@@ -97,6 +97,10 @@ kramdown:
   input: GFM
   hard_wrap: false
 
+# Include _pages directory (Jekyll ignores _ prefixed dirs by default)
+include:
+  - _pages
+
 # Exclude migration scripts from build
 exclude:
   - _migration/
