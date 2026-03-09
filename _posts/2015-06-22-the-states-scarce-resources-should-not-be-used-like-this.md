@@ -1,0 +1,26 @@
+---
+title: "The State’s Scarce Resources Should Not Be Used Like This."
+date: 2015-06-22 09:23:51
+categories:
+  - Media
+---
+
+Would you give a lot of food to someone really hungry, or give everyone with a stomach a morsel? Will you use the state’s resources to give a little to all, or a lot to some? These are the big questions of public policy. Given scarce resources, we elect politicians to make these choices, and we elect them based on their pre-election promises. You’ll be hearing a lot more of them fairly soon.
+
+Nothing is learned for long, in the end. Some promises are not made to be kept, and sometimes it makes no sense to even try to keep them. The commitment to provide universal health care to all children under six, for example, made no sense to me the day it was announced, and it makes no sense to me today. I am trained to analyse, and not to emote. And yet in this case my reaction to the policy is emotional. I am blessed with a good job and three healthy children. If I need to send my children to the GP, I can afford to do so. My neighbours have two children who have chronic illnesses. They find accessing resources much harder, and their income is lower than mine.
+
+I thought of them when the free to under 6’s policy was announced. My children will get a service they do not need, in place of my neighbour’s children, who will still struggle to get the services they desperately need.
+
+This is a policy choice. A health system that over spends every year, that is demand and supply constrained in almost every way, is now gearing up to allow free GP care to all children under 6.
+
+I like this idea, actually. I think universal care is the cheapest option, long run, for the population. The NHS model is the one I would advocate, as being remarkably cheap per patient, but that is not what has happened with the Irish system, at least the one which grew from the early 19th Century. The Irish Medical Charities Act of 1851 basically co-ordinated a patch work of medical dispensaries and voluntary hospitals which had grown up around the country, whose activities were financed by a combination of subscriptions, grants from both local and national government, and philanthropy. The public and private provision of health care or what we now call the ‘mixed delivery model’ has operated side by side for hundreds of years in Ireland, dating at least back to the Elizabethan era. In previous centuries government did not see the provision of health as something which it had any duty or business being involved with. That is not the case today, largely thanks to the example set by the NHS in the UK and the great reforming health ministers of the 1940s and 50s in Ireland.
+
+Moving to the present, the choice is to use scarce public funding not to target the most in medical need, but to allow access to all regardless of their medical need. In the current circumstances I think this was the wrong choice.
+
+Ireland’s GPs are not saints, nor are they charities. They are profit-maximising business people who I believe do their best for their patients, but also try to do the best for their bank balances. Health economic studies have shown doctors respond to monetary incentives in almost the exact same way as other service providers.
+
+Their large scale rejection of the new under 6’s scheme by GPs reflects business choices as much as concerns for patient care. Again, history gives us the best model for the present and for the future. The famine of the 1840s accelerated the obvious need for public involvement in health care provision and gave rise to the Act of 1851 which created the outline of the health service we have today. While private provision of many services was considered then to be the natural order of things, the medical profession throughout this period was in a battle to improve its status and ensure that its earnings were protected. As Ruth Barrington showed in her classic, Health, medicine and politics in Ireland 1900 - 1970, in the nineteenth century the social status and incomes of Irish doctors ranked below most of the professions of the day including the church, the law, the military and the civil service. That has obviously changed, and any change to the system will have to take the status and positional power of GPs into account.
+
+On the [irisheconomy.ie](http://irisheconomy.ie) blog, UCD’s Dr Kevin Denny has estimated the scheme will result in about one and a half extra visits per child per year, if all GPs signed up. GP Dr William Behan has cast doubt on the data Dr Denny uses and emphasises that the children of poorer families will need more healthcare than the children of richer households, too. All of which would contribute to a much, much larger increase in the number of visits per child to each GP. Dr Behan argues the government modelling suffers from an underestimation of the under 6 population and an over-estimation number of contracts being offered, which translates into a lot more work for GPs for a lot less money.
+
+All of which contributes to policy making in an effective vacuum. You wouldn’t want to be Minister for Health on a good day. Implementing a bad policy with hotly contested data which will potentially damage the interests of a powerful group in society? Best of luck with that, Leo.

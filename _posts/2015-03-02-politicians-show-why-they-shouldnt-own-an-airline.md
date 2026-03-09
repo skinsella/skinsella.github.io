@@ -1,0 +1,32 @@
+---
+title: "Politicians show why they shouldn't own an airline."
+date: 2015-03-02 11:02:36
+categories:
+  - Media
+---
+
+(This is an unedited version of my *Sunday Business Post* Column from yesterday.)
+
+[International Airlines Group](http://markets.ft.com/tearsheets/performance.asp?s=uk:IAG)’s bid to purchase Aer Lingus is bringing out the worst in the political classes and showing precisely why ownership of state assets should be externally monitored and all divestitures examined for conflicts of interest. Chests are being puffed up to harvest-frog levels as Ministers and TDs in shaky seats whose constituents have a chance of being effected by any change line up to bash the bid. IAG’s Willie Walsh had a bit of a grilling at the Oireachtas transport committee, but let’s be fair, it was like watching someone getting mugged by a band of squirrels. Lots of noise, little real impact, lots of nuts.
+
+Mr. Walsh was extremely patient with the TDs and Senators at the committee, some of whom wanted him to run more transatlantic routes using his expensive and scarce wide bodied planes from the sprawling metropolis of Knock (no really). His patience perhaps wearing thin, Mr. Walsh muddied the water somewhat telling them in a rather arrogant way his opening bid was his best bid, in a “take-it-or-leave-it, Paddy”, sort of way. Not a good opening move in a negotiation, and a clear sign of how he sees this process evolving.
+
+Let’s be clear: Mr. Walsh has only promised to do what is in his commercial interest to do. He may as well have promised the government he’d continue blinking.
+
+Mr Walsh has promised to expand Aer Lingus as a hub, and promised to retain Aer Lingus’ 330 slot pairs at Heathrow for the short term. He has said administrative jobs will be lost in Dublin as their functions are transferred to IAG, but argued any growth in traffic westward routing from London to Dublin would result in a net jobs increase for the airline. Longer term promises around the viability of regional airports like Shannon are not being made, precisely because it is not in Mr. Walsh’s commercial interest to make them. Having that clarity of purpose and intention must be extremely nice.
+
+The political system, which has no such clarity on anything, ever, has *de facto* promised to keep things exactly as they are because, from the point of view of the domestic electoral ‘market’, change at this point in the electoral cycle just isn’t in anyone’s interests. From the point of view of the government, a share of the 1.4 billion euro sale of Aer Lingus just isn’t worth the political hassle, and any downside chance to losing rural votes, should Mr. Walsh decide to give his newly acquired Shannon routes the bullet, would represent a much greater cost to the political system than a few hundred million here or there.
+
+All of which is grist to the mill of the political economy of our small island. At this stage in her economic development, Ireland should not have 25.1% of a small airline. The strategic imperative to have ‘slots’ at Heathrow is a red herring as IAG already have more than enough morning landing slots (the only valuable ones). It is planes IAG are short of, as the economist Colm McCarthy clearly showed during this week’s Irish Economy conference. IAG have never, ever, sold a Heathrow slot.
+
+It is clear IAG want Dublin to become a long-haul hub for the westward traffic ‘leaking’ from London to competitor airports in France and the Netherlands. IAG will create this new hub using Aer Lingus as the key carrier. Under this plan total flights would expand from Dublin, not reduce. The Dublin-London connection, which we all agree is strategically important, is now the busiest by volume in the world. It’s basically a bus route now with one flight every 15 or 20 minutes. Given the volume of demand, any reduction in flights by Aer Lingus eastward would surely be compensated by other airlines. The westward expansion would be incremental.
+
+What Mr. Walsh wants, in a sense, is a transfer of the historical rent Aer Lingus has enjoyed to IAG. The government probably aren’t sure what that rent actually is, and just want to leave well enough alone.
+
+The government is still labouring under two misapprehensions. The first is that a small island nation needs its own infant industry airline to prosper. This made a sort of sense when Aer Lingus was born in 1936. It was also the fashion as Joe Wallace, Siobhan Tiernan and Lorraine White showed in [the European Management Journal](http://www.sciencedirect.com/science/article/pii/S0263237306000594) in 2006. The second misapprehension is that regional development must be tied irrevocably to air transport links. The market and the surrounding road and rail infrastructure have developed enough so that Limerick, say, is essentially a hub town for Dublin airport. Technological advances mean getting on planes is less and less important in any case.
+
+(Lest you accuse me of being Dublin-centric, I’m speaking as someone who has worn the wings off the EI 380 to Heathrow for the last few years from Shannon).
+
+Dónal Palcic and Eoin Reeves in their 2011 book on the Irish experience of privatisation clearly spell out the lessons for governments should learn. The first lesson to learn is privatising to raise revenue is a bad idea. The second less is privatising to get better efficiencies makes some sense but only where there is a competitive market. Palcic and Reeves argue for smart privatisation where the government retains some control of the underlying asset. The retention of the blocking right for Aer Lingus falls under this category.
+
+The problem with the blocking right in this case is that it actively stymies development for an airline like Aer Lingus, and for westward transit through Dublin. The reasons aren’t for economic efficiency but political expediency, which is almost never a good thing. The Minister should divest himself of the 25.1% stake in this case simply to remove the obstacle he himself presents to the development of the market. The conflict is too great to ensure a rational outcome. Maybe the IAG deal is a bad one, or maybe a good one. That’s for the Board and the market to decide. The long run ‘strategic’ talk about the Heathrow slots is nonsense, as McCarthy showed this week. The big story here is simple commercial self-interest bashing off simple political self-interest. The long run interests of the country are nowhere to be seen. Let’s be charitable and say it’s the applied political economy, stupid.

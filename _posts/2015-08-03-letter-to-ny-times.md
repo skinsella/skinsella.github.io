@@ -1,0 +1,10 @@
+---
+title: "Letter to NY Times"
+date: 2015-08-03 17:53:52
+categories:
+  - Media
+---
+
+Sir, I read with interest Prof. Hans-Werner Sinn’s assertion (“[Why Greece Should Leave theEurozon](http://www.nytimes.com/2015/07/25/opinion/why-greece-should-leave-the-eurozone.html?_r=1)e”, July 24, 2015) that Ireland’s austerity effectively ended in 2010. As an Irish citizen and an economist I can tell you it didn’t. Dr. Sinn says the bubble burst in 2006, it was 2007. Dr. Sinn says no fiscal rescue was available—there was, but it wasn’t enough. Irish debt relative to GDP went from about 35% in 2006 to about 124% in 2013. Dr. Sinn says Irish wages fell drastically. Not so. According to Ireland’s Earnings, Hours and Employment Costs Survey, private sector wages fell by about 4% while public sector wages fell by about 3% over the crissis. Not nothing, but hardly a drop justifying the term ‘drastic’. What actually happened was employers reduced their wage bills by reducing employment and average hours worked per employee. This is important because what is really going on in the Irish economy is a Keynesian adjustment in quantity of labour and not a neoclassical wage-rate adjustment, implying the ‘cure’ for Ireland’s problems was not so much a supply-side set of ‘reforms’ but a (an?) increase in demand, first from the rest of the world thanks to Ireland’s remarkable openness as an economy, and then from a demand response following the end of austerity in 2013--not 2010. The Greek economy is nowhere near as open as the Irish economy, and, as measured by the cyclically adjusted structural balance, has already endured more than double the amount of austerity than Ireland. The Irish story isn’t a price adjustment, it’s a quantity adjustment. Dr. Sinn gets the most important part of his diagnosis wrong. His prescription is likely to kill the Greek patient. I’m not calling him a quack but if it walks like a duck, etc.
+
+Published in th[e NYT on the 11th of August](http://mobile.nytimes.com/2015/08/12/opinion/structural-crisis-in-the-eurozone.html?referrer=).

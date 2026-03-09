@@ -1,0 +1,32 @@
+---
+title: "Market liberalisation: A certain path of political failure"
+date: 2010-12-10 14:51:04
+categories:
+  - Media
+---
+
+Here's my column in this month's [Business and Finance magazine (paygated)](http://www.businessandfinance.ie/bf/2010/12/marketseconomicschristmas2010/marketliberalisationacertainpa).
+
+Update: [Stall the digger](http://www.slang.ie/index.php?county=all&entry=stall+the+digger&letter=S), [read Karl Whelan's Business and Finance column first](http://www.karlwhelan.com/IrishEconomy/BFDec10.pdf). He is much smarter than me. Then come back and read my thing.
+
+***
+
+Many of Ireland’s leading lights fancy themselves as classical market liberals in the tradition of Adam Smith, David Hume, and David Ricardo. These would be liberals feel the ‘dead hand’ of the State should be removed whenever possible-that fundamentally, for countries to prosper, they must practice openness and competition to foster economic growth. Economic growth will then increase the wealth and living standards of the citizens of the nation.
+
+Thus the espousal in Ireland of the policy––seeded under Lemass and brought to fruition two political generations later––of export-led growth, the vision given flesh of Ireland as a multinational export platform, Ireland as a gateway to the Single Market. During the dark days of the 1980s, the lead up to the creation of the Single Market created a surge of investment from abroad, especially the US. The EU doubled its structural fund expenditure in 1989, giving Ireland a Keynesian stimulus, of sorts, for our infrastructure. Increased market integration, combined with EU structural funds, and our readiness to court multinationals helped sow the seeds for the Celtic Tiger.
+
+This policy of openness has yielded concrete results: 5 of the top 25 global medical technology firms are located in Ireland; 8 of the top 10 in pharmaceuticals; and over half of the world s leading financial services companies have a foothold in Ireland. Exports grew by more than 50% in nominal terms in the past decade, but no net jobs were added in both the foreign-owned or indigenous exporting sectors.  Yet for some reason, rising exports--which multinational firms are overwhelmingly responsible for--are unquestioned, and unquestionably seen as an engine of growth. Witness the assumption of export-led growth in the EU-driven four-year plan published at the end of November. The key assumption within the four-year plan is that exports and private investment are what will make Ireland grow again. To increase the country’s exports, simply become more open to trade.
+
+The liberal position is that the choice to be open, to be connected with the ebb and flow of world commerce, is a choice between living well, and living poorly. It follows naturally that problems like excessive or inappropriate interference from the State must be removed, or resolved: they are the dead hand of wasteful corporatism.
+
+Not so.
+
+The problems Ireland faces today are not a result of poorly managed market forces, but the result of market forces, pure and simple. Ireland must learn the cardinal lesion that credit-driven markets create their own reversal. Markets are highly volatile, and they have been for 800 hundred years. Left to themselves, markets experience cycles. They boom. They bust. History has shown us that when economies embrace market liberalism, even of the classical sort, societal damage is done by the excess volatility of investment. Society is transformed, for better and for worse, by the process. Liberal markets destroy as much as they create. As Fianna Fáil are about to find out, market liberalization also generally obliterates the political party or movement that champions free market reforms, once the scale of the inevitable cyclical downturn is apparent to the populace. It is an empirical regularity that market liberalization is followed by the political immolation of the party that champions it. So it was in the UK under Thatcher’s Conservative Party, so it was in New Zealand under Douglas's Labour Party, so it was in Mexico’s Institutional Revolutionary Party under Salinas and Zedillo, so it will be in Ireland’s Fianna Fáil under Ahern and Cowen. Market liberalization is an object lesson in the old saying that nothing is ever learned for long.
+
+Don’t get wrong. Markets are powerful engines of growth, because what they do is to create the competitive pressures to innovate, but free markets are not independent of the societies in which they are constructed. Legislation and regulation create free markets. Varieties of capitalism abound, and the version currently being experimented upon in Ireland is reducing a sovereign state to a poor periphery.  We are not California. We are Ireland. I’m a citizen, not a subject.
+
+We are told the budgets of the next few years must be deflationary, because we must establish “credibility”. The country, so the story goes, is broke. We must reduce the difference between our receipts and expenditures, or else fall off a funding cliff when markets refuse to supply the difference. It is salutary that we had already arrived at this point in October. But if nothing is learned for long, it is clear that it takes our policy apparatus far too long to learn certain basic facts: the country has stalled, the budget is our last hand to play in the credibility game, and markets fear it will be a bluff.
+
+Our much-vaunted “credibility” is shot because we still refuse to recognize reality. For example: AIB this year made a €3bn euro provision for band debts on its €81bn euro Non-NAMA loan book. Anyone who suggests the soon to be nationalized AIB will lose just under 4% on a very shaky loan book must be dreaming. The drive for credibility amongst markets is a red herring. Logically market participants seek risk for return: offer them that and they’ll be happy. The prospects of Irish default are unfortunately too high now. As a result Ireland has entered the embrace of the EU/IMF, and is doing so under stringent conditions.
+
+Anyone interested in the chequered history of the IMF’s adventures in damaged countries can consult Nobel Laureate Joseph Stiglitz’s [Globalisation and its Discontents](http://en.wikipedia.org/wiki/Globalization_and_Its_Discontents). The EU/IMF solution is really just front-loaded pain, a more severe version of the ‘medicine’ being advocated by the government at the moment, yet more liberalization for liberalisation’s sake. We’ve seen where that road leads.

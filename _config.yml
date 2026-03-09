@@ -1,1 +1,108 @@
-theme: jekyll-theme-cayman
+# Site settings
+remote_theme: "mmistakes/minimal-mistakes@4.26.2"
+minimal_mistakes_skin: "default"
+
+title: "Stephen Kinsella"
+subtitle: "Economist | University of Limerick"
+name: "Stephen Kinsella"
+description: "Full Professor of Economics at the University of Limerick"
+url: "https://skinsella.github.io"
+baseurl: ""
+repository: "skinsella/skinsella.github.io"
+locale: "en-IE"
+
+# Author information
+author:
+  name: "Stephen Kinsella"
+  avatar: "/assets/images/sktrans.png"
+  bio: "Full Professor of Economics, University of Limerick"
+  location: "Limerick, Ireland"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:stephen.kinsella@ul.ie"
+    - label: "Google Scholar"
+      icon: "fas fa-fw fa-graduation-cap"
+      url: "https://scholar.google.com/citations?user=Duqr7rIAAAAJ"
+
+# Permalink structure (matches WordPress: /YYYY/MM/DD/slug/)
+permalink: /:year/:month/:day/:title/
+
+# Collections
+collections:
+  publications:
+    output: true
+    permalink: /publications/:path/
+  research:
+    output: true
+    permalink: /research/:path/
+  teaching:
+    output: false
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+      related: true
+      show_date: true
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: single
+      author_profile: true
+      share: true
+  - scope:
+      path: ""
+      type: research
+    values:
+      layout: single
+      author_profile: true
+  - scope:
+      path: "_pages"
+    values:
+      layout: single
+      author_profile: true
+
+# Pagination
+paginate: 20
+paginate_path: /blog/page:num/
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-redirect-from
+
+# Category archive
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+# Markdown processing
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Exclude migration scripts from build
+exclude:
+  - _migration/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - README.md
+  - LICENSE

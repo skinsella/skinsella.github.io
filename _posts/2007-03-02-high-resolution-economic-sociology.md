@@ -1,0 +1,71 @@
+---
+title: "High Resolution Economic Sociology"
+date: 2007-03-02 17:34:04
+categories:
+  - Research
+---
+
+Forthcoming in [Challenge](http://www.challengemagazine.com/). This is an expansion of [this post](http://www.stephenkinsella.net/2007/01/12/notes-for-inside-the-economists-mind/).
+
+Read *Who’s Who in Economics* (1999) sometime. The reader will be struck by how little we learn about the worthy being honored with inclusion. Co-editor William A. Barnett’s entry, for example, lists his degrees, his jobs, his selected papers and books. And that’s it. The reader is left wondering just who this person really is, how they came up with the ideas they are being lauded for, what they think of their ideas now, where they see the discipline going in the next little while, and so on. *Who’s Who* manages, ironically, to strip out the personal in its biographical summary, in essence, losing the ‘Who’. The only real information the book provides about the worthy is their personal ranking of their best papers and books in a paragraph asking what they feel is their principal contribution. But even this is almost useless–––chances are the reason you know their name and are looking them up is because of their more famous papers anyway. Nobody goes looking at *Who’s Who* to find out who Kenneth Arrow is. These are genuinely interesting people, men mostly, of genius, talent and ambition, whose life story enfolds and enriches the reader's appreciation of their work, as Paul Samuelson alludes to in his co-editor’s foreword. Implicitly comparing economists to philosophers, Samuelson finds their life stories enrich one’s appreciation of their work, though in fairness the philosophers’ life stories were not exactly light reading "an unhappier gaggle of misfits could hardly be imagined. Suicides abounded, melancholies persisted, celibacies and divorces competed for frequencies" (pg. *ix*). Though not quite as depressing, so it goes with worldly philosophers.
+
+The economics profession, like any other profession, talks to itself in learned journals and scholarly books. These publications are peer reviewed in part to strip out the noise of opinion and increase the signal of scholarly ‘fact’, however we choose to define it. The profession rarely talks *about* itself though. *Inside the Economist’s Mind: Conversations with Eminent Economists* (ITEM) is a collection of interviews commissioned for a journal*, Macroeconomic Dynamics*, by William Barnett, the co-editor of *Inside the Economist’s Mind* and *Macroeconomic Dynamics*. The idea is to gauge the position in time of the profession by asking the people who invented large swathes of the theory what their motivations were for doing what they did, when they did it, and how they did it. Readers find eccentric and irascible characters behind some of the major innovations in economic science, and that is the draw to the book.
+
+	The major innovation of the book is its format. There is no peer review system here, because all of the interviews are treated as direct quotations. Once the interviewee is aware of this, they use the opportunity of unlimited candor in different ways. Barnett bashes the Monetarists (pg. xxvii) for ignoring his Divisia system, to their detriment, Tobin chides the Real Business Cycle theorists (pg. 400), Modigliani the Monetarists again, (pg. 102) and takes a shot at Barro’s Equivalence theorem, which, “despite its elegance, has no substance” (pg. 100). Robert Aumann muses on religion, David Cass on university politics, Janos Kornai on neoclassical economics and the profession as a whole. Paul Volcker tells us about the Burns era at the Federal Reserve (pg. 175-177), fly fishing and the possibility of a world currency (pg. 186). We get insights in economic theory from Samuelson, Fisher, Sargent and Friedman, as well as finding out more about them and their approaches in the process. ITEM allows the reader an appreciation of the depth of the interviewee *Who’s Wh*o just can’t compete with*. Inside the Economist’s Mind*, in my opinion, supplies the missing ‘Who’.
+
+	The other innovation is the interviewer. Leontief is not interviewed by some graduate student or a Kinsella or a journalist who took a course in economics once, no. Leontief gets Duncan Foley of *the New School for Social Research*, Modigliani gets Solow and Barnett, Sims gets Lars Peter Hansen. This is the *fois gras* of reportage, because the interviewee feels no compunction to talk down to their equally esteemed professional colleague. Leontief understands that Foley understands what he's saying, and so the conversation moves along at a higher level than simple journalism might allow. The book could easily have been subtitled Conversations *Between* Eminent Economists. The format is an innovation because of the tone it invokes in the interviewee.
+
+	Because of the format, the profession gets to see its worthies really talking about themselves and their ideas, past works and, possibly most importantly, we hear their reflections on the current and future states of the discipline. We are edified when Paul Samuelson, co-editor of the book, says (pgs. 163—164): "My notion of a fruitful economic science would be that it can help us explain and understand the course of actual economic history. A scholar who seriously addresses commentary on contemporary monthly and yearly events is, in this view, practicing the study of history---history in its most contemporary time phasing." We hear Modigliani's advice to aspiring graduate students in macroeconomics: to look to open economy macroeconomics and international finance for the next series of breakthroughs (pg. 103), while Aumann (pgs. 371-372) tells the novice about collaboration with others: "Beyond mathematics, the arguments [between collaborators] are about identifying the right concept. This is a question of judgment; one cannot prove that this is a good concept and that is not...Everyone brings his own intuitions and ideas." 
+
+	The reader gets to see some interesting professional sociology through these largely unstructured interviews. We learn, for example, in different interviews (pg. 156) of what has to be one of the worst personnel managers in the history of academia–––Professor Harold H. Burbank of Harvard, whose tenure as department chairman saw Samuelson, Solow, Modigliani and Goodwin leave Harvard for MIT and Cambridge. We see the role Carnegie Mellon University its inspirational academic administrators like Dick Cyert played in the genesis of the ideas of many of the interviewees. Lucas, Modigliani, Uzawa, Cass and more were given the freedom at Carnegie Mellon to pursue the ideas that led to their fame, though that fame, once it came, took them elsewhere. Herbert Simon is cited by many of the interviewees as a continuing influence on their work. John Muth, apparently, found inspiration for his rational expectations model in Simon’s work! Lucas tells us (pg. 61) Simon was palpably offended when he heard this. The reader gets the impression from ITEM that the history of economic thought in the late 20th century can be told through the interactions of young scholars at these centres--Carnegie Mellon, RAND, CORE (which Jacques "of all trades" Dreze began (pg. 299)), and Cowles. We find little gems interspersed in the different interviews cross-referencing each other. Lucas was considered a protégé of Uzawa, according to Cass and Lucas himself (pgs. 41 and 60, respectively). The Institute for Mathematical Studies in the Social Sciences at Stanford is credited by Robert Aumann as influencing the development of economic theory for 20 years, using their summer school as a focal point for serious research (pg. 374). 
+
+We learn about the greats and their doctoral experiences. As a young economist, it is heartening that even David Cass had some trouble getting his first job, though Uzawa’s idea of promoting his students left a lot to be desired. Uzawa “thought it immoral [for a doctoral student] to have more than one offer” (pg. 39). Cass tells us Uzawa basically rediscovered the calculus of variations himself (pg. 37) and spent years reconstructing the classical economist's models as growth models using his optimal growth technique. Cass himself rebuilt the Ramsey model in ignorance of Ramsey's work as the first chapter of his Ph.D at Stanford. Once he'd found out about Ramsey he "was, to be perfectly honest...a bit embarrassed about it". 
+
+There are examples of tension as well in the interviews on certain subjects. In my opinion and perhaps I'm reading too much into the exchange, when Foley interviews Leontief, we have a great example of how a smart person can change the subject to keep the flow of the conversation going.
+
+Looking closely at the exchange between Foley and Leontief, you can see Foley steering the conversation towards the subject of Richard Goodwin, and then pushing Leontief on the thorny subject of Goodwin's tenure. First, Foley brings up Goodwin out of nowhere. They spend page 18 talking about the dual nature of input-output analysis and national accounting, when all of a sudden Foley throws in Goodwin's name in the context of structural change and fluctuations, and Leontief (starting pg. 19) takes the bait: 
+
+**Leontief.** Richard Goodwin was my student. he studied with me, he was my assistant. He couldn't get a permanent appointment at Harvard and then went to England. He was a good friend. He was very interesting. 
+
+**Foley** I talked with Goodwin about this [the tenure review] at one time. He did have a job at Harvard in the late 1940's, but it was an untenured job,, right?
+
+**Leontief** Yes. He couldn't get teunure. And this was the reason why he went to England. 
+
+Now Foley probes him a little more, before the tone of the conversation changes---Leontief has obviously had enough of this line of questioning, and gets short with Foley right afterwards. 
+
+**Foley** Yes, that's what he told me as well, but I was somewhat puzzled as to why someone who had been doing the kind of work he was doing in the late 1940's would not have been a shoo-in for tenure. 
+
+**Leontief** I think possibly it was politics. He was on the left.
+
+Foley senses the change in and wisely changes tack. After the next comment he begins asking about the role of structural changes again.
+
+**Foley** So that shaded the evaluation of his scientific work?
+
+**Leontief** Yes. That was it, frankly. 
+
+And the conversation moves on. 
+
+Almost every interviewee takes the opportunity of the interview to comment either on the present or future state of the discipline. All of the comments are insightful, and worth repeating in their entirety, but space considerations prevail. Janos Kornai remains disgruntled about the excessive mathematization of the subject. Kornai (pg. 74) feels 
+
+"Social Science, in my view is not a collection of true and exact statements about the world, but a cognitive process...First, once perceives that there is a puzzle and sets out to solve it more less by common sense and intuition. Then comes the middle stage, where neoclassical theory enters to help make the probably crude understanding more precise". 
+
+Oddly, Paul Samuelson echoes Kornai’s sentiment. Hardly an anti-equilibrium economist, Samuelson uses his interview to reject the metaphorical allusion made by Phillip Mirowski in his book More Heat than Light (1991) that economics is simply a social physics that Samuelson helped bring into the world. We find Samuelson refuting his interviewer's assertion that he had become highly influenced by the work of physical scientists (pg. 157-158, emphasis in original):
+
+"...I would be stupid, if out of "physics envy" or snake-oil salesmanship, I would inject into economic theory analytical mathematics that fit only gases and liquids. In my writings, I have criticised wrong analogies to physics by Irving Fisher (whom I admire as a superlative American Theorist). Even the genius of von Neumann has not escaped my critical auditings.  I have given on qualified approval to Marshall hope for a more biological and less physical approach to future economics.... Maybe someday, future Phillip Mirowskis and Roy Weintraubs will better fine-tune their nuances."
+
+Next we find Samuelson's hope for a truly successful grand theory of economics is rooted in its need to explain the emergence of economic history (pg. 163--164):
+
+"My notion of a fruitful economic science would be that it can help us explain and understand the course of actual economic history. A scholar who seriously addresses commentary on contemporary monthly and yearly events is, in this view, practicing the study of history---history in its most contemporary time phasing."
+
+Leontief appeals for a dynamical answer to the 'future of economics' question on page 18: "My feeling is that the fundamental theoretical understand of economic fluctuations is a dynamic process. I still believe, what explains the fluctuations of economies is some kind of difference, differential equations. Of course, structural change is very important, its important, particularly now. It's always dynamic. It's a system of interrelationships, a system of equations, but still the quantitative approach is important. "
+
+In future editions of this book and the further volumes to come, I'd love to see a focus on the characters behind different approaches to economics and their reasons for taking their contrarian positions to the mainstream---Foley, Nell, Solow and Velupillai, as well as more traditional mainstays of the profession. A focus on economists regarded primarily as great teachers and their pedagogical strategies would be great as well, not just the theoretical giants.
+
+The book is a very rare thing---an economic page-turner, like The Worldly Philosopher, Adam's Fallacy, and Freakonomics. The personalities behind the science's bleeding edge make for compelling reading I can’t recommend it enough, and I look forward to the next volume. 
+
+**References
+**
+
+Blaug, M. (ed), Who's Who in Economics (Third Edition). Cheltenham, UK and Northampton, MA: Edward Elgar, 1999
+
+Mirowski, P. J, More Heat Than Light: Economics as Social Physics: Physics as Nature's Economics (Historical Perspectives on Modern Economics series) Cambridge University Press; Reprint edition, 1991

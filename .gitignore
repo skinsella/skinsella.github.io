@@ -1,0 +1,12 @@
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+node_modules/
+_migration/venv/
+_migration/__pycache__/
+_migration/image_urls.txt
+_migration/failed_images.txt
+Gemfile.lock
+.DS_Store

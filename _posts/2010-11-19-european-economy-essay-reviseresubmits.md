@@ -1,0 +1,52 @@
+---
+title: "European Economy Essay Revise/Resubmits"
+date: 2010-11-19 15:05:57
+categories:
+  - Teaching
+---
+
+Essays 2 and 3 resubmitted are marked below.
+
+Essay 2
+
+10079289 B1
+
+0746495 B2
+
+0843466 B3
+
+10047905 C3
+
+0752576 B3
+
+09005410 B3
+
+0728136 B2
+
+09003992 B2
+
+Essay 3
+
+09005085 B3
+
+09005410 B3
+
+10047905 C1
+
+09005756 C3
+
+10079289 C2
+
+09006944 C2
+
+0725048 C3
+
+0758574 B2
+
+09005417 B2
+
+09004093 C1
+
+0865427 B2
+
+0875112 B1
