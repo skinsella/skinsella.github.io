@@ -39,3 +39,7 @@ Small open economies need routes to de-financialise.
 
 ### Political Economy of Taxation and Expenditure
 How we spend people's taxes depends on the interaction of ideas, interests, and institutions.
+
+## Publications
+
+A full list of my publications is available on my [ORCID profile](https://orcid.org/0000-0002-7943-4797).
