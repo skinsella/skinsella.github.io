@@ -27,6 +27,12 @@ author:
     - label: "Google Scholar"
       icon: "fas fa-fw fa-graduation-cap"
       url: "https://scholar.google.com/citations?user=Duqr7rIAAAAJ"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/stevekinsella/"
+    - label: "Old Blog"
+      icon: "fas fa-fw fa-blog"
+      url: "/blog/"
 
 # Permalink structure (matches WordPress: /YYYY/MM/DD/slug/)
 permalink: /:year/:month/:day/:title/
