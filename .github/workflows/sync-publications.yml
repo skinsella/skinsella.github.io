@@ -1,0 +1,36 @@
+name: Sync Publications from ORCID
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'  # Every Monday at 7am UTC
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch publications from ORCID
+        run: python _scripts/sync_publications.py
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet _pages/publications.md || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _pages/publications.md
+          git commit -m "Update publications from ORCID $(date +%Y-%m-%d)"
+          git push

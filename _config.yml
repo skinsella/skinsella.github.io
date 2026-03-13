@@ -113,6 +113,7 @@ include:
 # Exclude migration scripts from build
 exclude:
   - _migration/
+  - _scripts/
   - Gemfile
   - Gemfile.lock
   - node_modules/

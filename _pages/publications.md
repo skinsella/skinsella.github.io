@@ -17,9 +17,9 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 
 ## 2022
 
-- Limerick City Stories: The European Capital of Culture Bid Process and Narratives of Place. [DOI](https://doi.org/10.16997/book64.j)
-
 - Applying ecosystem accounting to develop a risk register for peatlands and inform restoration targets at catchment scale: a case study from the European region. *Restoration Ecology*. [DOI](https://doi.org/10.1111/rec.13632)
+
+- Limerick City Stories: The European Capital of Culture Bid Process and Narratives of Place. [DOI](https://doi.org/10.16997/book64.j)
 
 - Modular structure in labour networks reveals skill basins. *Research Policy*. [DOI](https://doi.org/10.1016/j.respol.2022.104486)
 
@@ -39,15 +39,15 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 
 ## 2019
 
-- Visualising economic crises using accounting models. *Accounting, Organizations and Society*. [DOI](https://doi.org/10.1016/j.aos.2019.01.001)
-
 - Exploring the effects of capital mobility on the saving–investment nexus: evidence from Icelandic historical data. *Scandinavian Economic History Review*. [DOI](https://doi.org/10.1080/03585522.2018.1529615)
+
+- Visualising economic crises using accounting models. *Accounting, Organizations and Society*. [DOI](https://doi.org/10.1016/j.aos.2019.01.001)
 
 ## 2018
 
-- Capital inflows, crisis and recovery in small open economies. *Finance Research Letters*. [DOI](https://doi.org/10.1016/j.frl.2018.03.011)
-
 - Asymmetries exist in the Feldstein–Horioka relationship. *Journal of International Trade and Economic Development*. [DOI](https://doi.org/10.1080/09638199.2017.1418412)
+
+- Capital inflows, crisis and recovery in small open economies. *Finance Research Letters*. [DOI](https://doi.org/10.1016/j.frl.2018.03.011)
 
 - Clinical efficacy and economic evaluation of online cognitive behavioral therapy for major depressive disorder: a systematic review and meta-analysis. *Expert Review of Pharmacoeconomics and Outcomes Research*. [DOI](https://doi.org/10.1080/14737167.2018.1407245)
 
@@ -142,8 +142,3 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 ## 2007
 
 - Economists Interviewing Economists. *Challenge*. [DOI](https://doi.org/10.2753/0577-5132500307)
-
-## Undated
-
-- Debt-deflation Traps Within Small Open Economies. *Contributions to Stock-Flow Modeling*. [DOI](https://doi.org/10.1057/9780230367357.0018)
-
