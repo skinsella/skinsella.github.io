@@ -6,8 +6,6 @@ redirect_from:
   - /teaching-3/
 ---
 
-# Teaching
-
 I believe good economic ideas are powerful forces for progress in society if they are applied well. I bring that level of seriousness to my teaching.
 
 After the global economic crisis, the disconnect between the real world and economic thinking was identified as a key flaw. I try to rectify this flaw through my teaching.
@@ -20,12 +18,12 @@ I see it as my job to create the environment through which students can discover
 
 ## Current Teaching
 
-- Present2016#### [International Political Economy](https://www.dropbox.com/s/9a380p6uukjk9x0/EC4437_2019_ModuleOutline.pdf?dl=0)Building frameworks to answer the big questions
-- Present2019#### [Macroeconomics and the Global Economy](https://www.dropbox.com/s/kccq8zzw8bn32ty/EC6051_ModuleOutline_2019.pdf?dl=0)MBA Class applying macroeconomic ideas to today's problems.
-- Present2016#### [Applied Economic Analysis](https://www.dropbox.com/s/e9il7pjxik8vae0/EC4044%20Module%20Outline%20Spring%202019.pdf?dl=0)Answering economic questions with R and machine learning.
-- Present2019#### [Understanding Big Data for Public Policy](https://handbook.unimelb.edu.au/2019/subjects/ppmn90055)The world needs people who speak both geek and wonk.
-- Present2019#### [Managing Public Finances](https://handbook.unimelb.edu.au/2019/subjects/padm90003)Public Financial Management for MPA students at the University of Melbourne
-- Present2015#### [Philosophy of Science](https://www.dropbox.com/s/tw7y075lmjgi5d4/Module%20Outline_Philosophy%20of%20Science%20%282%29.docx?dl=0)It's not enough to have technique. You have to understand the roots of the questions you are asking.
+- 2016 and onwards [International Political Economy](https://www.dropbox.com/s/9a380p6uukjk9x0/EC4437_2019_ModuleOutline.pdf?dl=0)Building frameworks to answer the big questions
+- 2019 and onwards [Macroeconomics and the Global Economy](https://www.dropbox.com/s/kccq8zzw8bn32ty/EC6051_ModuleOutline_2019.pdf?dl=0)MBA Class applying macroeconomic ideas to today's problems.
+- 2-16 and onwards [Applied Economic Analysis](https://www.dropbox.com/s/e9il7pjxik8vae0/EC4044%20Module%20Outline%20Spring%202019.pdf?dl=0)Answering economic questions with R and machine learning.
+- 2019 and onwards [Understanding Big Data for Public Policy](https://handbook.unimelb.edu.au/2019/subjects/ppmn90055)The world needs people who speak both geek and wonk.
+- 2019 and onwards [Managing Public Finances](https://handbook.unimelb.edu.au/2019/subjects/padm90003)Public Financial Management for MPA students at the University of Melbourne
+- 2015 and onwards [Philosophy of Science](https://www.dropbox.com/s/tw7y075lmjgi5d4/Module%20Outline_Philosophy%20of%20Science%20%282%29.docx?dl=0)It's not enough to have technique. You have to understand the roots of the questions you are asking.
 
 ## Teaching History
 
