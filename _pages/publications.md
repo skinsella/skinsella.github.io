@@ -11,6 +11,10 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 
 - Intangible capital, digitalisation and scale: Evidence and interactions in firm-level production and competition dynamics. *Research in International Business and Finance*. [DOI](https://doi.org/10.1016/j.ribaf.2026.103326)
 
+## 2025
+
+- Intangible income shifting: the impact of digitalisation on falling corporate tax rates. *International Tax and Public Finance*. [DOI](https://doi.org/10.1007/s10797-025-09883-y)
+
 ## 2023
 
 - Austerity Models and Their Impact on Markets. [DOI](https://doi.org/10.4324/9781003226222-12)
