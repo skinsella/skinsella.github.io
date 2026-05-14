@@ -14,4 +14,4 @@ You can sometimes, although rarely, find me on [Bluesky](https://bsky.app/profil
 
 I write a weekly blog at my [Substack](https://stephenkinsella.substack.com). 
 
-I'm often asked to speak at events, for boards, and for other things like that. If you're interested in that, talk to the lovely people at [Personally Speaking]([url](https://personallyspeaking.com/speaker/prof-stephen-kinsella/)). 
+I'm often asked to speak at events, for boards, and for other things like that. If you're interested in that, talk to the lovely people at [Personally Speaking](https://personallyspeaking.com/speaker/prof-stephen-kinsella/). 
