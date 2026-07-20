@@ -5,12 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Price of Unity — Irish Unification Fiscal Simulator</title>
 <meta name="description" content="Interactive fiscal scenario simulator for Irish unification. Constitutional forms, negotiation switches, and growth assumptions, calibrated to the published literature.">
+<script>document.documentElement.classList.add(sessionStorage.getItem("priceOfUnityAccess") === "granted" ? "access-granted" : "access-locked");</script>
+<script src="access.js" defer></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
 <script crossorigin src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
 <style>
+  html.access-locked body > :not(#access-gate) { visibility: hidden; }
+  #access-gate { visibility: visible; position: fixed; inset: 0; z-index: 99999; display: grid; place-items: center; padding: 20px; background: #F6F7F4; color: #182420; font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+  #access-form { width: min(100%, 390px); padding: 30px; border: 1px solid #DCE2DC; border-radius: 14px; background: #FFF; box-shadow: 0 12px 40px rgba(24,36,32,.08); }
+  #access-form .access-eyebrow { margin-bottom: 10px; color: #5C6B63; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+  #access-form h1 { margin: 0 0 8px; font-family: 'Fraunces', Georgia, serif; font-size: 32px; }
+  #access-form p { margin: 0 0 22px; color: #5C6B63; font-size: 14px; }
+  #access-form label { display: block; margin-bottom: 6px; color: #5C6B63; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  #access-form input { width: 100%; padding: 11px 12px; border: 1px solid #C9D2CB; border-radius: 7px; font: inherit; }
+  #access-form button { width: 100%; margin-top: 12px; padding: 11px; border: 0; border-radius: 7px; background: #177052; color: #FFF; font: inherit; font-weight: 600; cursor: pointer; }
+  #access-error { min-height: 18px; margin-top: 9px; color: #A63D2F; font-size: 12px; }
   html, body { margin: 0; padding: 0; background: #F6F7F4; }
   #fallback { font-family: system-ui, sans-serif; color: #5C6B63; padding: 40px; max-width: 640px; margin: 0 auto; }
 </style>
