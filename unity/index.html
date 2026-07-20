@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Price of Unity — Irish Unification Fiscal Simulator</title>
+<meta name="description" content="Interactive fiscal scenario simulator for Irish unification. Constitutional forms, negotiation switches, and growth assumptions, calibrated to the published literature.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+<script crossorigin src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #F6F7F4; }
+  #fallback { font-family: system-ui, sans-serif; color: #5C6B63; padding: 40px; max-width: 640px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div id="root"><div id="fallback">Loading the simulator. If this message persists, check your internet connection, the page loads React and Recharts from public CDNs.</div></div>
+<script>
+(() => {
+  const { useMemo, useState } = React;
+  const {
+    ComposedChart,
+    Line,
+    Area,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ReferenceLine,
+    ResponsiveContainer,
+    Legend
+  } = Recharts;
+  const GNI_STAR = 290.9;
+  const NORTH_GNI = 73.8;
+  const TAX_SHARE = 0.35;
+  const PUBLISHED = 16.58;
+  const PENSIONS = 6.67;
+  const DEBT_INT = 4.12;
+  const DEFENCE_NET = 1.59;
+  const OTHER_NONID = 0.67;
+  const TAX_ADD = 1.79;
+  const RERATE_FULL = 11;
+  const PENSION_ANNUAL_STEP = 0.115;
+  const PARITY = 2;
+  const AGE_SHARE = 0.35;
+  const SHIFT_YEARS = 30;
+  const FORMS = {
+    unitary: {
+      key: "unitary",
+      name: "Unitary",
+      model: "German 1990 model",
+      color: "#A63D2F",
+      desc: "Full absorption on day one. Welfare and pay harmonise immediately, duplication ends fast, but the wage shock hits Northern competitiveness.",
+      defaults: { reratingScope: 100, reratingYears: 1, investment: 0.5, duplication: 0, gNI: 3.5, stall: true }
+    },
+    federal: {
+      key: "federal",
+      name: "Federal",
+      model: "Belgian model",
+      color: "#2E5E9E",
+      desc: "A continuing Stormont inside an all-island state. Harmonisation deferred over two decades, but two administrations run permanently.",
+      defaults: { reratingScope: 60, reratingYears: 20, investment: 0.5, duplication: 0.5, gNI: 4, stall: false }
+    },
+    glide: {
+      key: "glide",
+      name: "Asymmetric glide path",
+      model: "Spanish and DCU-inspired",
+      color: "#177052",
+      desc: "Harmonisation on a published glide path tied to convergence benchmarks, with a front-loaded investment surge before the welfare bill lands.",
+      defaults: { reratingScope: 25, reratingYears: 15, investment: 1.5, duplication: 0.25, gNI: 5, stall: false }
+    },
+    worst: {
+      key: "worst",
+      name: "Worst case",
+      model: "FitzGerald and Morgenroth-inspired",
+      color: "#444B52",
+      desc: "Dublin absorbs pensions and debt interest, welfare and pay harmonise on day one, no investment surge, and convergence stalls German-style. The pessimists' full bill.",
+      defaults: { reratingScope: 100, reratingYears: 1, investment: 0, duplication: 0, gNI: 3, stall: true },
+      switches: { pensionsUK: false, debtUK: false }
+    }
+  };
+  function inheritedDeficit(pensionsUK, debtUK) {
+    return PUBLISHED - DEFENCE_NET - OTHER_NONID - TAX_ADD - (pensionsUK ? PENSIONS : 0) - (debtUK ? DEBT_INT : 0);
+  }
+  function simulate(p, horizon, s) {
+    const core = PUBLISHED - DEFENCE_NET - OTHER_NONID - TAX_ADD - PENSIONS - DEBT_INT;
+    const pensionsBorne = p.pensionsUK ? 0 : PENSIONS;
+    const debtBorne = p.debtUK ? 0 : DEBT_INT;
+    const r = (1 + p.gNI / 100) / (1 + s.southGrowth / 100);
+    const gs = s.southGrowth / 100, ag = s.ageing / 100;
+    const rows = [];
+    let cumulative = 0;
+    let factorAtStall = null;
+    for (let t = 1; t <= horizon; t++) {
+      let factor;
+      if (p.stall && t > 7) {
+        if (factorAtStall === null) factorAtStall = Math.pow(r, 7);
+        factor = Math.min(factorAtStall * Math.pow(1.004, t - 7), PARITY);
+      } else {
+        factor = Math.min(Math.pow(r, t), PARITY);
+      }
+      const gain = TAX_SHARE * NORTH_GNI * (factor - 1);
+      const ageF = Math.pow(1 + ag, t);
+      const coreAged = core * (1 - AGE_SHARE) + core * AGE_SHARE * ageF;
+      const shiftErosion = s.shift / 100 * core * Math.min(t / SHIFT_YEARS, 1);
+      const rerating = Math.min(t / p.reratingYears, 1) * RERATE_FULL * (p.reratingScope / 100);
+      const invest = t <= 10 ? p.investment : 0;
+      const pension = p.pensionsUK ? Math.min(t * PENSION_ANNUAL_STEP, PENSIONS) * ageF : 0;
+      const cost = coreAged - shiftErosion + pensionsBorne * ageF + debtBorne + pension + rerating + invest + p.duplication - gain;
+      const denom = GNI_STAR * Math.pow(1 + gs, t);
+      cumulative += cost;
+      rows.push({
+        year: t,
+        cost: round1(cost),
+        pctGNI: round2(cost / denom * 100),
+        cumulative: round1(cumulative),
+        gross: round1(coreAged + pensionsBorne * ageF + debtBorne + pension + rerating + invest + p.duplication),
+        gain: round1(-gain)
+      });
+    }
+    return rows;
+  }
+  function breakEven(rows) {
+    const hit = rows.find((r) => r.cost <= 0);
+    return hit ? hit.year : null;
+  }
+  function payback(rows) {
+    let started = false;
+    for (const r of rows) {
+      if (r.cumulative > 0) started = true;
+      if (started && r.cumulative <= 0) return r.year;
+    }
+    return null;
+  }
+  const round1 = (x) => Math.round(x * 10) / 10;
+  const round2 = (x) => Math.round(x * 100) / 100;
+  function Slider({ label, value, onChange, min, max, step, unit, marks, help }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "mb-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between mb-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs tracking-wide uppercase", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, label), /* @__PURE__ */ React.createElement("span", { className: "font-medium", style: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: 15, color: "#182420" } }, value, unit)), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "range",
+        min,
+        max,
+        step,
+        value,
+        onChange: (e) => onChange(parseFloat(e.target.value)),
+        className: "w-full accent-current",
+        style: { color: "#177052", height: 22 }
+      }
+    ), marks && /* @__PURE__ */ React.createElement("div", { className: "flex justify-between mt-0.5" }, marks.map((m) => /* @__PURE__ */ React.createElement("span", { key: m, className: "text-[10px]", style: { color: "#8A968E" } }, m))), help && /* @__PURE__ */ React.createElement("p", { className: "text-[11px] mt-1.5 leading-relaxed", style: { color: "#5C6B63" } }, help));
+  }
+  function Toggle({ label, sub, on, onChange, amount }) {
+    return /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => onChange(!on),
+        className: "w-full flex items-center justify-between py-2.5 px-3 mb-2 rounded-md border text-left transition-colors",
+        style: { borderColor: on ? "#177052" : "#DCE2DC", background: on ? "#EDF5F0" : "#FFFFFF" }
+      },
+      /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "text-sm font-medium", style: { color: "#182420" } }, label), /* @__PURE__ */ React.createElement("div", { className: "text-xs", style: { color: "#5C6B63" } }, sub)),
+      /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: 13, color: on ? "#177052" : "#8A968E" } }, on ? `\u2212\u20AC${amount}bn` : `\u20AC${amount}bn stays`), /* @__PURE__ */ React.createElement("div", { className: "w-9 h-5 rounded-full relative transition-colors", style: { background: on ? "#177052" : "#C9D2CB" } }, /* @__PURE__ */ React.createElement("div", { className: "w-4 h-4 rounded-full bg-white absolute top-0.5 transition-all", style: { left: on ? 18 : 2 } })))
+    );
+  }
+  function Waterfall({ pensionsUK, debtUK }) {
+    const segs = [
+      { label: "Defence, non-ID, tax", value: DEFENCE_NET + OTHER_NONID + TAX_ADD, off: true },
+      { label: "Pensions", value: PENSIONS, off: pensionsUK },
+      { label: "Debt interest", value: DEBT_INT, off: debtUK }
+    ];
+    const residual = inheritedDeficit(pensionsUK, debtUK);
+    return /* @__PURE__ */ React.createElement("div", { className: "mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between mb-2" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs uppercase tracking-wide", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "From London's ledger to Dublin's bill"), /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#8A968E" } }, "ONS headline \u20AC", PUBLISHED, "bn")), /* @__PURE__ */ React.createElement("div", { className: "flex w-full h-9 rounded-md overflow-hidden border", style: { borderColor: "#DCE2DC" } }, segs.map((s) => /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        key: s.label,
+        className: "relative h-full transition-all duration-500 flex items-center justify-center",
+        style: {
+          width: `${s.value / PUBLISHED * 100}%`,
+          background: s.off ? "repeating-linear-gradient(45deg,#EDF1ED,#EDF1ED 4px,#E2E8E2 4px,#E2E8E2 8px)" : "#C48A7E",
+          opacity: s.off ? 1 : 0.95
+        },
+        title: `${s.label}: \u20AC${round1(s.value)}bn ${s.off ? "(stays with London)" : "(transfers to Dublin)"}`
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "text-[10px] px-1 truncate", style: { color: s.off ? "#8A968E" : "#5A2A20" } }, s.label)
+    )), /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        className: "h-full flex items-center justify-center transition-all duration-500",
+        style: { width: `${Math.max(residual, 0) / PUBLISHED * 100}%`, background: "#182420", minWidth: 76 }
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "text-[11px] font-medium text-white px-1", style: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace" } }, "\u20AC", round1(residual), "bn")
+    )), /* @__PURE__ */ React.createElement("div", { className: "text-[11px] mt-1.5", style: { color: "#5C6B63" } }, "Hatched segments stay with the UK under current switches. The dark block is the inherited structural deficit before rerating, investment and growth."));
+  }
+  function Stat({ label, value, sub }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "rounded-lg border px-4 py-3", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-[11px] uppercase tracking-wide mb-1", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, label), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Fraunces', Georgia, serif", fontSize: 26, fontWeight: 600, color: "#182420", lineHeight: 1.05 } }, value), sub && /* @__PURE__ */ React.createElement("div", { className: "text-[11px] mt-1", style: { color: "#8A968E" } }, sub));
+  }
+  function UnificationSimulator() {
+    const [form, setForm] = useState("glide");
+    const [custom, setCustom] = useState(false);
+    const [pensionsUK, setPensionsUK] = useState(true);
+    const [debtUK, setDebtUK] = useState(true);
+    const [params, setParams] = useState({ ...FORMS.glide.defaults });
+    const [metric, setMetric] = useState("annual");
+    const [chartType, setChartType] = useState("area");
+    const [horizon, setHorizon] = useState(25);
+    const [structural, setStructural] = useState({ southGrowth: 2.5, ageing: 1, shift: 0 });
+    const setP = (k, v) => {
+      setParams((p) => ({ ...p, [k]: v }));
+      setCustom(true);
+    };
+    const setS = (k, v) => setStructural((s) => ({ ...s, [k]: v }));
+    const pickForm = (k) => {
+      setForm(k);
+      setCustom(false);
+      setParams({ ...FORMS[k].defaults });
+      if (FORMS[k].switches) {
+        setPensionsUK(FORMS[k].switches.pensionsUK);
+        setDebtUK(FORMS[k].switches.debtUK);
+      }
+    };
+    const active = { ...params, pensionsUK, debtUK };
+    const rows = useMemo(() => simulate(active, horizon, structural), [params, pensionsUK, debtUK, horizon, structural]);
+    const be = breakEven(rows);
+    const rows50 = useMemo(
+      () => horizon === 50 ? rows : simulate(active, 50, structural),
+      [params, pensionsUK, debtUK, horizon, structural, rows]
+    );
+    const pb50 = payback(rows50);
+    const cumEnd = rows[rows.length - 1].cumulative;
+    const yearOne = rows[0];
+    const compareData = useMemo(() => {
+      const runs = Object.values(FORMS).map((f) => ({
+        f,
+        rows: simulate({
+          ...f.defaults,
+          pensionsUK: f.switches ? f.switches.pensionsUK : pensionsUK,
+          debtUK: f.switches ? f.switches.debtUK : debtUK
+        }, horizon, structural)
+      }));
+      return Array.from({ length: horizon }, (_, i) => {
+        const o = { year: i + 1 };
+        runs.forEach(({ f, rows: rr }) => {
+          o[f.key] = rr[i].cost;
+        });
+        return o;
+      });
+    }, [pensionsUK, debtUK, horizon, structural]);
+    const color = FORMS[form].color;
+    const yLabel = metric === "pct" ? "% of GNI*" : "\u20ACbn (2023 prices)";
+    const dataKey = metric === "pct" ? "pctGNI" : metric === "cumulative" ? "cumulative" : "cost";
+    return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen", style: { background: "#F6F7F4", color: "#182420" } }, /* @__PURE__ */ React.createElement("style", null, `@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+        input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;}
+        input[type=range]::-webkit-slider-runnable-track{height:3px;background:#D5DCD5;border-radius:2px;}
+        input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:16px;width:16px;border-radius:50%;background:#177052;margin-top:-6.5px;border:2px solid #F6F7F4;box-shadow:0 1px 2px rgba(0,0,0,.2);}
+        input[type=range]::-moz-range-track{height:3px;background:#D5DCD5;border-radius:2px;}
+        input[type=range]::-moz-range-thumb{height:14px;width:14px;border-radius:50%;background:#177052;border:2px solid #F6F7F4;}
+        body{font-family:'IBM Plex Sans',system-ui,sans-serif;}`), /* @__PURE__ */ React.createElement("div", { className: "max-w-6xl mx-auto px-5 py-8" }, /* @__PURE__ */ React.createElement("header", { className: "mb-7" }, /*  */ React.createElement("nav", { className: "flex gap-4 mb-5 text-xs font-medium" }, /*  */ React.createElement("a", { href: "simulator.html", style: { color: "#182420" } }, "Simulator"), /*  */ React.createElement("a", { href: "assumptions.html", style: { color: "#177052" } }, "Assumptions and parameters")), /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-2", style: { color: "#5C6B63", letterSpacing: "0.14em" } }, "Fiscal simulation \xB7 harmonised to 2023 vintage \xB7 GNI* \u20AC290.9bn"), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: "'Fraunces', Georgia, serif", fontWeight: 600, fontSize: "clamp(26px,4vw,38px)", lineHeight: 1.1 } }, "The Price of Unity"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 max-w-2xl text-sm", style: { color: "#5C6B63" } }, "Every published estimate of the cost of Irish unification is a bundle of assumptions about constitutional form, negotiated liabilities and convergence speed. Set the bundle yourself.")), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-5 gap-6" }, /* @__PURE__ */ React.createElement("div", { className: "lg:col-span-2" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5 mb-4", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-3", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Constitutional form"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-2 mb-3" }, Object.values(FORMS).map((f) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: f.key,
+        onClick: () => pickForm(f.key),
+        className: "rounded-md border px-2 py-2 text-left transition-all",
+        style: {
+          borderColor: form === f.key && !custom ? f.color : "#DCE2DC",
+          background: form === f.key && !custom ? `${f.color}12` : "#FFF",
+          boxShadow: form === f.key && !custom ? `inset 0 0 0 1px ${f.color}` : "none"
+        }
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "w-2.5 h-2.5 rounded-full mb-1.5", style: { background: f.color } }),
+      /* @__PURE__ */ React.createElement("div", { className: "text-[13px] font-semibold leading-tight" }, f.name),
+      /* @__PURE__ */ React.createElement("div", { className: "text-[10px]", style: { color: "#8A968E" } }, f.model)
+    ))), /* @__PURE__ */ React.createElement("p", { className: "text-xs leading-relaxed", style: { color: "#5C6B63" } }, custom ? "Custom settings. Pick a form to reset to its preset." : FORMS[form].desc)), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5 mb-4", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-3", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "The negotiation switches"), /* @__PURE__ */ React.createElement(Toggle, { label: "UK retains state pensions", sub: "Contributions were paid to London", on: pensionsUK, onChange: setPensionsUK, amount: PENSIONS }), /* @__PURE__ */ React.createElement(Toggle, { label: "UK retains debt interest", sub: "No legal liability transfers, per the Scottish precedent", on: debtUK, onChange: setDebtUK, amount: DEBT_INT })), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-4", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Growth assumptions"), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Northern real growth",
+        value: params.gNI,
+        onChange: (v) => setP("gNI", v),
+        min: 0,
+        max: 7,
+        step: 0.25,
+        unit: "% pa",
+        marks: ["NI trend 1.3%", "Accession pace 6%+"],
+        help: "Annual growth assumed for Northern output after unity."
+      }
+    ), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Southern real growth (GNI*)",
+        value: structural.southGrowth,
+        onChange: (v) => setS("southGrowth", v),
+        min: 0,
+        max: 4,
+        step: 0.25,
+        unit: "% pa",
+        marks: ["Frozen", "GNI* trend ~3%"],
+        help: "Annual growth of the existing Republic and the affordability denominator."
+      }
+    ), /* @__PURE__ */ React.createElement("div", { className: "text-[11px] mb-4 -mt-2 px-1 rounded", style: { color: "#5C6B63" } }, "Convergence differential ", " ", /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", color: "#182420" } }, round2(((1 + params.gNI / 100) / (1 + structural.southGrowth / 100) - 1) * 100), "% pa"), " ", " \u2014 the Barro rule sits near 2%, and no currency-union region has sustained much above it."), /* @__PURE__ */ React.createElement("label", { className: "flex items-center gap-2 mb-5 cursor-pointer" }, /* @__PURE__ */ React.createElement("input", { type: "checkbox", checked: params.stall, onChange: (e) => setP("stall", e.target.checked), className: "accent-current", style: { color } }), /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#5C6B63" } }, "German-style stall after year 7 (TFP convergence halts, per Burda & Severgnini)")), /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-4 mt-2", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Policy dials"), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Rerating scope",
+        value: params.reratingScope,
+        onChange: (v) => setP("reratingScope", v),
+        min: 0,
+        max: 100,
+        step: 5,
+        unit: "% of \u20AC11bn gap",
+        marks: ["DCU ~25%", "F&M 100%"],
+        help: "Share of the estimated €11bn welfare and public-pay harmonisation bill that is implemented."
+      }
+    ), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Rerating phase-in",
+        value: params.reratingYears,
+        onChange: (v) => setP("reratingYears", v),
+        min: 1,
+        max: 25,
+        step: 1,
+        unit: " yrs",
+        marks: ["Day one", "A generation"],
+        help: "Years taken to introduce the selected rerating cost."
+      }
+    ), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Investment surge (yrs 1\u201310)",
+        value: params.investment,
+        onChange: (v) => setP("investment", v),
+        min: 0,
+        max: 2.5,
+        step: 0.25,
+        unit: " \u20ACbn/yr",
+        help: "Additional annual transition investment during the first ten years."
+      }
+    ), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Duplication cost",
+        value: params.duplication,
+        onChange: (v) => setP("duplication", v),
+        min: 0,
+        max: 1,
+        step: 0.05,
+        unit: " \u20ACbn/yr",
+        marks: ["Unitary", "Two of everything"],
+        help: "Continuing cost of parallel Northern and all-island administrations."
+      }
+    )), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5 mt-4", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-1", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Structural layer"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A968E" } }, "The accounting literature freezes the economy's structure. These dials unfreeze it. Set both to zero, with Southern growth at zero above, to reproduce the frozen-structure results."), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Ageing drift",
+        value: structural.ageing,
+        onChange: (v) => setS("ageing", v),
+        min: 0,
+        max: 2,
+        step: 0.25,
+        unit: "% pa",
+        marks: ["Off", "Faster Northern ageing"],
+        help: "Annual increase in age-sensitive health, care and pension expenditure."
+      }
+    ), /* @__PURE__ */ React.createElement(
+      Slider,
+      {
+        label: "Compositional shift",
+        value: structural.shift,
+        onChange: (v) => setS("shift", v),
+        min: 0,
+        max: 50,
+        step: 5,
+        unit: "% of core deficit",
+        marks: ["None", "Half dissolves by yr 30"],
+        help: "Share of the core deficit assumed to disappear as employment and economic structure change."
+      }
+    ))), /* @__PURE__ */ React.createElement("div", { className: "lg:col-span-3" }, /* @__PURE__ */ React.createElement(Waterfall, { pensionsUK, debtUK }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-3" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs uppercase tracking-wide", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Horizon"), /* @__PURE__ */ React.createElement("div", { className: "flex rounded-md border overflow-hidden", style: { borderColor: "#DCE2DC" } }, [25, 50].map((h) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: h,
+        onClick: () => setHorizon(h),
+        className: "px-3 py-1 text-xs font-medium transition-colors",
+        style: { background: horizon === h ? "#182420" : "#FFF", color: horizon === h ? "#FFF" : "#5C6B63" }
+      },
+      h,
+      " years"
+    )))), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-3 mb-5" }, /* @__PURE__ */ React.createElement(Stat, { label: "Year-one cost", value: `\u20AC${yearOne.cost}bn`, sub: `${yearOne.pctGNI}% of GNI*` }), /* @__PURE__ */ React.createElement(Stat, { label: "Annual break-even", value: be ? `Year ${be}` : "Never", sub: be ? "Deficit fully eroded" : "Bill exceeds parity ceiling" }), /* @__PURE__ */ React.createElement(
+      Stat,
+      {
+        label: "Full payback, 50-yr window",
+        value: pb50 ? `Year ${pb50}` : "None by yr 50",
+        sub: pb50 ? "Early deficits repaid by surpluses" : "Cumulative account still negative at 50"
+      }
+    ), /* @__PURE__ */ React.createElement(
+      Stat,
+      {
+        label: `${horizon}-yr cumulative`,
+        value: cumEnd < 0 ? `\u20AC${Math.abs(Math.round(cumEnd))}bn surplus` : `\u20AC${Math.round(cumEnd)}bn`,
+        sub: `${round1(Math.abs(cumEnd) / GNI_STAR * 100)}% of one year's GNI*`
+      }
+    )), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap items-center justify-between gap-2 mb-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex rounded-md border overflow-hidden", style: { borderColor: "#DCE2DC" } }, [["annual", "Annual \u20ACbn"], ["pct", "% of GNI*"], ["cumulative", "Cumulative"], ["compare", "Compare forms"]].map(([k, l]) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: k,
+        onClick: () => setMetric(k),
+        className: "px-3 py-1.5 text-xs font-medium transition-colors",
+        style: { background: metric === k ? "#182420" : "#FFF", color: metric === k ? "#FFF" : "#5C6B63" }
+      },
+      l
+    ))), metric !== "compare" && /* @__PURE__ */ React.createElement("div", { className: "flex rounded-md border overflow-hidden", style: { borderColor: "#DCE2DC" } }, [["area", "Area"], ["line", "Line"], ["bar", "Bars"]].map(([k, l]) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: k,
+        onClick: () => setChartType(k),
+        className: "px-2.5 py-1.5 text-xs transition-colors",
+        style: { background: chartType === k ? "#EDF1ED" : "#FFF", color: chartType === k ? "#182420" : "#8A968E" }
+      },
+      l
+    )))), /* @__PURE__ */ React.createElement(ResponsiveContainer, { width: "100%", height: 340 }, /* @__PURE__ */ React.createElement(ComposedChart, { data: metric === "compare" ? compareData : rows, margin: { top: 8, right: 12, left: 4, bottom: 4 } }, /* @__PURE__ */ React.createElement(CartesianGrid, { stroke: "#EAEEE9", vertical: false }), /* @__PURE__ */ React.createElement(
+      XAxis,
+      {
+        dataKey: "year",
+        tick: { fontSize: 11, fill: "#8A968E" },
+        tickLine: false,
+        axisLine: { stroke: "#DCE2DC" },
+        label: { value: "Years after unification", position: "insideBottom", offset: -2, fontSize: 11, fill: "#8A968E" }
+      }
+    ), /* @__PURE__ */ React.createElement(
+      YAxis,
+      {
+        tick: { fontSize: 11, fill: "#8A968E", fontFamily: "'IBM Plex Mono', monospace" },
+        tickLine: false,
+        axisLine: false,
+        label: { value: yLabel, angle: -90, position: "insideLeft", fontSize: 11, fill: "#8A968E" }
+      }
+    ), /* @__PURE__ */ React.createElement(
+      Tooltip,
+      {
+        contentStyle: { borderRadius: 8, border: "1px solid #DCE2DC", fontSize: 12, fontFamily: "'IBM Plex Sans', sans-serif" },
+        formatter: (v, n) => [
+          metric === "pct" ? `${v}%` : `\u20AC${v}bn`,
+          metric === "compare" ? FORMS[n]?.name || n : { cost: "Net annual cost", pctGNI: "Net cost", cumulative: "Cumulative cost" }[n] || n
+        ],
+        labelFormatter: (l) => `Year ${l}`
+      }
+    ), /* @__PURE__ */ React.createElement(ReferenceLine, { y: 0, stroke: "#182420", strokeWidth: 1.2 }), metric === "compare" ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Legend, { formatter: (v) => /* @__PURE__ */ React.createElement("span", { style: { fontSize: 12, color: "#5C6B63" } }, FORMS[v]?.name || v) }), Object.values(FORMS).map((f) => /* @__PURE__ */ React.createElement(Line, { key: f.key, type: "monotone", dataKey: f.key, stroke: f.color, strokeWidth: 2.2, dot: false }))) : chartType === "bar" ? /* @__PURE__ */ React.createElement(Bar, { dataKey, fill: color, radius: [3, 3, 0, 0] }) : chartType === "area" ? /* @__PURE__ */ React.createElement(Area, { type: "monotone", dataKey, stroke: color, strokeWidth: 2.2, fill: `${color}22` }) : /* @__PURE__ */ React.createElement(Line, { type: "monotone", dataKey, stroke: color, strokeWidth: 2.4, dot: false }), be && metric !== "compare" && metric !== "cumulative" && /* @__PURE__ */ React.createElement(
+      ReferenceLine,
+      {
+        x: be,
+        stroke: "#C9971F",
+        strokeDasharray: "4 3",
+        label: { value: `Break-even, yr ${be}`, fontSize: 11, fill: "#C9971F", position: "top" }
+      }
+    ))), /* @__PURE__ */ React.createElement("div", { className: "text-[11px] mt-3 leading-relaxed", style: { color: "#8A968E" } }, "Net cost = age-adjusted core deficit \u2212 compositional erosion + liabilities borne + rerating + investment + duplication \u2212 convergence-driven revenue gain. The gain runs on the differential between Northern and Southern growth, so the North matching the South yields nothing, and gains are capped when Northern output reaches parity, no scenario earning past \u20AC", round1(TAX_SHARE * NORTH_GNI * (PARITY - 1)), "bn a year. Rerating is held in constant 2023 euros, which understates the bill when Southern wages grow. Ageing drift applies to pension liabilities borne by Dublin and to the age-sensitive share of the core deficit. When the UK retains legacy pensions, Irish-system pension responsibility rises by \u20AC115m each year. The % of GNI* view divides by a denominator growing at the Southern real growth rate, so it measures affordability, while euro figures stay in constant 2023 prices. Negative values are fiscal surpluses accruing to the all-island exchequer. In compare mode the worst case always carries its own assumption that Dublin absorbs pensions and debt, while the other three follow the switches you set. Illustrative scenario engine calibrated to Doyle & UUEPC (2025), FitzGerald & Morgenroth (2024) and the harmonised meta-analysis. Not a forecast."))))));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(UnificationSimulator));
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assumptions and Parameters | The Price of Unity</title>
+<meta name="description" content="Assumptions, parameters, equations and limitations for The Price of Unity fiscal simulator.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#182420;--muted:#5c6b63;--soft:#8a968e;--line:#dce2dc;--paper:#f6f7f4;--card:#fff;--green:#177052;--gold:#9b7416;--red:#a63d2f}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif}.wrap{max-width:1120px;margin:auto;padding:32px 20px 64px}nav{display:flex;gap:18px;margin-bottom:30px;font-size:13px;font-weight:600}nav a{color:var(--muted);text-decoration:none}nav a.active{color:var(--green)}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-size:12px}h1,h2{font-family:'Fraunces',Georgia,serif}h1{font-size:clamp(34px,6vw,56px);line-height:1.05;margin:10px 0 12px}h2{font-size:25px;margin:0 0 12px}p{line-height:1.6}.lead{max-width:760px;color:var(--muted);font-size:16px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:28px}.card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}.half{grid-column:span 6}.third{grid-column:span 4}.formula{font-family:'IBM Plex Mono',monospace;background:#edf1ed;border-radius:9px;padding:16px;line-height:1.7;overflow:auto;font-size:13px}.tag{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:600}.official{background:#e6f1eb;color:var(--green)}.study{background:#f5eedc;color:var(--gold)}.calibration{background:#f4e8e5;color:var(--red)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #e8ece8;vertical-align:top}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}td.value{font-family:'IBM Plex Mono',monospace;white-space:nowrap}.note{color:var(--muted);font-size:12px}ul{padding-left:20px;line-height:1.7}.callout{border-left:4px solid var(--gold);padding-left:16px;color:var(--muted)}@media(max-width:760px){.half,.third{grid-column:span 12}.card{padding:19px}table{display:block;overflow-x:auto}h1{font-size:38px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <nav><a href="index.html">Simulator</a><a class="active" href="assumptions.html">Assumptions and parameters</a></nav>
+  <div class="eyebrow">Model audit · 2023 price base</div>
+  <h1>Assumptions and parameters</h1>
+  <p class="lead">The simulator is an assumption engine, not a forecast. This page shows how each result is produced, which inputs come from published evidence, and which depend on judgement.</p>
+
+  <section class="grid">
+    <article class="card half">
+      <h2>The accounting identity</h2>
+      <p>Annual net cost combines the inherited fiscal position, negotiated liabilities, policy harmonisation and transition spending, then subtracts structural savings and revenue from relative growth.</p>
+      <div class="formula">Net cost<sub>t</sub> = core deficit<sub>t</sub> + pensions<sub>t</sub> + debt interest + rerating<sub>t</sub> + investment<sub>t</sub> + duplication − structural savings<sub>t</sub> − growth revenue<sub>t</sub></div>
+    </article>
+    <article class="card half">
+      <h2>The starting point</h2>
+      <p>The model reconciles the published Northern fiscal deficit to an inherited core deficit.</p>
+      <div class="formula">€16.58bn − €1.59bn defence − €0.67bn other UK-wide spending − €1.79bn tax adjustment − €6.67bn pensions − €4.12bn debt interest = €1.74bn</div>
+    </article>
+
+    <article class="card">
+      <h2>Parameter register</h2>
+      <p class="note"><span class="tag official">Official</span> denotes an official statistic or a direct derivation. <span class="tag study">Study-derived</span> denotes an estimate adopted from published research. <span class="tag calibration">Calibration</span> denotes a transparent modelling judgement.</p>
+      <table>
+        <thead><tr><th>Parameter</th><th>Value</th><th>Type</th><th>Role and uncertainty</th></tr></thead>
+        <tbody>
+          <tr><td>Republic modified GNI*</td><td class="value">€290.9bn</td><td><span class="tag official">Official</span></td><td>2023 affordability denominator</td></tr>
+          <tr><td>Northern output proxy</td><td class="value">€73.8bn</td><td><span class="tag official">Official-derived</span></td><td>Northern GDP converted to euro and used as a GNI proxy</td></tr>
+          <tr><td>Revenue share</td><td class="value">35%</td><td><span class="tag official">Official-derived</span></td><td>Fixed tax yield applied to additional Northern output</td></tr>
+          <tr><td>Published fiscal deficit</td><td class="value">€16.58bn</td><td><span class="tag official">Official-derived</span></td><td>ONS 2023 figure converted from £14.22bn</td></tr>
+          <tr><td>Pension allocation</td><td class="value">€6.67bn</td><td><span class="tag study">Study-derived</span></td><td>Treatment depends on a future UK–Ireland settlement</td></tr>
+          <tr><td>Debt-interest allocation</td><td class="value">€4.12bn</td><td><span class="tag study">Study-derived</span></td><td>Legal liability and negotiated incidence are distinct</td></tr>
+          <tr><td>Net defence adjustment</td><td class="value">€1.59bn</td><td><span class="tag study">Study-derived</span></td><td>Net of assumed additional Irish defence expenditure</td></tr>
+          <tr><td>Other excluded UK spending</td><td class="value">€0.67bn</td><td><span class="tag study">Study-derived</span></td><td>Central and overseas UK spending assumed not to transfer</td></tr>
+          <tr><td>Additional attributed revenue</td><td class="value">€1.79bn</td><td><span class="tag study">Study-derived</span></td><td>Combines headquarters and tax-system adjustments</td></tr>
+          <tr><td>Full rerating bill</td><td class="value">€11.0bn</td><td><span class="tag study">Study-derived</span></td><td>2019 estimate uplifted to the 2023 price base</td></tr>
+          <tr><td>Annual pension transition</td><td class="value">€0.115bn</td><td><span class="tag study">Study-derived</span></td><td>Interpreted as a cumulative annual step for new Irish-system accruals</td></tr>
+          <tr><td>Age-sensitive core share</td><td class="value">35%</td><td><span class="tag calibration">Calibration</span></td><td>Controls how strongly ageing affects the inherited core deficit</td></tr>
+          <tr><td>Relative output ceiling</td><td class="value">2.0×</td><td><span class="tag calibration">Calibration</span></td><td>Stops the model generating unlimited convergence revenue</td></tr>
+          <tr><td>Post-stall relative growth</td><td class="value">0.4% pa</td><td><span class="tag calibration">Calibration</span></td><td>Stylised productivity plateau after year seven</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <article class="card third">
+      <h2>Rerating</h2>
+      <p>Rerating means raising Northern welfare and public-sector pay towards Southern levels.</p>
+      <div class="formula">€11bn × selected scope × min(year ÷ phase-in years, 1)</div>
+      <p class="note">A 25 per cent scope phased over 15 years ultimately adds €2.75 billion annually.</p>
+    </article>
+    <article class="card third">
+      <h2>Relative growth</h2>
+      <p>Only Northern growth above Southern growth produces convergence revenue.</p>
+      <div class="formula">Relative output<sub>t</sub> = ((1 + g<sub>N</sub>) ÷ (1 + g<sub>S</sub>))<sup>t</sup></div>
+      <p class="note">The gain is multiplied by Northern output and the 35 per cent revenue share.</p>
+    </article>
+    <article class="card third">
+      <h2>Pension transition</h2>
+      <p>If the UK retains legacy rights, new Irish pension responsibility accumulates gradually.</p>
+      <div class="formula">min(year × €0.115bn, €6.67bn) × ageing factor</div>
+      <p class="note">This is a provisional interpretation of the study’s transition description.</p>
+    </article>
+
+    <article class="card half">
+      <h2>What break-even means</h2>
+      <ul>
+        <li>Annual break-even is the first year in which that year’s simulated fiscal balance reaches zero</li>
+        <li>Cumulative payback is the first year in which later surpluses offset every earlier deficit</li>
+        <li>Neither measure implies full productivity or income convergence</li>
+      </ul>
+    </article>
+    <article class="card half">
+      <h2>What the model omits</h2>
+      <ul>
+        <li>Population, migration and pension cohorts</li>
+        <li>Marginal public-service costs generated by higher output</li>
+        <li>Behavioural tax responses and general-equilibrium effects</li>
+        <li>Independent returns from transition investment</li>
+        <li>Detailed costs of public-service quality convergence</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>Interpretation warning</h2>
+      <p class="callout">The optimistic glide-path result is driven materially by 5 per cent Northern growth against 2.5 per cent Southern growth. The resulting 2.44 per cent relative-growth differential is an upside assumption, not an established forecast.</p>
+      <p class="note">Detailed provenance is maintained in <code>model_parameters.csv</code>, <code>MODEL_NOTES.md</code> and the accompanying literature review. Several source locations remain provisional pending exact table and page verification.</p>
+    </article>
+  </section>
+</main>
+</body>
+</html>
