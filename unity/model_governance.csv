@@ -1,0 +1,31 @@
+parameter,class,owner,source,vintage,uncertainty,review_trigger,review_frequency,public_label
+southGNIStar,observed,Model data steward,CSO Annual National Accounts,2023,medium,CSO national accounts revision,annual,Official statistic
+northGNI,derived,Model data steward,ONS regional accounts and exchange-rate conversion,2023,high,ONS regional accounts revision or currency-base change,annual,Official-derived
+publishedBalance,derived,Public-finance lead,ONS Country and Regional Public Sector Finances,2022-23,high,new ONS CRPSF release or material revision,biennial,Official-derived
+pensions,estimated,Pensions workstream,Doyle and UUEPC waterfall,2023,very high,actuarial study or negotiating framework,immediate on evidence,Study-derived
+debtInterest,estimated,Public-finance lead,Doyle and UUEPC waterfall,2023,very high,negotiating framework or revised allocation,immediate on evidence,Study-derived
+defenceNet,estimated,Security and finance workstream,Doyle and UUEPC waterfall,2023,high,defence capability plan or departmental costing,immediate on evidence,Study-derived
+taxAdjustment,estimated,Revenue workstream,Doyle and UUEPC waterfall,2023,high,Revenue Commissioners or HMRC re-attribution study,immediate on evidence,Study-derived
+fullRerating,estimated,Public-service pay and welfare workstream,FitzGerald and Morgenroth with price uplift,2023,very high,pay and welfare mapping study,annual,Study-derived
+northGrowth,scenario,Macroeconomic workstream,ESRI productivity evidence and literature benchmarks,2022-25,very high,new ESRI annual comparison or structural model result,annual,Scenario
+southGrowth,scenario,Macroeconomic workstream,Department of Finance and CSO medium-term evidence,current,high,new official medium-term forecast,annual,Scenario
+employmentGain,scenario,Labour-market workstream,NISRA labour-market evidence,current,very high,employment-policy appraisal or structural estimate,annual,Scenario
+taxShare,derived,Revenue workstream,ONS revenue divided by Northern output,2023,high,new ONS revenue release or tax-policy reform,biennial,Official-derived
+taxMultiplier,estimated,Macroeconomic workstream,Irish Fiscal Advisory Council multiplier research,2019,very high,new Irish multiplier estimate or structural-model result,three years,Research estimate
+investmentOutputReturn,scenario,Capital appraisal workstream,No programme-specific estimate,current,very high,programme business cases or econometric appraisal,project gate,Scenario
+investmentLag,scenario,Capital appraisal workstream,No programme-specific estimate,current,high,programme delivery plans,project gate,Scenario
+investmentDepreciation,scenario,Capital appraisal workstream,National-accounts capital assumptions,current,medium,asset-class composition agreed,project gate,Scenario
+ukPensionShare,scenario,Negotiation workstream,Future UK-Ireland settlement,future,unknowable,published framework or agreement,immediate,Negotiation variable
+ukDebtShare,scenario,Negotiation workstream,Future UK-Ireland settlement,future,unknowable,published framework or agreement,immediate,Negotiation variable
+pensionAccrualYears,estimated,Pensions workstream,Doyle and UUEPC transition schedule,2025,very high,actuarial model or scheme-level data,immediate on evidence,Provisional estimate
+healthOutcomeTarget,scenario,Health workstream,No approved target,current,very high,agreed service outcome framework,project gate,Scenario
+educationOutcomeTarget,scenario,Education workstream,No approved target,current,very high,agreed service outcome framework,project gate,Scenario
+administrationOutcomeTarget,scenario,Public-service reform workstream,No approved target,current,very high,agreed institutional-capacity framework,project gate,Scenario
+serviceCostPerOutcomePoint,scenario,Service-costing workstreams,ONS spending bases only,2022-23,very high,departmental marginal unit-cost estimates,project gate,Scenario
+oneOffTransitionCost,scenario,Programme management office,No departmental plan,current,very high,costed implementation workstreams,project gate,Scenario
+interestRate,scenario,Debt management workstream,Market and stress assumptions,current,high,material yield-curve movement,quarterly,Stress assumption
+borrowingShare,scenario,Fiscal-policy workstream,Policy choice,current,very high,fiscal strategy decision,annual,Policy choice
+northAgeBands,observed,Demographic workstream,NISRA 2024-based population projections,2024,medium,new NISRA projection release,two years,Official statistic
+southPopulation,observed,Demographic workstream,CSO Census and population projections,2022,medium,new CSO projection release,five years,Official statistic
+northMigrationRate,scenario,Demographic workstream,NISRA migration evidence,current,very high,new projection assumptions or migration shock,annual,Scenario
+southMigrationRate,scenario,Demographic workstream,CSO projection scenarios,current,very high,new CSO projection assumptions,annual,Scenario

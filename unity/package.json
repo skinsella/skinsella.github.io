@@ -1,0 +1,8 @@
+{
+  "name": "irish-reunification-fiscal-simulator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/test_model.mjs"
+  }
+}
