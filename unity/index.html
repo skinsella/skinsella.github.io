@@ -75,7 +75,7 @@
       model: "Belgian model",
       color: "#2E5E9E",
       desc: "A continuing Stormont inside an all-island state. Harmonisation deferred over two decades, but two administrations run permanently.",
-      defaults: { reratingScope: 60, reratingYears: 20, investment: 0.5, duplication: 0.5, gNI: 4, stall: false }
+      defaults: { reratingScope: 60, reratingYears: 20, investment: 0.5, duplication: 0.5, gNI: 4.5, stall: false }
     },
     glide: {
       key: "glide",
@@ -83,7 +83,7 @@
       model: "Spanish and DCU-inspired",
       color: "#177052",
       desc: "Harmonisation on a published glide path tied to convergence benchmarks, with a front-loaded investment surge before the welfare bill lands.",
-      defaults: { reratingScope: 25, reratingYears: 15, investment: 1.5, duplication: 0.25, gNI: 5, stall: false }
+      defaults: { reratingScope: 25, reratingYears: 15, investment: 1.5, duplication: 0.25, gNI: 3.5, stall: false }
     },
     worst: {
       key: "worst",
@@ -91,7 +91,7 @@
       model: "FitzGerald and Morgenroth-inspired",
       color: "#444B52",
       desc: "Dublin absorbs pensions and debt interest, welfare and pay harmonise on day one, no investment surge, and convergence stalls German-style. The pessimists' full bill.",
-      defaults: { reratingScope: 100, reratingYears: 1, investment: 0, duplication: 0, gNI: 3, stall: true },
+      defaults: { reratingScope: 100, reratingYears: 1, investment: 0, duplication: 0, gNI: 1.3, stall: true },
       switches: { pensionsUK: false, debtUK: false }
     }
   };
@@ -287,15 +287,15 @@
     ))), /* @__PURE__ */ React.createElement("p", { className: "text-xs leading-relaxed", style: { color: "#5C6B63" } }, custom ? "Custom settings. Pick a form to reset to its preset." : FORMS[form].desc)), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5 mb-4", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-3", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "The negotiation switches"), /* @__PURE__ */ React.createElement(Toggle, { label: "UK retains state pensions", sub: "Contributions were paid to London", on: pensionsUK, onChange: setPensionsUK, amount: PENSIONS }), /* @__PURE__ */ React.createElement(Toggle, { label: "UK retains debt interest", sub: "No legal liability transfers, per the Scottish precedent", on: debtUK, onChange: setDebtUK, amount: DEBT_INT })), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-4", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Growth assumptions"), /* @__PURE__ */ React.createElement(
       Slider,
       {
-        label: "Northern real growth",
+        label: "Northern productivity growth",
         value: params.gNI,
         onChange: (v) => setP("gNI", v),
         min: 0,
         max: 7,
         step: 0.25,
         unit: "% pa",
-        marks: ["NI trend 1.3%", "Accession pace 6%+"],
-        help: "Annual growth assumed for Northern output after unity."
+        marks: ["Historical 1.3%", "Conditional convergence 4.5%"],
+        help: "Annual productivity path selected for Northern output. It is a scenario input, not an estimated unity dividend."
       }
     ), /* @__PURE__ */ React.createElement(
       Slider,

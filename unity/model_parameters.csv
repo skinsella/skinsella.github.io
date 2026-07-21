@@ -15,6 +15,9 @@ age_sensitive_share,Age-sensitive core share,0.35,ratio,author calibration,Model
 structural_shift_years,Structural shift duration,30,years,author calibration,Model author,calibration,Linear transition
 stall_year,Convergence stall year,7,year,author calibration,Model author,calibration,Stylised path
 post_stall_relative_growth,Relative growth after stall,0.004,ratio,author calibration,Model author,calibration,Not an estimate
+central_productivity_premium,Prudent Northern productivity premium,1.0,percentage points,evidence scenario,Irish literature synthesis,scenario,Default replaces the earlier two-point premium
+historical_north_growth,Northern real growth average 2000 to 2024,1.3,percent per year,study-derived,Doyle and UUEPC 2025,provisional,Historical scenario anchor
+conditional_convergence_premium,Conditional convergence premium,2.0,percentage points,research benchmark,Barro and Sala-i-Martin convergence literature,scenario,Upside scenario rather than forecast
 north_population_2024,Northern population,1.9279,million,official statistic,NISRA 2024 mid-year estimates,verified,Starting value for advanced model
 north_child_share,Share aged 0 to 15,0.20,ratio,official statistic,NISRA 2024 mid-year estimates,verified,Starting value for advanced model
 north_older_share,Share aged 65 plus,0.181,ratio,official statistic,NISRA 2024 mid-year estimates,verified,Starting value for advanced model
@@ -29,3 +32,20 @@ service_health_share,Health share,0.35,ratio,author calibration,Model author,cal
 service_education_share,Education share,0.20,ratio,author calibration,Model author,calibration,Advanced service composition
 service_welfare_share,Welfare share,0.25,ratio,author calibration,Model author,calibration,Advanced service composition
 service_administration_share,Administration share,0.20,ratio,author calibration,Model author,calibration,Advanced service composition
+ons_health_identifiable_2023,NI identifiable health expenditure,6.181,GBP bn 2022-23,official statistic,ONS CRPSF expenditure table 2,verified,Converted to EUR at 1.165 for service module
+ons_education_identifiable_2023,NI identifiable education expenditure,3.427,GBP bn 2022-23,official statistic,ONS CRPSF expenditure table 2,verified,Includes training
+ons_social_protection_identifiable_2023,NI identifiable social protection expenditure,10.658,GBP bn 2022-23,official statistic,ONS CRPSF expenditure table 2,verified,Welfare harmonisation remains in rerating module
+ons_general_services_identifiable_2023,NI identifiable general public services,0.525,GBP bn 2022-23,official statistic,ONS CRPSF expenditure table 2,verified,Administration service base
+health_uplift,Health service uplift,0,percent,scenario input,User-selected,calibration,Applied to ONS identifiable health base
+education_uplift,Education service uplift,0,percent,scenario input,User-selected,calibration,Applied to ONS identifiable education base
+administration_uplift,Administration service uplift,0,percent,scenario input,User-selected,calibration,Applied to ONS identifiable general-services base
+one_off_transition_cost,One-off transition envelope,0,EUR bn 2023,scenario input,User-selected,calibration,Defaults to zero until a sourced implementation plan exists
+tax_multiplier,Tax-funded output multiplier,0.5,ratio,research benchmark,Irish Fiscal Advisory Council and Department of Finance usage,calibration,Applied with a one-year lag
+investment_output_return,Annual output return on mature transition investment,0.08,ratio,scenario input,Model author,calibration,Not a project appraisal estimate
+investment_lag,Transition investment delivery lag,3,years,scenario input,Model author,calibration,Investment enters productive stock after lag
+investment_depreciation,Transition investment depreciation,0.04,ratio,scenario input,Model author,calibration,Annual productive-stock depreciation
+uk_pension_share,UK responsibility for legacy state pensions,100,percent,negotiation input,Future UK-Ireland settlement,unknown,Continuous share replaces binary switch
+uk_debt_share,UK responsibility for allocated debt interest,100,percent,negotiation input,Future UK-Ireland settlement,unknown,Continuous share replaces binary switch
+pension_accrual_years,Irish pension accrual period,40,years,study-derived,Doyle and UUEPC 2025,provisional,Used with EUR115m annual increment
+service_cost_per_outcome_point,Service cost per percentage point of outcome-gap closure,0.5,percent of service base,scenario input,User-selected,calibration,Target and cost are separately visible
+nisra_age_bands_2024,Northern population by five-year age band,1.927855,million,official statistic,NISRA 2024-based principal population projection,verified,21 bands from age 0-4 to 100 plus
