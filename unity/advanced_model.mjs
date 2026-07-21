@@ -190,3 +190,43 @@ export function requiredGrowthForBreakEven(input = {}, targetYear = 15) {
   }
   return round(high, 2);
 }
+
+export function convergenceTests(input = {}) {
+  const p = { ...DEFAULTS, ...input };
+  const rows = simulateAdvanced(p);
+  const fiscalSummary = summary(rows);
+  const peakCostRow = rows.reduce((a, b) => b.netCost > a.netCost ? b : a, rows[0]);
+  const peakDebtRow = rows.reduce((a, b) => b.debt > a.debt ? b : a, rows[0]);
+  const debtDenominator = CONSTANTS.southGNIStar * (1 + p.southGrowth / 100) ** peakDebtRow.year;
+  const peakDebtPctGNI = peakDebtRow.debt / debtDenominator * 100;
+  const stressedRows = simulateAdvanced({ ...p, interestRate: p.interestRate + 2 });
+  const stressedSummary = summary(stressedRows);
+  const fiscalChecks = [
+    { label: "Peak annual cost below 2% of GNI*", pass: peakCostRow.pctGNI <= 2, value: `${round(peakCostRow.pctGNI)}%` },
+    { label: "Peak transition debt below 10% of GNI*", pass: peakDebtPctGNI <= 10, value: `${round(peakDebtPctGNI)}%` },
+    { label: "Annual break-even within 15 years", pass: fiscalSummary.breakEven !== null && fiscalSummary.breakEven <= 15, value: fiscalSummary.breakEven ? `Year ${fiscalSummary.breakEven}` : "Not reached" },
+    { label: "Debt declines after a 2-point rate stress", pass: stressedRows.at(-1).debt < stressedSummary.peakDebt, value: `Peak €${round(stressedSummary.peakDebt, 1)}bn` },
+  ];
+  const targetYear = Math.min(15, rows.length);
+  const targetRow = rows[targetYear - 1];
+  const requiredGrowth = requiredGrowthForBreakEven(p, targetYear);
+  const recurringTransition = targetRow.rerating + targetRow.pension;
+  const productiveChecks = [
+    { label: `Selected growth meets the year ${targetYear} break-even threshold`, pass: requiredGrowth !== null && p.northGrowth >= requiredGrowth, value: requiredGrowth === null ? "Above 10% required" : `${round(p.northGrowth)}% vs ${round(requiredGrowth)}%` },
+    { label: `Revenue gain covers rerating and pension costs in year ${targetYear}`, pass: targetRow.revenueGain >= recurringTransition, value: `€${round(targetRow.revenueGain, 1)}bn vs €${round(recurringTransition, 1)}bn` },
+    { label: "Convergence does not stall after year 7", pass: !p.stall, value: p.stall ? "Stalled path" : "Sustained path" },
+  ];
+  return {
+    fiscal: { status: fiscalChecks.every(check => check.pass) ? "pass" : "fail", checks: fiscalChecks, peakDebt: fiscalSummary.peakDebt },
+    productive: { status: productiveChecks.every(check => check.pass) ? "provisional" : "fail", checks: productiveChecks, requiredGrowth },
+    services: {
+      status: "data-gap",
+      domains: [
+        { label: "Health", measures: "Waiting time, access, avoidable mortality, workforce" },
+        { label: "Education", measures: "Attainment, participation, class size, skills" },
+        { label: "Housing and welfare", measures: "Housing cost, poverty, replacement rates, access" },
+        { label: "Institutional capacity", measures: "Staffing, capital plan, implementation milestones" },
+      ],
+    },
+  };
+}
