@@ -171,3 +171,22 @@ export function breakEvenFrontier(input = {}) {
     })),
   };
 }
+
+export function requiredGrowthForBreakEven(input = {}, targetYear = 15) {
+  const horizon = Math.max(1, Math.round(targetYear));
+  const p = { ...DEFAULTS, ...input, horizon };
+  const reachesTarget = northGrowth => {
+    const year = summary(simulateAdvanced({ ...p, northGrowth })).breakEven;
+    return year !== null && year <= horizon;
+  };
+  if (reachesTarget(0)) return 0;
+  if (!reachesTarget(10)) return null;
+  let low = 0;
+  let high = 10;
+  for (let i = 0; i < 24; i += 1) {
+    const middle = (low + high) / 2;
+    if (reachesTarget(middle)) high = middle;
+    else low = middle;
+  }
+  return round(high, 2);
+}
