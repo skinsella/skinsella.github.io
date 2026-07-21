@@ -27,7 +27,7 @@
     <article class="card half">
       <h2>The accounting identity</h2>
       <p>Annual net cost combines the inherited fiscal position, negotiated liabilities, policy harmonisation and transition spending, then subtracts structural savings and revenue from relative growth.</p>
-      <div class="formula">Net cost<sub>t</sub> = core deficit<sub>t</sub> + pensions<sub>t</sub> + debt interest + rerating<sub>t</sub> + investment<sub>t</sub> + duplication − structural savings<sub>t</sub> − growth revenue<sub>t</sub></div>
+      <div class="formula">Net cost<sub>t</sub> = primary transition cost<sub>t</sub> + interest on opening transition debt<sub>t</sub> − growth revenue<sub>t</sub></div>
     </article>
     <article class="card half">
       <h2>The starting point</h2>
@@ -55,6 +55,12 @@
           <tr><td>Age-sensitive core share</td><td class="value">35%</td><td><span class="tag calibration">Calibration</span></td><td>Controls how strongly ageing affects the inherited core deficit</td></tr>
           <tr><td>Relative output ceiling</td><td class="value">2.0×</td><td><span class="tag calibration">Calibration</span></td><td>Stops the model generating unlimited convergence revenue</td></tr>
           <tr><td>Post-stall relative growth</td><td class="value">0.4% pa</td><td><span class="tag calibration">Calibration</span></td><td>Stylised productivity plateau after year seven</td></tr>
+          <tr><td>Prudent Northern productivity growth</td><td class="value">3.5% pa</td><td><span class="tag study">Evidence scenario</span></td><td>One percentage point above the 2.5% Southern assumption, with no separate employment dividend</td></tr>
+          <tr><td>Historical Northern growth</td><td class="value">1.3% pa</td><td><span class="tag study">Study-derived</span></td><td>Reported average for 2000 to 2024 and used in the cautious path</td></tr>
+          <tr><td>Health identifiable expenditure</td><td class="value">£6.181bn</td><td><span class="tag official">Official</span></td><td>ONS 2022 to 2023 base for explicit service uplift scenarios</td></tr>
+          <tr><td>Education identifiable expenditure</td><td class="value">£3.427bn</td><td><span class="tag official">Official</span></td><td>ONS 2022 to 2023 education and training base</td></tr>
+          <tr><td>Social-protection identifiable expenditure</td><td class="value">£10.658bn</td><td><span class="tag official">Official</span></td><td>ONS 2022 to 2023 base, with harmonisation represented through rerating</td></tr>
+          <tr><td>General public-services expenditure</td><td class="value">£0.525bn</td><td><span class="tag official">Official</span></td><td>ONS 2022 to 2023 identifiable base for administration uplift scenarios</td></tr>
         </tbody>
       </table>
     </article>
@@ -93,18 +99,25 @@
         <li>Detailed age-specific mortality, fertility and labour-force participation</li>
         <li>Behavioural tax responses and general-equilibrium effects</li>
         <li>Independent returns from transition investment</li>
-        <li>Detailed costs of public-service quality convergence</li>
+        <li>Measured service-quality targets and unit-cost estimates for public-service convergence</li>
+        <li>Behavioural effects of the taxes used to finance the non-borrowed share</li>
       </ul>
     </article>
     <article class="card">
       <h2>Advanced population and financing block</h2>
-      <p>The advanced model moves children, working-age people and people aged 65 plus forward annually for the North and South. Births and migration enter the cohorts, children age into the labour force, working-age people retire, and mortality reduces the older cohort.</p>
-      <div class="formula">Debt<sub>t</sub> = max(0, debt<sub>t−1</sub> × (1 + interest rate) + borrowing<sub>t</sub> + fiscal surplus<sub>t</sub>)</div>
-      <p class="note">The cohort equations are deliberately stylised. NISRA and CSO data anchor the starting populations, but the projected paths are model scenarios rather than official demographic forecasts.</p>
+      <p>The Northern block now starts from 21 official NISRA five-year age bands and advances them annually using ageing, age-specific mortality and age-weighted migration. The Southern block remains broader pending harmonised five-year data.</p>
+      <div class="formula">Interest<sub>t</sub> = opening debt<sub>t</sub> × rate<br>Debt<sub>t</sub> = max(0, opening debt<sub>t</sub> + borrowing<sub>t</sub> + fiscal surplus<sub>t</sub>)</div>
+      <p class="note">Interest is included in annual net cost before the model splits positive costs between borrowing and contemporaneous tax funding. It therefore also enters cumulative fiscal cost.</p>
+      <p class="note">The age-band transition equations remain scenarios rather than an attempt to reproduce the full official projection engine.</p>
     </article>
+    <article class="card third"><h2>Tax feedback</h2><p>Tax-funded transition costs reduce output with a one-year lag and lower subsequent revenue.</p><div class="formula">Revenue loss<sub>t</sub> = tax funding<sub>t−1</sub> × multiplier × revenue share</div><p class="note">The default multiplier is 0.5 and remains editable because Irish estimates vary materially.</p></article>
+    <article class="card third"><h2>Investment return</h2><p>Transition investment enters a delivery pipeline and then a depreciating productive stock.</p><div class="formula">Output gain<sub>t</sub> = mature investment stock<sub>t</sub> × output return</div><p class="note">The default lag is three years, depreciation is 4 per cent and the annual output return is 8 per cent.</p></article>
+    <article class="card third"><h2>Negotiated shares</h2><p>UK responsibility for legacy pensions and allocated debt interest can take any value from zero to 100 per cent.</p><div class="formula">Irish legacy liability = published allocation × (1 − UK share)</div><p class="note">The controls represent settlement possibilities and do not assign probabilities.</p></article>
+    <article class="card half"><h2>Service outcome targets</h2><p>Health, education and administrative additions combine a target for closing the outcome gap with an explicit cost per percentage point. Unit-cost anchors use ONS identifiable spending divided by the relevant NISRA population.</p><p class="note">Targets default to zero until comparable outcome series and departmental unit-cost estimates are approved.</p></article>
+    <article class="card half"><h2>Transition implementation plan</h2><p>The one-off envelope is allocated to legal and treaty work, digital and data migration, tax and benefit systems, institutional integration and contingency over years one to eight.</p><p class="note">This is a cost-collection template rather than a costed departmental plan. The envelope therefore defaults to zero.</p></article>
     <article class="card">
       <h2>Interpretation warning</h2>
-      <p class="callout">The optimistic glide-path result is driven materially by 5 per cent Northern growth against 2.5 per cent Southern growth. The resulting 2.44 per cent relative-growth differential is an upside assumption, not an established forecast.</p>
+      <p class="callout">The default now uses a one-point Northern productivity premium and no separate employment dividend. The historical path uses the reported 1.3 per cent Northern growth average. A two-point conditional-convergence path remains available as an upside scenario, not a forecast.</p>
       <p class="note">Detailed provenance is maintained in <code>model_parameters.csv</code>, <code>MODEL_NOTES.md</code> and the accompanying literature review. Several source locations remain provisional pending exact table and page verification.</p>
     </article>
   </section>
