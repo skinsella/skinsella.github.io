@@ -1,0 +1,31 @@
+id,label,value,unit,type,source,status,notes
+gni_star,Republic modified GNI*,290.9,EUR bn 2023,official statistic,CSO Annual National Accounts 2023,provisional,Exact table or URL required
+north_output,Northern nominal GDP proxy,73.8,EUR bn 2023,official-derived,ONS regional accounts and GBP conversion,provisional,GDP used as GNI proxy
+tax_share,Northern revenue share,0.35,ratio,official-derived,ONS revenue divided by Northern GDP,provisional,Fixed fiscal yield
+published_deficit,Published Northern fiscal deficit,16.58,EUR bn 2023,official-derived,ONS FY2023 and GBP conversion,provisional,Converted from GBP14.22bn
+pensions,Allocated pension spending,6.67,EUR bn 2023,study-derived,Doyle and UUEPC 2025 waterfall,provisional,Negotiated treatment uncertain
+debt_interest,Allocated UK debt interest,4.12,EUR bn 2023,study-derived,Doyle and UUEPC 2025 waterfall,provisional,Incidence differs from legal liability
+defence_net,Net defence adjustment,1.59,EUR bn 2023,study-derived,Doyle and UUEPC 2025 waterfall,provisional,Net of assumed Irish uplift
+other_non_identifiable,Other excluded spending,0.67,EUR bn 2023,study-derived,Doyle and UUEPC 2025 waterfall,provisional,Central and out-of-UK adjustments
+tax_additional,Additional attributed tax,1.79,EUR bn 2023,study-derived,Doyle and UUEPC 2025 waterfall,provisional,Several adjustments combined
+rerating_full,Full welfare and pay rerating,11.0,EUR bn 2023,study-derived,FitzGerald and Morgenroth 2024 plus price uplift,provisional,Price calculation requires exact citation
+pension_annual_step,Annual increase in Irish pension responsibility,0.115,EUR bn per year,study-derived,Doyle and UUEPC 2025 as summarised in supplied briefing,provisional,Implemented cumulatively
+parity_cap,Relative Northern output ceiling,2.0,ratio,author calibration,Model author,calibration,Prevents indefinite gains
+age_sensitive_share,Age-sensitive core share,0.35,ratio,author calibration,Model author,calibration,Requires sensitivity testing
+structural_shift_years,Structural shift duration,30,years,author calibration,Model author,calibration,Linear transition
+stall_year,Convergence stall year,7,year,author calibration,Model author,calibration,Stylised path
+post_stall_relative_growth,Relative growth after stall,0.004,ratio,author calibration,Model author,calibration,Not an estimate
+north_population_2024,Northern population,1.9279,million,official statistic,NISRA 2024 mid-year estimates,verified,Starting value for advanced model
+north_child_share,Share aged 0 to 15,0.20,ratio,official statistic,NISRA 2024 mid-year estimates,verified,Starting value for advanced model
+north_older_share,Share aged 65 plus,0.181,ratio,official statistic,NISRA 2024 mid-year estimates,verified,Starting value for advanced model
+south_population_2022,Republic population,5.149139,million,official statistic,CSO Census and population projections,verified,Starting value for advanced model
+south_children_2022,Republic population aged 0 to 14,1.0143,million,official statistic,CSO population projections,verified,Starting value for advanced model
+south_older_2022,Republic population aged 65 plus,0.776315,million,official statistic,CSO population projections,provisional,Exact table cell should be rechecked
+revenue_labour_share,Labour tax share,0.45,ratio,author calibration,Model author,calibration,Advanced revenue composition
+revenue_consumption_share,Consumption tax share,0.30,ratio,author calibration,Model author,calibration,Advanced revenue composition
+revenue_corporation_share,Corporation tax share,0.12,ratio,author calibration,Model author,calibration,Advanced revenue composition
+revenue_other_share,Property and other tax share,0.13,ratio,author calibration,Model author,calibration,Advanced revenue composition
+service_health_share,Health share,0.35,ratio,author calibration,Model author,calibration,Advanced service composition
+service_education_share,Education share,0.20,ratio,author calibration,Model author,calibration,Advanced service composition
+service_welfare_share,Welfare share,0.25,ratio,author calibration,Model author,calibration,Advanced service composition
+service_administration_share,Administration share,0.20,ratio,author calibration,Model author,calibration,Advanced service composition
