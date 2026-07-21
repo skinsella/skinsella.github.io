@@ -22,7 +22,29 @@ This replaces the earlier flat €115 million annual charge. It remains a study-
 
 ## Growth channel
 
-Relative Northern output is calculated from Northern growth divided by Southern growth. The output gain is multiplied by a fixed 35 per cent revenue share. This is a reduced-form revenue calculation rather than a general-equilibrium fiscal model.
+Relative Northern output per worker is calculated from Northern productivity growth divided by Southern productivity growth. A separate employment gain is applied only when explicitly selected and defaults to zero to avoid building an employment dividend into the central path. The output gain is multiplied by a fixed 35 per cent revenue share. This is a reduced-form revenue calculation rather than a general-equilibrium fiscal model.
+
+The default is now a prudent one percentage point Northern productivity premium. The historical scenario uses the 1.3 per cent Northern growth average for 2000 to 2024 reported by Doyle and UUEPC. The two percentage point conditional-convergence benchmark is retained as an upside scenario rather than the central case.
+
+## Financing consistency
+
+Interest on opening transition debt is included in annual gross cost, annual net cost and cumulative fiscal cost. Positive net costs are then divided between borrowing and contemporaneous tax funding. The debt stock increases only by the borrowing share because the interest component has already entered the annual cost. Modelled surpluses reduce the debt stock.
+
+## Fiscal bridge and services
+
+The bridge from the ONS Northern net fiscal balance to the inherited core is stored explicitly in `FISCAL_BRIDGE`, with each adjustment labelled as official-derived, study-derived or negotiation-dependent.
+
+Health, education, social protection and general public-services bases now use ONS 2022 to 2023 identifiable expenditure for Northern Ireland. They are converted at the model's common £1 to €1.165 rate. The service uplift controls apply explicit percentage additions to those bases. Their default is zero because no defensible service-quality target or unit-cost gap has yet been estimated. Welfare and public-pay harmonisation remain in the separate rerating module. A separate one-off transition envelope is available and also defaults to zero pending a sourced implementation plan.
+
+The expanded service module separates outcome-gap closure targets from the assumed cost per percentage point of gap closure. Unit-cost anchors use ONS spending divided by the relevant NISRA population. Targets remain zero by default.
+
+The tax-funded share now produces a lagged output and revenue loss through an editable multiplier. Transition investment enters a lagged, depreciating productive stock and returns additional taxable output. Both channels are stress mechanisms rather than structural macroeconomic estimates.
+
+Negotiated pension and debt responsibility now use continuous UK shares rather than binary switches. The pension schedule uses the study's €115 million annual increment over a default 40-year accrual period for the UK-retained legacy share.
+
+The one-off transition envelope is allocated across legal, digital, payment-system, institutional and contingency workstreams. Its default remains zero until departmental estimates exist.
+
+Northern demography now starts from 21 NISRA 2024 five-year age bands. The Southern side remains a broad-cohort scenario, so the support ratio is still less robust than the Northern service-cost indices.
 
 ## Author calibrations
 
@@ -50,6 +72,8 @@ Revenue gains are allocated across labour, consumption, corporation, and propert
 - The three-cohort population block does not replace a single-year-of-age projection
 - Marginal public-service costs and behavioural responses are omitted
 - Transition investment has no estimated supply-side return
+- Service uplift percentages and the one-off transition envelope are scenarios, not empirical estimates
+- Contemporaneous tax funding has no behavioural or macroeconomic feedback
 - Scenario labels are stylised bundles, not institutional estimates
 
 Annual break-even means the annual simulated balance first reaches zero. Cumulative payback means later simulated surpluses offset all earlier deficits. Neither means income convergence.
