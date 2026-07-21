@@ -1,0 +1,163 @@
+{
+  "model": "The Price of Unity",
+  "version": "2.0.0",
+  "generated": "2026-07-21",
+  "seed": 20260721,
+  "draws": 2000,
+  "warning": "Structured uncertainty draws are not estimated probabilities.",
+  "hashes": {
+    "advanced_model.mjs": "d9355202044884a590410001574f5560adf6aae0af826b12727b9ca592d59928",
+    "validation_model.mjs": "2d2f731f477d95edf228e57def03b7181cdeecdeb8aee6196b63f558996cebf4",
+    "model_parameters.csv": "77e8747a9c2ca449ebcf158162465beedf21059773e4e200d57a68811b5601b6",
+    "model_governance.csv": "87a76f88635625539fb067bd822b9491aea3e132d9a3c0abe5eaa05f8d4db35a"
+  },
+  "scenarios": [
+    {
+      "scenario": "central",
+      "label": "Prudent convergence",
+      "year1Cost": 3.51,
+      "year10Cost": 4.77,
+      "cumulative": 99.11,
+      "peakDebt": 69.38,
+      "breakEven": null,
+      "maxAnnualCostPctGNI": 1.28,
+      "maxDebtPctGNI": 12.86
+    },
+    {
+      "scenario": "negotiated",
+      "label": "Conditional convergence",
+      "year1Cost": 3.22,
+      "year10Cost": 1.04,
+      "cumulative": -32.84,
+      "peakDebt": 13.81,
+      "breakEven": 11,
+      "maxAnnualCostPctGNI": 1.08,
+      "maxDebtPctGNI": 3.71
+    },
+    {
+      "scenario": "cautious",
+      "label": "Historical trend",
+      "year1Cost": 4.57,
+      "year10Cost": 15.15,
+      "cumulative": 460.36,
+      "peakDebt": 345.27,
+      "breakEven": null,
+      "maxAnnualCostPctGNI": 6.2,
+      "maxDebtPctGNI": 64.02
+    },
+    {
+      "scenario": "adverse",
+      "label": "Adverse settlement",
+      "year1Cost": 17.67,
+      "year10Cost": 39.17,
+      "cumulative": 1094.45,
+      "peakDebt": 766.11,
+      "breakEven": null,
+      "maxAnnualCostPctGNI": 12.23,
+      "maxDebtPctGNI": 142.05
+    }
+  ],
+  "validation": [
+    {
+      "test": "Fiscal bridge reconciliation",
+      "observed": 1.74,
+      "modelled": 1.74,
+      "errorPct": 0,
+      "status": "identity check",
+      "independence": "in-sample"
+    },
+    {
+      "test": "Northern 2024 population",
+      "observed": 1.927855,
+      "modelled": 1.927855,
+      "errorPct": 0,
+      "status": "source reproduction",
+      "independence": "in-sample"
+    },
+    {
+      "test": "NISRA 2025 principal population",
+      "observed": 1.931301,
+      "modelled": 1.935,
+      "errorPct": 0.19,
+      "status": "projection benchmark",
+      "independence": "external benchmark"
+    },
+    {
+      "test": "NISRA 2034 principal population",
+      "observed": 1.939054,
+      "modelled": 1.974,
+      "errorPct": 1.8,
+      "status": "projection benchmark",
+      "independence": "external benchmark"
+    },
+    {
+      "test": "ONS four-service base",
+      "observed": 24.22,
+      "modelled": 24.22,
+      "errorPct": 0,
+      "status": "source reproduction",
+      "independence": "in-sample"
+    },
+    {
+      "test": "Revenue response",
+      "observed": null,
+      "modelled": null,
+      "errorPct": null,
+      "status": "not validated",
+      "independence": "requires historical series"
+    },
+    {
+      "test": "Service outcome response",
+      "observed": null,
+      "modelled": null,
+      "errorPct": null,
+      "status": "not validated",
+      "independence": "requires outcome and unit-cost series"
+    },
+    {
+      "test": "Investment productivity return",
+      "observed": null,
+      "modelled": null,
+      "errorPct": null,
+      "status": "not validated",
+      "independence": "requires programme appraisal or econometric estimate"
+    }
+  ],
+  "uncertainty": {
+    "seed": 20260721,
+    "draws": 2000,
+    "horizon": 25,
+    "warning": "Structured uncertainty draws, not estimated forecast probabilities",
+    "metrics": {
+      "cumulative": {
+        "p10": 87.77,
+        "median": 253.32,
+        "p90": 471.97
+      },
+      "peakDebt": {
+        "p10": 61.84,
+        "median": 177.32,
+        "p90": 330.38
+      },
+      "year10Cost": {
+        "p10": 4.66,
+        "median": 10.11,
+        "p90": 17.45
+      }
+    },
+    "breakEvenShares": [
+      {
+        "year": 10,
+        "share": 0.1
+      },
+      {
+        "year": 15,
+        "share": 2.3
+      },
+      {
+        "year": 25,
+        "share": 9
+      }
+    ]
+  }
+}
