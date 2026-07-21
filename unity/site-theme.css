@@ -1,0 +1,169 @@
+:root {
+  --fg-navy: #082f5f;
+  --fg-blue: #1261b5;
+  --fg-blue-dark: #0a4384;
+  --fg-yellow: #ffe63b;
+  --fg-ink: #15243a;
+  --fg-paper: #f3f6fa;
+  --fg-line: #d8e0ea;
+}
+
+html, body {
+  background: var(--fg-paper) !important;
+  color: var(--fg-ink) !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+h1, h2, h3, .metric strong {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em;
+}
+
+.top, .page-hero, #root header {
+  position: relative;
+  overflow: hidden;
+  padding: 28px !important;
+  border-radius: 24px;
+  background: linear-gradient(125deg, var(--fg-navy) 0%, #0d417b 62%, var(--fg-blue) 100%) !important;
+  color: #fff !important;
+}
+
+.top::after, .page-hero::after, #root header::after {
+  content: "";
+  position: absolute;
+  right: -70px;
+  bottom: -110px;
+  width: 300px;
+  height: 300px;
+  border: 42px solid rgba(255, 230, 59, 0.16);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.top h1, .page-hero h1, #root header h1 {
+  position: relative;
+  color: #fff !important;
+  font-style: italic;
+  z-index: 1;
+}
+
+.top h1::after, .page-hero h1::after, #root header h1::after {
+  content: "";
+  display: block;
+  width: 116px;
+  height: 6px;
+  margin-top: 16px;
+  border-radius: 99px;
+  background: var(--fg-yellow);
+}
+
+.top p, .page-hero p, #root header p,
+.top .eyebrow, .page-hero .eyebrow, #root header > div > div {
+  color: rgba(255, 255, 255, 0.84) !important;
+}
+
+.top .eyebrow, .page-hero .eyebrow {
+  color: var(--fg-yellow) !important;
+  font-weight: 700;
+}
+
+.nav, .page-hero nav, #root header nav {
+  position: relative;
+  z-index: 2;
+}
+
+.nav a, .page-hero nav a, #root header nav a {
+  display: inline-block;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 5px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  text-decoration: none;
+}
+
+.nav a:hover, .page-hero nav a:hover, #root header nav a:hover,
+.nav a[aria-current], .page-hero nav a.active {
+  border-color: var(--fg-yellow) !important;
+  background: var(--fg-yellow) !important;
+  color: var(--fg-navy) !important;
+}
+
+.card, .test, #root .rounded-xl, #root .rounded-lg {
+  border-color: transparent !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  box-shadow: 0 8px 28px rgba(8, 47, 95, 0.09);
+}
+
+.tabs button, .preset button, .presets button, .actions button {
+  border: 1px solid var(--fg-line) !important;
+  border-radius: 5px !important;
+  background: #fff !important;
+  color: var(--fg-navy) !important;
+  font-weight: 700;
+}
+
+.tabs button.active, .preset button.active, .presets button.active,
+.actions button:hover {
+  border-color: var(--fg-blue) !important;
+  background: var(--fg-blue) !important;
+  color: #fff !important;
+}
+
+#root button:not([role="switch"]) {
+  font-weight: 700;
+}
+
+#root input[type="range"], .control input[type="range"] {
+  accent-color: var(--fg-blue) !important;
+}
+
+.status.pass, .mark.yes {
+  background: var(--fg-blue) !important;
+  color: #fff !important;
+}
+
+.rule {
+  background: var(--fg-navy) !important;
+  border-top: 7px solid var(--fg-yellow);
+}
+
+.frontier-table .early {
+  background: #dcecff !important;
+  color: var(--fg-blue-dark) !important;
+}
+
+.narrative {
+  border-left-color: var(--fg-yellow) !important;
+}
+
+.bar i, .sensitivity-track i {
+  background: var(--fg-blue) !important;
+}
+
+#access-gate {
+  background: linear-gradient(135deg, var(--fg-navy), var(--fg-blue)) !important;
+}
+
+#access-form {
+  border: 0 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24) !important;
+}
+
+#access-form button {
+  border-radius: 4px !important;
+  background: var(--fg-yellow) !important;
+  color: var(--fg-navy) !important;
+  font-weight: 800 !important;
+}
+
+@media (max-width: 800px) {
+  .top, .page-hero, #root header {
+    padding: 22px !important;
+    border-radius: 16px;
+  }
+}
