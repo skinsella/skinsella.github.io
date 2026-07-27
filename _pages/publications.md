@@ -11,6 +11,10 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 
 - Intangible capital, digitalisation and scale: Evidence and interactions in firm-level production and competition dynamics. *Research in International Business and Finance*. [DOI](https://doi.org/10.1016/j.ribaf.2026.103326)
 
+- Irish Natural Capital Accounting for Sustainable Environments (the INCASE project): transdisciplinary research in action. [DOI](https://doi.org/10.4337/9781035346554.00018)
+
+- Measuring the Economic Impact of the Irish Aquaculture: An Input-Output Approach. *International Journal on Food System Dynamics*. [DOI](https://doi.org/10.1163/18696945-bja00046)
+
 ## 2025
 
 - Intangible income shifting: the impact of digitalisation on falling corporate tax rates. *International Tax and Public Finance*. [DOI](https://doi.org/10.1007/s10797-025-09883-y)
