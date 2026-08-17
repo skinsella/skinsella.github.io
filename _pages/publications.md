@@ -95,8 +95,6 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 
 - Introduction to the special issue: What causes credit booms?. *Research in International Business and Finance*. [DOI](https://doi.org/10.1016/j.ribaf.2012.12.001)
 
-- Legal protection of investors, corporate governance, and investable premia in emerging markets. *International Review of Economics and Finance*. [DOI](https://doi.org/10.1016/j.iref.2013.07.003)
-
 - Post-bailout ireland as the poster child for austerity. *CESifo Forum*.
 
 ## 2013
@@ -106,8 +104,6 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 - A model of partnership formation with friction and multiple criteria. *Search Theory: A Game Theoretic Perspective*. [DOI](https://doi.org/10.1007/978-1-4614-6825-7_17)
 
 - Accounting for Intangibles, the Knowledge Economy and the Issue of Memory; Some insights from Philosophy of Bergson. *Philosophy of Management*. [DOI](https://doi.org/10.5840/pom201312318)
-
-- Financial and regulatory failure: The case of Ireland. *Journal of Banking Regulation*. [DOI](https://doi.org/10.1057/jbr.2011.30)
 
 - Modeling moments of crisis: The case of ireland. *Journal of Economic Issues*. [DOI](https://doi.org/10.2753/JEI0021-3624470230)
 
@@ -126,8 +122,6 @@ Full publication list from my [ORCID profile](https://orcid.org/0000-0002-7943-4
 ## 2011
 
 - Acute Medical Assessment Units: An efficient alternative to in-hospital acute medical care. *Irish Medical Journal*.
-
-- An Experimental Analysis of Irish Electricity Auctions. *Electricity Journal*. [DOI](https://doi.org/10.1016/j.tej.2011.10.008)
 
 - An institutional architecture for meta-risk regulation in Irish banking: Lessons from Anglo Irish Banks Minsky moment. *Journal of Banking Regulation*. [DOI](https://doi.org/10.1057/jbr.2011.13)
 
