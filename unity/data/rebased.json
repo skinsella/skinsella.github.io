@@ -1,0 +1,297 @@
+{
+ "rows": [
+  {
+   "study": "McGuinness & Bergin",
+   "pub": "2019/2020",
+   "measure": "Subvention less non-identifiable spending (implied)",
+   "original": 6.779,
+   "unit": "\u00a3bn",
+   "data": "2014",
+   "eur2023": 10.05,
+   "pct_gni": 3.45,
+   "switch": "Dublin takes pensions, UK keeps debt",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "McGuinness & Bergin (ESRI bulletin)",
+   "pub": "2020",
+   "measure": "Subvention less 25% non-continuing items",
+   "original": 6.8999999999999995,
+   "unit": "\u00a3bn",
+   "data": "FY2017-18",
+   "eur2023": 9.81,
+   "pct_gni": 3.37,
+   "switch": "Dublin takes pensions, UK keeps debt",
+   "kind": "annual",
+   "quality": "Medium"
+  },
+  {
+   "study": "Doyle",
+   "pub": "2021",
+   "measure": "Transferring deficit",
+   "original": 2.4,
+   "unit": "\u00a3bn",
+   "data": "FY2018-19",
+   "eur2023": 3.34,
+   "pct_gni": 1.15,
+   "switch": "UK keeps pensions and debt",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "FitzGerald & Morgenroth",
+   "pub": "2019/2024",
+   "measure": "Base, Dublin takes pensions and debt",
+   "original": 10.91,
+   "unit": "\u20acbn (2019)",
+   "data": "2019",
+   "eur2023": 13.07,
+   "pct_gni": 4.49,
+   "switch": "Dublin takes pensions and debt",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "FitzGerald & Morgenroth",
+   "pub": "2019/2024",
+   "measure": "Base excluding pensions",
+   "original": 8.203,
+   "unit": "\u20acbn (2019)",
+   "data": "2019",
+   "eur2023": 9.82,
+   "pct_gni": 3.38,
+   "switch": "UK keeps pensions, Dublin takes debt",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "FitzGerald & Morgenroth",
+   "pub": "2019/2024",
+   "measure": "Base excluding debt interest",
+   "original": 9.232,
+   "unit": "\u20acbn (2019)",
+   "data": "2019",
+   "eur2023": 11.06,
+   "pct_gni": 3.8,
+   "switch": "Dublin takes pensions, UK keeps debt",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "FitzGerald & Morgenroth",
+   "pub": "2019/2024",
+   "measure": "Base plus immediate rerating",
+   "original": 20.625,
+   "unit": "\u20acbn (2019)",
+   "data": "2019",
+   "eur2023": 24.7,
+   "pct_gni": 8.49,
+   "switch": "Dublin takes both, immediate rerating",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "Birnie",
+   "pub": "2023",
+   "measure": "Doyle method replicated",
+   "original": 6.8,
+   "unit": "\u00a3bn",
+   "data": "FY2021-22",
+   "eur2023": 8.73,
+   "pct_gni": 3.0,
+   "switch": "UK keeps pensions and debt, fewer deductions",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "Birnie",
+   "pub": "2023",
+   "measure": "Assumptions relaxed",
+   "original": 12.6,
+   "unit": "\u00a3bn",
+   "data": "FY2021-22",
+   "eur2023": 16.18,
+   "pct_gni": 5.56,
+   "switch": "Dublin takes most liabilities",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "Birnie",
+   "pub": "2023",
+   "measure": "Doyle 2018-19 reworked, low",
+   "original": 3.6,
+   "unit": "\u00a3bn",
+   "data": "FY2018-19",
+   "eur2023": 5.0,
+   "pct_gni": 1.72,
+   "switch": "range",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "Birnie",
+   "pub": "2023",
+   "measure": "Doyle 2018-19 reworked, high",
+   "original": 8.8,
+   "unit": "\u00a3bn",
+   "data": "FY2018-19",
+   "eur2023": 12.23,
+   "pct_gni": 4.2,
+   "switch": "range",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "Doyle & UUEPC",
+   "pub": "2025",
+   "measure": "Inherited deficit",
+   "original": 1.487,
+   "unit": "\u00a3bn",
+   "data": "FY2022-23",
+   "eur2023": 1.78,
+   "pct_gni": 0.61,
+   "switch": "UK keeps pensions and debt",
+   "kind": "annual",
+   "quality": "Medium-High"
+  },
+  {
+   "study": "Doyle & UUEPC",
+   "pub": "2025",
+   "measure": "Year-one cost incl. \u20ac1bn investment",
+   "original": 3.017,
+   "unit": "\u20acbn mixed",
+   "data": "FY2022-23 + 2025 \u20ac",
+   "eur2023": 3.01,
+   "pct_gni": 1.03,
+   "switch": "UK keeps pensions and debt",
+   "kind": "annual",
+   "quality": "Medium-High"
+  },
+  {
+   "study": "Doyle (ISIA)",
+   "pub": "2026",
+   "measure": "Inherited deficit, most likely",
+   "original": 1.5,
+   "unit": "\u00a3bn",
+   "data": "FY2022-23 (assumed)",
+   "eur2023": 1.8,
+   "pct_gni": 0.62,
+   "switch": "UK keeps pensions and debt",
+   "kind": "annual",
+   "quality": "High"
+  },
+  {
+   "study": "H\u00fcbner / KLC",
+   "pub": "2015",
+   "measure": "All-island GDP gain, 8 years (benefit)",
+   "original": 35.6,
+   "unit": "\u20acbn (2015)",
+   "data": "2015",
+   "eur2023": 41.94,
+   "pct_gni": 14.42,
+   "switch": "n/a, benefit",
+   "kind": "cumulative benefit",
+   "quality": "Low"
+  },
+  {
+   "study": "H\u00fcbner & van Nieuwkoop / KLC",
+   "pub": "2018",
+   "measure": "Subvention assumed borne by Dublin",
+   "original": 11.4,
+   "unit": "\u20acbn (2018)",
+   "data": "2018",
+   "eur2023": 13.33,
+   "pct_gni": 4.58,
+   "switch": "Dublin takes all",
+   "kind": "annual",
+   "quality": "Low"
+  },
+  {
+   "study": "H\u00fcbner & van Nieuwkoop / KLC",
+   "pub": "2018",
+   "measure": "NI gain to 2025 (benefit)",
+   "original": 17.9,
+   "unit": "\u20acbn (2018)",
+   "data": "2018",
+   "eur2023": 20.93,
+   "pct_gni": 7.19,
+   "switch": "n/a, benefit",
+   "kind": "cumulative benefit",
+   "quality": "Low"
+  },
+  {
+   "study": "Chadwick (blog)",
+   "pub": "2026",
+   "measure": "Year-one cost",
+   "original": 3.8,
+   "unit": "\u20acbn (2026)",
+   "data": "2026",
+   "eur2023": 3.67,
+   "pct_gni": 1.26,
+   "switch": "Dublin takes pensions, pay equalised over 3 yrs",
+   "kind": "annual",
+   "quality": "Grey"
+  },
+  {
+   "study": "Chadwick (blog)",
+   "pub": "2026",
+   "measure": "20-year cumulative",
+   "original": 55,
+   "unit": "\u20acbn (2026)",
+   "data": "2026",
+   "eur2023": 53.18,
+   "pct_gni": 18.28,
+   "switch": "same",
+   "kind": "cumulative cost",
+   "quality": "Grey"
+  }
+ ],
+ "waterfall": [
+  [
+   "ONS published deficit",
+   17.058
+  ],
+  [
+   "UK keeps state pensions",
+   -6.864
+  ],
+  [
+   "UK keeps debt interest",
+   -4.238
+  ],
+  [
+   "UK defence, net of Irish uplift",
+   -1.64
+  ],
+  [
+   "Out-of-UK spending",
+   -0.48
+  ],
+  [
+   "Non-identifiable central spending",
+   -0.212
+  ],
+  [
+   "Tax-system and HQ additions",
+   -1.84
+  ]
+ ],
+ "residual": 1.784,
+ "addbacks": {
+  "pensions": 6.864,
+  "debt": 4.238,
+  "rerating": 11.634,
+  "investment": 0.967,
+  "pay": 0.147,
+  "pension_step": 0.111
+ },
+ "cells": {
+  "UK keeps pensions and debt, phased rerating (Doyle)": 3.009,
+  "Dublin takes pensions only, phased": 9.762,
+  "Dublin takes debt only, phased": 7.247,
+  "Dublin takes pensions and debt, phased": 14.0,
+  "Dublin takes both, immediate full rerating, no investment": 24.52
+ }
+}

@@ -1,0 +1,2303 @@
+{
+  "reviewDate": "2026-10-28",
+  "modelSha256": "24968ec1ae0e7def373db841df88f7fd928ddf31a4b046e4b55f3f50aab29f2f",
+  "verdict": "Conditional accounting with optional unestimated experiments. Not a forecast or comprehensive welfare estimate.",
+  "inputs": [
+    {
+      "kind": "Constant",
+      "key": "GNI_STAR",
+      "value": 290.9,
+      "status": "Verified frozen vintage",
+      "finding": "CSO Annual National Accounts 2023 reports €290.9bn. This is the recorded release vintage, not a claim about the latest revision."
+    },
+    {
+      "kind": "Constant",
+      "key": "NORTH_GNI",
+      "value": 72.77618735556858,
+      "status": "Arithmetic corrected, source unresolved",
+      "finding": "Uses the recorded £63.3bn project anchor and divides by verified 2023 GBP-per-EUR .86979. The official GDP cell and vintage remain unverified, so this anchor supports experiments only."
+    },
+    {
+      "kind": "Constant",
+      "key": "UK_2019_TO_2023_EUR",
+      "value": 1.3643408053374586,
+      "status": "Verified conversion inputs",
+      "finding": "Uses the original sterling figures, ONS L8GG calendar-year averages for 2019 and 2023, and the reciprocal of the verified annual ECB reference rate. No reverse conversion of rounded euro totals."
+    },
+    {
+      "kind": "Constant",
+      "key": "UK_FY2022_TO_2023_EUR",
+      "value": 1.199575803493008,
+      "status": "Verified arithmetic, fiscal period assumed",
+      "finding": "ONS L8GG FY2022–23 to CY2023 conversion with recorded 2023 FX. Whether this is the correct fiscal period of the frozen study observations remains unresolved."
+    },
+    {
+      "kind": "Constant",
+      "key": "BASE_REVENUE",
+      "value": 26.118363969453263,
+      "status": "Study traced, official cell unresolved",
+      "finding": "Doyle 2025 Table 1 reports revenue £21.773bn. The same assumed FY conversion as the frozen bridge is used. Exact official release and cell need confirmation."
+    },
+    {
+      "kind": "Constant",
+      "key": "BASE_SPENDING",
+      "value": 43.17636396945326,
+      "status": "Reconciled frozen accounting anchor",
+      "finding": "Opening revenue plus the frozen €17.058bn deficit. It reconciles exactly to the project deficit and approximates the separately rebased study spending figure within source rounding."
+    },
+    {
+      "kind": "Constant",
+      "key": "GROSS_PAY_FULL",
+      "value": 5.874851507783097,
+      "status": "Study benchmark, current applicability unresolved",
+      "finding": "F&M 2024 Table 6 gives a 2019 gross pay increment of £4.306bn. It is separately rebased, not inferred from a net fiscal envelope or treated as a current wage-policy costing."
+    },
+    {
+      "kind": "Constant",
+      "key": "GROSS_WELFARE_FULL",
+      "value": 6.561114932867839,
+      "status": "Study benchmark, current applicability unresolved",
+      "finding": "F&M 2024 Table 6 gives a 2019 gross welfare increment of £4.809bn. Eligibility, composition and future rates still require programme costing."
+    },
+    {
+      "kind": "Constant",
+      "key": "SOURCE_PAY_BASE",
+      "value": 9.273424453878706,
+      "status": "Historical source benchmark",
+      "finding": "F&M 2024 Table 6 reports a 2019 current public pay bill of £6.797bn. It is a historical normalisation, not a newly measured Northern Ireland pay bill."
+    },
+    {
+      "kind": "Constant",
+      "key": "PUBLISHED",
+      "value": 17.058,
+      "status": "Frozen study anchor",
+      "finding": "Doyle 2025 Table 1 and Table 2 contain £14.220bn. Table 2 labels the period 2019 while Table 1 and surrounding text say 2023. The official update remains on hold."
+    },
+    {
+      "kind": "Constant",
+      "key": "PENSIONS",
+      "value": 6.864,
+      "status": "Negotiated envelope, not actuarial estimate",
+      "finding": "Doyle 2025 Table 2 reports £5.722bn. The same frozen envelope now defines both immediate transfer and the endpoint of phased funding transfer, without mixing a net incremental allowance with a different gross endpoint."
+    },
+    {
+      "kind": "Constant",
+      "key": "DEBT_INT",
+      "value": 4.238,
+      "status": "Negotiated interest flow",
+      "finding": "Doyle 2025 Table 2 reports £3.533bn. It remains a frozen annual interest-flow scenario, not an allocated inherited debt principal or refinancing forecast."
+    },
+    {
+      "kind": "Constant",
+      "key": "DEFENCE_NET",
+      "value": 1.64,
+      "status": "Optional disputed deduction",
+      "finding": "Doyle 2025 Table 2 reports £1.367bn. The accepted share starts at zero, and any assumed deduction is explicit. Replacement security and defence services still need costing."
+    },
+    {
+      "kind": "Constant",
+      "key": "OTHER_NONID",
+      "value": 0.692,
+      "status": "Optional disputed deduction",
+      "finding": "Doyle 2025 Table 2 reports £0.400bn overseas and £0.177bn central costs. The accepted share starts at zero. Replacement functions and EU costs need a programme budget."
+    },
+    {
+      "kind": "Constant",
+      "key": "TAX_ADD",
+      "value": 1.84,
+      "status": "Optional disputed adjustment",
+      "finding": "Doyle 2025 Table 2 combines £0.500bn HQ, £0.265bn central spending and £0.769bn tax/PRSI changes. The accepted share starts at zero. Attribution is not automatically additional cash revenue."
+    },
+    {
+      "kind": "Constant",
+      "key": "RERATE_FULL",
+      "value": 11.633734047112508,
+      "status": "Conversion repaired, policy estimate conditional",
+      "finding": "F&M 2024 Table 7 original sterling 2019 difference £18.104bn minus £9.577bn, converted directly with the UK deflator and recorded FX. The gap between this net increment and Table 6 gross components is kept visible rather than allocated to household income."
+    },
+    {
+      "kind": "structural",
+      "key": "defenceSavingShare",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Accepted share of the study deduction, zero by default. A negotiation scenario, not an agreed saving."
+    },
+    {
+      "kind": "structural",
+      "key": "centralSavingShare",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Accepted share of the study central and overseas deductions, zero by default. Replacement functions remain a costing question."
+    },
+    {
+      "kind": "structural",
+      "key": "taxAdjustmentShare",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Accepted share of study revenue adjustments, zero by default. This must be reconciled to the tax base and harmonisation assumptions."
+    },
+    {
+      "kind": "structural",
+      "key": "pensionTransferYears",
+      "value": 40,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Linear transfer of the same pension funding envelope. Forty years follows a stylised period discussed by Doyle, not a cohort forecast or agreed settlement."
+    },
+    {
+      "kind": "params",
+      "key": "gNI",
+      "value": 2.5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen policy output growth, not a treatment effect estimated from reunification. It must exclude the linked mechanisms and residual shocks to avoid counting gains twice."
+    },
+    {
+      "kind": "structural",
+      "key": "southGrowth",
+      "value": 2.5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen Republic real GNI* path. It changes the denominator only and does not represent spillovers or financing effects on Republic activity."
+    },
+    {
+      "kind": "params",
+      "key": "reratingScope",
+      "value": 100,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen harmonisation scope. Benefits, eligibility, staffing, hours and service quality are compressed into one envelope."
+    },
+    {
+      "kind": "params",
+      "key": "reratingYears",
+      "value": 15,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen linear schedule. The source does not identify a single pay and welfare convergence process."
+    },
+    {
+      "kind": "params",
+      "key": "investment",
+      "value": 1.5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Preset spending choice. Capital versus current expenditure, additionality, maintenance and procurement capacity need separate budgets."
+    },
+    {
+      "kind": "params",
+      "key": "duplication",
+      "value": 0.25,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Preset recurring cost without a functional cost study or time-dependent transition budget."
+    },
+    {
+      "kind": "structural",
+      "key": "ageing",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Applies to the pension envelope and an explicitly supplied service base. Zero initially. It is not a demographic projection and must not duplicate baseline spending growth."
+    },
+    {
+      "kind": "structural",
+      "key": "realInterest",
+      "value": 2,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Constant real marginal borrowing rate. No debt-risk premium, maturity structure, inflation surprise or fiscal response."
+    },
+    {
+      "kind": "structural",
+      "key": "discountRate",
+      "value": 2,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen real discount rate. Discounted financing-inclusive costs are a cash-flow measure, not a social welfare valuation."
+    },
+    {
+      "kind": "structural",
+      "key": "baselineRevenueGrowth",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Explicit real receipts path. Constant in real terms by default, not automatically tied to assumed output convergence."
+    },
+    {
+      "kind": "structural",
+      "key": "baselineSpendingGrowth",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Explicit real spending path. Constant in real terms by default. Any ageing already in this path must not be added again."
+    },
+    {
+      "kind": "structural",
+      "key": "ageSensitiveSpending",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Explicit additional non-pension service spending exposed to ageing. Zero until a programme base is supplied. Excludes ageing already in baseline spending."
+    },
+    {
+      "kind": "structural",
+      "key": "taxShare",
+      "value": 35,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Explicit marginal revenue assumption. No average tax ratio is automatically treated as a causal tax elasticity."
+    },
+    {
+      "kind": "structural",
+      "key": "outputCeiling",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Optional numerical scenario bound, disabled by default. It is not measured parity with the Republic. A run records when it binds."
+    },
+    {
+      "kind": "structural",
+      "key": "businessUplift",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Residual assumed output-level effect, not an FDI estimate. No firm entry, profit repatriation, trade model or corporation-tax base."
+    },
+    {
+      "kind": "structural",
+      "key": "labourUplift",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "A separately assumed residual labour output contribution in either configuration, not output calculated from diagnostic job equivalents. It must exclude effects already represented by other mechanisms."
+    },
+    {
+      "kind": "structural",
+      "key": "privateMaturity",
+      "value": 10,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen linear phase-in, not estimated business adjustment."
+    },
+    {
+      "kind": "structural",
+      "key": "transitionShock",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen temporary output loss. No currency, banking, border, trade diversion or confidence model identifies its size."
+    },
+    {
+      "kind": "structural",
+      "key": "privateRecovery",
+      "value": 5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen linear recovery, not an estimated transition path."
+    },
+    {
+      "kind": "structural",
+      "key": "fundOpening",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Existing assets are an endowment. Prior taxation, forgone public investment and alternative uses are outside the horizon."
+    },
+    {
+      "kind": "structural",
+      "key": "fundReturn",
+      "value": 2,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Deterministic real return without risk, fees or covariance with borrowing costs. A favourable return spread is not free fiscal capacity."
+    },
+    {
+      "kind": "structural",
+      "key": "fundContribution",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Asset acquisition, normally financed by taxes or borrowing. The model correctly adds financing needs but has no macro financing feedback."
+    },
+    {
+      "kind": "structural",
+      "key": "fundContributionYears",
+      "value": 10,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen saving horizon. No fiscal rule or legal mandate is represented."
+    },
+    {
+      "kind": "structural",
+      "key": "fundDrawCap",
+      "value": 5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen withdrawal ceiling. Not a sustainable spending rule or guarantee of available assets."
+    },
+    {
+      "kind": "structural",
+      "key": "investmentCapitalShare",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Explicit split of additional expenditure. Starts at zero so current services and welfare never automatically become productive capital."
+    },
+    {
+      "kind": "structural",
+      "key": "spareCapacity",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen capacity margin. Starts at zero. Demand cannot create real output above the selected fixed-price capacity limit."
+    },
+    {
+      "kind": "structural",
+      "key": "baselineGrowth",
+      "value": 2.5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No estimated counterfactual or confidence interval. Distinguish output growth, productivity growth and population growth."
+    },
+    {
+      "kind": "structural",
+      "key": "investmentEfficiency",
+      "value": 80,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No NI project-level delivery estimate. Spending called investment also includes recurring health, education and welfare in Doyle Table 3, so it cannot all become productive physical capital."
+    },
+    {
+      "kind": "structural",
+      "key": "investmentLag",
+      "value": 2,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen timing with all expenditure completing at one lag. No project pipeline or distributed completion profile."
+    },
+    {
+      "kind": "structural",
+      "key": "capitalDepreciation",
+      "value": 4,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No asset mix or independently measured stock. Different public and private assets should not automatically share a depreciation rate."
+    },
+    {
+      "kind": "structural",
+      "key": "publicCapitalRatio",
+      "value": 100,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No measured NI reference public capital stock. The elasticity cannot identify an output effect without a defensible stock denominator."
+    },
+    {
+      "kind": "structural",
+      "key": "publicCapitalElasticity",
+      "value": 0.106,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Bom and Ligthart report an average .106 across heterogeneous studies. It is not a NI causal coefficient and may overlap private-capital and employment responses added separately."
+    },
+    {
+      "kind": "structural",
+      "key": "privateCapitalRatio",
+      "value": 150,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Unmeasured reference stock. Results depend on this scale and on whether the stock is gross or net."
+    },
+    {
+      "kind": "structural",
+      "key": "privateCrowdIn",
+      "value": 1,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Unestimated response. Public-capital effects may already include private adjustment, creating overlap."
+    },
+    {
+      "kind": "structural",
+      "key": "privateAdjustment",
+      "value": 5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Unestimated adjustment speed. The net additional stock now adjusts directly towards its target, with replacement implicit. It is a diagnostic and does not add another GDP effect."
+    },
+    {
+      "kind": "structural",
+      "key": "privateCapitalElasticity",
+      "value": 0.3,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen Cobb–Douglas exponent, not an estimated NI capital share. It is used only for a private-productivity diagnostic and does not add to headline GDP."
+    },
+    {
+      "kind": "structural",
+      "key": "publicPayBase",
+      "value": 9.273,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "A rebased historical pay-bill benchmark from F&M Table 6 replaces the invented normalisation. It is not a current measured NI pay bill or an estimate of private wage spillovers."
+    },
+    {
+      "kind": "structural",
+      "key": "payDisposableShare",
+      "value": 65,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Illustrative after-tax share. Fiscal feedback from the pay increase has not been reconciled to the net harmonisation envelope."
+    },
+    {
+      "kind": "structural",
+      "key": "payMPC",
+      "value": 0.6,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No recipient-specific consumption estimate. Tax financing and displaced Republic spending are absent."
+    },
+    {
+      "kind": "structural",
+      "key": "welfareMPC",
+      "value": 0.8,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No recipient-specific consumption estimate or saving dynamics. Benefit eligibility and withdrawal rates are absent."
+    },
+    {
+      "kind": "structural",
+      "key": "domesticRetention",
+      "value": 50,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No input-output estimate of imports or flows between NI, the Republic and Great Britain. Domestic geography must be defined."
+    },
+    {
+      "kind": "structural",
+      "key": "demandRealisation",
+      "value": 50,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Unestimated spare-capacity closure. The first-round response is capped by the selected spare capacity. This is a fixed-price experiment, not a general-equilibrium closure."
+    },
+    {
+      "kind": "structural",
+      "key": "wageSpillover",
+      "value": 20,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Unestimated public-to-private wage transmission. Labour groups, occupations and regional wage bargaining are not represented."
+    },
+    {
+      "kind": "structural",
+      "key": "labourSupplyElasticity",
+      "value": 0.2,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "The UCD paper does not estimate this aggregate NI coefficient. Household-specific wage elasticities cannot be directly treated as an aggregate employment effect."
+    },
+    {
+      "kind": "structural",
+      "key": "welfareIncomeElasticity",
+      "value": 0.05,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen income effect without benefit withdrawal or substitution effects. The income base is a hard-coded share of output."
+    },
+    {
+      "kind": "structural",
+      "key": "labourDemandElasticity",
+      "value": 0.5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen response to a productivity-minus-wages index. No firm first-order conditions, labour share or NI estimation establish it."
+    },
+    {
+      "kind": "structural",
+      "key": "labourSlack",
+      "value": 5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "No observed labour-force, hours, skills or participation constraint. Fixed reference employment does not grow with the baseline economy."
+    },
+    {
+      "kind": "structural",
+      "key": "publicRecruitmentElasticity",
+      "value": 0.2,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "A diagnostic index only. No measured staff response, vacancy closure, staffing cost or public-service benefit."
+    },
+    {
+      "kind": "structural",
+      "key": "baselineEmployment",
+      "value": 900000,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Illustrative scale rather than verified employment. Additional jobs should be called job equivalents, not a forecast."
+    },
+    {
+      "kind": "structural",
+      "key": "migrationResponse",
+      "value": 0,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Migration responds only to unfilled jobs. Housing, departures, return migration, composition and fiscal incidence are omitted."
+    },
+    {
+      "kind": "structural",
+      "key": "migrantHouseholdSize",
+      "value": 1.5,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen household scale with no age structure. No separate children, retirees or secondary earners."
+    },
+    {
+      "kind": "structural",
+      "key": "serviceCostPerResident",
+      "value": 15000,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Chosen marginal cost, not a budget costing. Housing, capital infrastructure and congestion are absent."
+    },
+    {
+      "kind": "structural",
+      "key": "growthRevenue",
+      "value": false,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Off by default. Enabling this applies an assumed marginal revenue share to extra output, without claiming an estimated fiscal effect."
+    },
+    {
+      "kind": "negotiation",
+      "key": "pensionsUK",
+      "value": false,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Negotiated scenario, not a settled legal or actuarial result. The current UI wording is qualified."
+    },
+    {
+      "kind": "negotiation",
+      "key": "debtUK",
+      "value": false,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Negotiated scenario, not a settled allocation of debt stock, assets or interest."
+    },
+    {
+      "kind": "params",
+      "key": "stall",
+      "value": false,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "After year seven the relative rate is capped at the lower of its previous rate and .4%. It cannot accelerate a low-growth path, but the timing and cap remain scenario assumptions."
+    },
+    {
+      "kind": "structural",
+      "key": "linkedMechanisms",
+      "value": false,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Research configuration. Enabling links creates an illustrative mechanism experiment, not an estimated causal model."
+    },
+    {
+      "kind": "run",
+      "key": "horizon",
+      "value": 25,
+      "status": "Explicit setting or qualified benchmark",
+      "finding": "Reporting choice rather than evidence. Long horizons magnify unsupported persistence, missing terminal liabilities and the output ceiling."
+    }
+  ],
+  "relationships": [
+    {
+      "item": "Defaults",
+      "status": "Repaired",
+      "finding": "The opening accounting reference has no negotiated deductions, no additional growth revenue and no linked behavioural effects. It is a conditional reference, not a best estimate of transition costs."
+    },
+    {
+      "item": "Price conversion",
+      "status": "Repaired",
+      "finding": "Net harmonisation uses original sterling Table 7 values directly. Gross pay and welfare use separate Table 6 values. All use the same recorded UK deflator and FX convention."
+    },
+    {
+      "item": "Net and gross harmonisation",
+      "status": "Repaired boundary, policy unresolved",
+      "finding": "Gross pay and welfare no longer come from an arbitrary split of a net fiscal envelope. The source gross/net discrepancy is recorded without inventing its composition."
+    },
+    {
+      "item": "Fiscal baseline",
+      "status": "Repaired accounting, paths assumed",
+      "finding": "Separate gross receipts and spending paths reconcile to the frozen deficit. Growth in output does not silently generate revenue. Both real fiscal growth rates are explicit."
+    },
+    {
+      "item": "Fiscal deductions",
+      "status": "Repaired interface, settlement unresolved",
+      "finding": "Each disputed defence, central-spending and revenue adjustment has an explicit accepted share, initially zero. The UK pension and debt switches are independent of policy labels."
+    },
+    {
+      "item": "Pensions",
+      "status": "Repaired endpoints, actuarial work needed",
+      "finding": "A single pension envelope transfers linearly over the selected period. Phased and immediate transfer agree at the endpoint, without mixing gross and net conventions or claiming a cohort projection."
+    },
+    {
+      "item": "Ageing",
+      "status": "Repaired base, data needed",
+      "finding": "Ageing applies to pensions and an explicit non-pension service base. No arbitrary share of a residual deficit is aged and no residual balance disappears through composition."
+    },
+    {
+      "item": "Public expenditure and capital",
+      "status": "Repaired boundary",
+      "finding": "Only the explicitly selected capital share of additional expenditure can become productive capital. That share starts at zero. Maintenance and project selection remain uncosted."
+    },
+    {
+      "item": "Capital and jobs",
+      "status": "Repaired overlap",
+      "finding": "Public capital provides one reduced-form output effect. Induced private capital and jobs are diagnostics, not extra output multipliers stacked on that benchmark."
+    },
+    {
+      "item": "Private net capital",
+      "status": "Repaired target",
+      "finding": "The additional net stock moves towards its target with replacement implicit. There is no second depreciation deduction preventing convergence to a fixed target."
+    },
+    {
+      "item": "Demand capacity",
+      "status": "Repaired bound, partial closure",
+      "finding": "Real demand effects cannot exceed selected spare capacity. The fixed-price experiment has no estimated price, trade, monetary or Republic-financing response."
+    },
+    {
+      "item": "Growth and revenue",
+      "status": "Explicit experiment",
+      "finding": "The marginal revenue rate is adjustable and feedback is off initially. Policy growth and residual shocks must exclude effects entered in other channels."
+    },
+    {
+      "item": "Output ceiling",
+      "status": "Repaired",
+      "finding": "There is no implicit doubling ceiling or claim of income parity. An optional user-selected bound records each binding year."
+    },
+    {
+      "item": "Slowdown",
+      "status": "Repaired direction",
+      "finding": "The switch never raises the relative growth rate after year seven. Its timing and remaining cap are still scenario settings."
+    },
+    {
+      "item": "Scenario comparison",
+      "status": "Repaired",
+      "finding": "Policy selection does not mutate liability switches. All compared bundles use the same negotiated terms, growth and structural settings. The selected comparison line uses exactly the main-run inputs."
+    },
+    {
+      "item": "Reproduction",
+      "status": "Repaired",
+      "finding": "A downloaded run includes policy inputs, shared settings, all compared bundles, annual results and the executable fingerprint. A CLI rejects mismatched models or results."
+    },
+    {
+      "item": "Debt, fund and cash",
+      "status": "Accounting identities tested",
+      "finding": "Contributions acquire assets and increase financing needs. Withdrawals reduce financing, not spending. Surpluses repay debt and excess becomes cash. Opening assets are not free income."
+    },
+    {
+      "item": "Inherited debt",
+      "status": "Scope unresolved",
+      "finding": "A constant annual interest allocation is not a negotiated debt stock. No inherited principal or refinancing model has been invented."
+    },
+    {
+      "item": "Labour and wages",
+      "status": "Unestimated diagnostic",
+      "finding": "Wage spillovers, labour supply, welfare income effects and firm labour demand remain unestimated. Their indices cannot establish changes in employment or public-service quality."
+    },
+    {
+      "item": "Migration",
+      "status": "Unestimated experiment",
+      "finding": "Optional migration adds residents and service costs. No return migration, cohort ageing, housing constraint or complete migrant tax account is estimated."
+    },
+    {
+      "item": "Counterfactual institutions",
+      "status": "Scope limitation",
+      "finding": "UK status quo is zero only from the incremental Republic perspective. Shared Island allocates its extra expenditure to the Republic. No welfare ordering or constitutional causal effect follows."
+    },
+    {
+      "item": "Evidence vintage",
+      "status": "Unresolved",
+      "finding": "The frozen ONS fiscal baseline and its exact official cells remain on hold. A historical harmonisation benchmark combined with a later deficit is a hybrid scenario, not an updated policy costing."
+    },
+    {
+      "item": "Forecasts and welfare",
+      "status": "Outside scope",
+      "finding": "No probabilities, distributional microsimulation, banking model, currency changeover, trade model or complete all-island welfare analysis is supplied. Slider bounds are not confidence intervals."
+    }
+  ],
+  "sensitivity": [
+    {
+      "configuration": "Accounting reference",
+      "parameter": "baselineSpendingGrowth",
+      "low": -2,
+      "high": 4,
+      "year25CostLow": 22.2,
+      "year25CostHigh": 133.2,
+      "cumulative25Low": 542.8,
+      "cumulative25High": 1747.5,
+      "cumulative50Low": 1096.6,
+      "cumulative50High": 8547.3
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "baselineRevenueGrowth",
+      "low": -2,
+      "high": 4,
+      "year25CostLow": 58.2,
+      "year25CostHigh": -8.9,
+      "cumulative25Low": 1001.5,
+      "cumulative25High": 272.8,
+      "cumulative50Low": 3006.2,
+      "cumulative50High": -1330.8
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "realInterest",
+      "low": 0,
+      "high": 6,
+      "year25CostLow": 28.9,
+      "year25CostHigh": 105.1,
+      "cumulative25Low": 657.1,
+      "cumulative25High": 1374.2,
+      "cumulative50Low": 1380.7,
+      "cumulative50High": 7485.9
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "reratingScope",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 28.3,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 576.5,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 1500.2,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "reratingYears",
+      "low": 1,
+      "high": 25,
+      "year25CostLow": 47,
+      "year25CostHigh": 43.2,
+      "cumulative25Low": 949.1,
+      "cumulative25High": 755,
+      "cumulative50Low": 2484.1,
+      "cumulative50High": 2165.6
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "ageing",
+      "low": 0,
+      "high": 2,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 50.1,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 890.3,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2629.7
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "taxAdjustmentShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 41.7,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 769.7,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2130.8
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "defenceSavingShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 42,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 776.1,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2147.8
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "investment",
+      "low": 0,
+      "high": 2.5,
+      "year25CostLow": 44.2,
+      "year25CostHigh": 44.9,
+      "cumulative25Low": 806.5,
+      "cumulative25High": 843.4,
+      "cumulative50Low": 2250.2,
+      "cumulative50High": 2310.7
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "fundOpening",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 41.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 793.5,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2146.3
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "duplication",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 44.2,
+      "year25CostHigh": 45.8,
+      "cumulative25Low": 820.6,
+      "cumulative25High": 852.7,
+      "cumulative50Low": 2265.3,
+      "cumulative50High": 2349.9
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "centralSavingShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 43.5,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 806.5,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2227.9
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "fundContribution",
+      "low": 0,
+      "high": 5,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 829.8,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2287.6
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "pensionTransferYears",
+      "low": 1,
+      "high": 60,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "gNI",
+      "low": 0,
+      "high": 7,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "southGrowth",
+      "low": 0,
+      "high": 4,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "discountRate",
+      "low": 0,
+      "high": 6,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "ageSensitiveSpending",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "taxShare",
+      "low": 0,
+      "high": 60,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "outputCeiling",
+      "low": 0,
+      "high": 4,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "businessUplift",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "labourUplift",
+      "low": 0,
+      "high": 10,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "privateMaturity",
+      "low": 1,
+      "high": 20,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "transitionShock",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "privateRecovery",
+      "low": 1,
+      "high": 15,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "fundReturn",
+      "low": -10,
+      "high": 8,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "fundContributionYears",
+      "low": 1,
+      "high": 25,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "fundDrawCap",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "investmentCapitalShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "spareCapacity",
+      "low": 0,
+      "high": 20,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "baselineGrowth",
+      "low": 0,
+      "high": 4,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "investmentEfficiency",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "investmentLag",
+      "low": 0,
+      "high": 10,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "capitalDepreciation",
+      "low": 0,
+      "high": 10,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "publicCapitalRatio",
+      "low": 25,
+      "high": 200,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "publicCapitalElasticity",
+      "low": 0,
+      "high": 0.25,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "privateCapitalRatio",
+      "low": 50,
+      "high": 300,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "privateCrowdIn",
+      "low": 0,
+      "high": 3,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "privateAdjustment",
+      "low": 1,
+      "high": 15,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "privateCapitalElasticity",
+      "low": 0,
+      "high": 0.6,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "publicPayBase",
+      "low": 5,
+      "high": 20,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "payDisposableShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "payMPC",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "welfareMPC",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "domesticRetention",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "demandRealisation",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "wageSpillover",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "labourSupplyElasticity",
+      "low": 0,
+      "high": 0.6,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "welfareIncomeElasticity",
+      "low": 0,
+      "high": 0.3,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "labourDemandElasticity",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "labourSlack",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "publicRecruitmentElasticity",
+      "low": 0,
+      "high": 0.6,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "baselineEmployment",
+      "low": 700000,
+      "high": 1100000,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "migrationResponse",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "migrantHouseholdSize",
+      "low": 1,
+      "high": 3,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    },
+    {
+      "configuration": "Accounting reference",
+      "parameter": "serviceCostPerResident",
+      "low": 0,
+      "high": 30000,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 828.6,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2286.5
+    }
+  ],
+  "experimentalSensitivity": [
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "gNI",
+      "low": 0,
+      "high": 7,
+      "year25CostLow": 70.7,
+      "year25CostHigh": -63.4,
+      "cumulative25Low": 1107.5,
+      "cumulative25High": -146.9,
+      "cumulative50Low": 3970.3,
+      "cumulative50High": -7158.8
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "baselineSpendingGrowth",
+      "low": -2,
+      "high": 4,
+      "year25CostLow": 21,
+      "year25CostHigh": 131.9,
+      "cumulative25Low": 521.5,
+      "cumulative25High": 1726.2,
+      "cumulative50Low": 1036.1,
+      "cumulative50High": 8486.8
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "baselineRevenueGrowth",
+      "low": -2,
+      "high": 4,
+      "year25CostLow": 56.9,
+      "year25CostHigh": -10.2,
+      "cumulative25Low": 980.3,
+      "cumulative25High": 251.5,
+      "cumulative50Low": 2945.7,
+      "cumulative50High": -1377.4
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "realInterest",
+      "low": 0,
+      "high": 6,
+      "year25CostLow": 28.1,
+      "year25CostHigh": 102.4,
+      "cumulative25Low": 639.5,
+      "cumulative25High": 1342,
+      "cumulative50Low": 1343.3,
+      "cumulative50High": 7303.3
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "baselineGrowth",
+      "low": 0,
+      "high": 4,
+      "year25CostLow": 15.9,
+      "year25CostHigh": 68.5,
+      "cumulative25Low": 506.3,
+      "cumulative25High": 1052.6,
+      "cumulative50Low": 476.6,
+      "cumulative50High": 4184.8
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "reratingScope",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 27.9,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 569.5,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 1484.3,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "reratingYears",
+      "low": 1,
+      "high": 25,
+      "year25CostLow": 45.6,
+      "year25CostHigh": 42,
+      "cumulative25Low": 921,
+      "cumulative25High": 737.9,
+      "cumulative50Low": 2412.4,
+      "cumulative50High": 2112
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "businessUplift",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 33.5,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 666,
+      "cumulative50Low": 2226,
+      "cumulative50High": 1680.5
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "labourUplift",
+      "low": 0,
+      "high": 10,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 36.9,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 714.5,
+      "cumulative50Low": 2226,
+      "cumulative50High": 1866.6
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "ageing",
+      "low": 0,
+      "high": 2,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 48.9,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 869,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2569.2
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "taxAdjustmentShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 40.4,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 748.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2070.4
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "defenceSavingShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 40.7,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 754.8,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2087.3
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "taxShare",
+      "low": 0,
+      "high": 60,
+      "year25CostLow": 44.6,
+      "year25CostHigh": 42.4,
+      "cumulative25Low": 828.6,
+      "cumulative25High": 792.1,
+      "cumulative50Low": 2286.5,
+      "cumulative50High": 2182.8
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "fundOpening",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 40.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 772.2,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2085.8
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "duplication",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 42.9,
+      "year25CostHigh": 44.6,
+      "cumulative25Low": 799.3,
+      "cumulative25High": 831.4,
+      "cumulative50Low": 2204.8,
+      "cumulative50High": 2289.4
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "domesticRetention",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.3,
+      "year25CostHigh": 42.4,
+      "cumulative25Low": 821.7,
+      "cumulative25High": 793.1,
+      "cumulative50Low": 2270.6,
+      "cumulative50High": 2181.4
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "demandRealisation",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 44.3,
+      "year25CostHigh": 42.4,
+      "cumulative25Low": 821.7,
+      "cumulative25High": 793.1,
+      "cumulative50Low": 2270.6,
+      "cumulative50High": 2181.4
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "investment",
+      "low": 0,
+      "high": 2.5,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.4,
+      "cumulative25Low": 792.2,
+      "cumulative25High": 817.7,
+      "cumulative50Low": 2205.6,
+      "cumulative50High": 2240
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "centralSavingShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 42.2,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 785.2,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2167.5
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "publicCapitalRatio",
+      "low": 25,
+      "high": 200,
+      "year25CostLow": 42.4,
+      "year25CostHigh": 43.5,
+      "cumulative25Low": 788.7,
+      "cumulative25High": 810.8,
+      "cumulative50Low": 2182.5,
+      "cumulative50High": 2233.8
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "transitionShock",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.7,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 826.5,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2257.3
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "publicCapitalElasticity",
+      "low": 0,
+      "high": 0.25,
+      "year25CostLow": 43.7,
+      "year25CostHigh": 42.9,
+      "cumulative25Low": 814.3,
+      "cumulative25High": 797.8,
+      "cumulative50Low": 2241.9,
+      "cumulative50High": 2204.2
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "spareCapacity",
+      "low": 0,
+      "high": 20,
+      "year25CostLow": 44.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 821.7,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2270.6,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "welfareMPC",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 44,
+      "year25CostHigh": 43.2,
+      "cumulative25Low": 817.3,
+      "cumulative25High": 804.9,
+      "cumulative50Low": 2257,
+      "cumulative50High": 2218.2
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "investmentEfficiency",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.7,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 814.3,
+      "cumulative25High": 805.7,
+      "cumulative50Low": 2241.9,
+      "cumulative50High": 2222.1
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "payMPC",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 43.6,
+      "year25CostHigh": 43.2,
+      "cumulative25Low": 811.7,
+      "cumulative25High": 804.5,
+      "cumulative50Low": 2239.5,
+      "cumulative50High": 2216.9
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "investmentCapitalShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.7,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 814.3,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2241.9,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "payDisposableShare",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.6,
+      "year25CostHigh": 43.2,
+      "cumulative25Low": 811.7,
+      "cumulative25High": 805,
+      "cumulative50Low": 2239.5,
+      "cumulative50High": 2218.7
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "capitalDepreciation",
+      "low": 0,
+      "high": 10,
+      "year25CostLow": 43.1,
+      "year25CostHigh": 43.5,
+      "cumulative25Low": 804.8,
+      "cumulative25High": 809.6,
+      "cumulative50Low": 2212.5,
+      "cumulative50High": 2233.3
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "investmentLag",
+      "low": 0,
+      "high": 10,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 806.7,
+      "cumulative25High": 810.2,
+      "cumulative50Low": 2225.2,
+      "cumulative50High": 2228.9
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "fundContribution",
+      "low": 0,
+      "high": 5,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 808.5,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2227.1
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "pensionTransferYears",
+      "low": 1,
+      "high": 60,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "southGrowth",
+      "low": 0,
+      "high": 4,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "discountRate",
+      "low": 0,
+      "high": 6,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "ageSensitiveSpending",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "outputCeiling",
+      "low": 0,
+      "high": 4,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "privateMaturity",
+      "low": 1,
+      "high": 20,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "privateRecovery",
+      "low": 1,
+      "high": 15,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "fundReturn",
+      "low": -10,
+      "high": 8,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "fundContributionYears",
+      "low": 1,
+      "high": 25,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "fundDrawCap",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "privateCapitalRatio",
+      "low": 50,
+      "high": 300,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "privateCrowdIn",
+      "low": 0,
+      "high": 3,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "privateAdjustment",
+      "low": 1,
+      "high": 15,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "privateCapitalElasticity",
+      "low": 0,
+      "high": 0.6,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "publicPayBase",
+      "low": 5,
+      "high": 20,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "wageSpillover",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "labourSupplyElasticity",
+      "low": 0,
+      "high": 0.6,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "welfareIncomeElasticity",
+      "low": 0,
+      "high": 0.3,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "labourDemandElasticity",
+      "low": 0,
+      "high": 1,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "labourSlack",
+      "low": 0,
+      "high": 15,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "publicRecruitmentElasticity",
+      "low": 0,
+      "high": 0.6,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "baselineEmployment",
+      "low": 700000,
+      "high": 1100000,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "migrationResponse",
+      "low": 0,
+      "high": 100,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "migrantHouseholdSize",
+      "low": 1,
+      "high": 3,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    },
+    {
+      "configuration": "Deliberately enabled response experiment, not recommended calibration",
+      "parameter": "serviceCostPerResident",
+      "low": 0,
+      "high": 30000,
+      "year25CostLow": 43.3,
+      "year25CostHigh": 43.3,
+      "cumulative25Low": 807.4,
+      "cumulative25High": 807.4,
+      "cumulative50Low": 2226,
+      "cumulative50High": 2226
+    }
+  ],
+  "experimentalSettings": {
+    "southGrowth": 2.5,
+    "ageing": 0,
+    "shift": 0,
+    "realInterest": 2,
+    "discountRate": 2,
+    "businessUplift": 0,
+    "labourUplift": 0,
+    "transitionShock": 0,
+    "privateMaturity": 10,
+    "privateRecovery": 5,
+    "fundOpening": 0,
+    "fundReturn": 2,
+    "fundContribution": 0,
+    "fundContributionYears": 10,
+    "fundDrawCap": 5,
+    "linkedMechanisms": true,
+    "growthRevenue": true,
+    "taxShare": 35,
+    "baselineRevenueGrowth": 0,
+    "baselineSpendingGrowth": 0,
+    "defenceSavingShare": 0,
+    "centralSavingShare": 0,
+    "taxAdjustmentShare": 0,
+    "pensionTransferYears": 40,
+    "ageSensitiveSpending": 0,
+    "outputCeiling": 0,
+    "investmentCapitalShare": 100,
+    "spareCapacity": 5,
+    "baselineGrowth": 2.5,
+    "investmentEfficiency": 80,
+    "investmentLag": 2,
+    "capitalDepreciation": 4,
+    "publicCapitalRatio": 100,
+    "publicCapitalElasticity": 0.106,
+    "privateCapitalRatio": 150,
+    "privateCrowdIn": 1,
+    "privateAdjustment": 5,
+    "privateCapitalElasticity": 0.3,
+    "publicPayBase": 9.273,
+    "payDisposableShare": 65,
+    "payMPC": 0.6,
+    "welfareMPC": 0.8,
+    "domesticRetention": 50,
+    "demandRealisation": 50,
+    "wageSpillover": 20,
+    "labourSupplyElasticity": 0.2,
+    "welfareIncomeElasticity": 0.05,
+    "labourDemandElasticity": 0.5,
+    "labourSlack": 5,
+    "publicRecruitmentElasticity": 0.2,
+    "baselineEmployment": 900000,
+    "migrationResponse": 0,
+    "migrantHouseholdSize": 1.5,
+    "serviceCostPerResident": 15000
+  },
+  "baseline": {
+    "policy": {
+      "reratingScope": 100,
+      "reratingYears": 15,
+      "investment": 1.5,
+      "duplication": 0.25,
+      "gNI": 2.5,
+      "stall": false,
+      "pensionsUK": false,
+      "debtUK": false,
+      "counterfactual": false,
+      "shared": false
+    },
+    "structural": {
+      "southGrowth": 2.5,
+      "ageing": 0,
+      "shift": 0,
+      "realInterest": 2,
+      "discountRate": 2,
+      "businessUplift": 0,
+      "labourUplift": 0,
+      "transitionShock": 0,
+      "privateMaturity": 10,
+      "privateRecovery": 5,
+      "fundOpening": 0,
+      "fundReturn": 2,
+      "fundContribution": 0,
+      "fundContributionYears": 10,
+      "fundDrawCap": 5,
+      "linkedMechanisms": false,
+      "growthRevenue": false,
+      "taxShare": 35,
+      "baselineRevenueGrowth": 0,
+      "baselineSpendingGrowth": 0,
+      "defenceSavingShare": 0,
+      "centralSavingShare": 0,
+      "taxAdjustmentShare": 0,
+      "pensionTransferYears": 40,
+      "ageSensitiveSpending": 0,
+      "outputCeiling": 0,
+      "investmentCapitalShare": 0,
+      "spareCapacity": 0,
+      "baselineGrowth": 2.5,
+      "investmentEfficiency": 80,
+      "investmentLag": 2,
+      "capitalDepreciation": 4,
+      "publicCapitalRatio": 100,
+      "publicCapitalElasticity": 0.106,
+      "privateCapitalRatio": 150,
+      "privateCrowdIn": 1,
+      "privateAdjustment": 5,
+      "privateCapitalElasticity": 0.3,
+      "publicPayBase": 9.273,
+      "payDisposableShare": 65,
+      "payMPC": 0.6,
+      "welfareMPC": 0.8,
+      "domesticRetention": 50,
+      "demandRealisation": 50,
+      "wageSpillover": 20,
+      "labourSupplyElasticity": 0.2,
+      "welfareIncomeElasticity": 0.05,
+      "labourDemandElasticity": 0.5,
+      "labourSlack": 5,
+      "publicRecruitmentElasticity": 0.2,
+      "baselineEmployment": 900000,
+      "migrationResponse": 0,
+      "migrantHouseholdSize": 1.5,
+      "serviceCostPerResident": 15000
+    },
+    "year25Cost": 44.6,
+    "cumulative25": 828.6,
+    "cumulative50": 2286.5
+  },
+  "accountingSnapshots": [
+    {
+      "key": "unitary",
+      "name": "Unitary",
+      "policy": {
+        "reratingScope": 100,
+        "reratingYears": 1,
+        "investment": 0.5,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false,
+        "pensionsUK": false,
+        "debtUK": false,
+        "counterfactual": false,
+        "shared": false
+      },
+      "year1": 29.2,
+      "year25": 46.3,
+      "cumulative25": 926.4,
+      "cumulative50": 2438.8
+    },
+    {
+      "key": "federal",
+      "name": "Federal",
+      "policy": {
+        "reratingScope": 100,
+        "reratingYears": 20,
+        "investment": 0.5,
+        "duplication": 0.5,
+        "gNI": 2.5,
+        "stall": false,
+        "pensionsUK": false,
+        "debtUK": false,
+        "counterfactual": false,
+        "shared": false
+      },
+      "year1": 18.6,
+      "year25": 44,
+      "cumulative25": 783.9,
+      "cumulative50": 2221.1
+    },
+    {
+      "key": "glide",
+      "name": "Managed Integration",
+      "policy": {
+        "reratingScope": 100,
+        "reratingYears": 15,
+        "investment": 1.5,
+        "duplication": 0.25,
+        "gNI": 2.5,
+        "stall": false,
+        "pensionsUK": false,
+        "debtUK": false,
+        "counterfactual": false,
+        "shared": false
+      },
+      "year1": 19.6,
+      "year25": 44.6,
+      "cumulative25": 828.6,
+      "cumulative50": 2286.5
+    },
+    {
+      "key": "worst",
+      "name": "Higher initial cost",
+      "policy": {
+        "reratingScope": 100,
+        "reratingYears": 1,
+        "investment": 0,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false,
+        "pensionsUK": false,
+        "debtUK": false,
+        "counterfactual": false,
+        "shared": false
+      },
+      "year1": 28.7,
+      "year25": 46.1,
+      "cumulative25": 919,
+      "cumulative50": 2426.7
+    },
+    {
+      "key": "statusquo",
+      "name": "UK status quo",
+      "policy": {
+        "reratingScope": 0,
+        "reratingYears": 1,
+        "investment": 0,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false,
+        "pensionsUK": false,
+        "debtUK": false,
+        "counterfactual": true,
+        "shared": false
+      },
+      "year1": 0,
+      "year25": 0,
+      "cumulative25": 0,
+      "cumulative50": 0
+    },
+    {
+      "key": "shared",
+      "name": "Shared Island",
+      "policy": {
+        "reratingScope": 0,
+        "reratingYears": 1,
+        "investment": 0.5,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false,
+        "pensionsUK": false,
+        "debtUK": false,
+        "counterfactual": true,
+        "shared": true
+      },
+      "year1": 0.5,
+      "year25": 0.1,
+      "cumulative25": 7.4,
+      "cumulative50": 12.1
+    }
+  ],
+  "liabilityMatrix": [
+    {
+      "pensionsUK": false,
+      "debtUK": false,
+      "openingGap": 17.058,
+      "year1": 19.6,
+      "year25": 44.6,
+      "cumulative25": 828.6
+    },
+    {
+      "pensionsUK": false,
+      "debtUK": true,
+      "openingGap": 12.82,
+      "year1": 15.3,
+      "year25": 37.8,
+      "cumulative25": 692.9
+    },
+    {
+      "pensionsUK": true,
+      "debtUK": false,
+      "openingGap": 10.193999999999999,
+      "year1": 12.9,
+      "year25": 39.1,
+      "cumulative25": 674.6
+    },
+    {
+      "pensionsUK": true,
+      "debtUK": true,
+      "openingGap": 5.955999999999999,
+      "year1": 8.7,
+      "year25": 32.3,
+      "cumulative25": 538.9
+    }
+  ]
+}

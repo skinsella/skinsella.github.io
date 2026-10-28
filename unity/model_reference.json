@@ -1,0 +1,2490 @@
+{
+  "managedExamples": {
+    "negotiated_growth": {
+      "label": "Negotiated-growth illustration",
+      "policy": {
+        "reratingScope": 100,
+        "reratingYears": 15,
+        "investment": 1.5,
+        "duplication": 0.25,
+        "gNI": 4.5,
+        "stall": false,
+        "pensionsUK": true,
+        "debtUK": true,
+        "counterfactual": false,
+        "shared": false
+      },
+      "structural": {
+        "southGrowth": 2.5,
+        "ageing": 0,
+        "shift": 0,
+        "realInterest": 2,
+        "discountRate": 2,
+        "businessUplift": 0,
+        "labourUplift": 0,
+        "transitionShock": 0,
+        "privateMaturity": 10,
+        "privateRecovery": 5,
+        "fundOpening": 0,
+        "fundReturn": 2,
+        "fundContribution": 0,
+        "fundContributionYears": 10,
+        "fundDrawCap": 5,
+        "linkedMechanisms": false,
+        "growthRevenue": true,
+        "taxShare": 35,
+        "baselineRevenueGrowth": 0,
+        "baselineSpendingGrowth": 0,
+        "defenceSavingShare": 100,
+        "centralSavingShare": 100,
+        "taxAdjustmentShare": 100,
+        "pensionTransferYears": 40,
+        "ageSensitiveSpending": 0,
+        "outputCeiling": 0,
+        "investmentCapitalShare": 0,
+        "spareCapacity": 0,
+        "baselineGrowth": 2.5,
+        "investmentEfficiency": 80,
+        "investmentLag": 2,
+        "capitalDepreciation": 4,
+        "publicCapitalRatio": 100,
+        "publicCapitalElasticity": 0.106,
+        "privateCapitalRatio": 150,
+        "privateCrowdIn": 1,
+        "privateAdjustment": 5,
+        "privateCapitalElasticity": 0.3,
+        "publicPayBase": 9.273,
+        "payDisposableShare": 65,
+        "payMPC": 0.6,
+        "welfareMPC": 0.8,
+        "domesticRetention": 50,
+        "demandRealisation": 50,
+        "wageSpillover": 20,
+        "labourSupplyElasticity": 0.2,
+        "welfareIncomeElasticity": 0.05,
+        "labourDemandElasticity": 0.5,
+        "labourSlack": 5,
+        "publicRecruitmentElasticity": 0.2,
+        "baselineEmployment": 900000,
+        "migrationResponse": 0,
+        "migrantHouseholdSize": 1.5,
+        "serviceCostPerResident": 15000
+      }
+    },
+    "faster_growth": {
+      "label": "Stronger-growth illustration",
+      "policy": {
+        "reratingScope": 100,
+        "reratingYears": 15,
+        "investment": 1.5,
+        "duplication": 0.25,
+        "gNI": 5,
+        "stall": false,
+        "pensionsUK": true,
+        "debtUK": true,
+        "counterfactual": false,
+        "shared": false
+      },
+      "structural": {
+        "southGrowth": 2.5,
+        "ageing": 0,
+        "shift": 0,
+        "realInterest": 2,
+        "discountRate": 2,
+        "businessUplift": 0,
+        "labourUplift": 0,
+        "transitionShock": 0,
+        "privateMaturity": 10,
+        "privateRecovery": 5,
+        "fundOpening": 0,
+        "fundReturn": 2,
+        "fundContribution": 0,
+        "fundContributionYears": 10,
+        "fundDrawCap": 5,
+        "linkedMechanisms": false,
+        "growthRevenue": true,
+        "taxShare": 35,
+        "baselineRevenueGrowth": 0,
+        "baselineSpendingGrowth": 0,
+        "defenceSavingShare": 100,
+        "centralSavingShare": 100,
+        "taxAdjustmentShare": 100,
+        "pensionTransferYears": 40,
+        "ageSensitiveSpending": 0,
+        "outputCeiling": 0,
+        "investmentCapitalShare": 0,
+        "spareCapacity": 0,
+        "baselineGrowth": 2.5,
+        "investmentEfficiency": 80,
+        "investmentLag": 2,
+        "capitalDepreciation": 4,
+        "publicCapitalRatio": 100,
+        "publicCapitalElasticity": 0.106,
+        "privateCapitalRatio": 150,
+        "privateCrowdIn": 1,
+        "privateAdjustment": 5,
+        "privateCapitalElasticity": 0.3,
+        "publicPayBase": 9.273,
+        "payDisposableShare": 65,
+        "payMPC": 0.6,
+        "welfareMPC": 0.8,
+        "domesticRetention": 50,
+        "demandRealisation": 50,
+        "wageSpillover": 20,
+        "labourSupplyElasticity": 0.2,
+        "welfareIncomeElasticity": 0.05,
+        "labourDemandElasticity": 0.5,
+        "labourSlack": 5,
+        "publicRecruitmentElasticity": 0.2,
+        "baselineEmployment": 900000,
+        "migrationResponse": 0,
+        "migrantHouseholdSize": 1.5,
+        "serviceCostPerResident": 15000
+      }
+    }
+  },
+  "audit": {
+    "constantAudit": {
+      "GNI_STAR": [
+        "Verified frozen vintage",
+        "CSO Annual National Accounts 2023 reports €290.9bn. This is the recorded release vintage, not a claim about the latest revision."
+      ],
+      "NORTH_GNI": [
+        "Arithmetic corrected, source unresolved",
+        "Uses the recorded £63.3bn project anchor and divides by verified 2023 GBP-per-EUR .86979. The official GDP cell and vintage remain unverified, so this anchor supports experiments only."
+      ],
+      "UK_2019_TO_2023_EUR": [
+        "Verified conversion inputs",
+        "Uses the original sterling figures, ONS L8GG calendar-year averages for 2019 and 2023, and the reciprocal of the verified annual ECB reference rate. No reverse conversion of rounded euro totals."
+      ],
+      "UK_FY2022_TO_2023_EUR": [
+        "Verified arithmetic, fiscal period assumed",
+        "ONS L8GG FY2022–23 to CY2023 conversion with recorded 2023 FX. Whether this is the correct fiscal period of the frozen study observations remains unresolved."
+      ],
+      "BASE_REVENUE": [
+        "Study traced, official cell unresolved",
+        "Doyle 2025 Table 1 reports revenue £21.773bn. The same assumed FY conversion as the frozen bridge is used. Exact official release and cell need confirmation."
+      ],
+      "BASE_SPENDING": [
+        "Reconciled frozen accounting anchor",
+        "Opening revenue plus the frozen €17.058bn deficit. It reconciles exactly to the project deficit and approximates the separately rebased study spending figure within source rounding."
+      ],
+      "GROSS_PAY_FULL": [
+        "Study benchmark, current applicability unresolved",
+        "F&M 2024 Table 6 gives a 2019 gross pay increment of £4.306bn. It is separately rebased, not inferred from a net fiscal envelope or treated as a current wage-policy costing."
+      ],
+      "GROSS_WELFARE_FULL": [
+        "Study benchmark, current applicability unresolved",
+        "F&M 2024 Table 6 gives a 2019 gross welfare increment of £4.809bn. Eligibility, composition and future rates still require programme costing."
+      ],
+      "SOURCE_PAY_BASE": [
+        "Historical source benchmark",
+        "F&M 2024 Table 6 reports a 2019 current public pay bill of £6.797bn. It is a historical normalisation, not a newly measured Northern Ireland pay bill."
+      ],
+      "PUBLISHED": [
+        "Frozen study anchor",
+        "Doyle 2025 Table 1 and Table 2 contain £14.220bn. Table 2 labels the period 2019 while Table 1 and surrounding text say 2023. The official update remains on hold."
+      ],
+      "PENSIONS": [
+        "Negotiated envelope, not actuarial estimate",
+        "Doyle 2025 Table 2 reports £5.722bn. The same frozen envelope now defines both immediate transfer and the endpoint of phased funding transfer, without mixing a net incremental allowance with a different gross endpoint."
+      ],
+      "DEBT_INT": [
+        "Negotiated interest flow",
+        "Doyle 2025 Table 2 reports £3.533bn. It remains a frozen annual interest-flow scenario, not an allocated inherited debt principal or refinancing forecast."
+      ],
+      "DEFENCE_NET": [
+        "Optional disputed deduction",
+        "Doyle 2025 Table 2 reports £1.367bn. The accepted share starts at zero, and any assumed deduction is explicit. Replacement security and defence services still need costing."
+      ],
+      "OTHER_NONID": [
+        "Optional disputed deduction",
+        "Doyle 2025 Table 2 reports £0.400bn overseas and £0.177bn central costs. The accepted share starts at zero. Replacement functions and EU costs need a programme budget."
+      ],
+      "TAX_ADD": [
+        "Optional disputed adjustment",
+        "Doyle 2025 Table 2 combines £0.500bn HQ, £0.265bn central spending and £0.769bn tax/PRSI changes. The accepted share starts at zero. Attribution is not automatically additional cash revenue."
+      ],
+      "RERATE_FULL": [
+        "Conversion repaired, policy estimate conditional",
+        "F&M 2024 Table 7 original sterling 2019 difference £18.104bn minus £9.577bn, converted directly with the UK deflator and recorded FX. The gap between this net increment and Table 6 gross components is kept visible rather than allocated to household income."
+      ]
+    },
+    "parameterAudit": {
+      "investmentCapitalShare": "Explicit split of additional expenditure. Starts at zero so current services and welfare never automatically become productive capital.",
+      "spareCapacity": "Chosen capacity margin. Starts at zero. Demand cannot create real output above the selected fixed-price capacity limit.",
+      "growthRevenue": "Off by default. Enabling this applies an assumed marginal revenue share to extra output, without claiming an estimated fiscal effect.",
+      "taxShare": "Explicit marginal revenue assumption. No average tax ratio is automatically treated as a causal tax elasticity.",
+      "baselineRevenueGrowth": "Explicit real receipts path. Constant in real terms by default, not automatically tied to assumed output convergence.",
+      "baselineSpendingGrowth": "Explicit real spending path. Constant in real terms by default. Any ageing already in this path must not be added again.",
+      "defenceSavingShare": "Accepted share of the study deduction, zero by default. A negotiation scenario, not an agreed saving.",
+      "centralSavingShare": "Accepted share of the study central and overseas deductions, zero by default. Replacement functions remain a costing question.",
+      "taxAdjustmentShare": "Accepted share of study revenue adjustments, zero by default. This must be reconciled to the tax base and harmonisation assumptions.",
+      "pensionTransferYears": "Linear transfer of the same pension funding envelope. Forty years follows a stylised period discussed by Doyle, not a cohort forecast or agreed settlement.",
+      "ageSensitiveSpending": "Explicit additional non-pension service spending exposed to ageing. Zero until a programme base is supplied. Excludes ageing already in baseline spending.",
+      "outputCeiling": "Optional numerical scenario bound, disabled by default. It is not measured parity with the Republic. A run records when it binds.",
+      "baselineGrowth": "No estimated counterfactual or confidence interval. Distinguish output growth, productivity growth and population growth.",
+      "investmentEfficiency": "No NI project-level delivery estimate. Spending called investment also includes recurring health, education and welfare in Doyle Table 3, so it cannot all become productive physical capital.",
+      "investmentLag": "Chosen timing with all expenditure completing at one lag. No project pipeline or distributed completion profile.",
+      "capitalDepreciation": "No asset mix or independently measured stock. Different public and private assets should not automatically share a depreciation rate.",
+      "publicCapitalRatio": "No measured NI reference public capital stock. The elasticity cannot identify an output effect without a defensible stock denominator.",
+      "publicCapitalElasticity": "Bom and Ligthart report an average .106 across heterogeneous studies. It is not a NI causal coefficient and may overlap private-capital and employment responses added separately.",
+      "privateCapitalRatio": "Unmeasured reference stock. Results depend on this scale and on whether the stock is gross or net.",
+      "privateCrowdIn": "Unestimated response. Public-capital effects may already include private adjustment, creating overlap.",
+      "privateAdjustment": "Unestimated adjustment speed. The net additional stock now adjusts directly towards its target, with replacement implicit. It is a diagnostic and does not add another GDP effect.",
+      "privateCapitalElasticity": "Chosen Cobb–Douglas exponent, not an estimated NI capital share. It is used only for a private-productivity diagnostic and does not add to headline GDP.",
+      "payShare": "Unverified pay/welfare split. A net fiscal harmonisation envelope cannot be split into gross household income without tax and benefit reconciliation.",
+      "publicPayBase": "A rebased historical pay-bill benchmark from F&M Table 6 replaces the invented normalisation. It is not a current measured NI pay bill or an estimate of private wage spillovers.",
+      "payDisposableShare": "Illustrative after-tax share. Fiscal feedback from the pay increase has not been reconciled to the net harmonisation envelope.",
+      "payMPC": "No recipient-specific consumption estimate. Tax financing and displaced Republic spending are absent.",
+      "welfareMPC": "No recipient-specific consumption estimate or saving dynamics. Benefit eligibility and withdrawal rates are absent.",
+      "domesticRetention": "No input-output estimate of imports or flows between NI, the Republic and Great Britain. Domestic geography must be defined.",
+      "demandRealisation": "Unestimated spare-capacity closure. The first-round response is capped by the selected spare capacity. This is a fixed-price experiment, not a general-equilibrium closure.",
+      "wageSpillover": "Unestimated public-to-private wage transmission. Labour groups, occupations and regional wage bargaining are not represented.",
+      "labourSupplyElasticity": "The UCD paper does not estimate this aggregate NI coefficient. Household-specific wage elasticities cannot be directly treated as an aggregate employment effect.",
+      "welfareIncomeElasticity": "Chosen income effect without benefit withdrawal or substitution effects. The income base is a hard-coded share of output.",
+      "labourDemandElasticity": "Chosen response to a productivity-minus-wages index. No firm first-order conditions, labour share or NI estimation establish it.",
+      "labourSlack": "No observed labour-force, hours, skills or participation constraint. Fixed reference employment does not grow with the baseline economy.",
+      "publicRecruitmentElasticity": "A diagnostic index only. No measured staff response, vacancy closure, staffing cost or public-service benefit.",
+      "baselineEmployment": "Illustrative scale rather than verified employment. Additional jobs should be called job equivalents, not a forecast.",
+      "migrationResponse": "Migration responds only to unfilled jobs. Housing, departures, return migration, composition and fiscal incidence are omitted.",
+      "migrantHouseholdSize": "Chosen household scale with no age structure. No separate children, retirees or secondary earners.",
+      "serviceCostPerResident": "Chosen marginal cost, not a budget costing. Housing, capital infrastructure and congestion are absent.",
+      "gNI": "Chosen policy output growth, not a treatment effect estimated from reunification. It must exclude the linked mechanisms and residual shocks to avoid counting gains twice.",
+      "southGrowth": "Chosen Republic real GNI* path. It changes the denominator only and does not represent spillovers or financing effects on Republic activity.",
+      "ageing": "Applies to the pension envelope and an explicitly supplied service base. Zero initially. It is not a demographic projection and must not duplicate baseline spending growth.",
+      "shift": "Assumed disappearance of part of the deficit without an identified causal or accounting mechanism.",
+      "realInterest": "Constant real marginal borrowing rate. No debt-risk premium, maturity structure, inflation surprise or fiscal response.",
+      "discountRate": "Chosen real discount rate. Discounted financing-inclusive costs are a cash-flow measure, not a social welfare valuation.",
+      "businessUplift": "Residual assumed output-level effect, not an FDI estimate. No firm entry, profit repatriation, trade model or corporation-tax base.",
+      "labourUplift": "A separately assumed residual labour output contribution in either configuration, not output calculated from diagnostic job equivalents. It must exclude effects already represented by other mechanisms.",
+      "transitionShock": "Chosen temporary output loss. No currency, banking, border, trade diversion or confidence model identifies its size.",
+      "privateMaturity": "Chosen linear phase-in, not estimated business adjustment.",
+      "privateRecovery": "Chosen linear recovery, not an estimated transition path.",
+      "fundOpening": "Existing assets are an endowment. Prior taxation, forgone public investment and alternative uses are outside the horizon.",
+      "fundReturn": "Deterministic real return without risk, fees or covariance with borrowing costs. A favourable return spread is not free fiscal capacity.",
+      "fundContribution": "Asset acquisition, normally financed by taxes or borrowing. The model correctly adds financing needs but has no macro financing feedback.",
+      "fundContributionYears": "Chosen saving horizon. No fiscal rule or legal mandate is represented.",
+      "fundDrawCap": "Chosen withdrawal ceiling. Not a sustainable spending rule or guarantee of available assets.",
+      "investment": "Preset spending choice. Capital versus current expenditure, additionality, maintenance and procurement capacity need separate budgets.",
+      "duplication": "Preset recurring cost without a functional cost study or time-dependent transition budget.",
+      "reratingScope": "Chosen harmonisation scope. Benefits, eligibility, staffing, hours and service quality are compressed into one envelope.",
+      "reratingYears": "Chosen linear schedule. The source does not identify a single pay and welfare convergence process.",
+      "pensionsUK": "Negotiated scenario, not a settled legal or actuarial result. The current UI wording is qualified.",
+      "debtUK": "Negotiated scenario, not a settled allocation of debt stock, assets or interest.",
+      "stall": "After year seven the relative rate is capped at the lower of its previous rate and .4%. It cannot accelerate a low-growth path, but the timing and cap remain scenario assumptions.",
+      "linkedMechanisms": "Research configuration. Enabling links creates an illustrative mechanism experiment, not an estimated causal model.",
+      "horizon": "Reporting choice rather than evidence. Long horizons magnify unsupported persistence, missing terminal liabilities and the output ceiling."
+    },
+    "relationships": [
+      [
+        "Defaults",
+        "Repaired",
+        "The opening accounting reference has no negotiated deductions, no additional growth revenue and no linked behavioural effects. It is a conditional reference, not a best estimate of transition costs."
+      ],
+      [
+        "Price conversion",
+        "Repaired",
+        "Net harmonisation uses original sterling Table 7 values directly. Gross pay and welfare use separate Table 6 values. All use the same recorded UK deflator and FX convention."
+      ],
+      [
+        "Net and gross harmonisation",
+        "Repaired boundary, policy unresolved",
+        "Gross pay and welfare no longer come from an arbitrary split of a net fiscal envelope. The source gross/net discrepancy is recorded without inventing its composition."
+      ],
+      [
+        "Fiscal baseline",
+        "Repaired accounting, paths assumed",
+        "Separate gross receipts and spending paths reconcile to the frozen deficit. Growth in output does not silently generate revenue. Both real fiscal growth rates are explicit."
+      ],
+      [
+        "Fiscal deductions",
+        "Repaired interface, settlement unresolved",
+        "Each disputed defence, central-spending and revenue adjustment has an explicit accepted share, initially zero. The UK pension and debt switches are independent of policy labels."
+      ],
+      [
+        "Pensions",
+        "Repaired endpoints, actuarial work needed",
+        "A single pension envelope transfers linearly over the selected period. Phased and immediate transfer agree at the endpoint, without mixing gross and net conventions or claiming a cohort projection."
+      ],
+      [
+        "Ageing",
+        "Repaired base, data needed",
+        "Ageing applies to pensions and an explicit non-pension service base. No arbitrary share of a residual deficit is aged and no residual balance disappears through composition."
+      ],
+      [
+        "Public expenditure and capital",
+        "Repaired boundary",
+        "Only the explicitly selected capital share of additional expenditure can become productive capital. That share starts at zero. Maintenance and project selection remain uncosted."
+      ],
+      [
+        "Capital and jobs",
+        "Repaired overlap",
+        "Public capital provides one reduced-form output effect. Induced private capital and jobs are diagnostics, not extra output multipliers stacked on that benchmark."
+      ],
+      [
+        "Private net capital",
+        "Repaired target",
+        "The additional net stock moves towards its target with replacement implicit. There is no second depreciation deduction preventing convergence to a fixed target."
+      ],
+      [
+        "Demand capacity",
+        "Repaired bound, partial closure",
+        "Real demand effects cannot exceed selected spare capacity. The fixed-price experiment has no estimated price, trade, monetary or Republic-financing response."
+      ],
+      [
+        "Growth and revenue",
+        "Explicit experiment",
+        "The marginal revenue rate is adjustable and feedback is off initially. Policy growth and residual shocks must exclude effects entered in other channels."
+      ],
+      [
+        "Output ceiling",
+        "Repaired",
+        "There is no implicit doubling ceiling or claim of income parity. An optional user-selected bound records each binding year."
+      ],
+      [
+        "Slowdown",
+        "Repaired direction",
+        "The switch never raises the relative growth rate after year seven. Its timing and remaining cap are still scenario settings."
+      ],
+      [
+        "Scenario comparison",
+        "Repaired",
+        "Policy selection does not mutate liability switches. All compared bundles use the same negotiated terms, growth and structural settings. The selected comparison line uses exactly the main-run inputs."
+      ],
+      [
+        "Reproduction",
+        "Repaired",
+        "A downloaded run includes policy inputs, shared settings, all compared bundles, annual results and the executable fingerprint. A CLI rejects mismatched models or results."
+      ],
+      [
+        "Debt, fund and cash",
+        "Accounting identities tested",
+        "Contributions acquire assets and increase financing needs. Withdrawals reduce financing, not spending. Surpluses repay debt and excess becomes cash. Opening assets are not free income."
+      ],
+      [
+        "Inherited debt",
+        "Scope unresolved",
+        "A constant annual interest allocation is not a negotiated debt stock. No inherited principal or refinancing model has been invented."
+      ],
+      [
+        "Labour and wages",
+        "Unestimated diagnostic",
+        "Wage spillovers, labour supply, welfare income effects and firm labour demand remain unestimated. Their indices cannot establish changes in employment or public-service quality."
+      ],
+      [
+        "Migration",
+        "Unestimated experiment",
+        "Optional migration adds residents and service costs. No return migration, cohort ageing, housing constraint or complete migrant tax account is estimated."
+      ],
+      [
+        "Counterfactual institutions",
+        "Scope limitation",
+        "UK status quo is zero only from the incremental Republic perspective. Shared Island allocates its extra expenditure to the Republic. No welfare ordering or constitutional causal effect follows."
+      ],
+      [
+        "Evidence vintage",
+        "Unresolved",
+        "The frozen ONS fiscal baseline and its exact official cells remain on hold. A historical harmonisation benchmark combined with a later deficit is a hybrid scenario, not an updated policy costing."
+      ],
+      [
+        "Forecasts and welfare",
+        "Outside scope",
+        "No probabilities, distributional microsimulation, banking model, currency changeover, trade model or complete all-island welfare analysis is supplied. Slider bounds are not confidence intervals."
+      ]
+    ]
+  },
+  "title": "Reunification Scenarios model reference",
+  "modelSha256": "24968ec1ae0e7def373db841df88f7fd928ddf31a4b046e4b55f3f50aab29f2f",
+  "constants": [
+    {
+      "key": "GNI_STAR",
+      "value": 290.9,
+      "label": "Republic GNI* anchor",
+      "unit": "€bn",
+      "basis": "Verified in CSO Annual National Accounts 2023, released 12 July 2024. Frozen vintage rather than a claim about the latest revision.",
+      "source": "cso"
+    },
+    {
+      "key": "NORTH_GNI",
+      "value": 72.77618735556858,
+      "label": "Northern Ireland output anchor",
+      "unit": "€bn",
+      "basis": "Arithmetic follows the recorded sterling anchor and FX. The official output cell remains unverified.",
+      "source": "onsgdp"
+    },
+    {
+      "key": "UK_2019_TO_2023_EUR",
+      "value": 1.3643408053374586,
+      "label": "2019 sterling to 2023 euros",
+      "unit": "EUR per 2019 GBP",
+      "basis": "Original sterling amounts with UK deflator and recorded FX.",
+      "source": "deflator"
+    },
+    {
+      "key": "UK_FY2022_TO_2023_EUR",
+      "value": 1.199575803493008,
+      "label": "Assumed FY2022–23 sterling to 2023 euros",
+      "unit": "EUR per GBP",
+      "basis": "Recorded conversion factor, with the fiscal source period unresolved.",
+      "source": "deflator"
+    },
+    {
+      "key": "BASE_REVENUE",
+      "value": 26.118363969453263,
+      "label": "Opening gross receipts",
+      "unit": "€bn",
+      "basis": "Doyle Table 1 £21.773bn rebased with the frozen bridge convention.",
+      "source": "doyle"
+    },
+    {
+      "key": "BASE_SPENDING",
+      "value": 43.17636396945326,
+      "label": "Opening reconciled gross spending",
+      "unit": "€bn",
+      "basis": "Opening receipts plus the frozen reported deficit.",
+      "source": "doyle"
+    },
+    {
+      "key": "GROSS_PAY_FULL",
+      "value": 5.874851507783097,
+      "label": "Gross pay harmonisation increment",
+      "unit": "€bn",
+      "basis": "F&M Table 6 original 2019 sterling £4.306bn, directly rebased.",
+      "source": "fm"
+    },
+    {
+      "key": "GROSS_WELFARE_FULL",
+      "value": 6.561114932867839,
+      "label": "Gross welfare harmonisation increment",
+      "unit": "€bn",
+      "basis": "F&M Table 6 original 2019 sterling £4.809bn, directly rebased.",
+      "source": "fm"
+    },
+    {
+      "key": "SOURCE_PAY_BASE",
+      "value": 9.273424453878706,
+      "label": "Historical public pay bill benchmark",
+      "unit": "€bn",
+      "basis": "F&M Table 6 original 2019 sterling £6.797bn, directly rebased.",
+      "source": "fm"
+    },
+    {
+      "key": "PUBLISHED",
+      "value": 17.058,
+      "label": "Starting reported Northern Ireland fiscal deficit",
+      "unit": "€bn",
+      "basis": "Frozen fiscal bridge, not a newly retrieved ONS release.",
+      "source": "rebased"
+    },
+    {
+      "key": "PENSIONS",
+      "value": 6.864,
+      "label": "Annual pension liability envelope",
+      "unit": "€bn",
+      "basis": "Study-derived liability assumption and project rebasing.",
+      "source": "doyle"
+    },
+    {
+      "key": "DEBT_INT",
+      "value": 4.238,
+      "label": "Allocated UK debt-interest envelope",
+      "unit": "€bn",
+      "basis": "Study-derived liability assumption and project rebasing.",
+      "source": "doyle"
+    },
+    {
+      "key": "DEFENCE_NET",
+      "value": 1.64,
+      "label": "Defence spending deduction, net of assumed Irish uplift",
+      "unit": "€bn",
+      "basis": "Study-derived fiscal adjustment.",
+      "source": "doyle"
+    },
+    {
+      "key": "OTHER_NONID",
+      "value": 0.692,
+      "label": "Other central and overseas spending deduction",
+      "unit": "€bn",
+      "basis": "Combined project adjustments.",
+      "source": "rebased"
+    },
+    {
+      "key": "TAX_ADD",
+      "value": 1.84,
+      "label": "Tax-system and headquarters revenue adjustment",
+      "unit": "€bn",
+      "basis": "Study-derived fiscal adjustment, not guaranteed additional receipts.",
+      "source": "doyle"
+    },
+    {
+      "key": "RERATE_FULL",
+      "value": 11.633734047112508,
+      "label": "Net fiscal harmonisation increment",
+      "unit": "€bn",
+      "basis": "F&M Table 7 original sterling difference £18.104bn minus £9.577bn, directly rebased.",
+      "source": "fm"
+    }
+  ],
+  "controls": [
+    {
+      "key": "defenceSavingShare",
+      "scope": "structural",
+      "label": "Share of study defence deduction accepted",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "centralSavingShare",
+      "scope": "structural",
+      "label": "Share of study central-spending deduction accepted",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "taxAdjustmentShare",
+      "scope": "structural",
+      "label": "Share of study revenue adjustment accepted",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "pensionTransferYears",
+      "scope": "structural",
+      "label": "Pension funding transfer period if UK retains accrued liabilities",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": " years",
+      "value": 40,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "gNI",
+      "scope": "params",
+      "label": "Northern Ireland growth before policy effects",
+      "min": 0,
+      "max": 7,
+      "step": 0.25,
+      "unit": "% pa",
+      "value": 2.5,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "southGrowth",
+      "scope": "structural",
+      "label": "Republic of Ireland real growth (GNI*)",
+      "min": 0,
+      "max": 4,
+      "step": 0.25,
+      "unit": "% pa",
+      "value": 2.5,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "reratingScope",
+      "scope": "params",
+      "label": "Final harmonisation target",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "% of net envelope",
+      "value": 100,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "reratingYears",
+      "scope": "params",
+      "label": "Rerating phase-in",
+      "min": 1,
+      "max": 25,
+      "step": 1,
+      "unit": " yrs",
+      "value": 15,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "investment",
+      "scope": "params",
+      "label": "Additional expenditure (yrs 1–10)",
+      "min": 0,
+      "max": 2.5,
+      "step": 0.25,
+      "unit": " €bn/yr",
+      "value": 1.5,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "duplication",
+      "scope": "params",
+      "label": "Duplication cost",
+      "min": 0,
+      "max": 1,
+      "step": 0.05,
+      "unit": " €bn/yr",
+      "value": 0.25,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "ageing",
+      "scope": "structural",
+      "label": "Ageing drift",
+      "min": 0,
+      "max": 2,
+      "step": 0.25,
+      "unit": "% pa",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "realInterest",
+      "scope": "structural",
+      "label": "Real borrowing rate",
+      "min": 0,
+      "max": 6,
+      "step": 0.25,
+      "unit": "% pa",
+      "value": 2,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "discountRate",
+      "scope": "structural",
+      "label": "Real discount rate",
+      "min": 0,
+      "max": 6,
+      "step": 0.25,
+      "unit": "% pa",
+      "value": 2,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "baselineRevenueGrowth",
+      "scope": "structural",
+      "label": "Baseline receipts real growth",
+      "min": -2,
+      "max": 4,
+      "step": 0.25,
+      "unit": "% pa",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "baselineSpendingGrowth",
+      "scope": "structural",
+      "label": "Baseline spending real growth",
+      "min": -2,
+      "max": 4,
+      "step": 0.25,
+      "unit": "% pa",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "ageSensitiveSpending",
+      "scope": "structural",
+      "label": "Additional age-sensitive service spending base",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": " €bn",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "taxShare",
+      "scope": "structural",
+      "label": "Marginal revenue from additional output",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "%",
+      "value": 35,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "outputCeiling",
+      "scope": "structural",
+      "label": "Optional output ceiling, zero disables",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": " times reference output",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "businessUplift",
+      "scope": "structural",
+      "label": "Residual business and FDI output uplift",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "% of output at maturity",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "labourUplift",
+      "scope": "structural",
+      "label": "Residual labour output contribution",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "% of output at maturity",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "privateMaturity",
+      "scope": "structural",
+      "label": "Years to mature private response",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": " years",
+      "value": 10,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "transitionShock",
+      "scope": "structural",
+      "label": "Initial business and consumption disruption",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "% of output lost",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "privateRecovery",
+      "scope": "structural",
+      "label": "Years to recover from disruption",
+      "min": 1,
+      "max": 15,
+      "step": 1,
+      "unit": " years",
+      "value": 5,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "fundOpening",
+      "scope": "structural",
+      "label": "Opening fund capital",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": " €bn",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "fundReturn",
+      "scope": "structural",
+      "label": "Real annual investment return",
+      "min": -10,
+      "max": 8,
+      "step": 0.5,
+      "unit": "% pa",
+      "value": 2,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "fundContribution",
+      "scope": "structural",
+      "label": "Annual Exchequer contribution",
+      "min": 0,
+      "max": 5,
+      "step": 0.25,
+      "unit": " €bn/yr",
+      "value": 0,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "fundContributionYears",
+      "scope": "structural",
+      "label": "Contribution period from year one",
+      "min": 1,
+      "max": 25,
+      "step": 1,
+      "unit": " years",
+      "value": 10,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "fundDrawCap",
+      "scope": "structural",
+      "label": "Maximum annual fund withdrawal",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": " €bn/yr",
+      "value": 5,
+      "basis": "Illustrative scenario setting. Not an estimated coefficient."
+    },
+    {
+      "key": "investmentCapitalShare",
+      "label": "Capital share of additional expenditure",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "basis": "Unallocated by default. Health, welfare and education expenditure is not automatically capital",
+      "scope": "structural"
+    },
+    {
+      "key": "spareCapacity",
+      "label": "Spare capacity for temporary demand",
+      "value": 0,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "basis": "Explicit fixed-price capacity constraint. No demand dividend without capacity",
+      "scope": "structural"
+    },
+    {
+      "key": "baselineGrowth",
+      "label": "Northern Ireland counterfactual growth",
+      "value": 2.5,
+      "min": 0,
+      "max": 4,
+      "step": 0.25,
+      "unit": "% pa",
+      "basis": "Illustrative reference path, independent of Republic growth",
+      "scope": "structural"
+    },
+    {
+      "key": "investmentEfficiency",
+      "label": "Investment delivered as productive capital",
+      "value": 80,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "basis": "Illustrative delivery efficiency",
+      "scope": "structural"
+    },
+    {
+      "key": "investmentLag",
+      "label": "Investment completion delay",
+      "value": 2,
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": " years",
+      "basis": "Illustrative construction delay",
+      "scope": "structural"
+    },
+    {
+      "key": "capitalDepreciation",
+      "label": "Capital depreciation",
+      "value": 4,
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "% pa",
+      "basis": "Illustrative depreciation rate",
+      "scope": "structural"
+    },
+    {
+      "key": "publicCapitalRatio",
+      "label": "Reference public capital stock",
+      "value": 100,
+      "min": 25,
+      "max": 200,
+      "step": 5,
+      "unit": "% of reference output",
+      "basis": "Illustrative stock normalisation, not measured NI capital",
+      "scope": "structural"
+    },
+    {
+      "key": "publicCapitalElasticity",
+      "label": "Public-capital output elasticity",
+      "value": 0.106,
+      "min": 0,
+      "max": 0.25,
+      "step": 0.001,
+      "unit": "",
+      "basis": "External meta-analysis average, not an NI causal estimate",
+      "url": "https://doi.org/10.1111/joes.12037",
+      "scope": "structural"
+    },
+    {
+      "key": "privateCapitalRatio",
+      "label": "Reference private capital stock",
+      "value": 150,
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "% of reference output",
+      "basis": "Illustrative stock normalisation",
+      "scope": "structural"
+    },
+    {
+      "key": "privateCrowdIn",
+      "label": "Private capital response to productivity",
+      "value": 1,
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "unit": " elasticity",
+      "basis": "Illustrative investment response",
+      "scope": "structural"
+    },
+    {
+      "key": "privateAdjustment",
+      "label": "Private capital adjustment period",
+      "value": 5,
+      "min": 1,
+      "max": 15,
+      "step": 1,
+      "unit": " years",
+      "basis": "Illustrative adjustment lag",
+      "scope": "structural"
+    },
+    {
+      "key": "privateCapitalElasticity",
+      "label": "Private-capital output elasticity",
+      "value": 0.3,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.05,
+      "unit": "",
+      "basis": "Illustrative production-function parameter",
+      "scope": "structural"
+    },
+    {
+      "key": "publicPayBase",
+      "label": "Reference public pay bill",
+      "value": 9.273,
+      "min": 5,
+      "max": 20,
+      "step": 0.001,
+      "unit": " €bn",
+      "basis": "F&M 2024 Table 6, 2019 public pay £6.797bn, rebased with UK deflator and 2023 FX. Historical benchmark, not a current measured pay bill",
+      "url": "https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf",
+      "scope": "structural"
+    },
+    {
+      "key": "payDisposableShare",
+      "label": "Pay increase reaching household disposable income",
+      "value": 65,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "basis": "Illustrative after-tax income share. No separate fiscal tax add-back",
+      "scope": "structural"
+    },
+    {
+      "key": "payMPC",
+      "label": "Consumption from additional disposable pay",
+      "value": 0.6,
+      "min": 0,
+      "max": 1,
+      "step": 0.05,
+      "unit": " share",
+      "basis": "Illustrative propensity to consume",
+      "scope": "structural"
+    },
+    {
+      "key": "welfareMPC",
+      "label": "Consumption from additional welfare",
+      "value": 0.8,
+      "min": 0,
+      "max": 1,
+      "step": 0.05,
+      "unit": " share",
+      "basis": "Illustrative propensity to consume",
+      "scope": "structural"
+    },
+    {
+      "key": "domesticRetention",
+      "label": "Additional consumption retained domestically",
+      "value": 50,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "basis": "Illustrative import leakage. Spending effects are uncertain",
+      "url": "https://www.fiscalcouncil.ie/irelands-spending-multipliers/",
+      "scope": "structural"
+    },
+    {
+      "key": "demandRealisation",
+      "label": "Domestic demand translated into real output",
+      "value": 50,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "basis": "Illustrative spare-capacity and price adjustment",
+      "scope": "structural"
+    },
+    {
+      "key": "wageSpillover",
+      "label": "Public-to-private wage spillover",
+      "value": 20,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "basis": "Illustrative wage transmission",
+      "scope": "structural"
+    },
+    {
+      "key": "labourSupplyElasticity",
+      "label": "Labour-supply response to real wages",
+      "value": 0.2,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.05,
+      "unit": " elasticity",
+      "basis": "Illustrative aggregate value. Irish estimates differ across household groups",
+      "url": "https://www.ucd.ie/economics/t4media/WP09.30.pdf",
+      "scope": "structural"
+    },
+    {
+      "key": "welfareIncomeElasticity",
+      "label": "Welfare income effect on labour supply",
+      "value": 0.05,
+      "min": 0,
+      "max": 0.3,
+      "step": 0.01,
+      "unit": " elasticity",
+      "basis": "Illustrative income effect, not benefit-withdrawal microsimulation",
+      "scope": "structural"
+    },
+    {
+      "key": "labourDemandElasticity",
+      "label": "Employment response to output and labour costs",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.05,
+      "unit": " elasticity",
+      "basis": "Illustrative labour-demand parameter",
+      "scope": "structural"
+    },
+    {
+      "key": "labourSlack",
+      "label": "Available resident labour above reference employment",
+      "value": 5,
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "%",
+      "basis": "Illustrative labour availability",
+      "scope": "structural"
+    },
+    {
+      "key": "publicRecruitmentElasticity",
+      "label": "Public-service recruitment response to pay",
+      "value": 0.2,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.05,
+      "unit": " elasticity",
+      "basis": "Illustrative recruitment index. Not an output or tax gain",
+      "scope": "structural"
+    },
+    {
+      "key": "baselineEmployment",
+      "label": "Reference employment for job equivalents",
+      "value": 900000,
+      "min": 700000,
+      "max": 1100000,
+      "step": 10000,
+      "unit": " jobs",
+      "basis": "Illustrative employment scale, not an official employment estimate",
+      "scope": "structural"
+    },
+    {
+      "key": "migrationResponse",
+      "label": "Unfilled labour demand met through migration",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "basis": "Illustrative response. Disabled by default",
+      "scope": "structural"
+    },
+    {
+      "key": "migrantHouseholdSize",
+      "label": "Additional residents per migrant worker",
+      "value": 1.5,
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "unit": " people",
+      "basis": "Illustrative household size",
+      "scope": "structural"
+    },
+    {
+      "key": "serviceCostPerResident",
+      "label": "Annual service cost per additional resident",
+      "value": 15000,
+      "min": 0,
+      "max": 30000,
+      "step": 1000,
+      "unit": " € per resident",
+      "basis": "Illustrative marginal cost, not average public spending",
+      "scope": "structural"
+    },
+    {
+      "key": "growthRevenue",
+      "scope": "structural",
+      "label": "Apply assumed output-revenue feedback",
+      "value": false,
+      "unit": "boolean",
+      "basis": "Explicit experiment, off by default."
+    },
+    {
+      "key": "pensionsUK",
+      "scope": "negotiation",
+      "label": "UK retains accrued pensions",
+      "value": false,
+      "unit": "boolean",
+      "basis": "Negotiated outcome, not a legal finding."
+    },
+    {
+      "key": "debtUK",
+      "scope": "negotiation",
+      "label": "UK retains debt interest",
+      "value": false,
+      "unit": "boolean",
+      "basis": "Negotiated outcome, not a legal finding."
+    },
+    {
+      "key": "stall",
+      "scope": "params",
+      "label": "Slowdown after year seven",
+      "value": false,
+      "unit": "boolean",
+      "basis": "Illustrative scenario switch. Subsequent relative catch-up is 0.4% per year."
+    },
+    {
+      "key": "linkedMechanisms",
+      "scope": "structural",
+      "label": "Run linked economic mechanisms",
+      "value": false,
+      "unit": "boolean",
+      "basis": "Model configuration. Off uses the simplified residual-response path."
+    },
+    {
+      "key": "horizon",
+      "scope": "run",
+      "label": "Reporting horizon",
+      "value": 25,
+      "min": 25,
+      "max": 50,
+      "step": 25,
+      "unit": "years",
+      "basis": "Reporting choice. Payback is searched over a separate 50-year run."
+    }
+  ],
+  "presets": {
+    "unitary": {
+      "key": "unitary",
+      "name": "Unitary",
+      "model": "Merge both systems at once",
+      "color": "#A63D2F",
+      "desc": "Full absorption on day one. Welfare and pay harmonise immediately, duplication ends fast, with growth selected independently.",
+      "defaults": {
+        "reratingScope": 100,
+        "reratingYears": 1,
+        "investment": 0.5,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false
+      }
+    },
+    "federal": {
+      "key": "federal",
+      "name": "Federal",
+      "model": "Keep two governments for decades",
+      "color": "#2E5E9E",
+      "desc": "A continuing Stormont inside an all-island state. Full harmonisation phased over two decades, but two administrations run permanently.",
+      "defaults": {
+        "reratingScope": 100,
+        "reratingYears": 20,
+        "investment": 0.5,
+        "duplication": 0.5,
+        "gNI": 2.5,
+        "stall": false
+      }
+    },
+    "glide": {
+      "key": "glide",
+      "name": "Managed Integration",
+      "model": "Phase it in, invest early",
+      "color": "#177052",
+      "desc": "An illustrative linear harmonisation schedule with additional expenditure during the first decade. Growth is a separate assumption.",
+      "defaults": {
+        "reratingScope": 100,
+        "reratingYears": 15,
+        "investment": 1.5,
+        "duplication": 0.25,
+        "gNI": 2.5,
+        "stall": false
+      }
+    },
+    "worst": {
+      "key": "worst",
+      "name": "Higher initial cost",
+      "model": "Immediate harmonisation, no extra investment",
+      "color": "#444B52",
+      "desc": "Immediate pay and welfare harmonisation without additional investment. Liability choices and growth are controlled separately and apply to every policy bundle.",
+      "defaults": {
+        "reratingScope": 100,
+        "reratingYears": 1,
+        "investment": 0,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false
+      }
+    },
+    "statusquo": {
+      "key": "statusquo",
+      "name": "UK status quo",
+      "model": "UK-funded regional balance",
+      "color": "#786A90",
+      "desc": "Northern Ireland remains in the UK. Its regional deficit remains UK-funded. No incremental Republic expenditure is assumed.",
+      "defaults": {
+        "reratingScope": 0,
+        "reratingYears": 1,
+        "investment": 0,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false
+      },
+      "counterfactual": true
+    },
+    "shared": {
+      "key": "shared",
+      "name": "Shared Island",
+      "model": "Cooperation without constitutional change",
+      "color": "#AA7A19",
+      "desc": "Northern Ireland remains in the UK. The Republic funds the investment selected below. UK liabilities do not transfer.",
+      "defaults": {
+        "reratingScope": 0,
+        "reratingYears": 1,
+        "investment": 0.5,
+        "duplication": 0,
+        "gNI": 2.5,
+        "stall": false
+      },
+      "counterfactual": true
+    }
+  },
+  "engineVariables": [
+    {
+      "name": "e",
+      "expression": "Object.fromEntries(ECONOMIC_PARAMETERS.map(item => [item.key, s[item.key] ?? item.value]))",
+      "description": "Resolved economic response settings, using supplied inputs or registered defaults."
+    },
+    {
+      "name": "linked",
+      "expression": "s.linkedMechanisms === true",
+      "description": "Whether the linked capital, harmonisation and employment equations run."
+    },
+    {
+      "name": "core",
+      "expression": "inheritedDeficit(true,true,s)",
+      "description": "Core opening balance after only the selected deduction shares and removal of the pension and debt envelopes."
+    },
+    {
+      "name": "pensionsBorne",
+      "expression": "p.pensionsUK ? 0 : PENSIONS",
+      "description": "Pension envelope transferred to the Republic under the negotiation switch."
+    },
+    {
+      "name": "debtBorne",
+      "expression": "p.debtUK ? 0 : DEBT_INT",
+      "description": "Inherited UK debt interest transferred to the Republic under the negotiation switch."
+    },
+    {
+      "name": "r",
+      "expression": "(1 + p.gNI / 100) / (1 + e.baselineGrowth / 100)",
+      "description": "Annual policy-to-counterfactual Northern Ireland output growth factor."
+    },
+    {
+      "name": "gs",
+      "expression": "s.southGrowth / 100",
+      "description": "Republic growth converted from percent to a decimal."
+    },
+    {
+      "name": "ag",
+      "expression": "s.ageing / 100",
+      "description": "Ageing drift converted from percent to a decimal."
+    },
+    {
+      "name": "isStatusQuo",
+      "expression": "p.counterfactual && !p.shared",
+      "description": "True for the UK status quo. Disables policy responses and fund operations."
+    },
+    {
+      "name": "openingFund",
+      "expression": "isStatusQuo ? 0 : Math.max(0, s.fundOpening ?? 0)",
+      "description": "Non-negative initial fund endowment. Zero in UK status quo."
+    },
+    {
+      "name": "cumulative",
+      "expression": "0",
+      "description": "Running sum of financing-inclusive annual costs."
+    },
+    {
+      "name": "debt",
+      "expression": "0",
+      "description": "Incremental transition debt, floored at zero."
+    },
+    {
+      "name": "presentValue",
+      "expression": "0",
+      "description": "Running discounted sum of annual costs."
+    },
+    {
+      "name": "cashSavings",
+      "expression": "0",
+      "description": "Surpluses remaining after debt repayment. Used before later borrowing and earn no return."
+    },
+    {
+      "name": "fundBalance",
+      "expression": "openingFund",
+      "description": "Fund asset stock after returns, contributions and withdrawals."
+    },
+    {
+      "name": "totalDraws",
+      "expression": "0",
+      "description": "Cumulative fund withdrawals."
+    },
+    {
+      "name": "totalFundReturns",
+      "expression": "0",
+      "description": "Cumulative fund investment returns, including losses."
+    },
+    {
+      "name": "factorAtStall",
+      "expression": "null",
+      "description": "Relative-output factor at year seven, retained for the slowdown branch."
+    },
+    {
+      "name": "publicCapital",
+      "expression": "0",
+      "description": "Additional public capital stock beyond the counterfactual stock."
+    },
+    {
+      "name": "privateCapital",
+      "expression": "0",
+      "description": "Additional net private capital diagnostic. Replacement is implicit in maintaining the target stock."
+    },
+    {
+      "name": "migrantWorkers",
+      "expression": "0",
+      "description": "Accumulated migrant-worker residents. They are not all necessarily employed each year."
+    },
+    {
+      "name": "rows",
+      "expression": "[]",
+      "description": "Array of annual result records."
+    },
+    {
+      "name": "clamp",
+      "expression": "(x,lo,hi)=>Math.max(lo,Math.min(hi,x))",
+      "description": "Helper enforcing a numerical lower and upper bound."
+    },
+    {
+      "name": "t",
+      "expression": "1",
+      "description": "Annual step, starting at one."
+    },
+    {
+      "name": "factor",
+      "expression": "Assigned within the annual loop",
+      "description": "Policy output factor relative to the Northern Ireland counterfactual."
+    },
+    {
+      "name": "baselineOutput",
+      "expression": "NORTH_GNI*Math.pow(1+e.baselineGrowth/100,t)",
+      "description": "Growing Northern Ireland counterfactual output."
+    },
+    {
+      "name": "policyOutput",
+      "expression": "isStatusQuo ? baselineOutput : baselineOutput*factor",
+      "description": "Output under the policy growth assumption before linked and residual responses."
+    },
+    {
+      "name": "ageF",
+      "expression": "Math.pow(1+ag,t)",
+      "description": "Cumulative ageing multiplier."
+    },
+    {
+      "name": "baselineRevenue",
+      "expression": "BASE_REVENUE*Math.pow(1+(s.baselineRevenueGrowth??0)/100,t)",
+      "description": "Gross counterfactual receipts along the separately selected real growth path."
+    },
+    {
+      "name": "baselineSpending",
+      "expression": "BASE_SPENDING*Math.pow(1+(s.baselineSpendingGrowth??0)/100,t)",
+      "description": "Gross counterfactual spending along the separately selected real growth path."
+    },
+    {
+      "name": "fiscalDrift",
+      "expression": "(baselineSpending-BASE_SPENDING)-(baselineRevenue-BASE_REVENUE)",
+      "description": "Change in gross baseline spending minus change in gross receipts relative to the opening deficit."
+    },
+    {
+      "name": "coreAged",
+      "expression": "core+fiscalDrift+(s.ageSensitiveSpending??0)*(ageF-1)",
+      "description": "Core plus gross fiscal drift and ageing of the explicitly selected non-pension service base."
+    },
+    {
+      "name": "shiftErosion",
+      "expression": "0",
+      "description": "Always zero. Unsupported residual deficit disappearance was removed."
+    },
+    {
+      "name": "rerating",
+      "expression": "p.counterfactual ? 0 : Math.min(t/p.reratingYears,1)*RERATE_FULL*p.reratingScope/100",
+      "description": "Current annual harmonisation cost envelope."
+    },
+    {
+      "name": "invest",
+      "expression": "!isStatusQuo && t<=10 ? p.investment : 0",
+      "description": "Current public investment expenditure. Limited to the first ten years."
+    },
+    {
+      "name": "payIncrease",
+      "expression": "rerating/RERATE_FULL*GROSS_PAY_FULL",
+      "description": "Gross public pay increase from its own source benchmark, distinct from the net fiscal envelope."
+    },
+    {
+      "name": "welfareIncrease",
+      "expression": "rerating/RERATE_FULL*GROSS_WELFARE_FULL",
+      "description": "Gross welfare increase from its own source benchmark."
+    },
+    {
+      "name": "privateRamp",
+      "expression": "Math.min(t/Math.max(1,s.privateMaturity??10),1)",
+      "description": "Linear phase-in factor for residual private responses."
+    },
+    {
+      "name": "shockDecay",
+      "expression": "Math.max(0,1-(t-1)/Math.max(1,s.privateRecovery??5))",
+      "description": "Linear decline of the initial disruption shock."
+    },
+    {
+      "name": "businessResidual",
+      "expression": "isStatusQuo ? 0 : (s.businessUplift??0)*privateRamp/100",
+      "description": "Residual business and FDI output uplift, expressed as a share."
+    },
+    {
+      "name": "labourResidual",
+      "expression": "isStatusQuo ? 0 : (s.labourUplift??0)*privateRamp/100",
+      "description": "Residual resident labour availability, expressed as a share."
+    },
+    {
+      "name": "disruption",
+      "expression": "isStatusQuo ? 0 : (s.transitionShock??0)*shockDecay/100",
+      "description": "Remaining temporary disruption, expressed as a share of output."
+    },
+    {
+      "name": "publicProductivity",
+      "expression": "1",
+      "description": "Output multiplier generated by additional public capital."
+    },
+    {
+      "name": "privateProductivity",
+      "expression": "1",
+      "description": "Output multiplier generated by additional private capital."
+    },
+    {
+      "name": "consumptionOutput",
+      "expression": "0",
+      "description": "First-round real domestic output response to additional household spending."
+    },
+    {
+      "name": "employmentChange",
+      "expression": "0",
+      "description": "Private employment change relative to reference employment, including employed migrants."
+    },
+    {
+      "name": "residentEmploymentChange",
+      "expression": "0",
+      "description": "Resident private employment change, limited by labour demand and available resident supply."
+    },
+    {
+      "name": "privateWagePressure",
+      "expression": "0",
+      "description": "Private wage change implied by the public wage spillover."
+    },
+    {
+      "name": "publicRecruitment",
+      "expression": "0",
+      "description": "Illustrative recruitment response to public pay. Not counted directly as GDP."
+    },
+    {
+      "name": "serviceCost",
+      "expression": "0",
+      "description": "Annual marginal service costs for additional migrant households."
+    },
+    {
+      "name": "completedCapital",
+      "expression": "0",
+      "description": "Public investment completing this year, adjusted for delivery efficiency."
+    },
+    {
+      "name": "completionYear",
+      "expression": "t-Math.round(e.investmentLag)",
+      "description": "Investment cohort whose delivery lag ends this year."
+    },
+    {
+      "name": "publicReference",
+      "expression": "baselineOutput*e.publicCapitalRatio/100",
+      "description": "Reference public capital stock, normalised to counterfactual output."
+    },
+    {
+      "name": "publicWageChange",
+      "expression": "payIncrease/e.publicPayBase",
+      "description": "Pay harmonisation divided by the reference public pay bill."
+    },
+    {
+      "name": "disposablePay",
+      "expression": "payIncrease*e.payDisposableShare/100",
+      "description": "Pay harmonisation reaching household disposable income."
+    },
+    {
+      "name": "consumptionSpending",
+      "expression": "(e.payMPC*disposablePay+e.welfareMPC*welfareIncrease)*e.domesticRetention/100",
+      "description": "Additional consumption after the domestic-retention assumption."
+    },
+    {
+      "name": "privateReference",
+      "expression": "baselineOutput*e.privateCapitalRatio/100",
+      "description": "Reference private capital stock, normalised to counterfactual output."
+    },
+    {
+      "name": "targetPrivate",
+      "expression": "privateReference*clamp(e.privateCrowdIn*(publicProductivity-1)-privateWagePressure,-0.5,0.5)",
+      "description": "Desired additional private capital given public productivity and wage pressure."
+    },
+    {
+      "name": "labourDemand",
+      "expression": "clamp(e.labourDemandElasticity*(publicProductivity*privateProductivity-1-privateWagePressure),-0.5,0.5)",
+      "description": "Desired private employment change given productivity, capital and wages."
+    },
+    {
+      "name": "welfareIncomeEffect",
+      "expression": "e.welfareIncomeElasticity*welfareIncrease/(0.6*baselineOutput)",
+      "description": "Illustrative welfare-income effect on resident labour supply."
+    },
+    {
+      "name": "labourSupply",
+      "expression": "clamp(e.labourSlack/100+e.labourSupplyElasticity*privateWagePressure-welfareIncomeEffect+labourResidual,-0.5,0.5)",
+      "description": "Available resident labour change including slack, wage responses, welfare effects and residual availability."
+    },
+    {
+      "name": "unfilledJobs",
+      "expression": "Math.max(0,(labourDemand-residentEmploymentChange)*e.baselineEmployment-migrantWorkers)",
+      "description": "Unfilled desired jobs remaining after resident supply and existing migrant residents."
+    },
+    {
+      "name": "employedMigrantWorkers",
+      "expression": "Math.min(migrantWorkers,Math.max(0,(labourDemand-residentEmploymentChange)*e.baselineEmployment))",
+      "description": "Migrant workers employed against current unmet labour demand."
+    },
+    {
+      "name": "extraResidents",
+      "expression": "migrantWorkers*e.migrantHouseholdSize",
+      "description": "Additional residents associated with migrant households."
+    },
+    {
+      "name": "labourFactor",
+      "expression": "1+labourResidual",
+      "description": "Separately selected residual labour output factor in either configuration. It is not calculated from diagnostic job equivalents."
+    },
+    {
+      "name": "supplyOutput",
+      "expression": "policyOutput*publicProductivity*labourFactor",
+      "description": "Policy output with one reduced-form public-capital response. Private capital and employment diagnostics do not add further output."
+    },
+    {
+      "name": "capacityOutput",
+      "expression": "supplyOutput/(1-e.spareCapacity/100)",
+      "description": "Output capacity under the explicitly selected spare-capacity assumption."
+    },
+    {
+      "name": "uncappedOutput",
+      "expression": "(supplyOutput+consumptionOutput)*(1+businessResidual-disruption)",
+      "description": "Output including first-round consumption, residual business gains and disruption, before the ceiling."
+    },
+    {
+      "name": "ceiling",
+      "expression": "(s.outputCeiling??0)>0 ? baselineOutput*s.outputCeiling : Number.MAX_VALUE",
+      "description": "Optional output bound, effectively unlimited when the control is zero."
+    },
+    {
+      "name": "actualOutput",
+      "expression": "isStatusQuo ? baselineOutput : clamp(uncappedOutput,0,ceiling)",
+      "description": "Output after capacity-constrained demand and residual shocks, with only an explicitly selected ceiling."
+    },
+    {
+      "name": "marginalRevenue",
+      "expression": "s.growthRevenue===true ? (s.taxShare??35)/100 : 0",
+      "description": "Selected marginal revenue share if growthRevenue is on, otherwise zero."
+    },
+    {
+      "name": "baselineGain",
+      "expression": "marginalRevenue*(policyOutput-baselineOutput)",
+      "description": "Tax revenue gain from policy growth against the Northern Ireland counterfactual."
+    },
+    {
+      "name": "privateOutput",
+      "expression": "actualOutput-policyOutput",
+      "description": "Additional output beyond the policy growth path due to linked and residual responses."
+    },
+    {
+      "name": "privateRevenue",
+      "expression": "marginalRevenue*privateOutput",
+      "description": "Revenue associated with privateOutput. Can be negative."
+    },
+    {
+      "name": "gain",
+      "expression": "baselineGain+privateRevenue",
+      "description": "Combined revenue gain from policy growth and additional responses."
+    },
+    {
+      "name": "pension",
+      "expression": "p.pensionsUK ? PENSIONS*Math.min(t/(s.pensionTransferYears??40),1)*ageF : 0",
+      "description": "Funding transfer from the same frozen pension envelope, phased over the selected period and scaled by ageing."
+    },
+    {
+      "name": "preFinancingCost",
+      "expression": "coreAged-shiftErosion+pensionsBorne*ageF+debtBorne+pension+rerating+invest+p.duplication+serviceCost-gain",
+      "description": "Annual cost before new borrowing interest. Includes inherited UK debt interest and is not a textbook primary deficit."
+    },
+    {
+      "name": "regionalDeficit",
+      "expression": "baselineSpending-baselineRevenue+(s.ageSensitiveSpending??0)*(ageF-1)+serviceCost+invest+rerating-gain",
+      "description": "Illustrative Northern Ireland regional gap with ageing, service costs, investment, harmonisation and revenue changes."
+    },
+    {
+      "name": "primary",
+      "expression": "p.counterfactual ? (p.shared ? invest : 0) : preFinancingCost",
+      "description": "Annual Republic cost before new borrowing interest. UK status quo is zero, Shared Island includes its investment only."
+    },
+    {
+      "name": "interest",
+      "expression": "debt*((s.realInterest??2)/100)",
+      "description": "Interest on opening transition debt at the selected real borrowing rate."
+    },
+    {
+      "name": "cost",
+      "expression": "primary+interest",
+      "description": "Annual cost including transition-debt interest."
+    },
+    {
+      "name": "fundReturn",
+      "expression": "fundBalance*((s.fundReturn??0)/100)",
+      "description": "Annual investment income or loss on opening fund assets. Distinct from the percentage input s.fundReturn."
+    },
+    {
+      "name": "availableFund",
+      "expression": "Math.max(0,fundBalance+fundReturn)",
+      "description": "Assets available for withdrawal after this year’s return."
+    },
+    {
+      "name": "contribution",
+      "expression": "!isStatusQuo && t<=(s.fundContributionYears??10) ? Math.max(0,s.fundContribution??0) : 0",
+      "description": "Current Exchequer contribution to fund assets within the contribution period."
+    },
+    {
+      "name": "fundDraw",
+      "expression": "Math.min(availableFund,Math.max(0,cost),Math.max(0,s.fundDrawCap??5))",
+      "description": "Withdrawal limited by assets, positive annual costs and the annual ceiling."
+    },
+    {
+      "name": "financingNeed",
+      "expression": "cost+contribution-fundDraw",
+      "description": "Annual cost plus fund contribution less withdrawal."
+    },
+    {
+      "name": "cashUsed",
+      "expression": "Math.min(cashSavings,Math.max(0,financingNeed))",
+      "description": "Previously accumulated cash used before new borrowing."
+    },
+    {
+      "name": "debtBeforeFloor",
+      "expression": "debt+financingNeed-cashUsed",
+      "description": "Debt after financing needs and cash use, before the zero-debt floor."
+    },
+    {
+      "name": "borrowing",
+      "expression": "Math.max(0,financingNeed-cashUsed)",
+      "description": "Positive new borrowing after using cash savings."
+    },
+    {
+      "name": "netLiabilities",
+      "expression": "debt-fundBalance-cashSavings",
+      "description": "Transition debt less remaining fund assets and accumulated cash."
+    },
+    {
+      "name": "wealthCost",
+      "expression": "netLiabilities+openingFund",
+      "description": "Change in net liabilities relative to the opening fund endowment."
+    },
+    {
+      "name": "denom",
+      "expression": "GNI_STAR*Math.pow(1+gs,t)",
+      "description": "Republic GNI* denominator at the selected year."
+    }
+  ],
+  "outputs": [
+    {
+      "key": "year",
+      "description": "Year after transition, starting at one.",
+      "precision": "Integer"
+    },
+    {
+      "key": "baselineRevenue",
+      "description": "Gross counterfactual receipts along the separately selected real growth path.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "baselineSpending",
+      "description": "Gross counterfactual spending along the separately selected real growth path.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "pensionTransfer",
+      "description": "Annual pension funding cost transferred to the Republic under the phased-retention scenario.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "pensionCost",
+      "description": "Pension funding cost paid by the Republic under either immediate or phased transfer, using the same envelope.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "harmonisation",
+      "description": "Net fiscal harmonisation cost, separate from gross household income.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "grossPayIncrease",
+      "description": "Gross source-based pay harmonisation before the disposable-income assumption.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "grossWelfareIncrease",
+      "description": "Gross source-based welfare harmonisation.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "capacityOutput",
+      "description": "Output capacity under the explicitly selected spare-capacity assumption.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "annualNonPositive",
+      "description": "Unrounded annual cost is at or below zero. Used for break-even.",
+      "precision": "Integer"
+    },
+    {
+      "key": "cumulativeNonPositive",
+      "description": "Unrounded cumulative cost is at or below zero. Used for payback.",
+      "precision": "Integer"
+    },
+    {
+      "key": "primaryCost",
+      "description": "Republic cost before transition financing. Includes inherited debt interest despite the historical field name.",
+      "precision": "One decimal place"
+    },
+    {
+      "key": "interest",
+      "description": "Interest on opening transition debt at the selected real borrowing rate.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "debt",
+      "description": "Incremental transition debt, floored at zero.",
+      "precision": "One decimal place"
+    },
+    {
+      "key": "presentValue",
+      "description": "Running discounted sum of annual costs.",
+      "precision": "One decimal place"
+    },
+    {
+      "key": "regionalDeficit",
+      "description": "Illustrative Northern Ireland regional gap with ageing, service costs, investment, harmonisation and revenue changes.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "cost",
+      "description": "Annual cost including transition-debt interest.",
+      "precision": "One decimal place"
+    },
+    {
+      "key": "pctGNI",
+      "description": "Financing-inclusive annual cost divided by that year’s Republic GNI*, multiplied by 100.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "cumulative",
+      "description": "Running sum of financing-inclusive annual costs.",
+      "precision": "One decimal place"
+    },
+    {
+      "key": "privateOutput",
+      "description": "Additional output beyond the policy growth path due to linked and residual responses.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "privateRevenue",
+      "description": "Revenue associated with privateOutput. Can be negative.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "fundBalance",
+      "description": "Fund asset stock after returns, contributions and withdrawals.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "fundReturn",
+      "description": "Annual investment income or loss on opening fund assets. Distinct from the percentage input s.fundReturn.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "fundContribution",
+      "description": "Annual Exchequer contribution to fund assets. Increases financing needs rather than current spending.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "fundDraw",
+      "description": "Withdrawal limited by assets, positive annual costs and the annual ceiling.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "totalDraws",
+      "description": "Cumulative fund withdrawals.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "totalFundReturns",
+      "description": "Cumulative fund investment returns, including losses.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "financingNeed",
+      "description": "Annual cost plus fund contribution less withdrawal.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "borrowing",
+      "description": "Positive new borrowing after using cash savings.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "netLiabilities",
+      "description": "Transition debt less remaining fund assets and accumulated cash.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "cashSavings",
+      "description": "Surpluses remaining after debt repayment. Used before later borrowing and earn no return.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "wealthCost",
+      "description": "Change in net liabilities relative to the opening fund endowment.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "gross",
+      "description": "Gross annual cost components before revenue gains and transition interest. Not the Republic counterfactual cost in all scenarios.",
+      "precision": "One decimal place"
+    },
+    {
+      "key": "gain",
+      "description": "Revenue contribution shown with the opposite sign to internal gain so that additional receipts appear as a negative cost. A negative displayed gain means a fiscal improvement.",
+      "precision": "One decimal place"
+    },
+    {
+      "key": "baselineOutput",
+      "description": "Growing Northern Ireland counterfactual output.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "actualOutput",
+      "description": "Output after capacity-constrained demand and residual shocks, with only an explicitly selected ceiling.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "completedCapital",
+      "description": "Public investment completing this year, adjusted for delivery efficiency.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "publicCapital",
+      "description": "Additional public capital stock beyond the counterfactual stock.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "privateCapital",
+      "description": "Additional net private capital diagnostic. Replacement is implicit in maintaining the target stock.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "consumptionOutput",
+      "description": "First-round real domestic output response to additional household spending.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "privateWagePressure",
+      "description": "Private wage change implied by the public wage spillover.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "publicRecruitmentIndex",
+      "description": "Recruitment proxy with reference value 100. Not actual staff numbers or measured service quality.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "additionalJobs",
+      "description": "Additional private job equivalents, including employed migrants, based on the illustrative employment scale.",
+      "precision": "Integer"
+    },
+    {
+      "key": "migrantWorkers",
+      "description": "Accumulated migrant-worker residents. They are not all necessarily employed each year.",
+      "precision": "Integer"
+    },
+    {
+      "key": "additionalResidents",
+      "description": "Migrant-worker residents multiplied by the household-size assumption.",
+      "precision": "Integer"
+    },
+    {
+      "key": "serviceCost",
+      "description": "Annual marginal service costs for additional migrant households.",
+      "precision": "Two decimal places"
+    },
+    {
+      "key": "outputCapped",
+      "description": "Indicator equal to one when uncapped output exceeds the output ceiling.",
+      "precision": "Integer"
+    }
+  ],
+  "initialConditions": [
+    [
+      "Transition debt",
+      "0",
+      "No initial transition borrowing is assumed. Existing allocated UK debt interest is a separate annual flow."
+    ],
+    [
+      "Fund assets",
+      "fundOpening",
+      "Must already exist in year one. Prior funding and opportunity costs are outside the horizon."
+    ],
+    [
+      "Additional public and private capital",
+      "0",
+      "Stocks are increments to a reference path, not total Northern Ireland capital."
+    ],
+    [
+      "Migrant-worker residents",
+      "0",
+      "No extra migration before the model starts."
+    ],
+    [
+      "Cash savings and cumulative accounts",
+      "0",
+      "No opening savings or accumulated transition costs."
+    ],
+    [
+      "Recruitment index",
+      "100",
+      "Reference index only, not a headcount or service outcome."
+    ]
+  ],
+  "assumptions": [
+    [
+      "Reference case",
+      "Initial policy growth equals the NI output reference growth. Extra-output revenue and linked mechanisms are off. No negotiated deduction or liability retention is assumed. This is an accounting reference, not a best estimate."
+    ],
+    [
+      "Policy selection",
+      "Only policy expenditure, timing and harmonisation controls reset. Negotiated terms, growth and slowdown stay common across bundles. No preset mutates a liability switch."
+    ],
+    [
+      "Prices",
+      "Original sterling observations are converted with the recorded UK GDP deflator and reciprocal 2023 annual sterling-per-euro rate. Net and gross harmonisation source rows are separate."
+    ],
+    [
+      "Vintage",
+      "The official fiscal update remains on hold. FY2022–23 is the recorded conversion assumption for the frozen study fiscal inputs. The model has relative years and does not forecast a calendar transition date."
+    ],
+    [
+      "Gross baseline",
+      "Receipts and spending have independent real growth settings. Zero means a constant real fiscal baseline, not a forecast that services or tax bases will remain unchanged."
+    ],
+    [
+      "Deductions",
+      "Selected percentages apply separately to defence, central/overseas spending and tax adjustments. Their initial values are zero. The study itemised adjustments sum to £12.733bn, not the printed £12.773bn total."
+    ],
+    [
+      "Pensions",
+      "One frozen pension envelope defines both immediate and phased funding costs. If the UK retains accrued liabilities, the Republic funds min(t/transferYears,1) of the envelope. This is not a cohort model and no new tax recovery is invented."
+    ],
+    [
+      "Inherited interest",
+      "The negotiated envelope is a constant real annual flow. It is not an inherited debt principal and is separate from new transition borrowing."
+    ],
+    [
+      "Ageing",
+      "A selected ageing factor applies to the pension envelope and an explicitly supplied non-pension service spending base. The extra service base must exclude ageing already represented in baseline spending growth. Default ageing and extra service base are zero."
+    ],
+    [
+      "Composition",
+      "There is no automatic erosion of the residual deficit. Non-zero legacy shift inputs are rejected."
+    ],
+    [
+      "Harmonisation",
+      "The net fiscal envelope and the gross pay and welfare increments phase in linearly on the same selected schedule. The gross/net source discrepancy remains a reconciliation boundary, not an assumed household income split or an extra tax gain."
+    ],
+    [
+      "Pay benchmark",
+      "The pay-bill normalisation uses the historical F&M table rather than an invented current wage bill. Future real wage growth and occupational comparability are not separately modelled."
+    ],
+    [
+      "Additional expenditure",
+      "Expenditure lasts ten years. Only its selected capital share can become productive capital, after the selected completion lag and efficiency loss. The capital share starts at zero."
+    ],
+    [
+      "Public capital",
+      "Completed investment is depreciated each subsequent year. Its denominator is a chosen reference stock ratio. The external output elasticity is a transferred reduced-form benchmark, not a NI causal estimate."
+    ],
+    [
+      "Private capital",
+      "The additional net stock adjusts towards the selected target over the adjustment period, with replacement implicit. Target increments are bounded between minus and plus 50% of reference stock, with a lower stock bound of minus 80%."
+    ],
+    [
+      "Avoiding induced-output overlap",
+      "Private capital, job equivalents and recruitment are diagnostics in the linked experiment. They do not multiply the reduced-form public-capital output dividend again."
+    ],
+    [
+      "Consumption",
+      "Gross pay is reduced by the disposable-pay share, then pay and welfare propensities, retention and realisation determine first-round demand. Capacity limits the realised effect. No complete tax-financing or price model is implied."
+    ],
+    [
+      "Capacity",
+      "Output including demand cannot exceed supplyOutput/(1−spareCapacity/100) before separate residual output shocks. Default spare capacity is zero."
+    ],
+    [
+      "Labour diagnostics",
+      "Wage spillovers and labour supply/demand coefficients are unestimated. The welfare income normalisation is 0.6 times reference output. Changes are bounded between minus and plus 50% of reference employment."
+    ],
+    [
+      "Recruitment",
+      "An index bounded at 150 with base 100. It is not actual staffing, a service outcome or extra output."
+    ],
+    [
+      "Migration",
+      "Optional unfilled job demand attracts migrant residents and marginal service costs. There is no return migration, housing constraint or full migrant tax account. Migration starts at zero."
+    ],
+    [
+      "Residual shocks",
+      "Business and labour residuals phase in linearly, while disruption decays linearly from year one. Residuals must exclude effects already included in policy growth or other mechanisms. All start at zero."
+    ],
+    [
+      "Revenue feedback",
+      "Additional output generates no fiscal revenue unless the separate growthRevenue switch is enabled. The marginal rate is an assumption, not the average revenue ratio or an estimated elasticity."
+    ],
+    [
+      "Slowdown",
+      "After year seven relative growth uses min(previous relative rate,1.004), so the switch can never accelerate a path. Timing and the cap remain illustrative."
+    ],
+    [
+      "Output bounds",
+      "The default has no economic output ceiling. A selected positive ceiling is a multiple of NI reference output, not measured Republic parity. Output is floored at zero and binding ceilings are recorded."
+    ],
+    [
+      "Fiscal perspective",
+      "UK status quo has zero incremental Republic cost. Shared Island charges its extra expenditure and financing to the Republic. Regional gross fiscal paths are recorded separately and do not imply welfare rankings."
+    ],
+    [
+      "Fund order",
+      "Returns accrue on opening assets, withdrawals follow, then contributions enter the fund. Withdrawals are bounded by positive costs, assets and the selected cap."
+    ],
+    [
+      "Contributions",
+      "Asset purchases increase financing needs and assets equally. They can be debt-financed in this accounting model, without assuming beneficial macroeconomic feedback."
+    ],
+    [
+      "Fund risk",
+      "Constant real returns can be negative. No volatility, fees, asset allocation, correlation or risk-adjusted return premium is estimated. Opening assets have prior funding and opportunity costs outside the horizon."
+    ],
+    [
+      "Cash and debt",
+      "Surpluses repay debt first and excess becomes zero-return cash. Cash is used before new borrowing. Debt is floored at zero."
+    ],
+    [
+      "Wealth identity",
+      "Change in net liabilities equals cumulative financing-inclusive costs minus cumulative fund returns. Adding opening assets back avoids treating an endowment as free income."
+    ],
+    [
+      "Present value",
+      "Costs include transition interest and are discounted at end-year real rates. This cash-flow present value excludes fund contributions, draws and fund returns and is not a social valuation."
+    ],
+    [
+      "Break-even",
+      "Unrounded sign flags determine the first non-positive annual cost and the first cumulative crossing after positive costs. Neither is a discounted welfare or net-wealth payback test."
+    ],
+    [
+      "Affordability",
+      "The denominator is growing Republic GNI*, not all-island income or an EU fiscal-rule ratio. Republic macroeconomic and tax-financing feedback is not estimated."
+    ],
+    [
+      "Managed Integration examples",
+      "Optional buttons load selected real output growth paths and favourable study-based negotiation terms. They are not fitted forecasts. The separate 25-year tests report annual balance, cumulative payback and sensitivity to fiscal growth and marginal revenue."
+    ],
+    [
+      "Reproduction",
+      "The run download includes the exact inputs for the selected run and every compared bundle, the horizon, annual outputs, comparison lines and the executable SHA-256 fingerprint."
+    ],
+    [
+      "Input validation",
+      "Unsupported percentages, invalid types, unknown inputs, invalid horizons and the removed residual-shift mechanism are rejected. Interface ranges are scenario choices, not confidence intervals."
+    ],
+    [
+      "Omissions",
+      "No complete household distribution, trade, banking, currency, housing, EU-budget, actuarial or welfare model. Hybrid historical benchmarks need updated programme costing before a policy estimate."
+    ]
+  ],
+  "equations": [
+    [
+      "Opening bridge",
+      "PUBLISHED − defenceShare×DEFENCE_NET − centralShare×OTHER_NONID − taxShareAccepted×TAX_ADD − retained pension envelope − retained interest envelope"
+    ],
+    [
+      "Gross fiscal path",
+      "baselineSpending(t) − baselineRevenue(t), with independent real growth rates and explicit additional ageing costs"
+    ],
+    [
+      "Harmonisation",
+      "net cost = phase×RERATE_FULL; gross pay = phase×GROSS_PAY_FULL; gross welfare = phase×GROSS_WELFARE_FULL"
+    ],
+    [
+      "Pension transfer",
+      "pension(t) = PENSIONS×min(t/transferYears,1)×ageF if the UK retains accrued liabilities; otherwise PENSIONS×ageF is borne immediately"
+    ],
+    [
+      "Capital",
+      "completed capital = expenditure cohort × capital share × efficiency; publicCapital(t) = (1−depreciation)×publicCapital(t−1) + completed capital"
+    ],
+    [
+      "Reduced-form supply",
+      "supplyOutput = policyOutput × publicProductivity × (1+labourResidual); induced private capital and job diagnostics add no second output dividend"
+    ],
+    [
+      "Demand constraint",
+      "consumptionOutput ≤ supplyOutput/(1−spareCapacity/100) − supplyOutput"
+    ],
+    [
+      "Revenue feedback",
+      "gain = growthRevenue ? taxShare/100 × (actualOutput−baselineOutput) : 0"
+    ],
+    [
+      "Annual cost",
+      "selected pre-financing cost + interest on opening transition debt"
+    ],
+    [
+      "Fund",
+      "fundBalance(t) = opening assets + return − capped withdrawal + contribution"
+    ],
+    [
+      "Net liabilities",
+      "debt − fund assets − cash; change from opening = cumulative cost − cumulative fund returns"
+    ],
+    [
+      "Present value",
+      "sum cost(t)/(1+discountRate/100)^t"
+    ],
+    [
+      "Affordability",
+      "100×cost(t)/(GNI_STAR×(1+southGrowth/100)^t)"
+    ]
+  ],
+  "helpers": [
+    [
+      "managedCase(key)",
+      "Returns a fresh complete set of policy and structural inputs for a conditional growth illustration. Does not change the default reference or estimate a growth effect."
+    ],
+    [
+      "validateInputs(policy,horizon,settings)",
+      "Rejects unsupported, missing or unknown engine inputs."
+    ],
+    [
+      "policyForForm(key,common,selected)",
+      "Builds the main and comparison policy inputs through the same pure function."
+    ],
+    [
+      "inheritedDeficit(pensionsUK, debtUK, settings)",
+      "Reports the fiscal bridge under the two liability switches."
+    ],
+    [
+      "simulate(p, horizon, s)",
+      "Runs annual stock-flow accounting. p is the policy bundle, s holds structural and response settings."
+    ],
+    [
+      "breakEven(rows)",
+      "First unrounded annual cost at or below zero, using the stored sign flag. Returns null if not reached."
+    ],
+    [
+      "payback(rows)",
+      "First unrounded cumulative cost at or below zero after being positive, using stored sign flags. Returns null if not reached."
+    ],
+    [
+      "round0(x), round1(x), round2(x)",
+      "Display rounding to zero, one or two decimal places, normalising negative zero for JSON reproduction."
+    ],
+    [
+      "clamp(x, lo, hi)",
+      "Constrains a value to the supplied interval."
+    ]
+  ],
+  "interfaceState": [
+    [
+      "caseLabel",
+      "null",
+      "Name of a loaded conditional growth example. Cleared when assumptions change."
+    ],
+    [
+      "loadManagedCase(key)",
+      "Callback",
+      "Explicitly replaces policy, negotiated terms and shared settings with the named example."
+    ],
+    [
+      "exportRun",
+      "Callback",
+      "Downloads exact selected inputs, all comparison policies, annual results and the executable fingerprint."
+    ],
+    [
+      "comparedPolicies, payload, url, anchor",
+      "Export temporaries",
+      "Construct the portable scenario download. Not additional economic assumptions."
+    ],
+    [
+      "form",
+      "glide",
+      "Selected institutional form."
+    ],
+    [
+      "custom",
+      "false",
+      "Flags edits to policy controls."
+    ],
+    [
+      "params",
+      "Managed Integration preset",
+      "Policy settings, including the current policy growth and slowdown values."
+    ],
+    [
+      "structural",
+      "DEFAULT_STRUCTURAL",
+      "Shared response, financing and fund settings."
+    ],
+    [
+      "pensionsUK, debtUK",
+      "false, false",
+      "Liability switches retained separately from policy parameters."
+    ],
+    [
+      "metric",
+      "annual",
+      "Annual cost, GNI* share, cumulative cost, comparison or fund/debt chart."
+    ],
+    [
+      "chartType",
+      "area",
+      "Area, line or bar display."
+    ],
+    [
+      "horizon",
+      "25",
+      "Selected reporting horizon."
+    ],
+    [
+      "active",
+      "Computed",
+      "Current policy settings with liability switches and counterfactual flags."
+    ],
+    [
+      "rows, rows50",
+      "Computed",
+      "Annual records for the displayed horizon and the payback search."
+    ],
+    [
+      "be, pb50",
+      "Computed",
+      "Displayed annual break-even and financing-inclusive payback."
+    ],
+    [
+      "cumEnd, yearOne, lastYear",
+      "Computed",
+      "Selected records and end-horizon totals."
+    ],
+    [
+      "noFundRows",
+      "Computed",
+      "Otherwise identical run with zero opening fund and contributions."
+    ],
+    [
+      "fundInterestSaved",
+      "Computed",
+      "Difference between summed rounded interest in no-fund and selected runs. Not a net-wealth benefit."
+    ],
+    [
+      "compareData",
+      "Computed",
+      "Year-by-year chart values across forms."
+    ],
+    [
+      "color, yLabel, dataKey",
+      "Computed",
+      "Presentation settings only."
+    ],
+    [
+      "setP, setS, pickForm",
+      "Callbacks",
+      "Update controls or select institutional presets. No separate economic equations."
+    ]
+  ],
+  "sources": [
+    {
+      "id": "model",
+      "title": "Executable model and parameter registry",
+      "url": "scenario_model.mjs",
+      "status": "Implementation, not empirical evidence"
+    },
+    {
+      "id": "interface",
+      "title": "Simulator source and interface state",
+      "url": "unification_fiscal_simulator.jsx",
+      "status": "Current control defaults and presentation logic"
+    },
+    {
+      "id": "rebased",
+      "title": "Project rebased fiscal bridge",
+      "url": "../data/rebased.json",
+      "status": "Frozen project inputs. Underlying official baseline update remains on hold"
+    },
+    {
+      "id": "rebase",
+      "title": "Project price and currency conversion script",
+      "url": "../scripts/rebase.py",
+      "status": "Recorded conversion method and assumed source periods"
+    },
+    {
+      "id": "cso",
+      "title": "CSO Annual National Accounts",
+      "url": "https://www.cso.ie/en/releasesandpublications/ep/p-ana/annualnationalaccounts2023/keyfindings/",
+      "status": "Verified frozen GNI* anchor in the 12 July 2024 release"
+    },
+    {
+      "id": "ons",
+      "title": "ONS country and regional public sector finances",
+      "url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/datasets/countryandregionalpublicsectorfinancesnetfiscalbalancetables",
+      "status": "Official source family. Do not treat the frozen starting deficit as the latest release"
+    },
+    {
+      "id": "onsgdp",
+      "title": "ONS regional economic activity by gross domestic product",
+      "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionaleconomicactivitybygrossdomesticproductuk",
+      "status": "Official source family for the project output anchor"
+    },
+    {
+      "id": "doyle",
+      "title": "Doyle, 2025, projected public finances report",
+      "url": "https://all-islandeconomy.com/wp-content/uploads/2025/06/21614_Public_Finances_UPDATED.pdf",
+      "status": "Source used for fiscal decomposition and pension allowance, with project rebasing assumptions"
+    },
+    {
+      "id": "fm",
+      "title": "FitzGerald and Morgenroth, 2024, Northern Ireland Subvention",
+      "url": "https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf",
+      "status": "Source used for the harmonisation envelope, rebased by the project"
+    },
+    {
+      "id": "deflator",
+      "title": "ONS GDP deflator series L8GG",
+      "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/timeseries/l8gg/pn2",
+      "status": "Stored quarterly values for 2014–2025 matched to the source table for the recorded 13 August 2026 vintage. Reference-period choice remains a separate issue."
+    },
+    {
+      "id": "hicp",
+      "title": "Irish HICP series via FRED",
+      "url": "https://fred.stlouisfed.org/series/CP0000IEM086NEST",
+      "status": "Eurostat series mirror recorded in the rebasing script"
+    },
+    {
+      "id": "fx",
+      "title": "ECB euro reference rate for sterling",
+      "url": "https://statistiken.bundesbank.de/statistiken-de/zeitreihen/BBEX3/A.GBP.EUR.BB.AC.A04",
+      "status": "2023 annual GBP-per-EUR value 0.86979 verified in the Bundesbank ECB-reference-rate series. Its reciprocal gives the project euro-per-pound conversion, which is not the arithmetic mean of daily reciprocal rates."
+    },
+    {
+      "id": "capital",
+      "title": "Bom and Ligthart, public-capital productivity meta-analysis",
+      "url": "https://doi.org/10.1111/joes.12037",
+      "status": "External benchmark. Default elasticity 0.106 is not estimated specifically for Northern Ireland"
+    },
+    {
+      "id": "demand",
+      "title": "Irish Fiscal Advisory Council, Ireland’s Spending Multipliers",
+      "url": "https://www.fiscalcouncil.ie/irelands-spending-multipliers/",
+      "status": "Context for demand effects and uncertainty. No household-transfer multiplier is directly imported"
+    },
+    {
+      "id": "labour",
+      "title": "UCD Working Paper 09/30, labour-supply research",
+      "url": "https://www.ucd.ie/economics/t4media/WP09.30.pdf",
+      "status": "Evidence that wage responses vary by household group. The model’s aggregate coefficient is a calibration"
+    },
+    {
+      "id": "imf",
+      "title": "IMF WEO 2014, infrastructure investment chapter",
+      "url": "https://www.imf.org/-/media/websites/imf/imported/external/pubs/ft/weo/2014/02/pdf/_c3pdf.pdf",
+      "status": "Mechanism context for efficiency and private investment. Headline multipliers are not added to the capital equation"
+    },
+    {
+      "id": "notes",
+      "title": "Linked-model description and limitations",
+      "url": "../book/linked_model_description.md",
+      "status": "Project methodology and scope"
+    },
+    {
+      "id": "changes",
+      "title": "Model change register",
+      "url": "../book/model_changes_2026_10_28.md",
+      "status": "Implementation history. Later linked-extension notes supersede earlier descriptions"
+    }
+  ]
+}

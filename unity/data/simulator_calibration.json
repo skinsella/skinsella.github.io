@@ -1,0 +1,150 @@
+{
+  "modelSha256": "24968ec1ae0e7def373db841df88f7fd928ddf31a4b046e4b55f3f50aab29f2f",
+  "priceConvention": "Original sterling, recorded UK deflator to CY2023, reciprocal annual 2023 GBP/EUR reference rate. This is rebasing, not updated policy costing.",
+  "constants": {
+    "GNI_STAR": 290.9,
+    "NORTH_GNI": 72.77618735556858,
+    "UK_2019_TO_2023_EUR": 1.3643408053374586,
+    "UK_FY2022_TO_2023_EUR": 1.199575803493008,
+    "BASE_REVENUE": 26.118363969453263,
+    "BASE_SPENDING": 43.17636396945326,
+    "GROSS_PAY_FULL": 5.874851507783097,
+    "GROSS_WELFARE_FULL": 6.561114932867839,
+    "SOURCE_PAY_BASE": 9.273424453878706,
+    "PUBLISHED": 17.058,
+    "PENSIONS": 6.864,
+    "DEBT_INT": 4.238,
+    "DEFENCE_NET": 1.64,
+    "OTHER_NONID": 0.692,
+    "TAX_ADD": 1.84,
+    "RERATE_FULL": 11.633734047112508
+  },
+  "sourceRows": {
+    "fm2019GBPbn": {
+      "netBase": 9.577,
+      "netWithHarmonisation": 18.104,
+      "grossPayIncrease": 4.306,
+      "grossWelfareIncrease": 4.809,
+      "publicPayBase": 6.797
+    },
+    "doyleFiscalGBPbn": {
+      "receipts": 21.773,
+      "spending": 35.993,
+      "deficit": 14.22
+    }
+  },
+  "reconciliation": {
+    "grossLessNetHarmonisation": 0.8022323935384286,
+    "reconciledSpendingLessSourceRebased": 0.00003207432942531341
+  },
+  "sources": [
+    {
+      "id": "model",
+      "title": "Executable model and parameter registry",
+      "url": "scenario_model.mjs",
+      "status": "Implementation, not empirical evidence"
+    },
+    {
+      "id": "interface",
+      "title": "Simulator source and interface state",
+      "url": "unification_fiscal_simulator.jsx",
+      "status": "Current control defaults and presentation logic"
+    },
+    {
+      "id": "rebased",
+      "title": "Project rebased fiscal bridge",
+      "url": "../data/rebased.json",
+      "status": "Frozen project inputs. Underlying official baseline update remains on hold"
+    },
+    {
+      "id": "rebase",
+      "title": "Project price and currency conversion script",
+      "url": "../scripts/rebase.py",
+      "status": "Recorded conversion method and assumed source periods"
+    },
+    {
+      "id": "cso",
+      "title": "CSO Annual National Accounts",
+      "url": "https://www.cso.ie/en/releasesandpublications/ep/p-ana/annualnationalaccounts2023/keyfindings/",
+      "status": "Verified frozen GNI* anchor in the 12 July 2024 release"
+    },
+    {
+      "id": "ons",
+      "title": "ONS country and regional public sector finances",
+      "url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/datasets/countryandregionalpublicsectorfinancesnetfiscalbalancetables",
+      "status": "Official source family. Do not treat the frozen starting deficit as the latest release"
+    },
+    {
+      "id": "onsgdp",
+      "title": "ONS regional economic activity by gross domestic product",
+      "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionaleconomicactivitybygrossdomesticproductuk",
+      "status": "Official source family for the project output anchor"
+    },
+    {
+      "id": "doyle",
+      "title": "Doyle, 2025, projected public finances report",
+      "url": "https://all-islandeconomy.com/wp-content/uploads/2025/06/21614_Public_Finances_UPDATED.pdf",
+      "status": "Source used for fiscal decomposition and pension allowance, with project rebasing assumptions"
+    },
+    {
+      "id": "fm",
+      "title": "FitzGerald and Morgenroth, 2024, Northern Ireland Subvention",
+      "url": "https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf",
+      "status": "Source used for the harmonisation envelope, rebased by the project"
+    },
+    {
+      "id": "deflator",
+      "title": "ONS GDP deflator series L8GG",
+      "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/timeseries/l8gg/pn2",
+      "status": "Stored quarterly values for 2014–2025 matched to the source table for the recorded 13 August 2026 vintage. Reference-period choice remains a separate issue."
+    },
+    {
+      "id": "hicp",
+      "title": "Irish HICP series via FRED",
+      "url": "https://fred.stlouisfed.org/series/CP0000IEM086NEST",
+      "status": "Eurostat series mirror recorded in the rebasing script"
+    },
+    {
+      "id": "fx",
+      "title": "ECB euro reference rate for sterling",
+      "url": "https://statistiken.bundesbank.de/statistiken-de/zeitreihen/BBEX3/A.GBP.EUR.BB.AC.A04",
+      "status": "2023 annual GBP-per-EUR value 0.86979 verified in the Bundesbank ECB-reference-rate series. Its reciprocal gives the project euro-per-pound conversion, which is not the arithmetic mean of daily reciprocal rates."
+    },
+    {
+      "id": "capital",
+      "title": "Bom and Ligthart, public-capital productivity meta-analysis",
+      "url": "https://doi.org/10.1111/joes.12037",
+      "status": "External benchmark. Default elasticity 0.106 is not estimated specifically for Northern Ireland"
+    },
+    {
+      "id": "demand",
+      "title": "Irish Fiscal Advisory Council, Ireland’s Spending Multipliers",
+      "url": "https://www.fiscalcouncil.ie/irelands-spending-multipliers/",
+      "status": "Context for demand effects and uncertainty. No household-transfer multiplier is directly imported"
+    },
+    {
+      "id": "labour",
+      "title": "UCD Working Paper 09/30, labour-supply research",
+      "url": "https://www.ucd.ie/economics/t4media/WP09.30.pdf",
+      "status": "Evidence that wage responses vary by household group. The model’s aggregate coefficient is a calibration"
+    },
+    {
+      "id": "imf",
+      "title": "IMF WEO 2014, infrastructure investment chapter",
+      "url": "https://www.imf.org/-/media/websites/imf/imported/external/pubs/ft/weo/2014/02/pdf/_c3pdf.pdf",
+      "status": "Mechanism context for efficiency and private investment. Headline multipliers are not added to the capital equation"
+    },
+    {
+      "id": "notes",
+      "title": "Linked-model description and limitations",
+      "url": "../book/linked_model_description.md",
+      "status": "Project methodology and scope"
+    },
+    {
+      "id": "changes",
+      "title": "Model change register",
+      "url": "../book/model_changes_2026_10_28.md",
+      "status": "Implementation history. Later linked-extension notes supersede earlier descriptions"
+    }
+  ]
+}
