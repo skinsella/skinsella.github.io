@@ -1,66 +1,22 @@
-# United Ireland fiscal cases
+# Repaired fiscal cases
 
-These are selected conditional scenarios for fiscal payback and affordability. They do not estimate household welfare or claim that their growth and negotiated terms will occur.
+These results supersede the fixed-envelope examples. Amounts are €bn in constant 2023 prices and include transition interest.
 
-## Common assumptions
+| Case | Year 1 | Year 10 | Year 25 | Cumulative 25 | Annual balance | Payback | Stressed cumulative |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Federal · 4.5% NI growth | 2.9 | 2.8 | -14.9 | -37 | 15 | 23 | 93.2 |
+| Managed Integration · 5% NI growth | 3.8 | 3.9 | -22.1 | -76.4 | 14 | 21 | 54.6 |
+| Federal · 5% NI growth | 2.8 | 1.1 | -21.9 | -112.2 | 11 | 18 | 5.2 |
+| Managed Integration · 5.5% NI growth | 3.7 | 2.1 | -29.9 | -155.3 | 11 | 18 | -34.6 |
+| Unitary · 6% NI growth | 13.1 | 3.1 | -38.9 | -160.1 | 12 | 20 | -16.3 |
+| Managed Integration · faster service spending | 3.8 | 2.8 | -30.6 | -139.5 | 12 | 19 | -1.1 |
 
-All cases use full harmonisation, the selected constitutional bundle's expenditure schedule, and favourable UK retention of accrued pensions and the allocated interest flow. All study defence, central-spending and revenue adjustments are accepted, pension funding transfers over forty years, and additional output produces an assumed 35% marginal revenue response.
+All examples retain the same favourable settlement assumptions. Component allocations remain historical calibrations rather than current official budgets.
 
-The Northern Ireland counterfactual and Republic GNI* each grow at 2.5% annually, and real borrowing interest is 2%. No fund endowment, external grant or separate linked economic dividend is included.
+Receipts grow with reference output, while pay, benefits, pensions and residual purchases have separate real-rate and population paths. The pension envelope is removed from baseline non-pension spending and enters only once through the selected funding share.
 
-These are model assumptions rather than negotiated commitments or empirical forecasts. The historical fiscal vintage, output anchor and harmonisation costing retain the limitations described in the model reference.
+The stress lowers selected NI growth by 0.5 percentage points, raises residual purchases growth by 0.5 points and sets borrowing interest to 3%. Growth is an assumed path rather than an estimated policy effect.
 
-## Fiscal outcomes
+[Complete settings and annual results](../data/united_ireland_fiscal_cases.json)
 
-Negative annual and cumulative costs indicate surpluses. Cumulative figures include transition interest without discounting.
-
-| Case | NI growth | Receipts/spending growth | Year 1 cost | Year 10 cost | Year 25 cost | Cumulative cost | Annual balance | Payback |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Federal · annual balance | 4.5% | 1% | 3.2 | 6.0 | -4.4 | 92.0 | 23 | Not within 25 |
-| Managed Integration · annual balance | 5% | 1% | 4.0 | 6.9 | -15.3 | 33.6 | 19 | Not within 25 |
-| Federal · cumulative payback | 5% | 1% | 3.1 | 3.9 | -15.9 | -11.2 | 17 | 25 |
-| Managed Integration · cumulative payback | 5.5% | 1% | 3.9 | 4.7 | -27.1 | -76.7 | 16 | 22 |
-| Unitary · faster growth | 6% | 1% | 13.4 | 6.4 | -39.6 | -100.2 | 14 | 23 |
-| Managed Integration · faster service spending | 6% | 2.5% | 4.0 | 5.7 | -29.6 | -69.6 | 16 | 23 |
-
-## Affordability without a payback requirement
-
-There is no externally validated affordability cutoff in this model. We report the annual transfer, peak incremental debt burden, remaining incremental debt and whether debt is falling, so a reader can judge the financing requirement.
-
-Debt ratios below use Republic GNI*, rather than an unverified constructed all-island GNI* denominator. They exclude existing sovereign debt, inherited debt principal, opportunity costs and macroeconomic feedback from financing, so they do not certify united-state debt sustainability.
-
-| Case | Peak transition debt / Republic GNI* | Year 25 debt / Republic GNI* | Year 25 debt €bn | Year 25 annual cost / Republic GNI* | Debt falling at year 25 |
-| --- | --- | --- | --- | --- | --- |
-| Federal · annual balance | 20.4% | 17.1% | 92.0 | -0.8% | Yes |
-| Managed Integration · annual balance | 20.0% | 6.2% | 33.6 | -2.8% | Yes |
-| Federal · cumulative payback | 11.8% | 0.0% | 0.0 | -3.0% | Yes |
-| Managed Integration · cumulative payback | 13.7% | 0.0% | 0.0 | -5.0% | Already repaid |
-| Unitary · faster growth | 28.9% | 0.0% | 0.0 | -7.3% | Already repaid |
-| Managed Integration · faster service spending | 16.1% | 0.0% | 0.0 | -5.5% | Already repaid |
-
-## Less favourable variants
-
-Each variant lowers Northern Ireland growth by 0.5 percentage points, raises baseline spending growth by 0.5 points while leaving receipts growth unchanged, and raises real borrowing interest to 3%. These are chosen stress assumptions rather than estimated probabilities.
-
-| Case | Stressed year 25 cost | Stressed cumulative cost | Stressed payback | Stressed year 25 debt / Republic GNI* |
-| --- | --- | --- | --- | --- |
-| Federal · annual balance | 18.7 | 321.3 | Not within 25 | 59.6% |
-| Managed Integration · annual balance | 8.6 | 271.2 | Not within 25 | 50.3% |
-| Federal · cumulative payback | 7.3 | 218.9 | Not within 25 | 40.6% |
-| Managed Integration · cumulative payback | -4.0 | 160.4 | Not within 25 | 29.7% |
-| Unitary · faster growth | -14.9 | 159.9 | Not within 25 | 29.6% |
-| Managed Integration · faster service spending | -0.8 | 208.5 | Not within 25 | 38.7% |
-
-## Interpretation and sources
-
-A successful case demonstrates sufficiency inside these equations, not empirical likelihood. Several successful cases share the same favourable settlement and should not be counted as independent evidence of viability.
-
-The stronger-growth paths require evidence on sustained productivity and employment improvements against continued UK membership. Equal growth of receipts and spending also enlarges the absolute underlying deficit because the spending base is larger.
-
-The complete settings and annual paths are in [the calculation file](../data/united_ireland_fiscal_cases.json), generated by [the assessment script](../scripts/build_unity_cases.mjs). Annual costs and debt have also been checked using a separate restricted recurrence.
-
-[Executable model](../simulator/scenario_model.mjs)  
-[Parameter evidence and limitations](../simulator/model_reference.html)  
-[Recorded source calibration](../data/simulator_calibration.json)  
-[FitzGerald and Morgenroth harmonisation source](https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf)  
-[Doyle supplied full text](https://all-islandeconomy.com/wp-content/uploads/2025/06/21614_Public_Finances_UPDATED.pdf)
+[Sources, equations and limitations](https://stephenkinsella.net/unity/model_reference.html)

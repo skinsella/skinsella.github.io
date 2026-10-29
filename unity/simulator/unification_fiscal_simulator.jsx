@@ -10,7 +10,7 @@ import {
 
 // ---------------------------------------------------------------
 const GNI_STAR = 290.9;
-const NORTH_GNI = 63.3 / 0.86979; // Project output anchor remains unverified. Arithmetic now follows the recorded FX input.
+const NORTH_GNI = 63.265 / 0.86979; // Verified ONS Table 1, release 17 April 2025, 2023 GDP £63.265bn. Frozen vintage.
 // Original sterling observations from F&M 2024 Tables 6 and 7, not reverse-converted euro totals.
 const UK_2019_TO_2023_EUR = ((90.7406+92.0952+92.7667+92.7151)/(76.6540+77.4590+77.9213+78.3396))/0.86979;
 const UK_FY2022_TO_2023_EUR = ((90.7406+92.0952+92.7667+92.7151)/(85.7671+87.1467+89.3502+90.7406))/0.86979;
@@ -19,7 +19,7 @@ const BASE_SPENDING = BASE_REVENUE+17.058; // Preserve the agreed frozen rounded
 const GROSS_PAY_FULL = 4.306*UK_2019_TO_2023_EUR;
 const GROSS_WELFARE_FULL = 4.809*UK_2019_TO_2023_EUR;
 const SOURCE_PAY_BASE = 6.797*UK_2019_TO_2023_EUR;
-const MODEL_VERSION = '2026-10-28-accounting-repair';
+const MODEL_VERSION = '2026-10-29-component-fiscal';
 const PUBLISHED = 17.058;
 const PENSIONS = 6.864;
 const DEBT_INT = 4.238;
@@ -49,10 +49,10 @@ const FORMS = {
     defaults: { reratingScope: 100, reratingYears: 15, investment: 1.5, duplication: 0.25, gNI: 2.5, stall: false },
   },
   worst: {
-    key: "worst", name: "Higher initial cost", model: "Immediate harmonisation, no extra investment",
+    key: "worst", name: "Higher Cost", model: "Immediate harmonisation, larger administration allowance",
     color: "#444B52",
     desc: "Immediate pay and welfare harmonisation without additional investment. Liability choices and growth are controlled separately and apply to every policy bundle.",
-    defaults: { reratingScope: 100, reratingYears: 1, investment: 0, duplication: 0, gNI: 2.5, stall: false },
+    defaults: { reratingScope: 100, reratingYears: 1, investment: 0, duplication: 1, gNI: 2.5, stall: false },
   },
   statusquo: {
     key: "statusquo", name: "UK status quo", model: "UK-funded regional balance",
@@ -81,7 +81,7 @@ function inheritedDeficit(pensionsUK, debtUK, s = {}) {
 const ECONOMIC_PARAMETERS = [
   {key:'investmentCapitalShare',label:'Capital share of additional expenditure',value:0,min:0,max:100,step:5,unit:'%',basis:'Unallocated by default. Health, welfare and education expenditure is not automatically capital'},
   {key:'spareCapacity',label:'Spare capacity for temporary demand',value:0,min:0,max:20,step:1,unit:'%',basis:'Explicit fixed-price capacity constraint. No demand dividend without capacity'},
-  {key:'baselineGrowth',label:'Northern Ireland counterfactual growth',value:2.5,min:0,max:4,step:0.25,unit:'% pa',basis:'Illustrative reference path, independent of Republic growth'},
+  {key:'baselineGrowth',label:'Northern Ireland counterfactual growth',value:2,min:0,max:4,step:0.25,unit:'% pa',basis:'Illustrative reference path, independent of Republic growth'},
   {key:'investmentEfficiency',label:'Investment delivered as productive capital',value:80,min:0,max:100,step:5,unit:'%',basis:'Illustrative delivery efficiency'},
   {key:'investmentLag',label:'Investment completion delay',value:2,min:0,max:10,step:1,unit:' years',basis:'Illustrative construction delay'},
   {key:'capitalDepreciation',label:'Capital depreciation',value:4,min:0,max:10,step:0.5,unit:'% pa',basis:'Illustrative depreciation rate'},
@@ -109,10 +109,13 @@ const ECONOMIC_PARAMETERS = [
   {key:'serviceCostPerResident',label:'Annual service cost per additional resident',value:15000,min:0,max:30000,step:1000,unit:' € per resident',basis:'Illustrative marginal cost, not average public spending'},
 ];
 
-const DEFAULT_STRUCTURAL = { southGrowth: 2.5, ageing: 0, shift: 0, realInterest: 2, discountRate: 2,
+const DEFAULT_STRUCTURAL = { southGrowth: 2, ageing: 0, shift: 0, realInterest: 2, discountRate: 2,
+    payGrowthPassThrough:1, niPayGrowth:1, niBenefitGrowth:1, pensionRateGrowth:1, southPayGrowth:1, southBenefitGrowth:1,
+    nonPensionWelfareBase:9.615*UK_2019_TO_2023_EUR-PENSIONS,
+    populationVolumes:true, populationVariant:'M2', inheritedInterestYears:25,
     businessUplift: 0, labourUplift: 0, transitionShock: 0, privateMaturity: 10, privateRecovery: 5,
-    fundOpening: 0, fundReturn: 2, fundContribution: 0, fundContributionYears: 10, fundDrawCap: 5, linkedMechanisms: false, growthRevenue: false,
-    taxShare: 35, baselineRevenueGrowth: 0, baselineSpendingGrowth: 0,
+    fundOpening: 0, fundReturn: 2, fundContribution: 0, fundContributionYears: 10, fundDrawCap: 5, linkedMechanisms: false, growthRevenue: true,
+    taxShare: 35, baselineRevenueGrowth: 0, baselineSpendingGrowth: 1,
     defenceSavingShare: 0, centralSavingShare: 0, taxAdjustmentShare: 0,
     pensionTransferYears: 40, ageSensitiveSpending: 0, outputCeiling: 0,
     ...Object.fromEntries(ECONOMIC_PARAMETERS.map(item => [item.key, item.value])) };
@@ -129,18 +132,66 @@ function managedCase(key) {
 
 // Selected fiscal scenarios, not forecasts or estimated policy effects.
 const UNITY_CASES = {
- federal_balance:{label:'Federal · annual balance',form:'federal',growth:4.5,fiscalGrowth:1},
- managed_balance:{label:'Managed Integration · annual balance',form:'glide',growth:5,fiscalGrowth:1},
- federal_payback:{label:'Federal · cumulative payback',form:'federal',growth:5,fiscalGrowth:1},
- managed_payback:{label:'Managed Integration · cumulative payback',form:'glide',growth:5.5,fiscalGrowth:1},
- unitary_payback:{label:'Unitary · faster growth',form:'unitary',growth:6,fiscalGrowth:1},
+ federal_balance:{label:'Federal · 4.5% NI growth',form:'federal',growth:4.5,fiscalGrowth:1},
+ managed_balance:{label:'Managed Integration · 5% NI growth',form:'glide',growth:5,fiscalGrowth:1},
+ federal_payback:{label:'Federal · 5% NI growth',form:'federal',growth:5,fiscalGrowth:1},
+ managed_payback:{label:'Managed Integration · 5.5% NI growth',form:'glide',growth:5.5,fiscalGrowth:1},
+ unitary_payback:{label:'Unitary · 6% NI growth',form:'unitary',growth:6,fiscalGrowth:1},
  managed_spending:{label:'Managed Integration · faster service spending',form:'glide',growth:6,fiscalGrowth:2.5},
 };
 function unityCase(key) {
  const c=UNITY_CASES[key];
  if(!c)throw new RangeError('Unknown fiscal scenario');
  const seed=managedCase('faster_growth');
- return {label:c.label,form:c.form,policy:{...seed.policy,...FORMS[c.form].defaults,gNI:c.growth},structural:{...seed.structural,baselineRevenueGrowth:c.fiscalGrowth,baselineSpendingGrowth:c.fiscalGrowth}};
+ return {label:c.label,form:c.form,policy:{...seed.policy,...FORMS[c.form].defaults,gNI:c.growth},structural:{...seed.structural,baselineRevenueGrowth:0,baselineSpendingGrowth:c.fiscalGrowth}};
+}
+
+const POPULATION_PROJECTIONS = {"baseYear":2024,"ni":{"2024":{"total":1927855.0,"over65":349194.0},"2025":{"total":1931301.0,"over65":357695.0},"2026":{"total":1934180.0,"over65":366755.0},"2027":{"total":1936545.0,"over65":375613.0},"2028":{"total":1938324.0,"over65":384768.0},"2029":{"total":1939582.0,"over65":394243.0},"2030":{"total":1940347.0,"over65":403900.0},"2031":{"total":1940634.0,"over65":413012.0},"2032":{"total":1940471.0,"over65":421637.0},"2033":{"total":1939927.0,"over65":430027.0},"2034":{"total":1939054.0,"over65":437794.0},"2035":{"total":1937878.0,"over65":444859.0},"2036":{"total":1936429.0,"over65":451740.0},"2037":{"total":1934818.0,"over65":457615.0},"2038":{"total":1933097.0,"over65":463004.0},"2039":{"total":1931313.0,"over65":467365.0},"2040":{"total":1929481.0,"over65":470627.0},"2041":{"total":1927624.0,"over65":473832.0},"2042":{"total":1925677.0,"over65":476453.0},"2043":{"total":1923707.0,"over65":479525.0},"2044":{"total":1921673.0,"over65":483750.0},"2045":{"total":1919518.0,"over65":488871.0},"2046":{"total":1917172.0,"over65":493111.0},"2047":{"total":1914584.0,"over65":497114.0},"2048":{"total":1911750.0,"over65":501159.0},"2049":{"total":1908622.0,"over65":505183.0},"2050":{"total":1905145.0,"over65":509615.0},"2051":{"total":1901280.0,"over65":514259.0},"2052":{"total":1897000.0,"over65":518589.00000000006},"2053":{"total":1892289.0,"over65":522676.00000000006},"2054":{"total":1887160.0,"over65":526306.0},"2055":{"total":1881601.0,"over65":529986.0},"2056":{"total":1875649.0,"over65":533125.0},"2057":{"total":1869316.0,"over65":535964.0},"2058":{"total":1862660.0,"over65":538146.0},"2059":{"total":1855716.0,"over65":540216.0},"2060":{"total":1848496.0,"over65":541873.0},"2061":{"total":1841061.0,"over65":543408.0},"2062":{"total":1833449.0,"over65":545618.0},"2063":{"total":1825686.0,"over65":547389.0},"2064":{"total":1817821.0,"over65":548338.0},"2065":{"total":1809896.0,"over65":547391.0},"2066":{"total":1801926.0,"over65":546048.0},"2067":{"total":1793928.0,"over65":544403.0},"2068":{"total":1785923.0,"over65":543239.0},"2069":{"total":1777923.0,"over65":543174.0},"2070":{"total":1769940.0,"over65":543050.0},"2071":{"total":1761958.0,"over65":543206.0},"2072":{"total":1754004.0,"over65":544209.0},"2073":{"total":1746067.0,"over65":546391.0},"2074":{"total":1738122.0,"over65":548554.0}},"roi":{"M1":{"2022":5184000,"2027":5581800.0,"2032":5872400.0,"2037":6142300.0,"2042":6396300.0,"2047":6633600.0,"2052":6839200.0,"2057":7005400.0},"M2":{"2022":5184000,"2027":5530500.0,"2032":5761000,"2037":5946900.0,"2042":6113200.0,"2047":6259900.0,"2052":6373200.0,"2057":6446300.0},"M3":{"2022":5184000,"2027":5489700.0,"2032":5645500.0,"2037":5721200.0,"2042":5771500.0,"2047":5797300.0,"2052":5786300.0,"2057":5733700.0}}};
+
+function populationAt(year,variant='M2') {
+ const years=Object.keys(POPULATION_PROJECTIONS.roi[variant]).map(Number).sort((a,b)=>a-b);
+ const clamped=Math.max(years[0],Math.min(years.at(-1),year));
+ const left=years.filter(y=>y<=clamped).at(-1),right=years.find(y=>y>=clamped);
+ const roi=left===right?POPULATION_PROJECTIONS.roi[variant][left]:POPULATION_PROJECTIONS.roi[variant][left]+(POPULATION_PROJECTIONS.roi[variant][right]-POPULATION_PROJECTIONS.roi[variant][left])*(clamped-left)/(right-left);
+ const niYear=Math.max(2024,Math.min(2074,year)),ni=POPULATION_PROJECTIONS.ni[niYear];
+ return {ni:ni.total,niOver65:ni.over65,roi,heldBeyondSource:year>2057||year>2074};
+}
+function fiscalComponents(p,s,t) {
+ const start=populationAt(2024,s.populationVariant),pop=populationAt(2024+t,s.populationVariant);
+ const volumes=s.populationVolumes?pop.ni/start.ni:1,pensionVolumes=s.populationVolumes?pop.niOver65/start.niOver65:1;
+ const payBase=s.publicPayBase,benefitBase=s.nonPensionWelfareBase;
+ const purchasesBase=BASE_SPENDING-payBase-benefitBase-PENSIONS-DEBT_INT-DEFENCE_NET-OTHER_NONID;
+ if(purchasesBase<0)throw new RangeError('Component allocations exceed frozen gross spending');
+ const relativeRate=(1+p.gNI/100)/(1+s.baselineGrowth/100);
+ const relativeOutput=p.stall&&t>7?Math.pow(relativeRate,7)*Math.pow(Math.min(relativeRate,1.004),t-7):Math.pow(relativeRate,t);
+ const pay=payBase*Math.pow(1+s.niPayGrowth/100,t)*Math.pow(relativeOutput,s.payGrowthPassThrough)*volumes;
+ const benefits=benefitBase*Math.pow(1+s.niBenefitGrowth/100,t)*volumes;
+ const pensionEnvelope=PENSIONS*Math.pow(1+s.pensionRateGrowth/100,t)*pensionVolumes*Math.pow(1+s.ageing/100,t);
+ const purchasesFactor=Math.pow(1+s.baselineSpendingGrowth/100,t)*volumes;
+ const purchases=purchasesBase*purchasesFactor;
+ const defence=DEFENCE_NET*purchasesFactor*(1-s.defenceSavingShare/100);
+ const central=OTHER_NONID*purchasesFactor*(1-s.centralSavingShare/100);
+ const allocatedInterest=t<=s.inheritedInterestYears?DEBT_INT:0;
+ const pensionShare=p.pensionsUK?Math.min(t/s.pensionTransferYears,1):1;
+ const pensionCost=pensionEnvelope*pensionShare;
+ const spending=pay+benefits+pensionCost+purchases+defence+central+(p.debtUK?0:allocatedInterest);
+ const baselineSpending=pay+benefits+pensionEnvelope+purchases+(DEFENCE_NET+OTHER_NONID)*purchasesFactor+allocatedInterest;
+ const referenceFactor=Math.pow(1+s.baselineGrowth/100,t);
+ const baselineRevenue=BASE_REVENUE*referenceFactor*Math.pow(1+s.baselineRevenueGrowth/100,t);
+ const revenueAdjustment=TAX_ADD*s.taxAdjustmentShare/100*referenceFactor;
+ const phase=p.counterfactual?0:Math.min(t/p.reratingYears,1)*p.reratingScope/100;
+ const payTarget=(payBase+GROSS_PAY_FULL)*Math.pow(1+s.southPayGrowth/100,t)*volumes;
+ const grossPayIncrease=phase*Math.max(0,payTarget-pay);
+ const welfareBase=benefitBase+PENSIONS;
+ const pensionWeight=PENSIONS/welfareBase;
+ const welfareVolumes=(1-pensionWeight)*volumes+pensionWeight*pensionVolumes;
+ const welfareTarget=(welfareBase+GROSS_WELFARE_FULL)*Math.pow(1+s.southBenefitGrowth/100,t)*welfareVolumes;
+ const welfareBefore=benefits+pensionEnvelope;
+ const grossWelfareIncrease=phase*Math.max(0,welfareTarget-welfareBefore);
+ // Source net/gross bridge is applied once. This is not an estimated tax schedule.
+ const netRecoveryShare=1-RERATE_FULL/(GROSS_PAY_FULL+GROSS_WELFARE_FULL);
+ const harmonisation=(grossPayIncrease+grossWelfareIncrease)*(1-netRecoveryShare);
+ return {pay,benefits,pensionEnvelope,pensionCost,purchases,defence,central,allocatedInterest,spending,baselineSpending,baselineRevenue,revenueAdjustment,harmonisation,grossPayIncrease,grossWelfareIncrease,volumes,pensionVolumes,niPopulation:pop.ni,roiPopulation:pop.roi,populationHeld:pop.heldBeyondSource?1:0};
 }
 
 const MODEL_CONSTANTS = { GNI_STAR, NORTH_GNI, UK_2019_TO_2023_EUR, UK_FY2022_TO_2023_EUR, BASE_REVENUE, BASE_SPENDING, GROSS_PAY_FULL, GROSS_WELFARE_FULL, SOURCE_PAY_BASE, PUBLISHED, PENSIONS, DEBT_INT, DEFENCE_NET, OTHER_NONID, TAX_ADD, RERATE_FULL };
@@ -151,7 +202,7 @@ function validateInputs(p,horizon,s) {
   for(const key of Object.keys(s))if(!(key in DEFAULT_STRUCTURAL))throw new TypeError('Unknown structural input '+key);
   for(const [key,value] of Object.entries(s))if(typeof DEFAULT_STRUCTURAL[key]==='number'&&!Number.isFinite(value))throw new TypeError('Non-numeric input '+key);
   for(const key of Object.keys(p))if(!['gNI','stall','reratingScope','reratingYears','investment','duplication','pensionsUK','debtUK','counterfactual','shared'].includes(key))throw new TypeError('Unknown policy input '+key);
-  for(const key of ['linkedMechanisms','growthRevenue'])if(s[key]!==undefined&&typeof s[key]!=='boolean')throw new TypeError('Invalid switch '+key);
+  for(const key of ['linkedMechanisms','growthRevenue','populationVolumes'])if(s[key]!==undefined&&typeof s[key]!=='boolean')throw new TypeError('Invalid switch '+key);
   for(const key of ['stall','counterfactual','shared'])if(p[key]!==undefined&&typeof p[key]!=='boolean')throw new TypeError('Invalid switch '+key);
   for(const key of ['gNI','reratingScope','reratingYears','investment','duplication'])if(!Number.isFinite(p[key]))throw new TypeError('Missing policy input '+key);
   for(const key of ['pensionsUK','debtUK'])if(typeof p[key]!=='boolean')throw new TypeError('Missing liability switch '+key);
@@ -163,6 +214,10 @@ function validateInputs(p,horizon,s) {
   if((s.pensionTransferYears??40)<1||(s.outputCeiling??0)<0||((s.outputCeiling??0)>0&&s.outputCeiling<1))throw new RangeError('Invalid transfer period or ceiling');
   for(const key of ['defenceSavingShare','centralSavingShare','taxAdjustmentShare','taxShare'])if((s[key]??(key==='taxShare'?35:100))<0||(s[key]??0)>100)throw new RangeError('Invalid percentage '+key);
   for(const key of ['baselineRevenueGrowth','baselineSpendingGrowth'])if((s[key]??0)<-10||(s[key]??0)>10)throw new RangeError('Invalid fiscal baseline growth '+key);
+  if(!Number.isFinite(s.payGrowthPassThrough)||s.payGrowthPassThrough<0||s.payGrowthPassThrough>1)throw new RangeError('Invalid public pay pass-through');
+  if(!['M1','M2','M3'].includes(s.populationVariant))throw new RangeError('Unknown CSO population variant');
+  for(const key of ['niPayGrowth','niBenefitGrowth','pensionRateGrowth','southPayGrowth','southBenefitGrowth'])if(!Number.isFinite(s[key])||s[key]<-2||s[key]>6)throw new RangeError('Invalid indexation rate '+key);
+  if(s.nonPensionWelfareBase<0||s.inheritedInterestYears<0||s.inheritedInterestYears>100)throw new RangeError('Invalid component settings');
   if(s.shift)throw new RangeError('Unspecified compositional deficit erosion has been removed');
 }
 function policyForForm(key, common, selected = null) {
@@ -195,14 +250,14 @@ function simulate(p, horizon, s) {
     // The no-change case follows the reference NI path, not the policy growth input.
     const policyOutput=isStatusQuo ? baselineOutput : baselineOutput*factor;
     const ageF=Math.pow(1+ag,t);
-    const baselineRevenue=BASE_REVENUE*Math.pow(1+(s.baselineRevenueGrowth??0)/100,t);
-    const baselineSpending=BASE_SPENDING*Math.pow(1+(s.baselineSpendingGrowth??0)/100,t);
-    const fiscalDrift=(baselineSpending-BASE_SPENDING)-(baselineRevenue-BASE_REVENUE);
-    const coreAged=core+fiscalDrift+(s.ageSensitiveSpending??0)*(ageF-1);
+    const components=fiscalComponents(p,s,t);
+    const baselineRevenue=components.baselineRevenue,baselineSpending=components.baselineSpending;
+    const fiscalDrift=0;
+    const coreAged=components.spending-components.baselineRevenue-components.revenueAdjustment+(s.ageSensitiveSpending??0)*(ageF-1);
     const shiftErosion=0; // Unsupported disappearance of a residual deficit removed.
-    const rerating=p.counterfactual ? 0 : Math.min(t/p.reratingYears,1)*RERATE_FULL*p.reratingScope/100;
+    const rerating=components.harmonisation;
     const invest=!isStatusQuo && t<=10 ? p.investment : 0;
-    const payIncrease=rerating/RERATE_FULL*GROSS_PAY_FULL, welfareIncrease=rerating/RERATE_FULL*GROSS_WELFARE_FULL;
+    const payIncrease=components.grossPayIncrease, welfareIncrease=components.grossWelfareIncrease;
     const privateRamp=Math.min(t/Math.max(1,s.privateMaturity??10),1);
     const shockDecay=Math.max(0,1-(t-1)/Math.max(1,s.privateRecovery??5));
     const businessResidual=isStatusQuo ? 0 : (s.businessUplift??0)*privateRamp/100;
@@ -257,9 +312,9 @@ function simulate(p, horizon, s) {
     const gain=baselineGain+privateRevenue;
     // Transfer the same frozen pension envelope, so the endpoints reconcile.
     // This is a linear funding scenario, not a cohort-based actuarial forecast.
-    const pension=p.pensionsUK ? PENSIONS*Math.min(t/(s.pensionTransferYears??40),1)*ageF : 0;
+    const pension=p.pensionsUK ? components.pensionCost : 0;
     // Includes inherited debt interest. This is not a textbook primary balance.
-    const preFinancingCost=coreAged-shiftErosion+pensionsBorne*ageF+debtBorne+pension+rerating+invest+p.duplication+serviceCost-gain;
+    const preFinancingCost=coreAged+rerating+invest+p.duplication+serviceCost-gain;
     const regionalDeficit=baselineSpending-baselineRevenue+(s.ageSensitiveSpending??0)*(ageF-1)+serviceCost+invest+rerating-gain;
     const primary=p.counterfactual ? (p.shared ? invest : 0) : preFinancingCost;
     const interest=debt*((s.realInterest??2)/100), cost=primary+interest;
@@ -281,13 +336,18 @@ function simulate(p, horizon, s) {
     const denom=GNI_STAR*Math.pow(1+gs,t);
     cumulative+=cost;
     rows.push({
-      year:t, baselineRevenue:round2(baselineRevenue), baselineSpending:round2(baselineSpending), pensionTransfer:round2(pension), pensionCost:round2(pensionsBorne*ageF+pension), harmonisation:round2(rerating), grossPayIncrease:round2(payIncrease), grossWelfareIncrease:round2(welfareIncrease), capacityOutput:round2(capacityOutput), annualNonPositive:cost<=0 ? 1 : 0, cumulativeNonPositive:cumulative<=0 ? 1 : 0, primaryCost:round1(primary), interest:round2(interest), debt:round1(debt), presentValue:round1(presentValue),
+      year:t, publicPay:round2(components.pay),nonPensionBenefits:round2(components.benefits),otherPurchases:round2(components.purchases),pensionEnvelope:round2(components.pensionEnvelope),revenueAdjustment:round2(components.revenueAdjustment),allocatedInterest:round2(p.debtUK?0:components.allocatedInterest),
+      niPopulation:Math.round(components.niPopulation),roiPopulation:Math.round(components.roiPopulation),populationHeld:components.populationHeld,
+      // Matched GDP concepts, common 2024 nowcast from frozen 2023 source anchors. Not household income.
+      gdpPerPersonRatio:round2(100*(actualOutput*(1+e.baselineGrowth/100)/components.niPopulation)/(509.952*Math.pow(1+gs,t+1)/components.roiPopulation)),
+      relativePerPersonIndex:round2(100*(actualOutput/NORTH_GNI)/Math.pow(1+gs,t)*(populationAt(2024,s.populationVariant).ni/components.niPopulation)/(populationAt(2024,s.populationVariant).roi/components.roiPopulation)),
+      baselineRevenue:round2(baselineRevenue), baselineSpending:round2(baselineSpending), pensionTransfer:round2(pension), pensionCost:round2(components.pensionCost), harmonisation:round2(rerating), grossPayIncrease:round2(payIncrease), grossWelfareIncrease:round2(welfareIncrease), capacityOutput:round2(capacityOutput), annualNonPositive:cost<=0 ? 1 : 0, cumulativeNonPositive:cumulative<=0 ? 1 : 0, primaryCost:round1(primary), interest:round2(interest), debt:round1(debt), presentValue:round1(presentValue),
       regionalDeficit:round2(regionalDeficit), cost:round1(cost), pctGNI:round2(cost/denom*100), cumulative:round1(cumulative),
       privateOutput:round2(privateOutput), privateRevenue:round2(privateRevenue), fundBalance:round2(fundBalance),
       fundReturn:round2(fundReturn), fundContribution:round2(contribution), fundDraw:round2(fundDraw),
       totalDraws:round2(totalDraws), totalFundReturns:round2(totalFundReturns), financingNeed:round2(financingNeed),
       borrowing:round2(borrowing), netLiabilities:round2(netLiabilities), cashSavings:round2(cashSavings), wealthCost:round2(wealthCost),
-      gross:round1(coreAged+pensionsBorne*ageF+debtBorne+pension+rerating+invest+p.duplication+serviceCost), gain:round1(-gain),
+      gross:round1(coreAged+rerating+invest+p.duplication+serviceCost), gain:round1(-gain),
       baselineOutput:round2(baselineOutput), actualOutput:round2(actualOutput), completedCapital:round2(completedCapital),
       publicCapital:round2(publicCapital), privateCapital:round2(privateCapital), consumptionOutput:round2(consumptionOutput),
       privateWagePressure:round2(privateWagePressure*100), publicRecruitmentIndex:round2(100*(1+publicRecruitment)),
@@ -433,6 +493,7 @@ function Stat({ label, value, sub }) {
 export default function UnificationSimulator() {
   const [form, setForm] = useState("glide");
   const [custom, setCustom] = useState(false);
+  const [hasSelected, setHasSelected] = useState(false);
   const [caseLabel, setCaseLabel] = useState(null);
   const [pensionsUK, setPensionsUK] = useState(false);
   const [debtUK, setDebtUK] = useState(false);
@@ -442,14 +503,14 @@ export default function UnificationSimulator() {
   const [horizon, setHorizon] = useState(25);
   const [structural, setStructural] = useState({ ...DEFAULT_STRUCTURAL });
 
-  const setP = (k, v) => { setParams((p) => ({ ...p, [k]: v })); setCustom(true); setCaseLabel(null); };
-  const setS = (k, v) => { setStructural((s) => ({ ...s, [k]: v })); setCaseLabel(null); };
-  const pickForm = (k) => {
+  const setP = (k, v) => { setHasSelected(true); setParams((p) => ({ ...p, [k]: v })); setCustom(true); setCaseLabel(null); };
+  const setS = (k, v) => { setHasSelected(true); setStructural((s) => ({ ...s, [k]: v })); setCaseLabel(null); };
+  const pickForm = (k) => { setHasSelected(true);
     setForm(k); setCustom(false); setCaseLabel(null); setParams((previous) => ({ ...FORMS[k].defaults, gNI: previous.gNI, stall: previous.stall }));
 
   };
 
-  const loadManagedCase = (key) => {
+  const loadManagedCase = (key) => { setHasSelected(true);
     const example=managedCase(key);
     setForm('glide');setCustom(true);setCaseLabel(example.label);
     setParams({...FORMS.glide.defaults,gNI:example.policy.gNI,stall:false});
@@ -457,8 +518,10 @@ export default function UnificationSimulator() {
     setStructural({...example.structural});
   };
 
-  const loadUnityCase = (key) => {
+  const loadUnityCase = (key, stressed=false) => {
+    setHasSelected(true);
     const example=unityCase(key);
+    if(stressed){example.policy.gNI-=0.5;example.structural.baselineSpendingGrowth+=0.5;example.structural.realInterest=3;example.label+=' · combined stress';}
     setForm(example.form);setCustom(true);setCaseLabel(example.label);setHorizon(25);
     const {gNI,stall,reratingScope,reratingYears,investment,duplication}=example.policy;
     setParams({gNI,stall,reratingScope,reratingYears,investment,duplication});
@@ -569,9 +632,17 @@ export default function UnificationSimulator() {
 
             <div className="rounded-xl border p-5 mb-4" style={{borderColor:'#DCE2DC',background:'#FFFFFF'}}>
               <div className="text-xs uppercase tracking-wide mb-3" style={{color:'#5C6B63'}}>United Ireland fiscal scenarios</div>
-              <p className="text-xs mb-3">Choose a complete conditional setup for annual balance or cumulative payback. These examples replace all settings and use a 25-year horizon.</p>
-              <div className="grid grid-cols-1 gap-2">{Object.entries(UNITY_CASES).map(([key,c])=><button key={key} type="button" onClick={()=>loadUnityCase(key)} className="border rounded px-3 py-2 text-xs text-left" style={{borderColor:'#DCE2DC'}}>{c.label}<span className="block mt-1" style={{color:'#5C6B63'}}>NI growth {c.growth}% · baseline receipts and spending growth {c.fiscalGrowth}%</span></button>)}</div>
+              <p className="text-xs mb-3">Choose a complete conditional setup. Labels describe inputs rather than promise an outcome. These examples replace all settings and use a 25-year horizon.</p>
+              <div className="grid grid-cols-1 gap-2">{Object.entries(UNITY_CASES).map(([key,c])=><button key={key} type="button" onClick={()=>loadUnityCase(key)} className="border rounded px-3 py-2 text-xs text-left" style={{borderColor:'#DCE2DC'}}>{c.label}<span className="block mt-1" style={{color:'#5C6B63'}}>NI growth {c.growth}% · other purchases growth {c.fiscalGrowth}%</span></button>)}</div>
               <p className="text-xs mt-3">All assume favourable UK pension and interest terms, acceptance of all study adjustments, a 35% marginal revenue response and full harmonisation. Growth rates are selected hypotheses, not forecasts.</p>
+              <button type="button" onClick={()=>loadUnityCase('managed_payback',true)} className="border rounded px-3 py-2 text-xs mt-3">Managed Integration · combined stress</button>
+              <p className="text-xs mt-2">Combined stress lowers NI growth by 0.5 percentage points, raises spending growth by 0.5 points and sets real interest to 3%. Favourable settlement terms remain unchanged.</p>
+              <div className="overflow-x-auto mt-3"><table className="text-xs w-full"><caption className="text-left mb-2">Cumulative cost over 25 years, €bn in 2023 prices, including interest</caption><thead><tr><th className="text-left">Case</th><th>Selected inputs</th><th>Combined stress</th></tr></thead><tbody>{Object.entries(UNITY_CASES).map(([key,c])=>{
+                const ex=unityCase(key),base=simulate(ex.policy,25,ex.structural).at(-1);
+                const stress=simulate({...ex.policy,gNI:ex.policy.gNI-.5},25,{...ex.structural,baselineSpendingGrowth:ex.structural.baselineSpendingGrowth+.5,realInterest:3}).at(-1);
+                return <tr key={key}><td className="py-2">{c.label}</td><td className="text-center">{base.cumulative}</td><td className="text-center">{stress.cumulative}</td></tr>;
+              })}</tbody></table></div>
+              <p className="text-xs my-2">Negative costs are surpluses. Pay, benefits and pensions now have indexed component paths. Historical source gaps remain and growth effects are assumed.</p>
               <a href="../book/united_ireland_fiscal_cases.md" target="_blank" rel="noreferrer" className="underline text-xs">Outcomes, affordability measures and less favourable variants</a>
             </div>
 
@@ -579,7 +650,7 @@ export default function UnificationSimulator() {
               <div className="text-xs uppercase tracking-wide mb-3" style={{color:'#5C6B63'}}>Managed Integration over 25 years</div>
               <p className="text-xs mb-3">Test favourable negotiated terms with an explicit growth-related revenue response. Each button replaces the complete current setup with an illustrative case.</p>
               <div className="flex gap-2 mb-3">{Object.entries(MANAGED_CASES).map(([key,example])=><button type="button" key={key} onClick={()=>loadManagedCase(key)} className="border rounded px-3 py-2 text-xs" style={{borderColor:'#177052',color:'#177052'}}>Test {example.gNI}% real growth</button>)}</div>
-              <p className="text-xs mb-2">These examples assume UK retention of accrued pensions and allocated interest, all study deductions, a 35% marginal revenue response, and a 2.5% Northern Ireland reference growth path. Baseline real receipts and spending are held constant, and no additional linked dividend or fund is added.</p>
+              <p className="text-xs mb-2">These examples assume UK retention of accrued pensions and allocated interest, all study deductions, a 35% marginal revenue response, and a 2% Northern Ireland reference growth path. Component spending and reference-linked receipts apply, with no additional linked dividend or fund.</p>
               <a href="../book/managed_integration_25_year_tests.md" target="_blank" rel="noreferrer" className="underline text-xs" style={{color:'#177052'}}>Required growth, repayment tests and sensitivity</a>
             </div>}
 
@@ -587,8 +658,8 @@ export default function UnificationSimulator() {
               <div className="text-xs uppercase tracking-wide mb-3" style={{ color: "#5C6B63", letterSpacing: "0.08em" }}>
                 Elements to Negotiate
               </div>
-              <Toggle label="UK retains accrued pension liabilities" sub="Negotiated pension allocation, not an established entitlement" on={pensionsUK} onChange={v=>{setPensionsUK(v);setCaseLabel(null);}} amount={PENSIONS} />
-              <Toggle label="UK retains debt interest" sub="Negotiated allocation, not a legal conclusion" on={debtUK} onChange={v=>{setDebtUK(v);setCaseLabel(null);}} amount={DEBT_INT} />
+              <Toggle label="UK retains accrued pension liabilities" sub="Negotiated pension allocation, not an established entitlement" on={pensionsUK} onChange={v=>{setPensionsUK(v);setCaseLabel(null);setHasSelected(true);}} amount={PENSIONS} />
+              <Toggle label="UK retains debt interest" sub="Negotiated allocation, not a legal conclusion" on={debtUK} onChange={v=>{setDebtUK(v);setCaseLabel(null);setHasSelected(true);}} amount={DEBT_INT} />
               <p className="text-xs mb-3">The switches and accepted shares below define the assumed settlement. They are not agreed terms.</p>
               <Slider label="Share of study defence deduction accepted" value={structural.defenceSavingShare} onChange={v=>setS('defenceSavingShare',v)} min={0} max={100} step={5} unit="%" />
               <Slider label="Share of study central-spending deduction accepted" value={structural.centralSavingShare} onChange={v=>setS('centralSavingShare',v)} min={0} max={100} step={5} unit="%" />
@@ -645,21 +716,34 @@ export default function UnificationSimulator() {
                 Structural and financing assumptions
               </div>
               <p className="text-xs mb-4" style={{ color: "#8A968E" }}>
-                Baseline receipts and spending have separate real growth assumptions. Age-sensitive services must have an explicit spending base. Republic growth changes the affordability denominator, not Northern Ireland revenue.
+                Receipts follow reference NI output, with a separate residual growth setting. Pay, benefits, pensions and purchases have separate rate and population paths. Republic growth changes the affordability denominator.
               </p>
+              <details className="mb-4"><summary className="text-sm cursor-pointer">Component spending and population assumptions</summary>
+                <p className="text-xs my-3">Historical component allocations reconcile to the frozen total. Their current composition and the real growth rates remain scenario assumptions.</p>
+                <Slider label="Policy output premium passed to public pay" value={structural.payGrowthPassThrough} onChange={v=>setS('payGrowthPassThrough',v)} min={0} max={1} step={0.1} unit=" elasticity" />
+                <Slider label="NI public pay real growth per worker" value={structural.niPayGrowth} onChange={v=>setS('niPayGrowth',v)} min={-2} max={6} step={0.25} unit="%" />
+                <Slider label="NI non-pension benefit real rate growth" value={structural.niBenefitGrowth} onChange={v=>setS('niBenefitGrowth',v)} min={-2} max={6} step={0.25} unit="%" />
+                <Slider label="Pension real rate growth" value={structural.pensionRateGrowth} onChange={v=>setS('pensionRateGrowth',v)} min={-2} max={6} step={0.25} unit="%" />
+                <Slider label="Republic public pay target real growth" value={structural.southPayGrowth} onChange={v=>setS('southPayGrowth',v)} min={-2} max={6} step={0.25} unit="%" />
+                <Slider label="Republic benefit target real growth" value={structural.southBenefitGrowth} onChange={v=>setS('southBenefitGrowth',v)} min={-2} max={6} step={0.25} unit="%" />
+                <Slider label="Opening non-pension benefit allocation" value={structural.nonPensionWelfareBase} onChange={v=>setS('nonPensionWelfareBase',v)} min={0} max={9} step={0.25} unit=" €bn" />
+                <Slider label="Inherited interest flow duration" value={structural.inheritedInterestYears} onChange={v=>setS('inheritedInterestYears',v)} min={0} max={100} step={1} unit=" years" />
+                <label className="block text-xs my-3"><input type="checkbox" checked={structural.populationVolumes} onChange={e=>setS('populationVolumes',e.target.checked)} /> Use NI population for service volumes and over-65 population for pension volumes</label>
+                <label className="text-xs">Republic population variant <select value={structural.populationVariant} onChange={e=>setS('populationVariant',e.target.value)}>{['M1','M2','M3'].map(v=><option key={v}>{v}</option>)}</select></label>
+              </details>
               <Slider label="Ageing drift" value={structural.ageing} onChange={(v) => setS("ageing", v)}
                 min={0} max={2} step={0.25} unit="% pa"
                 marks={["Off", "Faster Northern Ireland ageing"]} />
               <Slider label="Real borrowing rate" value={structural.realInterest} onChange={(v) => setS("realInterest", v)} min={0} max={6} step={0.25} unit="% pa" />
               <Slider label="Real discount rate" value={structural.discountRate} onChange={(v) => setS("discountRate", v)} min={0} max={6} step={0.25} unit="% pa" />
               <p className="text-xs mb-4">Rates are illustrative assumptions. Interest applies to opening transition debt. Surpluses repay debt before accumulating net savings.</p>
-              <Slider label="Baseline receipts real growth" value={structural.baselineRevenueGrowth} onChange={v=>setS('baselineRevenueGrowth',v)} min={-2} max={4} step={0.25} unit="% pa" />
-              <Slider label="Baseline spending real growth" value={structural.baselineSpendingGrowth} onChange={v=>setS('baselineSpendingGrowth',v)} min={-2} max={4} step={0.25} unit="% pa" />
+              <Slider label="Receipts growth beyond reference output" value={structural.baselineRevenueGrowth} onChange={v=>setS('baselineRevenueGrowth',v)} min={-2} max={4} step={0.25} unit="% pa" />
+              <Slider label="Other purchases real cost growth per resident" value={structural.baselineSpendingGrowth} onChange={v=>setS('baselineSpendingGrowth',v)} min={-2} max={4} step={0.25} unit="% pa" />
               <Slider label="Additional age-sensitive service spending base" value={structural.ageSensitiveSpending} onChange={v=>setS('ageSensitiveSpending',v)} min={0} max={15} step={0.5} unit=" €bn" />
               <p className="text-xs mb-4">This service base excludes pensions and any ageing already allowed for in baseline spending growth. No share of the net deficit is automatically treated as age-sensitive spending.</p>
               <label className="flex gap-2 text-xs mb-3"><input type="checkbox" checked={structural.growthRevenue} onChange={e=>setS('growthRevenue',e.target.checked)} />Apply assumed extra-output revenue to fiscal costs</label>
               <Slider label="Marginal revenue from additional output" value={structural.taxShare} onChange={v=>setS('taxShare',v)} min={0} max={60} step={1} unit="%" />
-              <p className="text-xs mb-4">Revenue feedback is off initially. Turning it on applies an assumed marginal rate, not an estimated tax elasticity.</p>
+              <p className="text-xs mb-4">Baseline receipts follow reference output. This switch adds only the revenue difference associated with policy output above or below that reference.</p>
               <Slider label="Optional output ceiling, zero disables" value={structural.outputCeiling} onChange={v=>setS('outputCeiling',v)} min={0} max={4} step={1} unit=" times reference output" />
             </div>
             <div className="rounded-xl border p-5 mt-4" style={{ borderColor: "#DCE2DC", background: "#FFFFFF" }}>
@@ -698,12 +782,14 @@ export default function UnificationSimulator() {
 
           {/* Output */}
           <div className="lg:col-span-3">
+            {!hasSelected ? <div className="rounded-xl border p-5 bg-white"><h2 className="text-lg mb-3">Choose assumptions before viewing results</h2><p>No opening result is presented as a central forecast. Select a policy bundle, a complete example or edit a control to run the calculation.</p><p className="mt-3">The examples depend on assumed growth, negotiated terms and spending paths. Compare the combined stresses beside the cases before interpreting a payback result.</p><button type="button" className="border rounded p-2 mt-3" onClick={()=>setHasSelected(true)}>Show restrictive accounting reference</button></div> : <>
+
             {FORMS[form].counterfactual ? <div className="rounded-xl border p-5 mb-5 bg-white text-sm">Republic fiscal perspective. Northern Ireland remains UK-funded. The investment dial affects Shared Island only. The UK status quo has zero incremental Republic cost by definition.</div> : <Waterfall pensionsUK={pensionsUK} debtUK={debtUK} structural={structural} />}
 
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs uppercase tracking-wide" style={{ color: "#5C6B63", letterSpacing: "0.08em" }}>Horizon</span>
               <div className="flex rounded-md border overflow-hidden" style={{ borderColor: "#DCE2DC" }}>
-                {[25, 50].map((h) => (
+                {[25].map((h) => (
                   <button key={h} onClick={() => setHorizon(h)}
                     className="px-3 py-1 text-xs font-medium transition-colors"
                     style={{ background: horizon === h ? "#182420" : "#FFF", color: horizon === h ? "#FFF" : "#5C6B63" }}>
@@ -731,6 +817,7 @@ export default function UnificationSimulator() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-5">
               <Stat label="Transition debt as share of Republic GNI*" value={`${round1(lastYear.debt/(GNI_STAR*Math.pow(1+structural.southGrowth/100,horizon))*100)}%`} sub="Incremental debt only, not total sovereign debt" />
               <Stat label="Annual cost at horizon" value={`${lastYear.pctGNI}% of Republic GNI*`} sub="Negative means a fiscal surplus. Not a welfare measure." />
+              <Stat label="NI GDP per person relative to Republic GDP" value={`${lastYear.gdpPerPersonRatio}%`} sub={lastYear.gdpPerPersonRatio>100?'Crossover flagged. GDP is not household living standards.':'Official population projections and frozen GDP anchors. Not household income.'} />
               <Stat label="Delivered public capital" value={`€${lastYear.publicCapital}bn`} sub="Additional stock after delays and depreciation" />
               <Stat label="Additional private job equivalents" value={lastYear.additionalJobs.toLocaleString()} sub="Experimental diagnostic. Not added to GDP." />
               <Stat label="Public recruitment index" value={lastYear.publicRecruitmentIndex} sub="Reference = 100. Does not itself add GDP." />
@@ -814,6 +901,7 @@ export default function UnificationSimulator() {
                 <p className="mt-2">The UK status quo has zero incremental Republic cost by definition. The chart compares conditional fiscal paths and does not rank welfare outcomes.</p>
               </div>
             </div>
+            </>}
           </div>
         </div>
       </div>

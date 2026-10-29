@@ -22,7 +22,7 @@
       <form id="access-form" autocomplete="off">
         <div class="access-eyebrow">Restricted preview</div>
         <h1>The Price of Unity</h1>
-        <p>Enter the password to view the fiscal simulator.</p>
+        <p>This preview prompt does not make the model files private.</p>
         <label for="access-password">Password</label>
         <input id="access-password" type="password" autocomplete="current-password" autofocus required>
         <button type="submit">Enter</button>

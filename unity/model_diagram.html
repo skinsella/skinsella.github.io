@@ -1,54 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reunification model diagram</title><style>body{font-family:system-ui;background:#f6f7f4;color:#182420;margin:24px}main{max-width:1100px;margin:auto}.mermaid{background:white;padding:20px;border-radius:10px}a{color:#177052}</style><script>document.documentElement.classList.add(sessionStorage.getItem("priceOfUnityAccess") === "granted" ? "access-granted" : "access-locked");</script>
-<script src="access.js" defer></script>
-<style>
-  html.access-locked body > :not(#access-gate) { visibility: hidden; }
-  #access-gate { visibility: visible; position: fixed; inset: 0; z-index: 99999; display: grid; place-items: center; padding: 20px; background: #F6F7F4; color: #182420; font-family: 'IBM Plex Sans', system-ui, sans-serif; }
-  #access-form { width: min(100%, 390px); padding: 30px; border: 1px solid #DCE2DC; border-radius: 14px; background: #FFF; box-shadow: 0 12px 40px rgba(24,36,32,.08); }
-  #access-form .access-eyebrow { margin-bottom: 10px; color: #5C6B63; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
-  #access-form h1 { margin: 0 0 8px; font-family: 'Fraunces', Georgia, serif; font-size: 32px; }
-  #access-form p { margin: 0 0 22px; color: #5C6B63; font-size: 14px; }
-  #access-form label { display: block; margin-bottom: 6px; color: #5C6B63; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
-  #access-form input { width: 100%; padding: 11px 12px; border: 1px solid #C9D2CB; border-radius: 7px; font: inherit; }
-  #access-form button { width: 100%; margin-top: 12px; padding: 11px; border: 0; border-radius: 7px; background: #177052; color: #FFF; font: inherit; font-weight: 600; cursor: pointer; }
-  #access-error { min-height: 18px; margin-top: 9px; color: #A63D2F; font-size: 12px; }
-</style>
-</head><body><main><p><a href="simulator.html">Simulator</a> · <a href="model_reference.html">Sources and assumptions</a></p><h1>Reunification model connections</h1><p>Scenario selection loads assumptions into the same fiscal engine. Economic responses and revenue feedback remain optional.</p><pre class="mermaid">flowchart TD
-    SELECT["Scenario selection or manual settings"] --> POLICY["Harmonisation and additional expenditure"]
-    SELECT --> TERMS["Negotiated liabilities and pension transfer"]
-    SELECT --> BASE["Baseline receipts and spending paths"]
-    SELECT --> GROW["NI output and reference growth paths"]
-    SELECT --> FINSET["Interest, fund and Republic growth settings"]
-
-    POLICY --> COST["Republic pre-financing cost"]
-    TERMS --> COST
-    BASE --> COST
-    AGE["Explicit ageing and service costs"] --> COST
-    POLICY --> EXP["Optional capital and household demand experiments"]
-    EXP --> OUTPUT["NI output relative to reference"]
-    GROW --> OUTPUT
-    RES["Optional residual output shocks"] --> OUTPUT
-    OUTPUT --> REV["Optional marginal revenue feedback"]
-    REV --> COST
-
-    POLICY --> DIAG["Wage, private capital and job diagnostics"]
-    EXP --> DIAG
-    DIAG --> MIG["Optional migration and service costs"]
-    MIG --> COST
-
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reunification model connections</title><style>body{font:16px/1.6 system-ui;background:#f7f7f1;color:#172a24;max-width:1100px;margin:auto;padding:24px}a{color:#177052}.mermaid{background:white;padding:15px}</style><script>document.documentElement.classList.add(sessionStorage.getItem("priceOfUnityAccess") === "granted" ? "access-granted" : "access-locked");</script><script src="access.js" defer></script><style>html.access-locked body > :not(#access-gate){visibility:hidden}#access-gate{visibility:visible;position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#f7f7f1;padding:20px;font:16px system-ui}#access-form{width:min(100%,390px);padding:30px;background:white;border:1px solid #d7dfd7;border-radius:12px}#access-form input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #aebfb3;border-radius:6px}#access-form button{width:100%;margin-top:12px;background:#177052;color:white;padding:12px;border:0;border-radius:6px}#access-error{min-height:20px;color:#a63d2f}</style><p><a href="story.html">Read the story</a> · <a href="model_reference.html">Sources and equations</a></p><h1>How the model connects</h1><p>Receipts and component spending follow explicit paths. The diagram describes assumed relationships, not estimated causal effects.</p><pre class="mermaid">flowchart TD
+    SELECT["Scenario and negotiated terms"] --> SPEND["Pay, benefits, purchases and inherited interest"]
+    SELECT --> HARM["Moving Republic pay and benefit targets"]
+    SELECT --> GROW["NI policy and reference output paths"]
+    POP["NISRA and CSO population projections"] --> SPEND
+    POP --> PENSION["Indexed pension envelope and funding share"]
+    GROW --> WAGE["Assumed output premium passed to public pay"]
+    WAGE --> SPEND
+    WAGE --> HARM
+    GROW --> TAX["Reference-linked receipts and marginal policy receipts"]
+    SPEND --> COST["Republic cost before transition interest"]
+    PENSION --> COST
+    HARM --> COST
+    TAX --> COST
+    EXTRA["Additional spending and duplication"] --> COST
+    EXTRA --> ECON["Optional capital and demand experiments"]
+    ECON --> TAX
     COST --> ANNUAL["Annual fiscal cost including interest"]
-    FINSET --> FUND["Fund contributions, returns and withdrawals"]
-    FINSET --> INTEREST["Interest on opening transition debt"]
-    ANNUAL --> FIN["Financing need, debt repayment and cash"]
-    FUND --> FIN
-    FIN --> INTEREST
+    FUND["Fund assets, returns, contributions and draws"] --> FIN["Financing, debt repayment and cash"]
+    ANNUAL --> FIN
+    FIN --> INTEREST["Interest on opening transition debt"]
     INTEREST --> ANNUAL
-
-    ANNUAL --> BALANCE["First annual fiscal balance"]
-    ANNUAL --> CUM["Cumulative financing-inclusive cost"]
-    CUM --> PAYBACK["Cumulative fiscal payback"]
+    ANNUAL --> BALANCE["Annual balance and cumulative payback"]
     FIN --> DEBT["Peak and remaining transition debt"]
-    FINSET --> GNI["Republic GNI* path"]
-    ANNUAL --> AFFORD["Annual cost and debt relative to GNI*"]
-    DEBT --> AFFORD
-    GNI --> AFFORD
-</pre><p>Annual balance and cumulative payback are separate tests. Debt ratios describe financing burdens and do not certify affordability.</p><p><a href="book/linked_model_diagram.mmd">Download Mermaid source</a></p></main><script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:'neutral'});</script></body></html>
+    ROI["Republic GNI* path"] --> BURDEN["Cost and debt relative to GNI*"]
+    DEBT --> BURDEN
+    ANNUAL --> BURDEN
+    GROW --> PERPERSON["Matched GDP per person and crossover flag"]
+    POP --> PERPERSON
+    ROI --> PERPERSON
+</pre><script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:'neutral'});</script></html>

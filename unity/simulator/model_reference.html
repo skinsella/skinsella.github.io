@@ -1,0 +1,374 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reunification model reference</title><style>body{font:16px/1.6 system-ui;background:#f6f7f4;color:#182420;margin:auto;padding:24px;max-width:1100px}table{border-collapse:collapse;width:100%;background:white}td,th{padding:10px;text-align:left;border-bottom:1px solid #dce2dc}a{color:#177052}.scroll{overflow:auto}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}li{margin:12px 0}</style><script>document.documentElement.classList.add(sessionStorage.getItem("priceOfUnityAccess") === "granted" ? "access-granted" : "access-locked");</script><script src="../access.js" defer></script><style>html.access-locked body > :not(#access-gate){visibility:hidden}#access-gate{visibility:visible;position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#f7f7f1;padding:20px;font:16px system-ui}#access-form{width:min(100%,390px);padding:30px;background:white;border:1px solid #d7dfd7;border-radius:12px}#access-form input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #aebfb3;border-radius:6px}#access-form button{width:100%;margin-top:12px;background:#177052;color:white;padding:12px;border:0;border-radius:6px}#access-error{min-height:20px;color:#a63d2f}</style><h1>Every assumption, in one place</h1><p><a href="../story.html">Read the story</a> · <a href="../unification_fiscal_simulator.html">Specialist controls</a> · <a href="model_reference.json">Download full register</a></p><p>This is a conditional fiscal model, not a forecast. The economic effects and negotiated settlement remain assumptions.</p><h2>What changed</h2><p>Receipts follow reference output. Pay, benefits, pensions and other purchases now have separate indexed paths, and harmonisation follows a moving target.</p><h2>Sources and vintage</h2><ul><li><a href="../data/rebased.json">Frozen fiscal bridge and original source values</a> Official fiscal update remains on hold. Doyle source period remains mixed.</li><li><a href="https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf">FitzGerald and Morgenroth 2024</a> Tables 6 and 7 provide historical pay, welfare and gross/net harmonisation benchmarks.</li><li><a href="https://all-islandeconomy.com/wp-content/uploads/2025/06/21614_Public_Finances_UPDATED.pdf">Doyle 2025</a> Fiscal/pension/interest envelopes. Not legal certainty or current component accounts.</li><li><a href="https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/1998to2023">ONS regional GDP, 17 April 2025 release, Table 1</a> Verified 2023 NI current-price GDP £63.265bn. Output cell replaces former rounded £63.3bn. Fiscal anchor unchanged.</li><li><a href="https://www.cso.ie/en/releasesandpublications/ep/p-ana/annualnationalaccounts2023/gdpandgrowthrates/">CSO Annual National Accounts 2023, Table 1.1</a> Frozen 12 July 2024 release GDP €509.952bn. GNI* €290.9bn remains the separate fiscal denominator.</li><li><a href="https://www.nisra.gov.uk/publications/2024-based-population-projections-northern-ireland">NISRA 2024-based projections</a> Principal projection, total and 65+ population, 2024–2074. Source workbook saved with the model.</li><li><a href="https://www.cso.ie/en/releasesandpublications/ep/p-plfp/populationandlabourforceprojections2023-2057/populationprojectionsresults/">CSO Population and Labour Force Projections 2023–2057, Table 2.1</a> M1/M2/M3 five-year population knots. Linear annual interpolation is ours. Beyond 2057 held flat and flagged.</li></ul><h2>Equations</h2><div class="scroll"><table><thead><tr><th>Item</th><th>Definition</th></tr></thead><tbody><tr><td>Opening components</td><td>BASE_SPENDING = payBase + nonPensionBenefits + PENSIONS + DEBT_INT + defence + central + residualPurchases</td></tr><tr><td>Baseline receipts</td><td>BASE_REVENUE × referenceOutputFactor × residualReceiptsFactor</td></tr><tr><td>Extra receipts</td><td>marginalRate × (policyOutput − referenceOutput), only when enabled</td></tr><tr><td>Pay</td><td>Opening pay × reference wage index × (policy output / reference output)^selected pass-through × NI population-volume factor. Public pay therefore responds to the chosen output premium.</td></tr><tr><td>Non-pension benefits</td><td>Opening component × own real-rate index × NI population-volume factor</td></tr><tr><td>Pensions</td><td>PENSIONS × own real-rate index × NI over-65-volume factor × Republic funding share</td></tr><tr><td>Negotiated spending</td><td>Defence and central allocations × purchases index × resident volume × unretained share</td></tr><tr><td>Moving harmonisation</td><td>phase × positive difference between indexed Republic target and indexed NI baseline, separately for gross pay and welfare</td></tr><tr><td>Gross/net bridge</td><td>net harmonisation = gross harmonisation × source net envelope / source gross envelope. Recovery is counted once, not added again to receipts.</td></tr><tr><td>Annual Republic cost</td><td>Allocated component spending − baseline receipts − accepted revenue adjustment + net harmonisation + additional expenditure + duplication + service costs − extra receipts + transition interest</td></tr><tr><td>GDP per person comparison</td><td>Matched GDP concepts. Both frozen 2023 GDP anchors are nowcast to common 2024 using reference NI growth and Republic growth, then scenario growth and official population paths apply. Not PPP, household income, GNI* or a welfare comparison.</td></tr><tr><td>Debt and fund</td><td>Opening transition debt earns interest. Surpluses repay debt then accumulate cash. Fund draws affect financing rather than underlying spending.</td></tr><tr><td>Timing</td><td>Base time is an illustrative 2024 demographic normalisation, using frozen historical fiscal envelopes in 2023 prices. Year t GNI* denominator grows for t years. Not a calendar-year official fiscal forecast.</td></tr></tbody></table></div><h2>Every parameter</h2><div class="scroll"><table><thead><tr><th>Name</th><th>Value</th><th>Assumption</th></tr></thead><tbody><tr><td>southGrowth</td><td>2</td><td>Republic GNI* and GDP real growth assumption. Distinct levels are used for fiscal capacity and matched GDP comparison.</td></tr><tr><td>ageing</td><td>0</td><td>Additional pension rate/need drift beyond official over-65 volume growth. Default zero. Avoid duplicating age effects.</td></tr><tr><td>shift</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>realInterest</td><td>2</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>discountRate</td><td>2</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>payGrowthPassThrough</td><td>1</td><td>Assumed elasticity of public pay to NI policy output relative to reference output. One-for-one by default, not an estimated coefficient. Additional economic experiments are excluded from this wage feedback to avoid an unresolved feedback loop.</td></tr><tr><td>niPayGrowth</td><td>1</td><td>NI baseline real public pay growth per worker. Selected assumption.</td></tr><tr><td>niBenefitGrowth</td><td>1</td><td>NI real non-pension benefit-rate growth. Selected assumption.</td></tr><tr><td>pensionRateGrowth</td><td>1</td><td>Real pension-rate growth. Separate from projected over-65 volume growth.</td></tr><tr><td>southPayGrowth</td><td>1</td><td>Real growth of the Republic pay target used in the gross harmonisation gap.</td></tr><tr><td>southBenefitGrowth</td><td>1</td><td>Real growth of the Republic welfare target used in the gross harmonisation gap.</td></tr><tr><td>nonPensionWelfareBase</td><td>6.254136843319665</td><td>Synthetic allocation from 2019 F&amp;M total welfare £9.615bn rebased, less the separately recorded pension envelope. Not an observed current component budget. Change for sensitivity.</td></tr><tr><td>populationVolumes</td><td>true</td><td>NI total population scales pay staffing, benefits and residual purchases. NI over-65 population scales pension volumes once. This is not a cohort or service-demand forecast.</td></tr><tr><td>populationVariant</td><td>M2</td><td>CSO M1/M2/M3 migration variant. Annual interpolation between published five-year knots. Does not change NI population.</td></tr><tr><td>inheritedInterestYears</td><td>25</td><td>Selected duration of the inherited real interest flow, not an estimated maturity. No inherited principal is modelled.</td></tr><tr><td>businessUplift</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>labourUplift</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>transitionShock</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>privateMaturity</td><td>10</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>privateRecovery</td><td>5</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>fundOpening</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>fundReturn</td><td>2</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>fundContribution</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>fundContributionYears</td><td>10</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>fundDrawCap</td><td>5</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>linkedMechanisms</td><td>false</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>growthRevenue</td><td>true</td><td>Adds marginal receipts on policy output above or below the reference. Baseline receipts already grow with reference output.</td></tr><tr><td>taxShare</td><td>35</td><td>Marginal revenue coefficient. Selected 35%, not an estimate of NI tax elasticity.</td></tr><tr><td>baselineRevenueGrowth</td><td>0</td><td>Residual receipts growth in addition to reference output. Zero preserves the starting average reference tax share.</td></tr><tr><td>baselineSpendingGrowth</td><td>1</td><td>Real cost growth of residual purchases per resident. Does not index pay, benefits or pensions.</td></tr><tr><td>defenceSavingShare</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>centralSavingShare</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>taxAdjustmentShare</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>pensionTransferYears</td><td>40</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>ageSensitiveSpending</td><td>0</td><td>Extra non-pension spending base for explicit ageing need. Zero initially.</td></tr><tr><td>outputCeiling</td><td>0</td><td>Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed.</td></tr><tr><td>investmentCapitalShare</td><td>0</td><td>Unallocated by default. Health, welfare and education expenditure is not automatically capital</td></tr><tr><td>spareCapacity</td><td>0</td><td>Explicit fixed-price capacity constraint. No demand dividend without capacity</td></tr><tr><td>baselineGrowth</td><td>2</td><td>NI reference real output growth. Assumed, not a catch-up coefficient.</td></tr><tr><td>investmentEfficiency</td><td>80</td><td>Illustrative delivery efficiency</td></tr><tr><td>investmentLag</td><td>2</td><td>Illustrative construction delay</td></tr><tr><td>capitalDepreciation</td><td>4</td><td>Illustrative depreciation rate</td></tr><tr><td>publicCapitalRatio</td><td>100</td><td>Illustrative stock normalisation, not measured NI capital</td></tr><tr><td>publicCapitalElasticity</td><td>0.106</td><td>External meta-analysis average, not an NI causal estimate</td></tr><tr><td>privateCapitalRatio</td><td>150</td><td>Illustrative stock normalisation</td></tr><tr><td>privateCrowdIn</td><td>1</td><td>Illustrative investment response</td></tr><tr><td>privateAdjustment</td><td>5</td><td>Illustrative adjustment lag</td></tr><tr><td>privateCapitalElasticity</td><td>0.3</td><td>Illustrative production-function parameter</td></tr><tr><td>publicPayBase</td><td>9.273</td><td>Historical F&amp;M 2019 public pay £6.797bn rebased. Used as a component normalisation, not a current measured pay bill.</td></tr><tr><td>payDisposableShare</td><td>65</td><td>Illustrative after-tax income share. No separate fiscal tax add-back</td></tr><tr><td>payMPC</td><td>0.6</td><td>Illustrative propensity to consume</td></tr><tr><td>welfareMPC</td><td>0.8</td><td>Illustrative propensity to consume</td></tr><tr><td>domesticRetention</td><td>50</td><td>Illustrative import leakage. Spending effects are uncertain</td></tr><tr><td>demandRealisation</td><td>50</td><td>Illustrative spare-capacity and price adjustment</td></tr><tr><td>wageSpillover</td><td>20</td><td>Illustrative wage transmission</td></tr><tr><td>labourSupplyElasticity</td><td>0.2</td><td>Illustrative aggregate value. Irish estimates differ across household groups</td></tr><tr><td>welfareIncomeElasticity</td><td>0.05</td><td>Illustrative income effect, not benefit-withdrawal microsimulation</td></tr><tr><td>labourDemandElasticity</td><td>0.5</td><td>Illustrative labour-demand parameter</td></tr><tr><td>labourSlack</td><td>5</td><td>Illustrative labour availability</td></tr><tr><td>publicRecruitmentElasticity</td><td>0.2</td><td>Illustrative recruitment index. Not an output or tax gain</td></tr><tr><td>baselineEmployment</td><td>900000</td><td>Illustrative employment scale, not an official employment estimate</td></tr><tr><td>migrationResponse</td><td>0</td><td>Illustrative response. Disabled by default</td></tr><tr><td>migrantHouseholdSize</td><td>1.5</td><td>Illustrative household size</td></tr><tr><td>serviceCostPerResident</td><td>15000</td><td>Illustrative marginal cost, not average public spending</td></tr><tr><td>reratingScope</td><td>100</td><td>Selected policy input. Growth, harmonisation phase, additional spending or duplication. See bundle definition.</td></tr><tr><td>reratingYears</td><td>15</td><td>Selected policy input. Growth, harmonisation phase, additional spending or duplication. See bundle definition.</td></tr><tr><td>investment</td><td>1.5</td><td>Selected policy input. Growth, harmonisation phase, additional spending or duplication. See bundle definition.</td></tr><tr><td>duplication</td><td>0.25</td><td>Selected policy input. Growth, harmonisation phase, additional spending or duplication. See bundle definition.</td></tr><tr><td>gNI</td><td>2.5</td><td>Selected policy input. Growth, harmonisation phase, additional spending or duplication. See bundle definition.</td></tr><tr><td>stall</td><td>false</td><td>Selected policy input. Growth, harmonisation phase, additional spending or duplication. See bundle definition.</td></tr><tr><td>pensionsUK</td><td>false</td><td>Assumed negotiated allocation, not an established entitlement.</td></tr><tr><td>debtUK</td><td>false</td><td>Assumed negotiated allocation, not an established entitlement.</td></tr></tbody></table></div><h2>Constants</h2><div class="scroll"><table><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody><tr><td>GNI_STAR</td><td>290.9</td></tr><tr><td>NORTH_GNI</td><td>72.73594775750469</td></tr><tr><td>UK_2019_TO_2023_EUR</td><td>1.3643408053374586</td></tr><tr><td>UK_FY2022_TO_2023_EUR</td><td>1.199575803493008</td></tr><tr><td>BASE_REVENUE</td><td>26.118363969453263</td></tr><tr><td>BASE_SPENDING</td><td>43.17636396945326</td></tr><tr><td>GROSS_PAY_FULL</td><td>5.874851507783097</td></tr><tr><td>GROSS_WELFARE_FULL</td><td>6.561114932867839</td></tr><tr><td>SOURCE_PAY_BASE</td><td>9.273424453878706</td></tr><tr><td>PUBLISHED</td><td>17.058</td></tr><tr><td>PENSIONS</td><td>6.864</td></tr><tr><td>DEBT_INT</td><td>4.238</td></tr><tr><td>DEFENCE_NET</td><td>1.64</td></tr><tr><td>OTHER_NONID</td><td>0.692</td></tr><tr><td>TAX_ADD</td><td>1.84</td></tr><tr><td>RERATE_FULL</td><td>11.633734047112508</td></tr></tbody></table></div><h2>Every output</h2><div class="scroll"><table><thead><tr><th>Name</th><th>Definition</th></tr></thead><tbody><tr><td>year</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>publicPay</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>nonPensionBenefits</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>otherPurchases</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>pensionEnvelope</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>revenueAdjustment</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>allocatedInterest</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>niPopulation</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>roiPopulation</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>populationHeld</td><td>One when population is held beyond available source horizon.</td></tr><tr><td>gdpPerPersonRatio</td><td>NI GDP per person / Republic GDP per person, percent. Common 2024 nowcast and official projected population. Not living standards.</td></tr><tr><td>relativePerPersonIndex</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>baselineRevenue</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>baselineSpending</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>pensionTransfer</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>pensionCost</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>harmonisation</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>grossPayIncrease</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>grossWelfareIncrease</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>capacityOutput</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>annualNonPositive</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>cumulativeNonPositive</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>primaryCost</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>interest</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>debt</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>presentValue</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>regionalDeficit</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>cost</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>pctGNI</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>cumulative</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>privateOutput</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>privateRevenue</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>fundBalance</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>fundReturn</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>fundContribution</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>fundDraw</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>totalDraws</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>totalFundReturns</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>financingNeed</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>borrowing</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>netLiabilities</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>cashSavings</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>wealthCost</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>gross</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>gain</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>baselineOutput</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>actualOutput</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>completedCapital</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>publicCapital</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>privateCapital</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>consumptionOutput</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>privateWagePressure</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>publicRecruitmentIndex</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>additionalJobs</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>migrantWorkers</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>additionalResidents</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>serviceCost</td><td>Annual result, defined by the executable source and component equations.</td></tr><tr><td>outputCapped</td><td>Annual result, defined by the executable source and component equations.</td></tr></tbody></table></div><h2>Limits</h2><ul><li>No economic growth is attributed causally to constitutional change.</li><li>Historical component allocations are synthetic normalisations, not fresh official programme budgets.</li><li>Real pay, welfare and purchases growth defaults are illustrative 1% sensitivities, not forecasts.</li><li>Pension headcount uses 65+ population as a proxy. Occupational pensions, retirement ages and cohort rights are not individually modelled.</li><li>No inherited debt principal or bond maturity schedule is estimated. Duration of its interest flow is explicitly selected.</li><li>Migration stays at the official projection assumptions and is not endogenously driven by the selected growth rate.</li><li>GDP includes multinational effects and is not a household living-standard measure. A crossover is flagged, not capped.</li><li>Existing sovereign debt and financing feedback are not modelled, so debt/GNI* does not certify affordability.</li></ul><details><summary>Every variable and relationship in the executable source</summary><pre>// ---------------------------------------------------------------
+// Constant 2023 euros. Fiscal bridge follows data/rebased.json. Northern Ireland GDP £63.3bn × €1.14970.
+// Existing baseline retained pending the agreed ONS update. No new official-data claims.
+
+// ---------------------------------------------------------------
+const GNI_STAR = 290.9;
+const NORTH_GNI = 63.265 / 0.86979; // Verified ONS Table 1, release 17 April 2025, 2023 GDP £63.265bn. Frozen vintage.
+// Original sterling observations from F&amp;M 2024 Tables 6 and 7, not reverse-converted euro totals.
+const UK_2019_TO_2023_EUR = ((90.7406+92.0952+92.7667+92.7151)/(76.6540+77.4590+77.9213+78.3396))/0.86979;
+const UK_FY2022_TO_2023_EUR = ((90.7406+92.0952+92.7667+92.7151)/(85.7671+87.1467+89.3502+90.7406))/0.86979;
+const BASE_REVENUE = 21.773*UK_FY2022_TO_2023_EUR;
+const BASE_SPENDING = BASE_REVENUE+17.058; // Preserve the agreed frozen rounded deficit exactly.
+const GROSS_PAY_FULL = 4.306*UK_2019_TO_2023_EUR;
+const GROSS_WELFARE_FULL = 4.809*UK_2019_TO_2023_EUR;
+const SOURCE_PAY_BASE = 6.797*UK_2019_TO_2023_EUR;
+const MODEL_VERSION = &#39;2026-10-29-component-fiscal&#39;;
+const PUBLISHED = 17.058;
+const PENSIONS = 6.864;
+const DEBT_INT = 4.238;
+const DEFENCE_NET = 1.640;
+const OTHER_NONID = 0.692;
+const TAX_ADD = 1.840;
+const RERATE_FULL = (18.104-9.577)*UK_2019_TO_2023_EUR;
+
+
+const FORMS = {
+  unitary: {
+    key: &quot;unitary&quot;, name: &quot;Unitary&quot;, model: &quot;Merge both systems at once&quot;,
+    color: &quot;#A63D2F&quot;,
+    desc: &quot;Full absorption on day one. Welfare and pay harmonise immediately, duplication ends fast, with growth selected independently.&quot;,
+    defaults: { reratingScope: 100, reratingYears: 1, investment: 0.5, duplication: 0, gNI: 2.5, stall: false },
+  },
+  federal: {
+    key: &quot;federal&quot;, name: &quot;Federal&quot;, model: &quot;Keep two governments for decades&quot;,
+    color: &quot;#2E5E9E&quot;,
+    desc: &quot;A continuing Stormont inside an all-island state. Full harmonisation phased over two decades, but two administrations run permanently.&quot;,
+    defaults: { reratingScope: 100, reratingYears: 20, investment: 0.5, duplication: 0.5, gNI: 2.5, stall: false },
+  },
+  glide: {
+    key: &quot;glide&quot;, name: &quot;Managed Integration&quot;, model: &quot;Phase it in, invest early&quot;,
+    color: &quot;#177052&quot;,
+    desc: &quot;An illustrative linear harmonisation schedule with additional expenditure during the first decade. Growth is a separate assumption.&quot;,
+    defaults: { reratingScope: 100, reratingYears: 15, investment: 1.5, duplication: 0.25, gNI: 2.5, stall: false },
+  },
+  worst: {
+    key: &quot;worst&quot;, name: &quot;Higher Cost&quot;, model: &quot;Immediate harmonisation, larger administration allowance&quot;,
+    color: &quot;#444B52&quot;,
+    desc: &quot;Immediate pay and welfare harmonisation without additional investment. Liability choices and growth are controlled separately and apply to every policy bundle.&quot;,
+    defaults: { reratingScope: 100, reratingYears: 1, investment: 0, duplication: 1, gNI: 2.5, stall: false },
+  },
+  statusquo: {
+    key: &quot;statusquo&quot;, name: &quot;UK status quo&quot;, model: &quot;UK-funded regional balance&quot;,
+    color: &quot;#786A90&quot;, desc: &quot;Northern Ireland remains in the UK. Its regional deficit remains UK-funded. No incremental Republic expenditure is assumed.&quot;,
+    defaults: { reratingScope: 0, reratingYears: 1, investment: 0, duplication: 0, gNI: 2.5, stall: false },
+    counterfactual: true,
+  },
+  shared: {
+    key: &quot;shared&quot;, name: &quot;Shared Island&quot;, model: &quot;Cooperation without constitutional change&quot;,
+    color: &quot;#AA7A19&quot;, desc: &quot;Northern Ireland remains in the UK. The Republic funds the investment selected below. UK liabilities do not transfer.&quot;,
+    defaults: { reratingScope: 0, reratingYears: 1, investment: 0.5, duplication: 0, gNI: 2.5, stall: false },
+    counterfactual: true,
+  },
+};
+
+// ---------------------------------------------------------------
+// Simulation
+// ---------------------------------------------------------------
+function inheritedDeficit(pensionsUK, debtUK, s = {}) {
+  return PUBLISHED - DEFENCE_NET*(s.defenceSavingShare??0)/100 - OTHER_NONID*(s.centralSavingShare??0)/100 - TAX_ADD*(s.taxAdjustmentShare??0)/100
+    - (pensionsUK ? PENSIONS : 0) - (debtUK ? DEBT_INT : 0);
+}
+
+// Published benchmarks are transferred evidence, not Northern Ireland estimates.
+// All other response settings below are explicitly illustrative calibrations.
+const ECONOMIC_PARAMETERS = [
+  {key:&#39;investmentCapitalShare&#39;,label:&#39;Capital share of additional expenditure&#39;,value:0,min:0,max:100,step:5,unit:&#39;%&#39;,basis:&#39;Unallocated by default. Health, welfare and education expenditure is not automatically capital&#39;},
+  {key:&#39;spareCapacity&#39;,label:&#39;Spare capacity for temporary demand&#39;,value:0,min:0,max:20,step:1,unit:&#39;%&#39;,basis:&#39;Explicit fixed-price capacity constraint. No demand dividend without capacity&#39;},
+  {key:&#39;baselineGrowth&#39;,label:&#39;Northern Ireland counterfactual growth&#39;,value:2,min:0,max:4,step:0.25,unit:&#39;% pa&#39;,basis:&#39;Illustrative reference path, independent of Republic growth&#39;},
+  {key:&#39;investmentEfficiency&#39;,label:&#39;Investment delivered as productive capital&#39;,value:80,min:0,max:100,step:5,unit:&#39;%&#39;,basis:&#39;Illustrative delivery efficiency&#39;},
+  {key:&#39;investmentLag&#39;,label:&#39;Investment completion delay&#39;,value:2,min:0,max:10,step:1,unit:&#39; years&#39;,basis:&#39;Illustrative construction delay&#39;},
+  {key:&#39;capitalDepreciation&#39;,label:&#39;Capital depreciation&#39;,value:4,min:0,max:10,step:0.5,unit:&#39;% pa&#39;,basis:&#39;Illustrative depreciation rate&#39;},
+  {key:&#39;publicCapitalRatio&#39;,label:&#39;Reference public capital stock&#39;,value:100,min:25,max:200,step:5,unit:&#39;% of reference output&#39;,basis:&#39;Illustrative stock normalisation, not measured NI capital&#39;},
+  {key:&#39;publicCapitalElasticity&#39;,label:&#39;Public-capital output elasticity&#39;,value:0.106,min:0,max:0.25,step:0.001,unit:&#39;&#39;,basis:&#39;External meta-analysis average, not an NI causal estimate&#39;,url:&#39;https://doi.org/10.1111/joes.12037&#39;},
+  {key:&#39;privateCapitalRatio&#39;,label:&#39;Reference private capital stock&#39;,value:150,min:50,max:300,step:10,unit:&#39;% of reference output&#39;,basis:&#39;Illustrative stock normalisation&#39;},
+  {key:&#39;privateCrowdIn&#39;,label:&#39;Private capital response to productivity&#39;,value:1,min:0,max:3,step:0.1,unit:&#39; elasticity&#39;,basis:&#39;Illustrative investment response&#39;},
+  {key:&#39;privateAdjustment&#39;,label:&#39;Private capital adjustment period&#39;,value:5,min:1,max:15,step:1,unit:&#39; years&#39;,basis:&#39;Illustrative adjustment lag&#39;},
+  {key:&#39;privateCapitalElasticity&#39;,label:&#39;Private-capital output elasticity&#39;,value:0.3,min:0,max:0.6,step:0.05,unit:&#39;&#39;,basis:&#39;Illustrative production-function parameter&#39;},
+  {key:&#39;publicPayBase&#39;,label:&#39;Reference public pay bill&#39;,value:Math.round(SOURCE_PAY_BASE*1000)/1000,min:5,max:20,step:0.001,unit:&#39; €bn&#39;,basis:&#39;F&amp;M 2024 Table 6, 2019 public pay £6.797bn, rebased with UK deflator and 2023 FX. Historical benchmark, not a current measured pay bill&#39;,url:&#39;https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf&#39;},
+  {key:&#39;payDisposableShare&#39;,label:&#39;Pay increase reaching household disposable income&#39;,value:65,min:0,max:100,step:5,unit:&#39;%&#39;,basis:&#39;Illustrative after-tax income share. No separate fiscal tax add-back&#39;},
+  {key:&#39;payMPC&#39;,label:&#39;Consumption from additional disposable pay&#39;,value:0.6,min:0,max:1,step:0.05,unit:&#39; share&#39;,basis:&#39;Illustrative propensity to consume&#39;},
+  {key:&#39;welfareMPC&#39;,label:&#39;Consumption from additional welfare&#39;,value:0.8,min:0,max:1,step:0.05,unit:&#39; share&#39;,basis:&#39;Illustrative propensity to consume&#39;},
+  {key:&#39;domesticRetention&#39;,label:&#39;Additional consumption retained domestically&#39;,value:50,min:0,max:100,step:5,unit:&#39;%&#39;,basis:&#39;Illustrative import leakage. Spending effects are uncertain&#39;,url:&#39;https://www.fiscalcouncil.ie/irelands-spending-multipliers/&#39;},
+  {key:&#39;demandRealisation&#39;,label:&#39;Domestic demand translated into real output&#39;,value:50,min:0,max:100,step:5,unit:&#39;%&#39;,basis:&#39;Illustrative spare-capacity and price adjustment&#39;},
+  {key:&#39;wageSpillover&#39;,label:&#39;Public-to-private wage spillover&#39;,value:20,min:0,max:100,step:5,unit:&#39;%&#39;,basis:&#39;Illustrative wage transmission&#39;},
+  {key:&#39;labourSupplyElasticity&#39;,label:&#39;Labour-supply response to real wages&#39;,value:0.2,min:0,max:0.6,step:0.05,unit:&#39; elasticity&#39;,basis:&#39;Illustrative aggregate value. Irish estimates differ across household groups&#39;,url:&#39;https://www.ucd.ie/economics/t4media/WP09.30.pdf&#39;},
+  {key:&#39;welfareIncomeElasticity&#39;,label:&#39;Welfare income effect on labour supply&#39;,value:0.05,min:0,max:0.3,step:0.01,unit:&#39; elasticity&#39;,basis:&#39;Illustrative income effect, not benefit-withdrawal microsimulation&#39;},
+  {key:&#39;labourDemandElasticity&#39;,label:&#39;Employment response to output and labour costs&#39;,value:0.5,min:0,max:1,step:0.05,unit:&#39; elasticity&#39;,basis:&#39;Illustrative labour-demand parameter&#39;},
+  {key:&#39;labourSlack&#39;,label:&#39;Available resident labour above reference employment&#39;,value:5,min:0,max:15,step:0.5,unit:&#39;%&#39;,basis:&#39;Illustrative labour availability&#39;},
+  {key:&#39;publicRecruitmentElasticity&#39;,label:&#39;Public-service recruitment response to pay&#39;,value:0.2,min:0,max:0.6,step:0.05,unit:&#39; elasticity&#39;,basis:&#39;Illustrative recruitment index. Not an output or tax gain&#39;},
+  {key:&#39;baselineEmployment&#39;,label:&#39;Reference employment for job equivalents&#39;,value:900000,min:700000,max:1100000,step:10000,unit:&#39; jobs&#39;,basis:&#39;Illustrative employment scale, not an official employment estimate&#39;},
+  {key:&#39;migrationResponse&#39;,label:&#39;Unfilled labour demand met through migration&#39;,value:0,min:0,max:100,step:5,unit:&#39;%&#39;,basis:&#39;Illustrative response. Disabled by default&#39;},
+  {key:&#39;migrantHouseholdSize&#39;,label:&#39;Additional residents per migrant worker&#39;,value:1.5,min:1,max:3,step:0.1,unit:&#39; people&#39;,basis:&#39;Illustrative household size&#39;},
+  {key:&#39;serviceCostPerResident&#39;,label:&#39;Annual service cost per additional resident&#39;,value:15000,min:0,max:30000,step:1000,unit:&#39; € per resident&#39;,basis:&#39;Illustrative marginal cost, not average public spending&#39;},
+];
+
+const DEFAULT_STRUCTURAL = { southGrowth: 2, ageing: 0, shift: 0, realInterest: 2, discountRate: 2,
+    payGrowthPassThrough:1, niPayGrowth:1, niBenefitGrowth:1, pensionRateGrowth:1, southPayGrowth:1, southBenefitGrowth:1,
+    nonPensionWelfareBase:9.615*UK_2019_TO_2023_EUR-PENSIONS,
+    populationVolumes:true, populationVariant:&#39;M2&#39;, inheritedInterestYears:25,
+    businessUplift: 0, labourUplift: 0, transitionShock: 0, privateMaturity: 10, privateRecovery: 5,
+    fundOpening: 0, fundReturn: 2, fundContribution: 0, fundContributionYears: 10, fundDrawCap: 5, linkedMechanisms: false, growthRevenue: true,
+    taxShare: 35, baselineRevenueGrowth: 0, baselineSpendingGrowth: 1,
+    defenceSavingShare: 0, centralSavingShare: 0, taxAdjustmentShare: 0,
+    pensionTransferYears: 40, ageSensitiveSpending: 0, outputCeiling: 0,
+    ...Object.fromEntries(ECONOMIC_PARAMETERS.map(item =&gt; [item.key, item.value])) };
+// Conditional feasibility examples. These are selected assumptions, not estimated forecasts.
+const MANAGED_CASES = {
+  negotiated_growth: {label:&#39;Negotiated-growth illustration&#39;,gNI:4.5},
+  faster_growth: {label:&#39;Stronger-growth illustration&#39;,gNI:5.0},
+};
+function managedCase(key) {
+  const example=MANAGED_CASES[key];
+  if(!example)throw new RangeError(&#39;Unknown Managed Integration example&#39;);
+  return {label:example.label,policy:{...FORMS.glide.defaults,gNI:example.gNI,stall:false,pensionsUK:true,debtUK:true,counterfactual:false,shared:false},structural:{...DEFAULT_STRUCTURAL,growthRevenue:true,taxShare:35,defenceSavingShare:100,centralSavingShare:100,taxAdjustmentShare:100,linkedMechanisms:false}};
+}
+
+// Selected fiscal scenarios, not forecasts or estimated policy effects.
+const UNITY_CASES = {
+ federal_balance:{label:&#39;Federal · 4.5% NI growth&#39;,form:&#39;federal&#39;,growth:4.5,fiscalGrowth:1},
+ managed_balance:{label:&#39;Managed Integration · 5% NI growth&#39;,form:&#39;glide&#39;,growth:5,fiscalGrowth:1},
+ federal_payback:{label:&#39;Federal · 5% NI growth&#39;,form:&#39;federal&#39;,growth:5,fiscalGrowth:1},
+ managed_payback:{label:&#39;Managed Integration · 5.5% NI growth&#39;,form:&#39;glide&#39;,growth:5.5,fiscalGrowth:1},
+ unitary_payback:{label:&#39;Unitary · 6% NI growth&#39;,form:&#39;unitary&#39;,growth:6,fiscalGrowth:1},
+ managed_spending:{label:&#39;Managed Integration · faster service spending&#39;,form:&#39;glide&#39;,growth:6,fiscalGrowth:2.5},
+};
+function unityCase(key) {
+ const c=UNITY_CASES[key];
+ if(!c)throw new RangeError(&#39;Unknown fiscal scenario&#39;);
+ const seed=managedCase(&#39;faster_growth&#39;);
+ return {label:c.label,form:c.form,policy:{...seed.policy,...FORMS[c.form].defaults,gNI:c.growth},structural:{...seed.structural,baselineRevenueGrowth:0,baselineSpendingGrowth:c.fiscalGrowth}};
+}
+
+const POPULATION_PROJECTIONS = {&quot;baseYear&quot;:2024,&quot;ni&quot;:{&quot;2024&quot;:{&quot;total&quot;:1927855.0,&quot;over65&quot;:349194.0},&quot;2025&quot;:{&quot;total&quot;:1931301.0,&quot;over65&quot;:357695.0},&quot;2026&quot;:{&quot;total&quot;:1934180.0,&quot;over65&quot;:366755.0},&quot;2027&quot;:{&quot;total&quot;:1936545.0,&quot;over65&quot;:375613.0},&quot;2028&quot;:{&quot;total&quot;:1938324.0,&quot;over65&quot;:384768.0},&quot;2029&quot;:{&quot;total&quot;:1939582.0,&quot;over65&quot;:394243.0},&quot;2030&quot;:{&quot;total&quot;:1940347.0,&quot;over65&quot;:403900.0},&quot;2031&quot;:{&quot;total&quot;:1940634.0,&quot;over65&quot;:413012.0},&quot;2032&quot;:{&quot;total&quot;:1940471.0,&quot;over65&quot;:421637.0},&quot;2033&quot;:{&quot;total&quot;:1939927.0,&quot;over65&quot;:430027.0},&quot;2034&quot;:{&quot;total&quot;:1939054.0,&quot;over65&quot;:437794.0},&quot;2035&quot;:{&quot;total&quot;:1937878.0,&quot;over65&quot;:444859.0},&quot;2036&quot;:{&quot;total&quot;:1936429.0,&quot;over65&quot;:451740.0},&quot;2037&quot;:{&quot;total&quot;:1934818.0,&quot;over65&quot;:457615.0},&quot;2038&quot;:{&quot;total&quot;:1933097.0,&quot;over65&quot;:463004.0},&quot;2039&quot;:{&quot;total&quot;:1931313.0,&quot;over65&quot;:467365.0},&quot;2040&quot;:{&quot;total&quot;:1929481.0,&quot;over65&quot;:470627.0},&quot;2041&quot;:{&quot;total&quot;:1927624.0,&quot;over65&quot;:473832.0},&quot;2042&quot;:{&quot;total&quot;:1925677.0,&quot;over65&quot;:476453.0},&quot;2043&quot;:{&quot;total&quot;:1923707.0,&quot;over65&quot;:479525.0},&quot;2044&quot;:{&quot;total&quot;:1921673.0,&quot;over65&quot;:483750.0},&quot;2045&quot;:{&quot;total&quot;:1919518.0,&quot;over65&quot;:488871.0},&quot;2046&quot;:{&quot;total&quot;:1917172.0,&quot;over65&quot;:493111.0},&quot;2047&quot;:{&quot;total&quot;:1914584.0,&quot;over65&quot;:497114.0},&quot;2048&quot;:{&quot;total&quot;:1911750.0,&quot;over65&quot;:501159.0},&quot;2049&quot;:{&quot;total&quot;:1908622.0,&quot;over65&quot;:505183.0},&quot;2050&quot;:{&quot;total&quot;:1905145.0,&quot;over65&quot;:509615.0},&quot;2051&quot;:{&quot;total&quot;:1901280.0,&quot;over65&quot;:514259.0},&quot;2052&quot;:{&quot;total&quot;:1897000.0,&quot;over65&quot;:518589.00000000006},&quot;2053&quot;:{&quot;total&quot;:1892289.0,&quot;over65&quot;:522676.00000000006},&quot;2054&quot;:{&quot;total&quot;:1887160.0,&quot;over65&quot;:526306.0},&quot;2055&quot;:{&quot;total&quot;:1881601.0,&quot;over65&quot;:529986.0},&quot;2056&quot;:{&quot;total&quot;:1875649.0,&quot;over65&quot;:533125.0},&quot;2057&quot;:{&quot;total&quot;:1869316.0,&quot;over65&quot;:535964.0},&quot;2058&quot;:{&quot;total&quot;:1862660.0,&quot;over65&quot;:538146.0},&quot;2059&quot;:{&quot;total&quot;:1855716.0,&quot;over65&quot;:540216.0},&quot;2060&quot;:{&quot;total&quot;:1848496.0,&quot;over65&quot;:541873.0},&quot;2061&quot;:{&quot;total&quot;:1841061.0,&quot;over65&quot;:543408.0},&quot;2062&quot;:{&quot;total&quot;:1833449.0,&quot;over65&quot;:545618.0},&quot;2063&quot;:{&quot;total&quot;:1825686.0,&quot;over65&quot;:547389.0},&quot;2064&quot;:{&quot;total&quot;:1817821.0,&quot;over65&quot;:548338.0},&quot;2065&quot;:{&quot;total&quot;:1809896.0,&quot;over65&quot;:547391.0},&quot;2066&quot;:{&quot;total&quot;:1801926.0,&quot;over65&quot;:546048.0},&quot;2067&quot;:{&quot;total&quot;:1793928.0,&quot;over65&quot;:544403.0},&quot;2068&quot;:{&quot;total&quot;:1785923.0,&quot;over65&quot;:543239.0},&quot;2069&quot;:{&quot;total&quot;:1777923.0,&quot;over65&quot;:543174.0},&quot;2070&quot;:{&quot;total&quot;:1769940.0,&quot;over65&quot;:543050.0},&quot;2071&quot;:{&quot;total&quot;:1761958.0,&quot;over65&quot;:543206.0},&quot;2072&quot;:{&quot;total&quot;:1754004.0,&quot;over65&quot;:544209.0},&quot;2073&quot;:{&quot;total&quot;:1746067.0,&quot;over65&quot;:546391.0},&quot;2074&quot;:{&quot;total&quot;:1738122.0,&quot;over65&quot;:548554.0}},&quot;roi&quot;:{&quot;M1&quot;:{&quot;2022&quot;:5184000,&quot;2027&quot;:5581800.0,&quot;2032&quot;:5872400.0,&quot;2037&quot;:6142300.0,&quot;2042&quot;:6396300.0,&quot;2047&quot;:6633600.0,&quot;2052&quot;:6839200.0,&quot;2057&quot;:7005400.0},&quot;M2&quot;:{&quot;2022&quot;:5184000,&quot;2027&quot;:5530500.0,&quot;2032&quot;:5761000,&quot;2037&quot;:5946900.0,&quot;2042&quot;:6113200.0,&quot;2047&quot;:6259900.0,&quot;2052&quot;:6373200.0,&quot;2057&quot;:6446300.0},&quot;M3&quot;:{&quot;2022&quot;:5184000,&quot;2027&quot;:5489700.0,&quot;2032&quot;:5645500.0,&quot;2037&quot;:5721200.0,&quot;2042&quot;:5771500.0,&quot;2047&quot;:5797300.0,&quot;2052&quot;:5786300.0,&quot;2057&quot;:5733700.0}}};
+
+function populationAt(year,variant=&#39;M2&#39;) {
+ const years=Object.keys(POPULATION_PROJECTIONS.roi[variant]).map(Number).sort((a,b)=&gt;a-b);
+ const clamped=Math.max(years[0],Math.min(years.at(-1),year));
+ const left=years.filter(y=&gt;y&lt;=clamped).at(-1),right=years.find(y=&gt;y&gt;=clamped);
+ const roi=left===right?POPULATION_PROJECTIONS.roi[variant][left]:POPULATION_PROJECTIONS.roi[variant][left]+(POPULATION_PROJECTIONS.roi[variant][right]-POPULATION_PROJECTIONS.roi[variant][left])*(clamped-left)/(right-left);
+ const niYear=Math.max(2024,Math.min(2074,year)),ni=POPULATION_PROJECTIONS.ni[niYear];
+ return {ni:ni.total,niOver65:ni.over65,roi,heldBeyondSource:year&gt;2057||year&gt;2074};
+}
+function fiscalComponents(p,s,t) {
+ const start=populationAt(2024,s.populationVariant),pop=populationAt(2024+t,s.populationVariant);
+ const volumes=s.populationVolumes?pop.ni/start.ni:1,pensionVolumes=s.populationVolumes?pop.niOver65/start.niOver65:1;
+ const payBase=s.publicPayBase,benefitBase=s.nonPensionWelfareBase;
+ const purchasesBase=BASE_SPENDING-payBase-benefitBase-PENSIONS-DEBT_INT-DEFENCE_NET-OTHER_NONID;
+ if(purchasesBase&lt;0)throw new RangeError(&#39;Component allocations exceed frozen gross spending&#39;);
+ const relativeRate=(1+p.gNI/100)/(1+s.baselineGrowth/100);
+ const relativeOutput=p.stall&amp;&amp;t&gt;7?Math.pow(relativeRate,7)*Math.pow(Math.min(relativeRate,1.004),t-7):Math.pow(relativeRate,t);
+ const pay=payBase*Math.pow(1+s.niPayGrowth/100,t)*Math.pow(relativeOutput,s.payGrowthPassThrough)*volumes;
+ const benefits=benefitBase*Math.pow(1+s.niBenefitGrowth/100,t)*volumes;
+ const pensionEnvelope=PENSIONS*Math.pow(1+s.pensionRateGrowth/100,t)*pensionVolumes*Math.pow(1+s.ageing/100,t);
+ const purchasesFactor=Math.pow(1+s.baselineSpendingGrowth/100,t)*volumes;
+ const purchases=purchasesBase*purchasesFactor;
+ const defence=DEFENCE_NET*purchasesFactor*(1-s.defenceSavingShare/100);
+ const central=OTHER_NONID*purchasesFactor*(1-s.centralSavingShare/100);
+ const allocatedInterest=t&lt;=s.inheritedInterestYears?DEBT_INT:0;
+ const pensionShare=p.pensionsUK?Math.min(t/s.pensionTransferYears,1):1;
+ const pensionCost=pensionEnvelope*pensionShare;
+ const spending=pay+benefits+pensionCost+purchases+defence+central+(p.debtUK?0:allocatedInterest);
+ const baselineSpending=pay+benefits+pensionEnvelope+purchases+(DEFENCE_NET+OTHER_NONID)*purchasesFactor+allocatedInterest;
+ const referenceFactor=Math.pow(1+s.baselineGrowth/100,t);
+ const baselineRevenue=BASE_REVENUE*referenceFactor*Math.pow(1+s.baselineRevenueGrowth/100,t);
+ const revenueAdjustment=TAX_ADD*s.taxAdjustmentShare/100*referenceFactor;
+ const phase=p.counterfactual?0:Math.min(t/p.reratingYears,1)*p.reratingScope/100;
+ const payTarget=(payBase+GROSS_PAY_FULL)*Math.pow(1+s.southPayGrowth/100,t)*volumes;
+ const grossPayIncrease=phase*Math.max(0,payTarget-pay);
+ const welfareBase=benefitBase+PENSIONS;
+ const pensionWeight=PENSIONS/welfareBase;
+ const welfareVolumes=(1-pensionWeight)*volumes+pensionWeight*pensionVolumes;
+ const welfareTarget=(welfareBase+GROSS_WELFARE_FULL)*Math.pow(1+s.southBenefitGrowth/100,t)*welfareVolumes;
+ const welfareBefore=benefits+pensionEnvelope;
+ const grossWelfareIncrease=phase*Math.max(0,welfareTarget-welfareBefore);
+ // Source net/gross bridge is applied once. This is not an estimated tax schedule.
+ const netRecoveryShare=1-RERATE_FULL/(GROSS_PAY_FULL+GROSS_WELFARE_FULL);
+ const harmonisation=(grossPayIncrease+grossWelfareIncrease)*(1-netRecoveryShare);
+ return {pay,benefits,pensionEnvelope,pensionCost,purchases,defence,central,allocatedInterest,spending,baselineSpending,baselineRevenue,revenueAdjustment,harmonisation,grossPayIncrease,grossWelfareIncrease,volumes,pensionVolumes,niPopulation:pop.ni,roiPopulation:pop.roi,populationHeld:pop.heldBeyondSource?1:0};
+}
+
+const MODEL_CONSTANTS = { GNI_STAR, NORTH_GNI, UK_2019_TO_2023_EUR, UK_FY2022_TO_2023_EUR, BASE_REVENUE, BASE_SPENDING, GROSS_PAY_FULL, GROSS_WELFARE_FULL, SOURCE_PAY_BASE, PUBLISHED, PENSIONS, DEBT_INT, DEFENCE_NET, OTHER_NONID, TAX_ADD, RERATE_FULL };
+
+function validateInputs(p,horizon,s) {
+  if(!Number.isInteger(horizon)||horizon&lt;1||horizon&gt;100)throw new RangeError(&#39;Horizon must be an integer from 1 to 100&#39;);
+  for(const [key,value] of Object.entries({...s,...p}))if(typeof value===&#39;number&#39;&amp;&amp;!Number.isFinite(value))throw new RangeError(&#39;Non-finite input &#39;+key);
+  for(const key of Object.keys(s))if(!(key in DEFAULT_STRUCTURAL))throw new TypeError(&#39;Unknown structural input &#39;+key);
+  for(const [key,value] of Object.entries(s))if(typeof DEFAULT_STRUCTURAL[key]===&#39;number&#39;&amp;&amp;!Number.isFinite(value))throw new TypeError(&#39;Non-numeric input &#39;+key);
+  for(const key of Object.keys(p))if(![&#39;gNI&#39;,&#39;stall&#39;,&#39;reratingScope&#39;,&#39;reratingYears&#39;,&#39;investment&#39;,&#39;duplication&#39;,&#39;pensionsUK&#39;,&#39;debtUK&#39;,&#39;counterfactual&#39;,&#39;shared&#39;].includes(key))throw new TypeError(&#39;Unknown policy input &#39;+key);
+  for(const key of [&#39;linkedMechanisms&#39;,&#39;growthRevenue&#39;,&#39;populationVolumes&#39;])if(s[key]!==undefined&amp;&amp;typeof s[key]!==&#39;boolean&#39;)throw new TypeError(&#39;Invalid switch &#39;+key);
+  for(const key of [&#39;stall&#39;,&#39;counterfactual&#39;,&#39;shared&#39;])if(p[key]!==undefined&amp;&amp;typeof p[key]!==&#39;boolean&#39;)throw new TypeError(&#39;Invalid switch &#39;+key);
+  for(const key of [&#39;gNI&#39;,&#39;reratingScope&#39;,&#39;reratingYears&#39;,&#39;investment&#39;,&#39;duplication&#39;])if(!Number.isFinite(p[key]))throw new TypeError(&#39;Missing policy input &#39;+key);
+  for(const key of [&#39;pensionsUK&#39;,&#39;debtUK&#39;])if(typeof p[key]!==&#39;boolean&#39;)throw new TypeError(&#39;Missing liability switch &#39;+key);
+  if(p.gNI&lt;0||p.gNI&gt;7||p.reratingScope&lt;0||p.reratingScope&gt;100||p.reratingYears&lt;1||p.investment&lt;0||p.duplication&lt;0)throw new RangeError(&#39;Policy input outside supported domain&#39;);
+  for(const item of ECONOMIC_PARAMETERS){const v=s[item.key]??item.value;if(!Number.isFinite(v)||v&lt;item.min||v&gt;item.max)throw new RangeError(&#39;Economic input outside supported domain &#39;+item.key);}
+  for(const key of [&#39;southGrowth&#39;,&#39;ageing&#39;])if(!Number.isFinite(s[key])||s[key]&lt;0||s[key]&gt;10)throw new RangeError(&#39;Invalid structural input &#39;+key);
+  for(const key of [&#39;fundOpening&#39;,&#39;fundContribution&#39;,&#39;fundDrawCap&#39;,&#39;realInterest&#39;,&#39;discountRate&#39;,&#39;ageSensitiveSpending&#39;])if((s[key]??0)&lt;0)throw new RangeError(&#39;Negative input &#39;+key);
+  if((s.fundReturn??0)&lt;-100)throw new RangeError(&#39;Fund return cannot be below minus 100 percent&#39;);
+  if((s.pensionTransferYears??40)&lt;1||(s.outputCeiling??0)&lt;0||((s.outputCeiling??0)&gt;0&amp;&amp;s.outputCeiling&lt;1))throw new RangeError(&#39;Invalid transfer period or ceiling&#39;);
+  for(const key of [&#39;defenceSavingShare&#39;,&#39;centralSavingShare&#39;,&#39;taxAdjustmentShare&#39;,&#39;taxShare&#39;])if((s[key]??(key===&#39;taxShare&#39;?35:100))&lt;0||(s[key]??0)&gt;100)throw new RangeError(&#39;Invalid percentage &#39;+key);
+  for(const key of [&#39;baselineRevenueGrowth&#39;,&#39;baselineSpendingGrowth&#39;])if((s[key]??0)&lt;-10||(s[key]??0)&gt;10)throw new RangeError(&#39;Invalid fiscal baseline growth &#39;+key);
+  if(!Number.isFinite(s.payGrowthPassThrough)||s.payGrowthPassThrough&lt;0||s.payGrowthPassThrough&gt;1)throw new RangeError(&#39;Invalid public pay pass-through&#39;);
+  if(![&#39;M1&#39;,&#39;M2&#39;,&#39;M3&#39;].includes(s.populationVariant))throw new RangeError(&#39;Unknown CSO population variant&#39;);
+  for(const key of [&#39;niPayGrowth&#39;,&#39;niBenefitGrowth&#39;,&#39;pensionRateGrowth&#39;,&#39;southPayGrowth&#39;,&#39;southBenefitGrowth&#39;])if(!Number.isFinite(s[key])||s[key]&lt;-2||s[key]&gt;6)throw new RangeError(&#39;Invalid indexation rate &#39;+key);
+  if(s.nonPensionWelfareBase&lt;0||s.inheritedInterestYears&lt;0||s.inheritedInterestYears&gt;100)throw new RangeError(&#39;Invalid component settings&#39;);
+  if(s.shift)throw new RangeError(&#39;Unspecified compositional deficit erosion has been removed&#39;);
+}
+function policyForForm(key, common, selected = null) {
+  if(!FORMS[key])throw new RangeError(&#39;Unknown policy bundle&#39;);
+  return {...FORMS[key].defaults,...(selected??{}),...common,counterfactual:!!FORMS[key].counterfactual,shared:key===&#39;shared&#39;};
+}
+
+function simulate(p, horizon, s) {
+  const e = Object.fromEntries(ECONOMIC_PARAMETERS.map(item =&gt; [item.key, s[item.key] ?? item.value]));
+  validateInputs(p,horizon,s);
+  const linked = s.linkedMechanisms === true;
+  const core = inheritedDeficit(true,true,s);
+  const pensionsBorne = p.pensionsUK ? 0 : PENSIONS;
+  const debtBorne = p.debtUK ? 0 : DEBT_INT;
+  const r = (1 + p.gNI / 100) / (1 + e.baselineGrowth / 100);
+  const gs = s.southGrowth / 100, ag = s.ageing / 100;
+  const isStatusQuo = p.counterfactual &amp;&amp; !p.shared;
+  const openingFund = isStatusQuo ? 0 : Math.max(0, s.fundOpening ?? 0);
+  let cumulative=0, debt=0, presentValue=0, cashSavings=0, fundBalance=openingFund;
+  let totalDraws=0, totalFundReturns=0, factorAtStall=null, publicCapital=0, privateCapital=0, migrantWorkers=0;
+  const rows=[];
+  const clamp=(x,lo,hi)=&gt;Math.max(lo,Math.min(hi,x));
+  for(let t=1;t&lt;=horizon;t++) {
+    let factor;
+    if(p.stall &amp;&amp; t&gt;7) {
+      if(factorAtStall===null) factorAtStall=Math.pow(r,7);
+      factor=factorAtStall*Math.pow(Math.min(r,1.004),t-7);
+    } else factor=Math.pow(r,t);
+    const baselineOutput=NORTH_GNI*Math.pow(1+e.baselineGrowth/100,t);
+    // The no-change case follows the reference NI path, not the policy growth input.
+    const policyOutput=isStatusQuo ? baselineOutput : baselineOutput*factor;
+    const ageF=Math.pow(1+ag,t);
+    const components=fiscalComponents(p,s,t);
+    const baselineRevenue=components.baselineRevenue,baselineSpending=components.baselineSpending;
+    const fiscalDrift=0;
+    const coreAged=components.spending-components.baselineRevenue-components.revenueAdjustment+(s.ageSensitiveSpending??0)*(ageF-1);
+    const shiftErosion=0; // Unsupported disappearance of a residual deficit removed.
+    const rerating=components.harmonisation;
+    const invest=!isStatusQuo &amp;&amp; t&lt;=10 ? p.investment : 0;
+    const payIncrease=components.grossPayIncrease, welfareIncrease=components.grossWelfareIncrease;
+    const privateRamp=Math.min(t/Math.max(1,s.privateMaturity??10),1);
+    const shockDecay=Math.max(0,1-(t-1)/Math.max(1,s.privateRecovery??5));
+    const businessResidual=isStatusQuo ? 0 : (s.businessUplift??0)*privateRamp/100;
+    const labourResidual=isStatusQuo ? 0 : (s.labourUplift??0)*privateRamp/100;
+    const disruption=isStatusQuo ? 0 : (s.transitionShock??0)*shockDecay/100;
+    let publicProductivity=1, privateProductivity=1, consumptionOutput=0, employmentChange=0;
+    let residentEmploymentChange=0, privateWagePressure=0, publicRecruitment=0, serviceCost=0, completedCapital=0;
+    if(linked &amp;&amp; !isStatusQuo) {
+      const completionYear=t-Math.round(e.investmentLag);
+      completedCapital=completionYear&gt;=1 &amp;&amp; completionYear&lt;=10 ? p.investment*e.investmentCapitalShare/100*e.investmentEfficiency/100 : 0;
+      publicCapital=publicCapital*(1-e.capitalDepreciation/100)+completedCapital;
+      const publicReference=baselineOutput*e.publicCapitalRatio/100;
+      publicProductivity=Math.pow(1+publicCapital/publicReference,e.publicCapitalElasticity);
+      const publicWageChange=payIncrease/e.publicPayBase;
+      privateWagePressure=publicWageChange*e.wageSpillover/100;
+      publicRecruitment=clamp(e.publicRecruitmentElasticity*publicWageChange,0,0.5);
+      const disposablePay=payIncrease*e.payDisposableShare/100;
+      const consumptionSpending=(e.payMPC*disposablePay+e.welfareMPC*welfareIncrease)*e.domesticRetention/100;
+      consumptionOutput=consumptionSpending*e.demandRealisation/100;
+      const privateReference=baselineOutput*e.privateCapitalRatio/100;
+      const targetPrivate=privateReference*clamp(e.privateCrowdIn*(publicProductivity-1)-privateWagePressure,-0.5,0.5);
+      // Target is an additional net stock. Replacement is implicit in maintaining it.
+      privateCapital=privateCapital+(targetPrivate-privateCapital)/e.privateAdjustment;
+      privateCapital=Math.max(privateCapital,-0.8*privateReference);
+      privateProductivity=Math.pow(1+privateCapital/privateReference,e.privateCapitalElasticity);
+      // Private labour demand responds to productivity/capital and wage pressure.
+      // Consumption output is a separate first-round effect, not counted again in this employment channel.
+      const labourDemand=clamp(e.labourDemandElasticity*(publicProductivity*privateProductivity-1-privateWagePressure),-0.5,0.5);
+      const welfareIncomeEffect=e.welfareIncomeElasticity*welfareIncrease/(0.6*baselineOutput);
+      const labourSupply=clamp(e.labourSlack/100+e.labourSupplyElasticity*privateWagePressure-welfareIncomeEffect+labourResidual,-0.5,0.5);
+      residentEmploymentChange=Math.min(labourDemand,labourSupply);
+      const unfilledJobs=Math.max(0,(labourDemand-residentEmploymentChange)*e.baselineEmployment-migrantWorkers);
+      migrantWorkers+=unfilledJobs*e.migrationResponse/100;
+      const employedMigrantWorkers=Math.min(migrantWorkers,Math.max(0,(labourDemand-residentEmploymentChange)*e.baselineEmployment));
+      employmentChange=clamp(residentEmploymentChange+employedMigrantWorkers/e.baselineEmployment,-0.5,0.5);
+      const extraResidents=migrantWorkers*e.migrantHouseholdSize;
+      serviceCost=extraResidents*e.serviceCostPerResident/1e9;
+    }
+    // The public-capital benchmark is a reduced-form output response. Do not add its
+    // induced private-capital and job responses to output again. They remain diagnostics.
+    const labourFactor=1+labourResidual;
+    const supplyOutput=policyOutput*publicProductivity*labourFactor;
+    const capacityOutput=supplyOutput/(1-e.spareCapacity/100);
+    consumptionOutput=Math.min(consumptionOutput,Math.max(0,capacityOutput-supplyOutput));
+    const uncappedOutput=(supplyOutput+consumptionOutput)*(1+businessResidual-disruption);
+    const ceiling=(s.outputCeiling??0)&gt;0 ? baselineOutput*s.outputCeiling : Number.MAX_VALUE;
+    const actualOutput=isStatusQuo ? baselineOutput : clamp(uncappedOutput,0,ceiling);
+    const marginalRevenue=s.growthRevenue===true ? (s.taxShare??35)/100 : 0;
+    const baselineGain=marginalRevenue*(policyOutput-baselineOutput);
+    const privateOutput=actualOutput-policyOutput;
+    const privateRevenue=marginalRevenue*privateOutput;
+    const gain=baselineGain+privateRevenue;
+    // Transfer the same frozen pension envelope, so the endpoints reconcile.
+    // This is a linear funding scenario, not a cohort-based actuarial forecast.
+    const pension=p.pensionsUK ? components.pensionCost : 0;
+    // Includes inherited debt interest. This is not a textbook primary balance.
+    const preFinancingCost=coreAged+rerating+invest+p.duplication+serviceCost-gain;
+    const regionalDeficit=baselineSpending-baselineRevenue+(s.ageSensitiveSpending??0)*(ageF-1)+serviceCost+invest+rerating-gain;
+    const primary=p.counterfactual ? (p.shared ? invest : 0) : preFinancingCost;
+    const interest=debt*((s.realInterest??2)/100), cost=primary+interest;
+    const fundReturn=fundBalance*((s.fundReturn??0)/100);
+    const availableFund=Math.max(0,fundBalance+fundReturn);
+    const contribution=!isStatusQuo &amp;&amp; t&lt;=(s.fundContributionYears??10) ? Math.max(0,s.fundContribution??0) : 0;
+    const fundDraw=Math.min(availableFund,Math.max(0,cost),Math.max(0,s.fundDrawCap??5));
+    fundBalance=availableFund+contribution-fundDraw;
+    totalDraws+=fundDraw; totalFundReturns+=fundReturn;
+    const financingNeed=cost+contribution-fundDraw;
+    const cashUsed=Math.min(cashSavings,Math.max(0,financingNeed));
+    cashSavings-=cashUsed;
+    const debtBeforeFloor=debt+financingNeed-cashUsed;
+    cashSavings+=Math.max(0,-debtBeforeFloor);
+    const borrowing=Math.max(0,financingNeed-cashUsed);
+    debt=Math.max(0,debtBeforeFloor);
+    const netLiabilities=debt-fundBalance-cashSavings, wealthCost=netLiabilities+openingFund;
+    presentValue+=cost/Math.pow(1+(s.discountRate??2)/100,t);
+    const denom=GNI_STAR*Math.pow(1+gs,t);
+    cumulative+=cost;
+    rows.push({
+      year:t, publicPay:round2(components.pay),nonPensionBenefits:round2(components.benefits),otherPurchases:round2(components.purchases),pensionEnvelope:round2(components.pensionEnvelope),revenueAdjustment:round2(components.revenueAdjustment),allocatedInterest:round2(p.debtUK?0:components.allocatedInterest),
+      niPopulation:Math.round(components.niPopulation),roiPopulation:Math.round(components.roiPopulation),populationHeld:components.populationHeld,
+      // Matched GDP concepts, common 2024 nowcast from frozen 2023 source anchors. Not household income.
+      gdpPerPersonRatio:round2(100*(actualOutput*(1+e.baselineGrowth/100)/components.niPopulation)/(509.952*Math.pow(1+gs,t+1)/components.roiPopulation)),
+      relativePerPersonIndex:round2(100*(actualOutput/NORTH_GNI)/Math.pow(1+gs,t)*(populationAt(2024,s.populationVariant).ni/components.niPopulation)/(populationAt(2024,s.populationVariant).roi/components.roiPopulation)),
+      baselineRevenue:round2(baselineRevenue), baselineSpending:round2(baselineSpending), pensionTransfer:round2(pension), pensionCost:round2(components.pensionCost), harmonisation:round2(rerating), grossPayIncrease:round2(payIncrease), grossWelfareIncrease:round2(welfareIncrease), capacityOutput:round2(capacityOutput), annualNonPositive:cost&lt;=0 ? 1 : 0, cumulativeNonPositive:cumulative&lt;=0 ? 1 : 0, primaryCost:round1(primary), interest:round2(interest), debt:round1(debt), presentValue:round1(presentValue),
+      regionalDeficit:round2(regionalDeficit), cost:round1(cost), pctGNI:round2(cost/denom*100), cumulative:round1(cumulative),
+      privateOutput:round2(privateOutput), privateRevenue:round2(privateRevenue), fundBalance:round2(fundBalance),
+      fundReturn:round2(fundReturn), fundContribution:round2(contribution), fundDraw:round2(fundDraw),
+      totalDraws:round2(totalDraws), totalFundReturns:round2(totalFundReturns), financingNeed:round2(financingNeed),
+      borrowing:round2(borrowing), netLiabilities:round2(netLiabilities), cashSavings:round2(cashSavings), wealthCost:round2(wealthCost),
+      gross:round1(coreAged+rerating+invest+p.duplication+serviceCost), gain:round1(-gain),
+      baselineOutput:round2(baselineOutput), actualOutput:round2(actualOutput), completedCapital:round2(completedCapital),
+      publicCapital:round2(publicCapital), privateCapital:round2(privateCapital), consumptionOutput:round2(consumptionOutput),
+      privateWagePressure:round2(privateWagePressure*100), publicRecruitmentIndex:round2(100*(1+publicRecruitment)),
+      additionalJobs:round0(employmentChange*e.baselineEmployment), migrantWorkers:round0(migrantWorkers),
+      additionalResidents:round0(migrantWorkers*e.migrantHouseholdSize), serviceCost:round2(serviceCost),
+      outputCapped:uncappedOutput&gt;ceiling ? 1 : 0,
+    });
+  }
+  return rows;
+}
+
+function breakEven(rows) {
+  const hit = rows.find((r) =&gt; r.annualNonPositive === 1);
+  return hit ? hit.year : null;
+}
+function payback(rows) {
+  let started = false;
+  for (const r of rows) {
+    if (r.cumulativeNonPositive === 0) started = true;
+    if (started &amp;&amp; r.cumulativeNonPositive === 1) return r.year;
+  }
+  return null;
+}
+const round0 = (x) =&gt; { const rounded=Math.round(x); return rounded===0 ? 0 : rounded; };
+const round1 = (x) =&gt; { const rounded=Math.round(x*10)/10; return rounded===0 ? 0 : rounded; };
+const round2 = (x) =&gt; { const rounded=Math.round(x*100)/100; return rounded===0 ? 0 : rounded; };
+
+
+export { FORMS, ECONOMIC_PARAMETERS, DEFAULT_STRUCTURAL, MODEL_CONSTANTS, simulate, inheritedDeficit, breakEven, payback, policyForForm, validateInputs, MANAGED_CASES, managedCase, UNITY_CASES, unityCase, fiscalComponents, populationAt, POPULATION_PROJECTIONS };
+</pre></details><p>Model fingerprint 93f2868aee8d484adbba6e63f5390f52bc9986f58c97d5e6725a64f45edeb3f8</p></html>

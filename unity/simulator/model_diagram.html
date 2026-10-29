@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reunification model connections</title><style>body{font:16px/1.6 system-ui;background:#f7f7f1;color:#172a24;max-width:1100px;margin:auto;padding:24px}a{color:#177052}.mermaid{background:white;padding:15px}</style><script>document.documentElement.classList.add(sessionStorage.getItem("priceOfUnityAccess") === "granted" ? "access-granted" : "access-locked");</script><script src="../access.js" defer></script><style>html.access-locked body > :not(#access-gate){visibility:hidden}#access-gate{visibility:visible;position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#f7f7f1;padding:20px;font:16px system-ui}#access-form{width:min(100%,390px);padding:30px;background:white;border:1px solid #d7dfd7;border-radius:12px}#access-form input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #aebfb3;border-radius:6px}#access-form button{width:100%;margin-top:12px;background:#177052;color:white;padding:12px;border:0;border-radius:6px}#access-error{min-height:20px;color:#a63d2f}</style><p><a href="../story.html">Read the story</a> · <a href="model_reference.html">Sources and equations</a></p><h1>How the model connects</h1><p>Receipts and component spending follow explicit paths. The diagram describes assumed relationships, not estimated causal effects.</p><pre class="mermaid">flowchart TD
+    SELECT["Scenario and negotiated terms"] --> SPEND["Pay, benefits, purchases and inherited interest"]
+    SELECT --> HARM["Moving Republic pay and benefit targets"]
+    SELECT --> GROW["NI policy and reference output paths"]
+    POP["NISRA and CSO population projections"] --> SPEND
+    POP --> PENSION["Indexed pension envelope and funding share"]
+    GROW --> WAGE["Assumed output premium passed to public pay"]
+    WAGE --> SPEND
+    WAGE --> HARM
+    GROW --> TAX["Reference-linked receipts and marginal policy receipts"]
+    SPEND --> COST["Republic cost before transition interest"]
+    PENSION --> COST
+    HARM --> COST
+    TAX --> COST
+    EXTRA["Additional spending and duplication"] --> COST
+    EXTRA --> ECON["Optional capital and demand experiments"]
+    ECON --> TAX
+    COST --> ANNUAL["Annual fiscal cost including interest"]
+    FUND["Fund assets, returns, contributions and draws"] --> FIN["Financing, debt repayment and cash"]
+    ANNUAL --> FIN
+    FIN --> INTEREST["Interest on opening transition debt"]
+    INTEREST --> ANNUAL
+    ANNUAL --> BALANCE["Annual balance and cumulative payback"]
+    FIN --> DEBT["Peak and remaining transition debt"]
+    ROI["Republic GNI* path"] --> BURDEN["Cost and debt relative to GNI*"]
+    DEBT --> BURDEN
+    ANNUAL --> BURDEN
+    GROW --> PERPERSON["Matched GDP per person and crossover flag"]
+    POP --> PERPERSON
+    ROI --> PERPERSON
+</pre><script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:'neutral'});</script></html>

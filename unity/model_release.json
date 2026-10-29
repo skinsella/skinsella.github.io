@@ -1,30 +1,9 @@
 {
-  "modelSha256": "24968ec1ae0e7def373db841df88f7fd928ddf31a4b046e4b55f3f50aab29f2f",
-  "purpose": "Conditional fiscal scenarios, not forecasts",
-  "entry": "simulator.html",
-  "diagram": "model_diagram.html",
-  "access": "Existing access.js unchanged",
-  "files": [
-    "simulator/unification_fiscal_simulator.jsx",
-    "simulator/scenario_model.mjs",
-    "simulator/model_reference.json",
-    "simulator/model_audit.json",
-    "book/linked_model_diagram.mmd",
-    "book/linked_model_description.md",
-    "book/united_ireland_fiscal_cases.md",
-    "book/managed_integration_25_year_tests.md",
-    "book/model_audit_2026_10_28.md",
-    "book/model_changes_2026_10_28.md",
-    "data/rebased.json",
-    "data/simulator_calibration.json",
-    "data/united_ireland_fiscal_cases.json",
-    "data/managed_integration_viability.json",
-    "data/managed_integration_faster_growth_run.json",
-    "data/managed_integration_negotiated_growth_run.json",
-    "data/reproducible_reference_run.json",
-    "scripts/reproduce_run.mjs",
-    "scripts/rebase.py",
-    "scripts/build_unity_cases.mjs",
-    "scripts/build_managed_viability.mjs"
-  ]
+  "modelVersion": "2026-10-29-component-fiscal",
+  "modelSha256": "93f2868aee8d484adbba6e63f5390f52bc9986f58c97d5e6725a64f45edeb3f8",
+  "story": "index.html",
+  "specialist": "unification_fiscal_simulator.html",
+  "reference": "model_reference.html",
+  "access": "Existing browser-side preview verifier retained. Static model files are public.",
+  "qualification": "Conditional model with historical component allocations, not a forecast."
 }
