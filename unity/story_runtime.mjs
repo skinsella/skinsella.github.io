@@ -1,4 +1,4 @@
-import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs?v=93f2868aee8d';
+import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs?v=46294b0f6fdc';
 const $=id=>document.getElementById(id),keys=['unitary','federal','glide','worst'];
 const names={unitary:'Unitary',federal:'Federal',glide:'Managed Integration',worst:'Higher Cost'};
 const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2};
@@ -39,10 +39,11 @@ function render(){
  lines('future-chart',series,'cost','Annual Republic fiscal costs across four futures. Grey zero line is additional Republic cost under UK status quo.');
  $('design-caption').textContent=`Managed Integration uses your ${state.years}-year timetable. Unitary and Higher Cost use immediate harmonisation, Federal uses 20 years. Other programme spending is set out in the model reference.`;
  lines('growth-chart',series,'cumulative','Cumulative Republic costs including transition interest. Below zero indicates costs repaid.');
+ $('growth-legend').innerHTML=series.map(s=>`<span><span class="dot" style="background:${s.colour}"></span>${s.name}</span>`).join('');
  const paid=series.filter(s=>payback(s.rows)!==null);$('growth-number').textContent=`${paid.length} of 4`;
  $('growth-results').innerHTML=series.map(s=>`<tr><td>${s.name}</td><td>${breakEven(s.rows)?'Year '+breakEven(s.rows):'Not within 25 years'}</td><td>${payback(s.rows)?'Year '+payback(s.rows):'Not within 25 years'}</td><td>${money(s.rows.at(-1).debt)}</td></tr>`).join('');
  $('population-results').innerHTML=series.map(s=>`<tr><td>${s.name}</td><td>${s.rows.at(-1).gdpPerPersonRatio.toFixed(1)}%</td><td>${s.rows.some(r=>r.gdpPerPersonRatio>100)?'GDP crossover flagged':'No GDP crossover within horizon'}</td></tr>`).join('');
- $('conclusion-text').textContent=paid.length?`Under your selected assumptions, ${paid.map(s=>s.name).join(' and ')} repay cumulative costs within the horizon. The outcome remains conditional on the negotiated settlement, spending paths and assumed growth.`:'Under your selected assumptions, none of these futures repays cumulative costs within the horizon. That is a fiscal result, not a verdict on wider wellbeing or constitutional choices.';
+ $('conclusion-text').textContent=paid.length?`Under your selected assumptions, ${paid.map(s=>s.name).join(' and ')} ${paid.length===1?'repays':'repay'} cumulative costs within the horizon. The outcome remains conditional on the negotiated settlement, spending paths and assumed growth.`:'Under your selected assumptions, none of these futures repays cumulative costs within the horizon. That is a fiscal result, not a verdict on wider wellbeing or constitutional choices.';
 }
 $('pension-toggle').addEventListener('click',()=>{state.pensionsUK=!state.pensionsUK;render();});$('debt-toggle').addEventListener('click',()=>{state.debtUK=!state.debtUK;render();});
 $('timing-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-years]');if(b){state.years=+b.dataset.years;render();}});
