@@ -219,7 +219,7 @@ function policyForForm(key, common, selected = null) {
   return {...FORMS[key].defaults,...(selected??{}),...common,counterfactual:!!FORMS[key].counterfactual,shared:key==='shared'};
 }
 
-function simulate(p, horizon, s) {
+function simulate(p, horizon, s, extension = null) {
   const e = Object.fromEntries(ECONOMIC_PARAMETERS.map(item => [item.key, s[item.key] ?? item.value]));
   validateInputs(p,horizon,s);
   const linked = s.linkedMechanisms === true;
@@ -262,6 +262,8 @@ function simulate(p, horizon, s) {
     if(linked && !isStatusQuo) {
       const completionYear=t-Math.round(e.investmentLag);
       completedCapital=completionYear>=1 && completionYear<=10 ? p.investment*e.investmentCapitalShare/100*e.investmentEfficiency/100 : 0;
+      // Optional externally financed capital passes through the same completion and depreciation channel.
+      if(extension?.capitalFunding && completionYear>=1) completedCapital+=extension.capitalFunding(completionYear)*e.investmentEfficiency/100;
       publicCapital=publicCapital*(1-e.capitalDepreciation/100)+completedCapital;
       const publicReference=baselineOutput*e.publicCapitalRatio/100;
       publicProductivity=Math.pow(1+publicCapital/publicReference,e.publicCapitalElasticity);
@@ -298,18 +300,22 @@ function simulate(p, horizon, s) {
     consumptionOutput=Math.min(consumptionOutput,Math.max(0,capacityOutput-supplyOutput));
     const uncappedOutput=(supplyOutput+consumptionOutput)*(1+businessResidual-disruption);
     const ceiling=(s.outputCeiling??0)>0 ? baselineOutput*s.outputCeiling : Number.MAX_VALUE;
-    const actualOutput=isStatusQuo ? baselineOutput : clamp(uncappedOutput,0,ceiling);
+    let actualOutput=isStatusQuo ? baselineOutput : clamp(uncappedOutput,0,ceiling);
     const marginalRevenue=s.growthRevenue===true ? (s.taxShare??35)/100 : 0;
     const baselineGain=marginalRevenue*(policyOutput-baselineOutput);
     const privateOutput=actualOutput-policyOutput;
     const privateRevenue=marginalRevenue*privateOutput;
-    const gain=baselineGain+privateRevenue;
+    let gain=baselineGain+privateRevenue;
+    // Optional benefits adapter receives unrounded accounts. It cannot alter a default run.
+    const extra=extension?.annual?.({t,baselineOutput,actualOutput,components,invest,rerating,serviceCost,gain}) ?? {};
+    actualOutput+=extra.outputDelta??0;
+    gain+=extra.revenueDelta??0;
     // Transfer the same frozen pension envelope, so the endpoints reconcile.
     // This is a linear funding scenario, not a cohort-based actuarial forecast.
     const pension=p.pensionsUK ? components.pensionCost : 0;
     // Includes inherited debt interest. This is not a textbook primary balance.
-    const preFinancingCost=coreAged+rerating+invest+p.duplication+serviceCost-gain;
-    const regionalDeficit=baselineSpending-baselineRevenue+(s.ageSensitiveSpending??0)*(ageF-1)+serviceCost+invest+rerating-gain;
+    const preFinancingCost=coreAged+rerating+invest+p.duplication+serviceCost-gain+(extra.costDelta??0);
+    const regionalDeficit=baselineSpending-baselineRevenue+(s.ageSensitiveSpending??0)*(ageF-1)+serviceCost+invest+rerating-gain+(extra.regionalCostDelta??0);
     const primary=p.counterfactual ? (p.shared ? invest : 0) : preFinancingCost;
     const interest=debt*((s.realInterest??2)/100), cost=primary+interest;
     const fundReturn=fundBalance*((s.fundReturn??0)/100);
@@ -330,6 +336,8 @@ function simulate(p, horizon, s) {
     const denom=GNI_STAR*Math.pow(1+gs,t);
     cumulative+=cost;
     rows.push({
+      ...(extra.fields??{}),
+      ...(extension?.precision?{unroundedCost:cost,unroundedDebt:debt,unroundedActualOutput:actualOutput,unroundedGain:gain,unroundedServiceCost:serviceCost}:{}),
       year:t, publicPay:round2(components.pay),nonPensionBenefits:round2(components.benefits),otherPurchases:round2(components.purchases),pensionEnvelope:round2(components.pensionEnvelope),revenueAdjustment:round2(components.revenueAdjustment),allocatedInterest:round2(p.debtUK?0:components.allocatedInterest),
       niPopulation:Math.round(components.niPopulation),roiPopulation:Math.round(components.roiPopulation),populationHeld:components.populationHeld,
       // Matched GDP concepts, common 2024 nowcast from frozen 2023 source anchors. Not household income.

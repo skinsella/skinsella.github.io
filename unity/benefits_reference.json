@@ -1,0 +1,769 @@
+{
+  "outputs": [
+    {
+      "key": "ukTransitionPayment",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "euSupport",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "euCapitalFunding",
+      "description": "EU funding allocated to already-costed programme capital before lag and efficiency, euro bn."
+    },
+    {
+      "key": "borderOutput",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "gbOutputLoss",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "fdiAdditionalJobs",
+      "description": "Additional foreign-owned NI jobs, before Republic displacement."
+    },
+    {
+      "key": "fdiOutput",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "fdiReceipts",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "republicBorderGain",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "republicDisplacedOutput",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "republicReceiptsChange",
+      "description": "Receipts on Republic border gain less displaced FDI receipts, euro bn."
+    },
+    {
+      "key": "integrationCost",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "integrationSaving",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "unroundedCost",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "unroundedDebt",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "unroundedActualOutput",
+      "description": "NI real output including separate output channels, euro bn."
+    },
+    {
+      "key": "unroundedGain",
+      "description": "Marginal NI receipts from all selected output channels, euro bn. Excludes separate Republic receipts."
+    },
+    {
+      "key": "unroundedServiceCost",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "republicOldAgeDependency",
+      "description": "Republic people aged 65+ per 100 aged 15 to 64."
+    },
+    {
+      "key": "islandOldAgeDependency",
+      "description": "Island people aged 65+ per 100 aged 15 to 64."
+    },
+    {
+      "key": "northernResourceProxyPerPerson",
+      "description": "Euro per NI resident. Output plus domestic fiscal transfer, not household income."
+    },
+    {
+      "key": "ukResourceProxyPerPerson",
+      "description": "Same broad proxy on the UK path, euro per NI resident."
+    },
+    {
+      "key": "northernProxyGainPerPerson",
+      "description": "Selected resource proxy less UK-path proxy, euro per resident."
+    },
+    {
+      "key": "islandOutputProxy",
+      "description": "NI GDP-based output plus Republic GNI*, constant 2023 euro bn."
+    },
+    {
+      "key": "ukIslandOutputProxy",
+      "description": "Same mixed-concept output measure on UK path, constant 2023 euro bn."
+    },
+    {
+      "key": "islandOutputProxyGain",
+      "description": "Selected island output proxy less UK path, constant 2023 euro bn."
+    },
+    {
+      "key": "ukOutput",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "ukDomesticTransfer",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "northernDomesticTransfer",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "ukTransferWithdrawal",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "republicGNI",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "baselineRepublicDebt",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "debtHeadroomPctGNI",
+      "description": "Chosen 80% ceiling less total debt ratio, percentage points."
+    },
+    {
+      "key": "totalRepublicDebt",
+      "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
+    },
+    {
+      "key": "totalDebtPctGNI",
+      "description": "Baseline plus transition gross debt as percent of scenario Republic GNI*."
+    },
+    {
+      "key": "netCostPerRepublicResident",
+      "description": "Unrounded annual Republic cost including interest divided by population, euro per resident."
+    }
+  ],
+  "version": "2026-10-29-benefits-extension",
+  "extensionSha256": "a8a1a57db716d68da2b25f8b2d8b27356ac331c0a7cc6c42639a9bec961d1bce",
+  "inputs": [
+    {
+      "key": "ukTransitionShare",
+      "value": 0,
+      "min": 0,
+      "max": 50,
+      "unit": "%",
+      "description": "Negotiated share of frozen opening transfer. No entitlement or probability is estimated.",
+      "status": "negotiation"
+    },
+    {
+      "key": "ukTransitionYears",
+      "value": 10,
+      "min": 1,
+      "max": 20,
+      "unit": "years",
+      "description": "Linear payment reaches zero in the year after the selected payment period.",
+      "status": "design"
+    },
+    {
+      "key": "euSupportPeak",
+      "value": 0,
+      "min": 0,
+      "max": 3,
+      "unit": "%",
+      "description": "Net additional grant as share of NI reference output. Eligibility, co-financing and net EU contribution effects need evidence.",
+      "status": "source needed"
+    },
+    {
+      "key": "euSupportRamp",
+      "value": 3,
+      "min": 1,
+      "max": 10,
+      "unit": "years",
+      "description": "Ramp to peak funding.",
+      "status": "design"
+    },
+    {
+      "key": "euSupportYears",
+      "value": 10,
+      "min": 1,
+      "max": 20,
+      "unit": "years",
+      "description": "Peak period includes the first peak year, followed by a five-year phase-out.",
+      "status": "design"
+    },
+    {
+      "key": "euCapitalShare",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "description": "Share financing existing eligible programme investment, never an additional free capital programme.",
+      "status": "source needed"
+    },
+    {
+      "key": "borderGainMax",
+      "value": 0,
+      "min": 0,
+      "max": 4,
+      "unit": "%",
+      "description": "NI long-run output level gain. Requires own gravity-to-output calibration.",
+      "status": "source needed"
+    },
+    {
+      "key": "borderGainRepublic",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "unit": "%",
+      "description": "Republic long-run GNI* level gain, not GDP. Requires calibration.",
+      "status": "source needed"
+    },
+    {
+      "key": "borderPhaseYears",
+      "value": 10,
+      "min": 3,
+      "max": 20,
+      "unit": "years",
+      "description": "Linear implementation path.",
+      "status": "design"
+    },
+    {
+      "key": "windsorShareRemoved",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "description": "Discount gains already achieved before unity.",
+      "status": "source needed"
+    },
+    {
+      "key": "gbFrictionLoss",
+      "value": 0,
+      "min": 0,
+      "max": 10,
+      "unit": "%",
+      "description": "Matched NI output level loss on GB trade. Bound is an engineering limit, not an estimate.",
+      "status": "source needed"
+    },
+    {
+      "key": "fdiNorthShare",
+      "value": 0,
+      "min": 0,
+      "max": 50,
+      "unit": "%",
+      "description": "Target NI foreign-owned employment per resident as share of Republic rate, above current NI intensity only.",
+      "status": "source needed"
+    },
+    {
+      "key": "fdiRampYears",
+      "value": 15,
+      "min": 5,
+      "max": 25,
+      "unit": "years",
+      "description": "Linear approach to target intensity.",
+      "status": "design"
+    },
+    {
+      "key": "fdiOutputPerJob",
+      "value": null,
+      "min": 0,
+      "max": 1000000,
+      "unit": "€/job",
+      "description": "Real value added excluding tax-booked profits. No calibration supplied.",
+      "status": "source needed"
+    },
+    {
+      "key": "fdiTaxPerJob",
+      "value": null,
+      "min": 0,
+      "max": 1000000,
+      "unit": "€/job",
+      "description": "Total payroll and corporation receipts per job. General marginal tax is not applied again.",
+      "status": "source needed"
+    },
+    {
+      "key": "fdiRepublicJobsPerResident",
+      "value": null,
+      "min": 0,
+      "max": 1,
+      "unit": "jobs/resident",
+      "description": "Matched foreign-owned employment coverage and source year required.",
+      "status": "source needed"
+    },
+    {
+      "key": "fdiNIJobsPerResident",
+      "value": null,
+      "min": 0,
+      "max": 1,
+      "unit": "jobs/resident",
+      "description": "Matched baseline NI foreign-owned employment intensity required.",
+      "status": "source needed"
+    },
+    {
+      "key": "fdiDisplacement",
+      "value": 50,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "description": "NI jobs displaced from Republic rather than genuinely additional to island. Unestimated.",
+      "status": "source needed"
+    },
+    {
+      "key": "integrationSaving",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "unit": "€bn/year",
+      "description": "Savings additional to the chosen administration allowance. Requires function inventory.",
+      "status": "source needed"
+    },
+    {
+      "key": "integrationSavingStart",
+      "value": 5,
+      "min": 1,
+      "max": 15,
+      "unit": "year",
+      "description": "Savings ramp over five years from this year.",
+      "status": "design"
+    },
+    {
+      "key": "integrationOneOff",
+      "value": 0,
+      "min": 0,
+      "max": 5,
+      "unit": "€bn",
+      "description": "Total implementation cost. Nonzero required whenever savings are selected.",
+      "status": "source needed"
+    },
+    {
+      "key": "integrationOneOffYears",
+      "value": 5,
+      "min": 1,
+      "max": 10,
+      "unit": "years",
+      "description": "Implementation cost spread evenly.",
+      "status": "design"
+    },
+    {
+      "key": "ukPathGrowth",
+      "value": null,
+      "min": 0,
+      "max": 3,
+      "unit": "%",
+      "description": "Null follows the existing NI reference growth assumption.",
+      "status": "design"
+    },
+    {
+      "key": "ukPathSpendingGrowth",
+      "value": null,
+      "min": -2,
+      "max": 3,
+      "unit": "%",
+      "description": "Null follows residual purchases cost growth. Does not blanket-index pay or pensions.",
+      "status": "design"
+    },
+    {
+      "key": "ukPathTransferRisk",
+      "value": 0,
+      "min": 0,
+      "max": 30,
+      "unit": "%",
+      "description": "Frozen transfer withdrawal by year 25, assumed to reduce residual services.",
+      "status": "source needed"
+    }
+  ],
+  "successRules": {
+    "comparisonYear": 15,
+    "debtCeiling": 80,
+    "burdenLimit": null,
+    "fallingFrom": 20,
+    "requiredPasses": 4
+  },
+  "sources": {
+    "ni": {
+      "2024": {
+        "workingAge": 1220022,
+        "over65": 349194
+      },
+      "2025": {
+        "workingAge": 1220969,
+        "over65": 357695
+      },
+      "2026": {
+        "workingAge": 1221356,
+        "over65": 366755
+      },
+      "2027": {
+        "workingAge": 1221651,
+        "over65": 375613
+      },
+      "2028": {
+        "workingAge": 1220670,
+        "over65": 384768
+      },
+      "2029": {
+        "workingAge": 1218694,
+        "over65": 394243
+      },
+      "2030": {
+        "workingAge": 1216430,
+        "over65": 403900
+      },
+      "2031": {
+        "workingAge": 1214511,
+        "over65": 413012
+      },
+      "2032": {
+        "workingAge": 1212036,
+        "over65": 421637
+      },
+      "2033": {
+        "workingAge": 1209003,
+        "over65": 430027
+      },
+      "2034": {
+        "workingAge": 1206001,
+        "over65": 437794
+      },
+      "2035": {
+        "workingAge": 1202822,
+        "over65": 444859
+      },
+      "2036": {
+        "workingAge": 1198879,
+        "over65": 451740
+      },
+      "2037": {
+        "workingAge": 1195819,
+        "over65": 457615
+      },
+      "2038": {
+        "workingAge": 1191436,
+        "over65": 463004
+      },
+      "2039": {
+        "workingAge": 1187455,
+        "over65": 467365
+      },
+      "2040": {
+        "workingAge": 1183527,
+        "over65": 470627
+      },
+      "2041": {
+        "workingAge": 1179507,
+        "over65": 473832
+      },
+      "2042": {
+        "workingAge": 1175619,
+        "over65": 476453
+      },
+      "2043": {
+        "workingAge": 1170927,
+        "over65": 479525
+      },
+      "2044": {
+        "workingAge": 1164735,
+        "over65": 483750
+      },
+      "2045": {
+        "workingAge": 1157316,
+        "over65": 488871
+      },
+      "2046": {
+        "workingAge": 1150454,
+        "over65": 493111
+      },
+      "2047": {
+        "workingAge": 1143501,
+        "over65": 497114
+      },
+      "2048": {
+        "workingAge": 1136233,
+        "over65": 501159
+      },
+      "2049": {
+        "workingAge": 1128739,
+        "over65": 505183
+      },
+      "2050": {
+        "workingAge": 1120628,
+        "over65": 509615
+      },
+      "2051": {
+        "workingAge": 1112158,
+        "over65": 514259
+      },
+      "2052": {
+        "workingAge": 1103892,
+        "over65": 518589.00000000006
+      },
+      "2053": {
+        "workingAge": 1095805,
+        "over65": 522676.00000000006
+      },
+      "2054": {
+        "workingAge": 1088169,
+        "over65": 526306
+      },
+      "2055": {
+        "workingAge": 1080476,
+        "over65": 529986
+      },
+      "2056": {
+        "workingAge": 1073346,
+        "over65": 533125
+      },
+      "2057": {
+        "workingAge": 1066518,
+        "over65": 535964
+      },
+      "2058": {
+        "workingAge": 1060371,
+        "over65": 538146
+      },
+      "2059": {
+        "workingAge": 1054349,
+        "over65": 540216
+      },
+      "2060": {
+        "workingAge": 1048692,
+        "over65": 541873
+      },
+      "2061": {
+        "workingAge": 1043096,
+        "over65": 543408
+      },
+      "2062": {
+        "workingAge": 1036743,
+        "over65": 545618
+      },
+      "2063": {
+        "workingAge": 1030720,
+        "over65": 547389
+      },
+      "2064": {
+        "workingAge": 1025410,
+        "over65": 548338
+      },
+      "2065": {
+        "workingAge": 1021842,
+        "over65": 547391
+      },
+      "2066": {
+        "workingAge": 1018474,
+        "over65": 546048
+      },
+      "2067": {
+        "workingAge": 1015181,
+        "over65": 544403
+      },
+      "2068": {
+        "workingAge": 1011163,
+        "over65": 543239
+      },
+      "2069": {
+        "workingAge": 1005787,
+        "over65": 543174
+      },
+      "2070": {
+        "workingAge": 1000196,
+        "over65": 543050
+      },
+      "2071": {
+        "workingAge": 994034,
+        "over65": 543206
+      },
+      "2072": {
+        "workingAge": 986774,
+        "over65": 544209
+      },
+      "2073": {
+        "workingAge": 978093,
+        "over65": 546391
+      },
+      "2074": {
+        "workingAge": 969173,
+        "over65": 548554
+      }
+    },
+    "roi": {
+      "M1": {
+        "2022": {
+          "workingAge": 3388200,
+          "over65": 781400
+        },
+        "2027": {
+          "workingAge": 3710700,
+          "over65": 918000
+        },
+        "2032": {
+          "workingAge": 3910700,
+          "over65": 1070200
+        },
+        "2037": {
+          "workingAge": 4040000,
+          "over65": 1237600
+        },
+        "2042": {
+          "workingAge": 4120000,
+          "over65": 1417000
+        },
+        "2047": {
+          "workingAge": 4134100.0000000005,
+          "over65": 1625300
+        },
+        "2052": {
+          "workingAge": 4145500,
+          "over65": 1809100
+        },
+        "2057": {
+          "workingAge": 4185800,
+          "over65": 1944400
+        }
+      },
+      "M2": {
+        "2022": {
+          "workingAge": 3388200,
+          "over65": 781400
+        },
+        "2027": {
+          "workingAge": 3668500,
+          "over65": 915800
+        },
+        "2032": {
+          "workingAge": 3821900,
+          "over65": 1064300
+        },
+        "2037": {
+          "workingAge": 3886900,
+          "over65": 1226300
+        },
+        "2042": {
+          "workingAge": 3901400,
+          "over65": 1399000
+        },
+        "2047": {
+          "workingAge": 3848500,
+          "over65": 1597800
+        },
+        "2052": {
+          "workingAge": 3794900,
+          "over65": 1766100
+        },
+        "2057": {
+          "workingAge": 3774100,
+          "over65": 1879500
+        }
+      },
+      "M3": {
+        "2022": {
+          "workingAge": 3388200,
+          "over65": 781400
+        },
+        "2027": {
+          "workingAge": 3634000,
+          "over65": 914100
+        },
+        "2032": {
+          "workingAge": 3727200,
+          "over65": 1059300
+        },
+        "2037": {
+          "workingAge": 3705100,
+          "over65": 1215400
+        },
+        "2042": {
+          "workingAge": 3630800,
+          "over65": 1380600
+        },
+        "2047": {
+          "workingAge": 3487100,
+          "over65": 1569600
+        },
+        "2052": {
+          "workingAge": 3344000,
+          "over65": 1721600
+        },
+        "2057": {
+          "workingAge": 3237800,
+          "over65": 1809500
+        }
+      }
+    },
+    "debtRatios": {
+      "2027": 56.4,
+      "2028": 56.3,
+      "2029": 56.2,
+      "2030": 54.9
+    },
+    "sources": {
+      "ni": "https://www.nisra.gov.uk/system/files/statistics/2026-04/NPP24_ppp_coc.xlsx",
+      "roi": "https://www.cso.ie/en/releasesandpublications/ep/p-plfp/populationandlabourforceprojections2023-2057/populationprojectionsresults/",
+      "debt": "https://assets.gov.ie/static/documents/a1841801/Budget_2027_-_Budget_2027_-_Economic_and_Fiscal_Outlook.pdf"
+    },
+    "sourceSha256": {
+      "NISRA_NPP24_principal_summary.xlsx": "614182450ca7b8c1953de7523c759604efc22ae3de3d966c705c3c6b2edc7ef0",
+      "CSO_population_projection_results.html": "038e677831b099b7aee951ad26a0afded69e36aa281bffb996821bd8aad63880",
+      "Budget_2027_EFO.pdf": "6e985218611d8144ec2ddd2059edb7035b07b0db2becadad1b592fa604b38a20"
+    },
+    "method": "CSO Table 2.4, people aged 15 to 64 and 65+. NI total less ages 0 to 14 less 65+, not the pension-age definition. Annual CSO interpolation is ours. Budget 2027 Table 18 debt ratios mapped to model years 1 to 4, then last ratio held. Apply ratios to model real GNI*, not nominal debt stocks."
+  },
+  "equations": {
+    "ukPayment": "PUBLISHED * ukTransitionShare/100 * max(0,1-(t-1)/ukTransitionYears)",
+    "euSupport": "NI reference output * selected peak share * ramp, hold and five-year run-off",
+    "trade": "Current NI output * (selected border gain * unremoved Windsor share - selected GB loss) * phase",
+    "fdi": "Additional jobs above current NI intensity * real output or receipts per job. Republic displacement deducted. No second marginal tax on FDI output.",
+    "integration": "One-off implementation spending less phased savings. Saving requires positive implementation cost.",
+    "proxy": "NI output plus net domestic public spending less receipts, per resident. A broad resource proxy, not household income. Public output may already be included in GDP, so this is not a national-accounts income identity.",
+    "island": "NI GDP-based output plus Republic GNI*. A mixed-concept output proxy, not island GDP.",
+    "debt": "Budget 2027 debt ratio schedule applied to unchanged model real GNI* baseline, plus transition borrowing. Divide by scenario Republic GNI*.",
+    "demography": "People 65+ / people aged 15 to 64. NI annual source and linearly interpolated CSO knots."
+  },
+  "limitations": [
+    "No income distribution, FRS or EU-SILC microsimulation. Do not label the proxy household welfare.",
+    "Baseline debt ratios are a scenario overlay. Budget years 2027 to 2030 index model years 1 to 4, while demographic normalisation stays 2024. Not a calendar-year forecast.",
+    "An 80% ceiling is Stephen’s assessment choice, not an established safe debt limit.",
+    "Four passes are required. The burden limit is unset and never counts as a pass.",
+    "The low-growth comparison uses a selected 1.3% illustration, not a verified historical estimate.",
+    "No empirical central values have been supplied for new trade, FDI or integration effects. These remain off in public controls.",
+    "EU grant allocation finances already-costed programme investment. It cannot create a second capital stock for the same spending.",
+    "Core policy growth is growth from other causes whenever separately modelled benefits are enabled. No causal growth premium is attached automatically to constitutional form.",
+    "The UK does not necessarily save the entire allocated transfer. Retained pension obligations, debt and UK-specific allocations remain distinct.",
+    "FDI employment and output are additive illustrations. No complete labour market, tax reform, general-equilibrium displacement or profit repatriation account is estimated."
+  ],
+  "scenarioStatus": {
+    "status": "not runnable",
+    "settingsFixedAt": null,
+    "settingsCommit": null,
+    "reason": "Unverified support, FDI, integration and gravity calibrations. Convergence-gated harmonisation needs a defined rule. No fabricated central values are substituted.",
+    "pairs": [
+      {
+        "id": "A",
+        "name": "Negotiated, supported transition",
+        "twin": "Supported transition, weak delivery",
+        "form": "glide",
+        "requiredEvidence": [
+          "Negotiated UK payment assumption fixed before run",
+          "Net EU support and eligibility",
+          "Convergence gate definition",
+          "Sourced historical growth for twin"
+        ]
+      },
+      {
+        "id": "B",
+        "name": "All-island growth dividend",
+        "twin": "Growth dividend, poor execution",
+        "form": "glide",
+        "requiredEvidence": [
+          "Gravity-to-output calibration net of Windsor",
+          "Matched FDI employment intensities, real output and receipts per job",
+          "Displacement assumption",
+          "GB friction calibration",
+          "Capital investment allocation"
+        ]
+      }
+    ]
+  }
+}

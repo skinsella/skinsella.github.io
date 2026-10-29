@@ -28,3 +28,17 @@ flowchart TD
     GROW --> PERPERSON["Matched GDP per person and crossover flag"]
     POP --> PERPERSON
     ROI --> PERPERSON
+    SUPPORT["Optional UK and EU funding"] --> COST
+    SUPPORT --> ECON
+    TRADE["Uncalibrated trade gains and GB losses"] --> TAX
+    FDI["Uncalibrated FDI and Republic displacement"] --> TAX
+    MERGE["Integration savings and implementation costs"] --> COST
+    GROW --> PROXY["Northern resource and island output proxies"]
+    TRADE --> PROXY
+    FDI --> PROXY
+    UK["Independent UK comparison path"] --> PROXY
+    POP --> AGE["Matched old-age dependency"]
+    BASEDEBT["Budget 2027 baseline ratio overlay"] --> TOTAL["Total debt and chosen success tests"]
+    DEBT --> TOTAL
+    PROXY --> TOTAL
+    ANNUAL --> TOTAL

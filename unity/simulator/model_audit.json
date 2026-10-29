@@ -1,5 +1,5 @@
 {
-  "modelSha256": "166183ffd6162968fc4af5471dd946bb19f1d97e744e025d2bee7a9930559fa7",
+  "modelSha256": "4c794c7e9803ed30dae34cc199432bc928383c1f630cae0b72e724d35744d7e0",
   "inputs": [
     {
       "key": "southGrowth",
@@ -479,6 +479,6 @@
     "No inherited debt principal or bond maturity schedule is estimated. Duration of its interest flow is explicitly selected.",
     "Migration stays at the official projection assumptions and is not endogenously driven by the selected growth rate.",
     "GDP includes multinational effects and is not a household living-standard measure. A crossover is flagged, not capped.",
-    "Existing sovereign debt and financing feedback are not modelled, so debt/GNI* does not certify affordability."
+    "The core fiscal view excludes existing sovereign debt. A separate benefits extension overlays Budget 2027 baseline debt ratios, but does not estimate sovereign financing feedback or certify affordability."
   ]
 }

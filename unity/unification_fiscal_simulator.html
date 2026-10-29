@@ -19,7 +19,7 @@
 <div id="root"><div id="fallback">Loading the simulator. If this message persists, check your internet connection, the page loads React and Recharts from public CDNs.</div></div>
 <script>
 (() => {
-  const BUILD_FINGERPRINT = "166183ffd6162968fc4af5471dd946bb19f1d97e744e025d2bee7a9930559fa7";
+  const BUILD_FINGERPRINT = "4c794c7e9803ed30dae34cc199432bc928383c1f630cae0b72e724d35744d7e0";
   const { useMemo, useState } = React;
   const { ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer, Legend } = Recharts;
   const GNI_STAR = 290.9;
@@ -262,7 +262,7 @@
     if (!FORMS[key]) throw new RangeError("Unknown policy bundle");
     return { ...FORMS[key].defaults, ...selected ?? {}, ...common, counterfactual: !!FORMS[key].counterfactual, shared: key === "shared" };
   }
-  function simulate(p, horizon, s) {
+  function simulate(p, horizon, s, extension = null) {
     const e = Object.fromEntries(ECONOMIC_PARAMETERS.map((item) => [item.key, s[item.key] ?? item.value]));
     validateInputs(p, horizon, s);
     const linked = s.linkedMechanisms === true;
@@ -304,6 +304,7 @@
       if (linked && !isStatusQuo) {
         const completionYear = t - Math.round(e.investmentLag);
         completedCapital = completionYear >= 1 && completionYear <= 10 ? p.investment * e.investmentCapitalShare / 100 * e.investmentEfficiency / 100 : 0;
+        if (extension?.capitalFunding && completionYear >= 1) completedCapital += extension.capitalFunding(completionYear) * e.investmentEfficiency / 100;
         publicCapital = publicCapital * (1 - e.capitalDepreciation / 100) + completedCapital;
         const publicReference = baselineOutput * e.publicCapitalRatio / 100;
         publicProductivity = Math.pow(1 + publicCapital / publicReference, e.publicCapitalElasticity);
@@ -335,15 +336,18 @@
       consumptionOutput = Math.min(consumptionOutput, Math.max(0, capacityOutput - supplyOutput));
       const uncappedOutput = (supplyOutput + consumptionOutput) * (1 + businessResidual - disruption);
       const ceiling = (s.outputCeiling ?? 0) > 0 ? baselineOutput * s.outputCeiling : Number.MAX_VALUE;
-      const actualOutput = isStatusQuo ? baselineOutput : clamp(uncappedOutput, 0, ceiling);
+      let actualOutput = isStatusQuo ? baselineOutput : clamp(uncappedOutput, 0, ceiling);
       const marginalRevenue = s.growthRevenue === true ? (s.taxShare ?? 35) / 100 : 0;
       const baselineGain = marginalRevenue * (policyOutput - baselineOutput);
       const privateOutput = actualOutput - policyOutput;
       const privateRevenue = marginalRevenue * privateOutput;
-      const gain = baselineGain + privateRevenue;
+      let gain = baselineGain + privateRevenue;
+      const extra = extension?.annual?.({ t, baselineOutput, actualOutput, components, invest, rerating, serviceCost, gain }) ?? {};
+      actualOutput += extra.outputDelta ?? 0;
+      gain += extra.revenueDelta ?? 0;
       const pension = p.pensionsUK ? components.pensionCost : 0;
-      const preFinancingCost = coreAged + rerating + invest + p.duplication + serviceCost - gain;
-      const regionalDeficit = baselineSpending - baselineRevenue + (s.ageSensitiveSpending ?? 0) * (ageF - 1) + serviceCost + invest + rerating - gain;
+      const preFinancingCost = coreAged + rerating + invest + p.duplication + serviceCost - gain + (extra.costDelta ?? 0);
+      const regionalDeficit = baselineSpending - baselineRevenue + (s.ageSensitiveSpending ?? 0) * (ageF - 1) + serviceCost + invest + rerating - gain + (extra.regionalCostDelta ?? 0);
       const primary = p.counterfactual ? p.shared ? invest : 0 : preFinancingCost;
       const interest = debt * ((s.realInterest ?? 2) / 100), cost = primary + interest;
       const fundReturn = fundBalance * ((s.fundReturn ?? 0) / 100);
@@ -365,6 +369,8 @@
       const denom = GNI_STAR * Math.pow(1 + gs, t);
       cumulative += cost;
       rows.push({
+        ...extra.fields ?? {},
+        ...extension?.precision ? { unroundedCost: cost, unroundedDebt: debt, unroundedActualOutput: actualOutput, unroundedGain: gain, unroundedServiceCost: serviceCost } : {},
         year: t,
         publicPay: round2(components.pay),
         nonPensionBenefits: round2(components.benefits),
@@ -625,7 +631,7 @@
         input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:16px;width:16px;border-radius:50%;background:#177052;margin-top:-6.5px;border:2px solid #F6F7F4;box-shadow:0 1px 2px rgba(0,0,0,.2);}
         input[type=range]::-moz-range-track{height:3px;background:#D5DCD5;border-radius:2px;}
         input[type=range]::-moz-range-thumb{height:14px;width:14px;border-radius:50%;background:#177052;border:2px solid #F6F7F4;}
-        body{font-family:'IBM Plex Sans',system-ui,sans-serif;}`), /* @__PURE__ */ React.createElement("div", { className: "max-w-6xl mx-auto px-5 py-8" }, /* @__PURE__ */ React.createElement("header", { className: "mb-7" }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-2", style: { color: "#5C6B63", letterSpacing: "0.14em" } }, "Conditional fiscal accounting \xB7 constant 2023 euros \xB7 frozen source vintage"), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: "'Fraunces', Georgia, serif", fontWeight: 600, fontSize: "clamp(26px,4vw,38px)", lineHeight: 1.1 } }, "Reunification Scenarios"), /* @__PURE__ */ React.createElement("a", { href: "model_reference.html", target: "_blank", rel: "noreferrer", className: "inline-block mt-3 underline text-sm", style: { color: "#177052" } }, "Model reference \xB7 variables, parameters and sources"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 max-w-2xl text-sm", style: { color: "#5C6B63" } }, "Every published estimate of the cost of Irish unification is a bundle of assumptions about constitutional form, negotiated liabilities and convergence speed. Set the bundle yourself. Selecting a bundle changes policy spending and timing only, while negotiated terms and growth stay explicit.")), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-5 gap-6" }, /* @__PURE__ */ React.createElement("div", { className: "lg:col-span-2" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5 mb-4", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-3", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Policy bundle"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-2 mb-3" }, Object.values(FORMS).map((f) => /* @__PURE__ */ React.createElement(
+        body{font-family:'IBM Plex Sans',system-ui,sans-serif;}`), /* @__PURE__ */ React.createElement("div", { className: "max-w-6xl mx-auto px-5 py-8" }, /* @__PURE__ */ React.createElement("header", { className: "mb-7" }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-2", style: { color: "#5C6B63", letterSpacing: "0.14em" } }, "Conditional fiscal accounting \xB7 constant 2023 euros \xB7 frozen source vintage"), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: "'Fraunces', Georgia, serif", fontWeight: 600, fontSize: "clamp(26px,4vw,38px)", lineHeight: 1.1 } }, "Reunification Scenarios"), /* @__PURE__ */ React.createElement("a", { href: "model_reference.html", target: "_blank", rel: "noreferrer", className: "inline-block mt-3 underline text-sm", style: { color: "#177052" } }, "Model reference \xB7 variables, parameters and sources"), /* @__PURE__ */ React.createElement("a", { className: "inline-block ml-4 underline text-sm", href: "benefits.html#" + encodeURIComponent(JSON.stringify({ policy: active, structural, horizon })) }, "Benefits and whole-island controls"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 max-w-2xl text-sm", style: { color: "#5C6B63" } }, "Every published estimate of the cost of Irish unification is a bundle of assumptions about constitutional form, negotiated liabilities and convergence speed. Set the bundle yourself. Selecting a bundle changes policy spending and timing only, while negotiated terms and growth stay explicit.")), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-5 gap-6" }, /* @__PURE__ */ React.createElement("div", { className: "lg:col-span-2" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl border p-5 mb-4", style: { borderColor: "#DCE2DC", background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "text-xs uppercase tracking-wide mb-3", style: { color: "#5C6B63", letterSpacing: "0.08em" } }, "Policy bundle"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-2 mb-3" }, Object.values(FORMS).map((f) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: f.key,

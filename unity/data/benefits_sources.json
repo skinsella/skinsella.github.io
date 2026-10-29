@@ -1,0 +1,329 @@
+{
+  "ni": {
+    "2024": {
+      "workingAge": 1220022.0,
+      "over65": 349194.0
+    },
+    "2025": {
+      "workingAge": 1220969.0,
+      "over65": 357695.0
+    },
+    "2026": {
+      "workingAge": 1221356.0,
+      "over65": 366755.0
+    },
+    "2027": {
+      "workingAge": 1221651.0,
+      "over65": 375613.0
+    },
+    "2028": {
+      "workingAge": 1220670.0,
+      "over65": 384768.0
+    },
+    "2029": {
+      "workingAge": 1218694.0,
+      "over65": 394243.0
+    },
+    "2030": {
+      "workingAge": 1216430.0,
+      "over65": 403900.0
+    },
+    "2031": {
+      "workingAge": 1214511.0,
+      "over65": 413012.0
+    },
+    "2032": {
+      "workingAge": 1212036.0,
+      "over65": 421637.0
+    },
+    "2033": {
+      "workingAge": 1209003.0,
+      "over65": 430027.0
+    },
+    "2034": {
+      "workingAge": 1206001.0,
+      "over65": 437794.0
+    },
+    "2035": {
+      "workingAge": 1202822.0,
+      "over65": 444859.0
+    },
+    "2036": {
+      "workingAge": 1198879.0,
+      "over65": 451740.0
+    },
+    "2037": {
+      "workingAge": 1195819.0,
+      "over65": 457615.0
+    },
+    "2038": {
+      "workingAge": 1191436.0,
+      "over65": 463004.0
+    },
+    "2039": {
+      "workingAge": 1187455.0,
+      "over65": 467365.0
+    },
+    "2040": {
+      "workingAge": 1183527.0,
+      "over65": 470627.0
+    },
+    "2041": {
+      "workingAge": 1179507.0,
+      "over65": 473832.0
+    },
+    "2042": {
+      "workingAge": 1175619.0,
+      "over65": 476453.0
+    },
+    "2043": {
+      "workingAge": 1170927.0,
+      "over65": 479525.0
+    },
+    "2044": {
+      "workingAge": 1164735.0,
+      "over65": 483750.0
+    },
+    "2045": {
+      "workingAge": 1157316.0,
+      "over65": 488871.0
+    },
+    "2046": {
+      "workingAge": 1150454.0,
+      "over65": 493111.0
+    },
+    "2047": {
+      "workingAge": 1143501.0,
+      "over65": 497114.0
+    },
+    "2048": {
+      "workingAge": 1136233.0,
+      "over65": 501159.0
+    },
+    "2049": {
+      "workingAge": 1128739.0,
+      "over65": 505183.0
+    },
+    "2050": {
+      "workingAge": 1120628.0,
+      "over65": 509615.0
+    },
+    "2051": {
+      "workingAge": 1112158.0,
+      "over65": 514259.0
+    },
+    "2052": {
+      "workingAge": 1103892.0,
+      "over65": 518589.00000000006
+    },
+    "2053": {
+      "workingAge": 1095805.0,
+      "over65": 522676.00000000006
+    },
+    "2054": {
+      "workingAge": 1088169.0,
+      "over65": 526306.0
+    },
+    "2055": {
+      "workingAge": 1080476.0,
+      "over65": 529986.0
+    },
+    "2056": {
+      "workingAge": 1073346.0,
+      "over65": 533125.0
+    },
+    "2057": {
+      "workingAge": 1066518.0,
+      "over65": 535964.0
+    },
+    "2058": {
+      "workingAge": 1060371.0,
+      "over65": 538146.0
+    },
+    "2059": {
+      "workingAge": 1054349.0,
+      "over65": 540216.0
+    },
+    "2060": {
+      "workingAge": 1048692.0,
+      "over65": 541873.0
+    },
+    "2061": {
+      "workingAge": 1043096.0,
+      "over65": 543408.0
+    },
+    "2062": {
+      "workingAge": 1036743.0,
+      "over65": 545618.0
+    },
+    "2063": {
+      "workingAge": 1030720.0,
+      "over65": 547389.0
+    },
+    "2064": {
+      "workingAge": 1025410.0,
+      "over65": 548338.0
+    },
+    "2065": {
+      "workingAge": 1021842.0,
+      "over65": 547391.0
+    },
+    "2066": {
+      "workingAge": 1018474.0,
+      "over65": 546048.0
+    },
+    "2067": {
+      "workingAge": 1015181.0,
+      "over65": 544403.0
+    },
+    "2068": {
+      "workingAge": 1011163.0,
+      "over65": 543239.0
+    },
+    "2069": {
+      "workingAge": 1005787.0,
+      "over65": 543174.0
+    },
+    "2070": {
+      "workingAge": 1000196.0,
+      "over65": 543050.0
+    },
+    "2071": {
+      "workingAge": 994034.0,
+      "over65": 543206.0
+    },
+    "2072": {
+      "workingAge": 986774.0,
+      "over65": 544209.0
+    },
+    "2073": {
+      "workingAge": 978093.0,
+      "over65": 546391.0
+    },
+    "2074": {
+      "workingAge": 969173.0,
+      "over65": 548554.0
+    }
+  },
+  "roi": {
+    "M1": {
+      "2022": {
+        "workingAge": 3388200.0,
+        "over65": 781400.0
+      },
+      "2027": {
+        "workingAge": 3710700.0,
+        "over65": 918000.0
+      },
+      "2032": {
+        "workingAge": 3910700.0,
+        "over65": 1070200.0
+      },
+      "2037": {
+        "workingAge": 4040000.0,
+        "over65": 1237600.0
+      },
+      "2042": {
+        "workingAge": 4120000.0,
+        "over65": 1417000.0
+      },
+      "2047": {
+        "workingAge": 4134100.0000000005,
+        "over65": 1625300.0
+      },
+      "2052": {
+        "workingAge": 4145500.0,
+        "over65": 1809100.0
+      },
+      "2057": {
+        "workingAge": 4185800.0,
+        "over65": 1944400.0
+      }
+    },
+    "M2": {
+      "2022": {
+        "workingAge": 3388200.0,
+        "over65": 781400.0
+      },
+      "2027": {
+        "workingAge": 3668500.0,
+        "over65": 915800.0
+      },
+      "2032": {
+        "workingAge": 3821900.0,
+        "over65": 1064300.0
+      },
+      "2037": {
+        "workingAge": 3886900.0,
+        "over65": 1226300.0
+      },
+      "2042": {
+        "workingAge": 3901400.0,
+        "over65": 1399000.0
+      },
+      "2047": {
+        "workingAge": 3848500.0,
+        "over65": 1597800.0
+      },
+      "2052": {
+        "workingAge": 3794900.0,
+        "over65": 1766100.0
+      },
+      "2057": {
+        "workingAge": 3774100.0,
+        "over65": 1879500.0
+      }
+    },
+    "M3": {
+      "2022": {
+        "workingAge": 3388200.0,
+        "over65": 781400.0
+      },
+      "2027": {
+        "workingAge": 3634000.0,
+        "over65": 914100.0
+      },
+      "2032": {
+        "workingAge": 3727200.0,
+        "over65": 1059300.0
+      },
+      "2037": {
+        "workingAge": 3705100.0,
+        "over65": 1215400.0
+      },
+      "2042": {
+        "workingAge": 3630800.0,
+        "over65": 1380600.0
+      },
+      "2047": {
+        "workingAge": 3487100.0,
+        "over65": 1569600.0
+      },
+      "2052": {
+        "workingAge": 3344000.0,
+        "over65": 1721600.0
+      },
+      "2057": {
+        "workingAge": 3237800.0,
+        "over65": 1809500.0
+      }
+    }
+  },
+  "debtRatios": {
+    "2027": 56.4,
+    "2028": 56.3,
+    "2029": 56.2,
+    "2030": 54.9
+  },
+  "sources": {
+    "ni": "https://www.nisra.gov.uk/system/files/statistics/2026-04/NPP24_ppp_coc.xlsx",
+    "roi": "https://www.cso.ie/en/releasesandpublications/ep/p-plfp/populationandlabourforceprojections2023-2057/populationprojectionsresults/",
+    "debt": "https://assets.gov.ie/static/documents/a1841801/Budget_2027_-_Budget_2027_-_Economic_and_Fiscal_Outlook.pdf"
+  },
+  "sourceSha256": {
+    "NISRA_NPP24_principal_summary.xlsx": "614182450ca7b8c1953de7523c759604efc22ae3de3d966c705c3c6b2edc7ef0",
+    "CSO_population_projection_results.html": "038e677831b099b7aee951ad26a0afded69e36aa281bffb996821bd8aad63880",
+    "Budget_2027_EFO.pdf": "6e985218611d8144ec2ddd2059edb7035b07b0db2becadad1b592fa604b38a20"
+  },
+  "method": "CSO Table 2.4, people aged 15 to 64 and 65+. NI total less ages 0 to 14 less 65+, not the pension-age definition. Annual CSO interpolation is ours. Budget 2027 Table 18 debt ratios mapped to model years 1 to 4, then last ratio held. Apply ratios to model real GNI*, not nominal debt stocks."
+}

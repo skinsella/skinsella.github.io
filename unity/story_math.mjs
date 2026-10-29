@@ -8,8 +8,8 @@ export function niceAxis(values){
  const ticks=Array.from({length:Math.round((hi-lo)/step)+1},(_,i)=>+(lo+i*step).toPrecision(12));
  return {lo,hi,step,ticks};
 }
-export function requiredGrowth(policy,settings,horizon=25){
- const passes=gNI=>simulate({...policy,gNI},horizon,settings).at(-1).cumulativeNonPositive===1;
+export function requiredGrowth(policy,settings,horizon=25,runner=simulate){
+ const passes=gNI=>runner({...policy,gNI},horizon,settings).at(-1).cumulativeNonPositive===1;
  if(passes(0))return {exact:0,display:0};
  let low=0,high=null;
  for(let g=.25;g<=7;g+=.25){if(passes(g)){high=g;break;}low=g;}

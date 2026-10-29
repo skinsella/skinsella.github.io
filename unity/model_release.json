@@ -1,6 +1,10 @@
 {
   "modelVersion": "2026-10-29-component-fiscal",
-  "modelSha256": "166183ffd6162968fc4af5471dd946bb19f1d97e744e025d2bee7a9930559fa7",
+  "modelSha256": "4c794c7e9803ed30dae34cc199432bc928383c1f630cae0b72e724d35744d7e0",
+  "extensionSha256": "a8a1a57db716d68da2b25f8b2d8b27356ac331c0a7cc6c42639a9bec961d1bce",
+  "extensionVersion": "2026-10-29-benefits-extension",
+  "benefits": "benefits.html",
+  "benefitsReference": "benefits_reference.json",
   "story": "index.html",
   "specialist": "unification_fiscal_simulator.html",
   "reference": "model_reference.html",

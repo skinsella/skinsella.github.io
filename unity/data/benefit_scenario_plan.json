@@ -1,0 +1,33 @@
+{
+  "status": "not runnable",
+  "settingsFixedAt": null,
+  "settingsCommit": null,
+  "reason": "Unverified support, FDI, integration and gravity calibrations. Convergence-gated harmonisation needs a defined rule. No fabricated central values are substituted.",
+  "pairs": [
+    {
+      "id": "A",
+      "name": "Negotiated, supported transition",
+      "twin": "Supported transition, weak delivery",
+      "form": "glide",
+      "requiredEvidence": [
+        "Negotiated UK payment assumption fixed before run",
+        "Net EU support and eligibility",
+        "Convergence gate definition",
+        "Sourced historical growth for twin"
+      ]
+    },
+    {
+      "id": "B",
+      "name": "All-island growth dividend",
+      "twin": "Growth dividend, poor execution",
+      "form": "glide",
+      "requiredEvidence": [
+        "Gravity-to-output calibration net of Windsor",
+        "Matched FDI employment intensities, real output and receipts per job",
+        "Displacement assumption",
+        "GB friction calibration",
+        "Capital investment allocation"
+      ]
+    }
+  ]
+}
