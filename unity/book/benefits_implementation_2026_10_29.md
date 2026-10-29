@@ -1,5 +1,9 @@
 # Benefits extension implementation
 
+Current assessment was revised after Claude’s income-test review. The public interface now reports three fiscal checks only, with no transfer-based income proxy or overall economic verdict.
+
+See [the repair record](income_test_repair_2026_10_29.md) for the current definitions. The implementation description below records the earlier version and is historical where it describes income proxies or five-test scoring.
+
 The extension adds a whole-island comparison alongside fiscal repayment. It does not establish that any constitutional arrangement improves household welfare.
 
 ## Decisions recorded first

@@ -1,6 +1,6 @@
-import {simulateBenefits,assessBenefits} from './benefits_model_runtime.mjs?v=94685b7a9fdb';
-import {niceAxis,requiredGrowth} from './story_math_runtime.mjs?v=f755bad295fc';
-import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs?v=f755bad295fc';
+import {simulateBenefits,assessBenefits} from './benefits_model_runtime.mjs?v=ed3a8616c7b2';
+import {niceAxis,requiredGrowth} from './story_math_runtime.mjs?v=a74a2fbb1979';
+import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs?v=a74a2fbb1979';
 const $=id=>document.getElementById(id),keys=['unitary','federal','glide','worst'];
 const names={unitary:'Unitary',federal:'Federal',glide:'Managed Integration',worst:'Higher Cost'};
 const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2,ukTransitionShare:0};
@@ -22,7 +22,7 @@ function lines(id,series,field,label,axisLabel="€bn · 2023 prices"){
  let svg=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}"><title>${label}</title>`;
  for(const v of ticks){svg+=`<line x1="${m.l}" x2="${w-m.r}" y1="${y(v)}" y2="${y(v)}" stroke="#e7ece6"/><text x="${m.l-8}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="#52655b">${step<1?Number(v.toFixed(3)):v}</text>`;}
  svg+=`<line x1="${m.l}" x2="${w-m.r}" y1="${y(0)}" y2="${y(0)}" stroke="#8b9690" stroke-dasharray="5 4"/>`;
- for(const s of series){const pts=s.rows.map(r=>`${x(r.year)},${y(r[field])}`).join(' ');svg+=`<polyline points="${pts}" fill="none" stroke="${s.colour}" stroke-width="${s.key===state.form?3.5:2}" opacity="${s.key===state.form?1:.65}"><title>${s.name}</title></polyline>`;for(const r of s.rows)svg+=`<circle cx="${x(r.year)}" cy="${y(r[field])}" r="4" fill="transparent"><title>${s.name}, year ${r.year}, ${field.includes("Proxy")?(Math.abs(r[field])<.05?0:r[field]).toFixed(1):money(r[field])}</title></circle>`;}
+ for(const s of series){const pts=s.rows.map(r=>`${x(r.year)},${y(r[field])}`).join(' ');svg+=`<polyline points="${pts}" fill="none" stroke="${s.colour}" stroke-width="${s.key===state.form?3.5:2}" opacity="${s.key===state.form?1:.65}"><title>${s.name}</title></polyline>`;for(const r of s.rows)svg+=`<circle cx="${x(r.year)}" cy="${y(r[field])}" r="4" fill="transparent"><title>${s.name}, year ${r.year}, ${(field.includes("Pct")||field.includes("Proxy"))?(Math.abs(r[field])<.05?0:r[field]).toFixed(1):money(r[field])}</title></circle>`;}
  for(const t of [1,5,10,15,20,25])svg+=`<text x="${x(t)}" y="${h-15}" text-anchor="middle" font-size="12" fill="#52655b">${t}</text>`;
  svg+=`<text x="${m.l}" y="12" font-size="11" fill="#52655b">${axisLabel}</text></svg>`;$(id).innerHTML=svg;
 }
@@ -30,16 +30,17 @@ function lines(id,series,field,label,axisLabel="€bn · 2023 prices"){
 function renderWorth(selected){
  const twin=simulateBenefits({...policy(state.form),gNI:Math.min(state.growth,1.3)},25,settings,benefits());
  const a=assessBenefits(selected.rows),b=assessBenefits(twin),end=selected.rows.at(-1);
- $('worth-number').textContent=a.passes+' of 5 tests';
- $('worth-unit').textContent=selected.name+' · '+a.status+' · annual burden limit 2% of Republic GNI*';
- const labels={northernProxy:'Northern resource proxy higher by year 15',islandOutput:'Island output proxy higher by year 15',debt:'Total Republic debt below 80% of GNI* throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling from year 20'};
+ $('worth-number').textContent=a.fiscalPasses+' of 3 fiscal checks';
+ $('worth-unit').textContent=selected.name+' · '+a.status;
+ const labels={debt:'Total Republic debt below 80% of GNI* throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling each year from year 20'};
  $('worth-tests').innerHTML=Object.entries(labels).map(([k,label])=>'<tr><td>'+label+'</td><td>'+(a.tests[k]===null?'Not assessed':a.tests[k]?'Pass':'Fail')+'</td><td>'+(b.tests[k]===null?'Not assessed':b.tests[k]?'Pass':'Fail')+'</td></tr>').join('');
- const field=state.worthMetric==='island'?'islandOutputProxyGain':'northernProxyGainPerPerson';
- const unit=state.worthMetric==='island'?'Island output proxy gain · €bn':'Northern resource proxy gain · €/person';
- lines('worth-chart',[{...selected,rows:selected.rows},{key:'twin',name:'Lower-growth comparison',colour:'#8b9690',rows:twin}],field,unit,unit);
- $('worth-sensitivities').textContent=''+a.burdenSensitivities.map((x,i)=>'At the '+x.limit+'% annual burden limit, there are '+x.passes+' of 5 passes for the selected future and '+b.burdenSensitivities[i].passes+' for its lower-growth comparison').join('. ')+'.';
- $('worth-debt').textContent='Year 25 total Republic debt is '+end.totalDebtPctGNI.toFixed(1)+'% of GNI*, '+(end.debtHeadroomPctGNI>=0?'headroom below the chosen 80% ceiling is '+end.debtHeadroomPctGNI.toFixed(1):'the chosen 80% ceiling is exceeded by '+(-end.debtHeadroomPctGNI).toFixed(1))+' percentage points. The island old-age dependency ratio is '+end.islandOldAgeDependency.toFixed(1)+' per 100 working-age people, compared with '+end.republicOldAgeDependency.toFixed(1)+' in the Republic alone.';
- document.querySelectorAll('[data-worth]').forEach(x=>x.setAttribute('aria-pressed',(state.worthMetric??'income')===x.dataset.worth));
+ const annual=state.worthMetric==='annual',field=annual?'netCostPctGNI':'totalDebtPctGNI',ceiling=annual?2:80;
+ const unit=annual?'Annual Republic cost / GNI* · %':'Total Republic debt / GNI* · %';
+ const limit={key:'limit',name:'Selected limit',colour:'#a37525',rows:selected.rows.map(r=>({year:r.year,[field]:ceiling}))};
+ lines('worth-chart',[{...selected,rows:selected.rows},{key:'twin',name:'Lower-growth comparison',colour:'#8b9690',rows:twin},limit],field,unit,unit);
+ $('worth-sensitivities').textContent=a.burdenSensitivities.map((x,i)=>'At the '+x.limit+'% annual burden limit, '+x.fiscalPasses+' of 3 fiscal checks pass for the selected future and '+b.burdenSensitivities[i].fiscalPasses+' for its lower-growth comparison').join('. ')+'.';
+ $('worth-debt').textContent='Year 25 total Republic debt is '+end.totalDebtPctGNI.toFixed(1)+'% of GNI*, '+(end.debtHeadroomPctGNI>=0?'headroom below the chosen 80% ceiling is '+end.debtHeadroomPctGNI.toFixed(1):'the chosen 80% ceiling is exceeded by '+(-end.debtHeadroomPctGNI).toFixed(1))+' percentage points.';
+ document.querySelectorAll('[data-worth]').forEach(x=>x.setAttribute('aria-pressed',(state.worthMetric??'debt')===x.dataset.worth));
 }
 
 function render(){

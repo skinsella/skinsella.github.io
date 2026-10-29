@@ -30,6 +30,7 @@ export const BENEFIT_INPUTS = [
  ['ukPathSpendingGrowth',null,-2,3,'%','Null follows residual purchases cost growth. Does not blanket-index pay or pensions.','design'],
  ['ukPathTransferRisk',0,0,30,'%','Frozen transfer withdrawal by year 25, assumed to reduce residual services.','source needed'],
 ].map(([key,value,min,max,unit,description,status])=>({key,value,min,max,unit,description,status}));
+export const ASSESSMENT_VERSION='2026-10-29-fiscal-checks';
 export const BENEFIT_DEFAULTS=Object.fromEntries(BENEFIT_INPUTS.map(x=>[x.key,x.value]));
 export const SUCCESS_RULES=Object.freeze({comparisonYear:15,debtCeiling:80,burdenPctGNI:2,burdenSensitivities:[1,3],fallingFrom:20,requiredPasses:4});
 const clamp=(v,l,h)=>Math.max(l,Math.min(h,v));
@@ -87,9 +88,12 @@ export function simulateBenefits(p,horizon,s=D,values={}) {
    const saving=b.integrationSaving*clamp((t-b.integrationSavingStart+1)/5,0,1);
    return {outputDelta:borderOutput-gbOutputLoss+fdiOutput,revenueDelta:marginal*(borderOutput-gbOutputLoss)+fdiReceipts,
      costDelta:oneOff-saving-uk-eu-republicReceipts,regionalCostDelta:oneOff-saving,
-     fields:{ukTransitionPayment:uk,euSupport:eu,euCapitalFunding:capitalFunding(t),borderOutput,gbOutputLoss,fdiAdditionalJobs:jobs,fdiOutput,fdiReceipts,republicBorderGain,republicDisplacedOutput:displacedOutput,republicReceiptsChange:republicReceipts,integrationCost:oneOff,integrationSaving:saving}};
+     fields:{channelBaseOutput:actualOutput,ukTransitionPayment:uk,euSupport:eu,euCapitalFunding:capitalFunding(t),borderOutput,gbOutputLoss,fdiAdditionalJobs:jobs,fdiOutput,fdiReceipts,republicBorderGain,republicDisplacedOutput:displacedOutput,republicReceiptsChange:republicReceipts,integrationCost:oneOff,integrationSaving:saving}};
  }};
  const rows=simulate(p,horizon,s,hook);
+ // Hold the chosen growth, wage, demand and residual settings fixed. Remove only
+ // programme and EU-funded capital to identify its mechanical output contribution.
+ const noCapitalRows=s.linkedMechanisms?simulate(p,horizon,{...s,investmentCapitalShare:0},{precision:true}):null;
  const ukSettings={...s,baselineGrowth:b.ukPathGrowth??s.baselineGrowth,baselineSpendingGrowth:b.ukPathSpendingGrowth??s.baselineSpendingGrowth};
  const ukPolicy={...FORMS.statusquo?.defaults,...p,counterfactual:true,shared:false,pensionsUK:false,debtUK:false};
  const ukRows=simulate(ukPolicy,horizon,ukSettings,{precision:true});
@@ -105,26 +109,52 @@ export function simulateBenefits(p,horizon,s=D,values={}) {
    const unityTransfer=c.pay+c.benefits+c.pensionEnvelope+c.purchases+c.harmonisation+(t<=10?p.investment:0)+r.unroundedServiceCost-c.baselineRevenue-c.revenueAdjustment-r.unroundedGain+(r.integrationCost??0)-(r.integrationSaving??0);
    const ukTransfer=ukComponents.pay+ukComponents.benefits+ukComponents.pensionEnvelope+ukComponents.purchases-ukComponents.baselineRevenue-withdrawal;
    const transfer=neutral?ukTransfer:unityTransfer;
-   const income=(niOutput+transfer)*1e9/r.niPopulation,ukIncome=((uk.unroundedActualOutput??uk.actualOutput)+ukTransfer)*1e9/uk.niPopulation;
+   // GDP is not household earned income. Neither adding nor subtracting a net
+   // public transfer supplies the missing household income account.
+   const northernOutputPerPerson=niOutput*1e9/r.niPopulation;
+   const ukOutputPerPerson=uk.unroundedActualOutput*1e9/uk.niPopulation;
+   const reference=C.NORTH_GNI*Math.pow(1+s.baselineGrowth/100,t);
+   const growthRatio=(1+p.gNI/100)/(1+s.baselineGrowth/100);
+   const growthFactor=p.stall&&t>7?Math.pow(growthRatio,7)*Math.pow(Math.min(growthRatio,1.004),t-7):Math.pow(growthRatio,t);
+   const assumedPolicyOutput=neutral?reference:reference*growthFactor;
+   const assumedGrowthOutputGap=assumedPolicyOutput-uk.unroundedActualOutput;
+   const capitalOutputGain=noCapitalRows?(r.channelBaseOutput??niOutput)-noCapitalRows[i].unroundedActualOutput:0;
+   const tradeOutputGain=(r.borderOutput??0)-(r.gbOutputLoss??0)+(r.republicBorderGain??0);
+   const fdiOutputGain=(r.fdiOutput??0)-(r.republicDisplacedOutput??0);
+   const modelledIslandOutputGain=capitalOutputGain+tradeOutputGain+fdiOutputGain;
+   const totalIslandOutputDifference=niOutput+republicOutput-uk.unroundedActualOutput-roiBase;
+   const otherOutputDifference=totalIslandOutputDifference-assumedGrowthOutputGap-modelledIslandOutputGain;
    const gni=neutral?roiBase:republicOutput;
    if(gni<=0)throw Error('Republic GNI* must remain positive');
    const baseDebt=baselineDebtRatio(t)/100*roiBase;
-   return {...r,...ageAt(2024+t,s.populationVariant),northernResourceProxyPerPerson:income,ukResourceProxyPerPerson:ukIncome,northernProxyGainPerPerson:income-ukIncome,
-     islandOutputProxy:niOutput+gni,ukIslandOutputProxy:uk.unroundedActualOutput+roiBase,islandOutputProxyGain:niOutput+gni-uk.unroundedActualOutput-roiBase,
+   return {...r,...ageAt(2024+t,s.populationVariant),northernEarnedIncomePerPerson:null,ukEarnedIncomePerPerson:null,northernEarnedIncomeGainPerPerson:null,
+     northernOutputPerPerson,ukOutputPerPerson,assumedPolicyOutput,assumedGrowthOutputGap,
+     capitalOutputGain,tradeOutputGain,fdiOutputGain,modelledIslandOutputGain,totalIslandOutputDifference,otherOutputDifference,
+     economicAssessmentReady:false,northernTransferPerPerson:transfer*1e9/r.niPopulation,ukTransferPerPerson:ukTransfer*1e9/uk.niPopulation,
      ukOutput:uk.unroundedActualOutput,ukDomesticTransfer:ukTransfer,northernDomesticTransfer:transfer,ukTransferWithdrawal:withdrawal,
      republicGNI:gni,baselineRepublicDebt:baseDebt,debtHeadroomPctGNI:SUCCESS_RULES.debtCeiling-100*(baseDebt+r.unroundedDebt)/gni,totalRepublicDebt:baseDebt+r.unroundedDebt,totalDebtPctGNI:100*(baseDebt+r.unroundedDebt)/gni,netCostPctGNI:100*r.unroundedCost/gni,burdenLimitPerRepublicResident:SUCCESS_RULES.burdenPctGNI/100*gni*1e9/r.roiPopulation,netCostPerRepublicResident:r.unroundedCost*1e9/r.roiPopulation};
  });
 }
 
 export function assessBenefits(rows,rules=SUCCESS_RULES) {
- const r=rows.find(x=>x.year===rules.comparisonYear),late=rows.filter(x=>x.year>=rules.fallingFrom);
- const tests={northernProxy:r?r.northernProxyGainPerPerson>1e-6:null,islandOutput:r?r.islandOutputProxyGain>1e-9:null,
+ const late=rows.filter(x=>x.year>=rules.fallingFrom);
+ // The two economic tests are unavailable until household income and empirical
+ // channel calibrations exist. An assumed output path never supplies a pass.
+ const tests={northernIncome:null,islandOutput:null,
    debt:rows.length?rows.every(x=>x.totalDebtPctGNI<rules.debtCeiling):null,
    burden:rows.length?rows.every(x=>x.netCostPctGNI<=rules.burdenPctGNI):null,
    falling:late.length<2?null:late.every(x=>{const prev=rows.find(y=>y.year===x.year-1);return prev&&x.unroundedCost<prev.unroundedCost;})};
- const passes=Object.values(tests).filter(x=>x===true).length,pending=Object.values(tests).filter(x=>x===null).length;
- const burdenSensitivities=(rules.burdenSensitivities??[]).map(limit=>{const burdenPass=rows.every(x=>x.netCostPctGNI<=limit),n=passes-(tests.burden===true?1:0)+(burdenPass?1:0);return {limit,burdenPass,passes:n,meetsRule:n>=rules.requiredPasses};});
- return {tests,passes,pending,burdenSensitivities,status:passes>=rules.requiredPasses?'Meets selected proxy tests':passes+pending<rules.requiredPasses?'Does not meet selected tests':'Assessment incomplete',payback:payback(rows)};
+ const fiscalTests=Object.fromEntries(['debt','burden','falling'].map(k=>[k,tests[k]]));
+ const fiscalPasses=Object.values(fiscalTests).filter(x=>x===true).length;
+ const pending=Object.values(fiscalTests).filter(x=>x===null).length;
+ const burdenSensitivities=(rules.burdenSensitivities??[]).map(limit=>{
+   const burdenPass=rows.length?rows.every(x=>x.netCostPctGNI<=limit):null;
+   const n=fiscalPasses-(tests.burden===true?1:0)+(burdenPass===true?1:0);
+   return {limit,burdenPass,passes:n,fiscalPasses:n,allFiscalPass:n===3};
+ });
+ return {tests,fiscalTests,passes:fiscalPasses,fiscalPasses,pending,burdenSensitivities,
+   economicAssessmentReady:false,overallStatus:'Not assessed',favourable:null,
+   status:pending?'Fiscal assessment incomplete':fiscalPasses===3?'All three fiscal checks pass':'At least one fiscal check fails',payback:payback(rows)};
 }
 
 export function publicationIssues(values={}) {
@@ -143,5 +173,5 @@ export function exportScenarioPair(pair,provenance) {
  for(const k of ['ukTransitionShare','euSupportPeak','borderGainMax','borderGainRepublic','fdiNorthShare','integrationSaving'])if(b[k]>a[k])throw Error('Adverse twin cannot increase benefit '+k);
  if(b.gbFrictionLoss<a.gbFrictionLoss)throw Error('Adverse twin cannot reduce GB friction');
  for(const item of [pair.scenario,pair.twin])if(publicationIssues(item.benefits).length)throw Error('Unverified scenario cannot be published');
- return {qualification:'Conditional proxy assessment, not household welfare or a forecast',provenance,...pair};
+ return {qualification:'Conditional fiscal assessment only. Economic benefit tests are not assessed.',provenance,...pair};
 }

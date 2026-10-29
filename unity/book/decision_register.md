@@ -14,6 +14,7 @@ This register separates settled working conventions from choices that still requ
 | Evidence discipline | Unverified values remain excluded or clearly labelled | Prevents provisional numbers becoming facts through repetition |
 | Private material | Do not publish raw private chats | The useful output is the documented decision and its provenance |
 | Success tests, 29 October 2026, Stephen | Northern resident income and island output higher than on the UK path by year 15, Republic total debt below 80% of GNI\* in every year, yearly transfer falling from year 20, yearly transfer no more than 2% of GNI\* in every year with 1% and 3% as sensitivities | Fixed before any favourable scenario is run. Affects book/model_spec_benefits_2026_10_29.md |
+| Income tests redefined, 29 October 2026, Stephen | Northern living standards uses income earned in the North, excluding net fiscal transfers. Island prosperity counts only output gains from a modelled channel, not the growth input. No scenario is called favourable until both are measured this way, and the brief reports the three fiscal tests only | As first built, the Northern test passed in every future because the transfer counted as a gain, and the island test only repeated the growth assumption. Affects book/model_spec_benefits_2026_10_29.md, simulator/benefits_model.mjs and documents/brief_v2.md |
 | Pass rule, 29 October 2026, Stephen | A scenario is favourable if it passes four of the five tests | Full repayment is not required, in line with how German unification is judged. Affects book/model_spec_benefits_2026_10_29.md |
 | Baseline Republic debt, 29 October 2026, Stephen | Follows Budget 2027 and Department of Finance projections, then holds steady. Total debt including transition borrowing may rise to 80% of GNI\* | Leaves about 24 points of headroom from a baseline near 56%. Replaces an earlier same-day rule allowing the baseline to reach 70%. Affects book/model_spec_benefits_2026_10_29.md |
 
@@ -29,6 +30,10 @@ The new comparison uses the same official demographic normalisation as the exist
 
 An unassessed test is never counted as a pass. The agreed four-of-five rule applies across all five tests, and a comparison using an income proxy cannot establish household welfare.
 
+The model follow-up reports only the three fiscal checks and leaves earned household income unassessed. GDP plus or minus a regional fiscal transfer is not used as an income estimate, and assumed growth is separated from mechanical channel output terms.
+
+The existing strict direction rule is retained pending the open decision below. No overall favourable classification is currently reported.
+
 ## Decisions required
 
 | Priority | Decision | Current position | Consequence of delay |
@@ -39,6 +44,7 @@ An unassessed test is never counted as a pass. The agreed four-of-five rule appl
 | 4 | Set standards for convergence tests | Three tests exist but thresholds and data vintages are not fixed | Sequencing claims remain qualitative |
 | 5 | Decide the public release model | Password protected preview exists, while long term access is unsettled | Reproducibility and public engagement remain limited |
 | 6 | Decide how to treat general equilibrium effects | Current framework is mainly structural accounting with selected feedbacks | Behavioural claims may exceed the implemented model |
+| 7 | Define "falling from year 20" | Code requires year 20 to be below year 19, the earlier brief draft did not | Federal at 3% growth passes or fails the direction test depending on the reading |
 
 ## Rule for closing a decision
 

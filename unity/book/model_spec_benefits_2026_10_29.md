@@ -4,6 +4,10 @@ Prepared 29 October 2026 for Codex and Stephen. This extends the component fisca
 
 Nothing here changes the existing fiscal engine. Every new channel starts switched off, so current results stay reproducible.
 
+Implementation update after review. The public model reports the three fiscal checks only, while household earned income remains unassessed.
+
+The proposed output-minus-transfer formula below has not been used as an earned-income estimate. See [the repair record](income_test_repair_2026_10_29.md) for the accounting distinction and the separate channel diagnostics.
+
 ## 1. Why the model needs this
 
 The current model measures one thing, the additional cost to the Republic's Exchequer. On that measure unification is always a bill, because most benefits fall on Northern households, on firms, on the island's economy and on the UK Treasury.
@@ -25,13 +29,33 @@ A scenario counts as favourable if it passes at least four of the five tests. St
 
 | Test | Measure | Threshold | Where it comes from |
 | --- | --- | --- | --- |
-| Northern living standards | Northern resident income per person against the UK path | Higher by year 15 | New output, section 4.8 |
-| Island prosperity | Island output against the UK path | Higher by year 15 | New output, section 4.8 |
+| Northern living standards | Northern earned income per person against the UK path, excluding net fiscal transfers from either government | Higher by year 15 | New output, section 4.8 |
+| Island prosperity | Island output against the UK path, counting only gains from a modelled channel | Higher by year 15 | New output, section 4.8 |
 | Republic debt | Total Republic gross debt as a share of GNI\* | Below 80% in every year | New output, section 4.8 |
 | Southern burden | Yearly net transfer as a share of Republic GNI\*, also shown per Republic resident | No more than 2% of GNI\* in every year, about €1,100 per resident at 2023 values. Report 1% and 3% as sensitivities | New output, section 4.8 |
-| Direction of travel | Yearly net transfer | Falling from year 20 | Existing output |
+| Direction of travel | Yearly net transfer | Falls every year from year 20, compared with the year before. Open question in section 9 | Existing output |
 
 Full repayment of transition borrowing is reported but is not required to pass. Germany's unification is generally judged on the second and third kind of test, not on repayment.
+
+### 3.1 Why the two income tests were redefined
+
+Stephen agreed on 29 October 2026 to redefine both income tests. As first built, neither could tell a good future from a bad one.
+
+The first Northern measure added Northern output to the net transfer into the North. Under unity, Southern pay and welfare rates are paid for by the South, so the transfer alone lifts the measure.
+
+Run on the released model with the favourable deal, every future passed the Northern test at 1.3%, 2% and 3% Northern growth. At 1.3% Northern output was about €9.6bn lower than on the UK path by year 15, yet the measure still showed a gain of about €3,100 per person.
+
+The first island measure added Northern output to Republic GNI\*. With every benefit channel at nil, the only difference from the UK path is the growth input, so the test passed when growth was set above the UK path and failed otherwise.
+
+At 2% the gain was exactly nil and the test failed by a tie. At 3% it passed. The test was reporting an input, not a result.
+
+The corrected tests have to be earned. Northern income counts only what is earned in the North, and island output counts only gains that come through a module in section 4.
+
+### 3.2 How results are reported until then
+
+No scenario is called favourable until both income tests are measured on the corrected definitions. Until then, published results and the Tánaiste brief report the three fiscal tests only, and say plainly that they measure whether the State could carry a future, not whether people are better off.
+
+The four-of-five rule still stands. It applies once all five tests can be measured.
 
 ## 4. New modules
 
@@ -145,8 +169,8 @@ Each module lists the policy question, the new inputs, the mechanism, the eviden
 
 | Output | Definition | Status |
 | --- | --- | --- |
-| Northern resident income per person | Northern output plus net fiscal transfer into the North, per resident | Proxy only, until the distributional microsimulation exists |
-| Island output | Northern output plus Republic GNI\* | New |
+| Northern earned income per person | Northern output less net fiscal transfers into the North from either government, per resident. Report the transfer separately beside it | Proxy only, until the distributional microsimulation exists |
+| Island output gain | Sum of the output terms from sections 4.3 and 4.4 and any capital channel, less GB friction and displacement, against the UK path. The difference between `gNI` and `ukPathGrowth` is reported separately and never counted towards the test | New |
 | Gain against the UK path | Each of the above minus its UK-path value | New |
 | Republic total gross debt | Existing debt path plus transition borrowing | Needs a baseline debt path |
 | Yearly net transfer per Republic resident | Yearly cost divided by Republic population | New |
@@ -189,7 +213,7 @@ Each scenario reports all five tests from section 3, plus the existing repayment
 ## 8. Order of work
 
 1. Stephen sets the test thresholds and the baseline debt rule, recorded in the decision register.
-2. Build the new outputs and the UK path (sections 4.7 and 4.8), with no new benefits switched on.
+2. Build the new outputs and the UK path (sections 4.7 and 4.8), with no new benefits switched on. Done by Codex on 29 October 2026. The two income outputs now need rebuilding to the definitions in section 3.1.
 3. Add the UK payment and EU support (4.1 and 4.2), which need negotiation ranges rather than estimates.
 4. Add integration savings and one-off costs (4.5), using the research assistant's inventories.
 5. Add investment moving North (4.4), with displacement.
@@ -202,6 +226,8 @@ Each scenario reports all five tests from section 3, plus the existing repayment
 2. Settled. The baseline follows Budget 2027 and Department of Finance projections, then holds steady, with total debt allowed up to 80% of GNI\*.
 3. Settled. A scenario must pass four of the five tests.
 4. Whether the book presents A and B as its central favourable cases, alongside the existing four futures.
+5. Open. Whether "falling from year 20" means year 20 must already be lower than year 19, as the code now does, or only that the transfer falls over years 20 to 25. The two readings differ only for Federal at 3% Northern growth, where pay rerating ends in year 20.
+6. Open. Whether `gNI` above `ukPathGrowth` may ever count towards island output. It should not, unless the difference comes from a modelled channel with its own evidence.
 
 ## Sources
 

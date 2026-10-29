@@ -1,160 +1,266 @@
 {
   "outputs": [
     {
+      "key": "channelBaseOutput",
+      "nullable": false,
+      "description": "Unrounded NI output before trade and FDI terms, euro bn."
+    },
+    {
       "key": "ukTransitionPayment",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "euSupport",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "euCapitalFunding",
-      "description": "EU funding allocated to already-costed programme capital before lag and efficiency, euro bn."
+      "nullable": false,
+      "description": "EU funding allocated to already-costed capital before lag and efficiency, euro bn."
     },
     {
       "key": "borderOutput",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "gbOutputLoss",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "fdiAdditionalJobs",
-      "description": "Additional foreign-owned NI jobs, before Republic displacement."
+      "nullable": false,
+      "description": "Additional NI foreign-owned jobs, before Republic displacement."
     },
     {
       "key": "fdiOutput",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "fdiReceipts",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "republicBorderGain",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "republicDisplacedOutput",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "republicReceiptsChange",
-      "description": "Receipts on Republic border gain less displaced FDI receipts, euro bn."
+      "nullable": false,
+      "description": "Republic receipts on border gain less displaced FDI receipts, euro bn."
     },
     {
       "key": "integrationCost",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "integrationSaving",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "unroundedCost",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "unroundedDebt",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "unroundedActualOutput",
-      "description": "NI real output including separate output channels, euro bn."
+      "nullable": false,
+      "description": "NI real output including separate channels, euro bn."
     },
     {
       "key": "unroundedGain",
-      "description": "Marginal NI receipts from all selected output channels, euro bn. Excludes separate Republic receipts."
+      "nullable": false,
+      "description": "Marginal NI receipts from selected output channels, euro bn. Excludes Republic receipts."
     },
     {
       "key": "unroundedServiceCost",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "republicOldAgeDependency",
+      "nullable": false,
       "description": "Republic people aged 65+ per 100 aged 15 to 64."
     },
     {
       "key": "islandOldAgeDependency",
+      "nullable": false,
       "description": "Island people aged 65+ per 100 aged 15 to 64."
     },
     {
-      "key": "northernResourceProxyPerPerson",
-      "description": "Euro per NI resident. Output plus domestic fiscal transfer, not household income."
+      "key": "northernEarnedIncomePerPerson",
+      "nullable": true,
+      "description": "Unavailable, null. No household earned-income account is modelled."
     },
     {
-      "key": "ukResourceProxyPerPerson",
-      "description": "Same broad proxy on the UK path, euro per NI resident."
+      "key": "ukEarnedIncomePerPerson",
+      "nullable": true,
+      "description": "Unavailable, null. GDP less fiscal transfers is not household earned income."
     },
     {
-      "key": "northernProxyGainPerPerson",
-      "description": "Selected resource proxy less UK-path proxy, euro per resident."
+      "key": "northernEarnedIncomeGainPerPerson",
+      "nullable": true,
+      "description": "Unavailable, null. No income pass or fail can be inferred."
     },
     {
-      "key": "islandOutputProxy",
-      "description": "NI GDP-based output plus Republic GNI*, constant 2023 euro bn."
+      "key": "northernOutputPerPerson",
+      "nullable": false,
+      "description": "NI GDP-based output per resident, euro. Not household income."
     },
     {
-      "key": "ukIslandOutputProxy",
-      "description": "Same mixed-concept output measure on UK path, constant 2023 euro bn."
+      "key": "ukOutputPerPerson",
+      "nullable": false,
+      "description": "NI GDP-based output per resident on UK path, euro."
     },
     {
-      "key": "islandOutputProxyGain",
-      "description": "Selected island output proxy less UK path, constant 2023 euro bn."
+      "key": "assumedPolicyOutput",
+      "nullable": false,
+      "description": "NI output from chosen growth before separate economic experiments, euro bn."
+    },
+    {
+      "key": "assumedGrowthOutputGap",
+      "nullable": false,
+      "description": "Assumed policy output less UK output, euro bn. Never an economic pass."
+    },
+    {
+      "key": "capitalOutputGain",
+      "nullable": false,
+      "description": "Selected output before trade and FDI less a core run with all programme and EU-funded capital removed, holding growth and all other settings fixed. Mechanical experiment, euro bn."
+    },
+    {
+      "key": "tradeOutputGain",
+      "nullable": false,
+      "description": "NI border term less GB friction plus Republic border term, euro bn. Uncalibrated."
+    },
+    {
+      "key": "fdiOutputGain",
+      "nullable": false,
+      "description": "NI FDI output less Republic displacement, euro bn. Uncalibrated."
+    },
+    {
+      "key": "modelledIslandOutputGain",
+      "nullable": false,
+      "description": "Capital plus trade plus net FDI terms only, euro bn. Excludes assumed growth and residual experiments. Not an estimated economic benefit."
+    },
+    {
+      "key": "totalIslandOutputDifference",
+      "nullable": false,
+      "description": "Total NI output plus Republic GNI* difference from UK path, euro bn. Mixed concepts, not island GDP."
+    },
+    {
+      "key": "otherOutputDifference",
+      "nullable": false,
+      "description": "Total difference less assumed growth and the three channel terms, euro bn. Not counted as a benefit."
+    },
+    {
+      "key": "economicAssessmentReady",
+      "nullable": false,
+      "description": "False. Household income and calibrated economic benefit tests remain unavailable."
+    },
+    {
+      "key": "northernTransferPerPerson",
+      "nullable": false,
+      "description": "Net domestic spending less receipts per NI resident, euro. Separate from output."
+    },
+    {
+      "key": "ukTransferPerPerson",
+      "nullable": false,
+      "description": "Same fiscal transfer on UK path, euro per NI resident."
     },
     {
       "key": "ukOutput",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "ukDomesticTransfer",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "northernDomesticTransfer",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "ukTransferWithdrawal",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "republicGNI",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "baselineRepublicDebt",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "debtHeadroomPctGNI",
+      "nullable": false,
       "description": "Chosen 80% ceiling less total debt ratio, percentage points."
     },
     {
       "key": "totalRepublicDebt",
+      "nullable": false,
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
       "key": "totalDebtPctGNI",
-      "description": "Baseline plus transition gross debt as percent of scenario Republic GNI*."
+      "nullable": false,
+      "description": "Baseline plus transition debt as percent of scenario Republic GNI*."
     },
     {
       "key": "netCostPctGNI",
-      "description": "Unrounded annual Republic cost including transition interest as percent of scenario Republic GNI*."
+      "nullable": false,
+      "description": "Unrounded annual cost including interest as percent of Republic GNI*."
     },
     {
       "key": "burdenLimitPerRepublicResident",
-      "description": "Annual 2% of GNI* limit expressed per Republic resident, euro."
+      "nullable": false,
+      "description": "2% of GNI* limit per Republic resident, euro."
     },
     {
       "key": "netCostPerRepublicResident",
-      "description": "Unrounded annual Republic cost including interest divided by population, euro per resident."
+      "nullable": false,
+      "description": "Annual Republic cost including interest per resident, euro."
     }
   ],
-  "version": "2026-10-29-benefits-extension",
-  "extensionSha256": "94685b7a9fdbc7b159ff8d703da28e0f27cb23e800673008ac0cc1845e7b5169",
+  "version": "2026-10-29-fiscal-checks",
+  "currentAssessment": {
+    "reportedTests": [
+      "debt",
+      "burden",
+      "falling"
+    ],
+    "unassessedTests": [
+      "northernIncome",
+      "islandOutput"
+    ],
+    "overallAssessment": "Not assessed",
+    "fourOfFiveRule": "Reserved until all economic tests are measured. Not applied to the fiscal checks."
+  },
+  "extensionSha256": "ed3a8616c7b2cdbf0b30624efe86a303d60c7f4580209e110f0378afb8374847",
   "inputs": [
     {
       "key": "ukTransitionShare",
@@ -728,22 +834,35 @@
     "trade": "Current NI output * (selected border gain * unremoved Windsor share - selected GB loss) * phase",
     "fdi": "Additional jobs above current NI intensity * real output or receipts per job. Republic displacement deducted. No second marginal tax on FDI output.",
     "integration": "One-off implementation spending less phased savings. Saving requires positive implementation cost.",
-    "proxy": "NI output plus net domestic public spending less receipts, per resident. A broad resource proxy, not household income. Public output may already be included in GDP, so this is not a national-accounts income identity.",
-    "island": "NI GDP-based output plus Republic GNI*. A mixed-concept output proxy, not island GDP.",
+    "income": "Not calculated. GDP is neither augmented nor reduced by fiscal transfers to manufacture household earned income.",
+    "island": "Only the capital, trade and net FDI channel terms. The assumed growth gap and other residual differences are recorded separately and cannot pass an economic test.",
+    "capital": "Output difference holding chosen growth and all other settings fixed, removing programme and EU-funded capital only.",
+    "reconciliation": "Total output difference = assumed growth gap + capital + trade + net FDI + other output differences.",
+    "direction": "Current strict rule includes the change from year 19 to 20, followed by a fall in every later year. Interpretation remains an open decision.",
     "debt": "Budget 2027 debt ratio schedule applied to unchanged model real GNI* baseline, plus transition borrowing. Divide by scenario Republic GNI*.",
     "demography": "People 65+ / people aged 15 to 64. NI annual source and linearly interpolated CSO knots."
   },
   "limitations": [
-    "No income distribution, FRS or EU-SILC microsimulation. Do not label the proxy household welfare.",
+    "Only three fiscal checks are scored. Household earned income remains unavailable and no overall favourable classification is reported.",
     "Baseline debt ratios are a scenario overlay. Budget years 2027 to 2030 index model years 1 to 4, while demographic normalisation stays 2024. Not a calendar-year forecast.",
     "An 80% ceiling is Stephen’s assessment choice, not an established safe debt limit.",
-    "Four passes are required. The annual burden limit is 2% of Republic GNI* with 1% and 3% sensitivities. These are assessment choices, not empirical safety limits.",
+    "The four-of-five rule is reserved for future use after economic tests can be measured. The annual burden limit is 2% of Republic GNI* with 1% and 3% sensitivities. These are assessment choices, not empirical safety limits.",
     "The low-growth comparison uses a selected 1.3% illustration, not a verified historical estimate.",
     "No empirical central values have been supplied for new trade, FDI or integration effects. These remain off in public controls.",
     "EU grant allocation finances already-costed programme investment. It cannot create a second capital stock for the same spending.",
     "Core policy growth is growth from other causes whenever separately modelled benefits are enabled. No causal growth premium is attached automatically to constitutional form.",
     "The UK does not necessarily save the entire allocated transfer. Retained pension obligations, debt and UK-specific allocations remain distinct.",
     "FDI employment and output are additive illustrations. No complete labour market, tax reform, general-equilibrium displacement or profit repatriation account is estimated."
+  ],
+  "definitionsSources": [
+    {
+      "title": "CSO Household Gross Disposable Income",
+      "url": "https://www.cso.ie/en/interactivezone/statisticsexplained/nationalaccountsexplained/householdgrossdisposableincome/"
+    },
+    {
+      "title": "ECB GDP, output, demand and income",
+      "url": "https://data.ecb.europa.eu/methodology/gdp-output-demand-and-income"
+    }
   ],
   "scenarioStatus": {
     "status": "not runnable",

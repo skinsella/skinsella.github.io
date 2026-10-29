@@ -33,12 +33,12 @@ flowchart TD
     TRADE["Uncalibrated trade gains and GB losses"] --> TAX
     FDI["Uncalibrated FDI and Republic displacement"] --> TAX
     MERGE["Integration savings and implementation costs"] --> COST
-    GROW --> PROXY["Northern resource and island output proxies"]
-    TRADE --> PROXY
-    FDI --> PROXY
-    UK["Independent UK comparison path"] --> PROXY
+    GROW --> DIAG["Assumed output gap, research diagnostic"]
+    TRADE --> CHANNEL["Separate output channel terms, uncalibrated"]
+    FDI --> CHANNEL
+    UK["Independent UK comparison path"] --> DIAG
     POP --> AGE["Matched old-age dependency"]
-    BASEDEBT["Budget 2027 baseline ratio overlay"] --> TOTAL["Total debt and chosen success tests"]
+    BASEDEBT["Budget 2027 baseline ratio overlay"] --> TOTAL["Three fiscal checks, no economic verdict"]
     DEBT --> TOTAL
-    PROXY --> TOTAL
     ANNUAL --> TOTAL
+    ECON --> CHANNEL

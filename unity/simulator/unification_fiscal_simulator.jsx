@@ -589,7 +589,7 @@ export default function UnificationSimulator() {
           <h1 style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 600, fontSize: "clamp(26px,4vw,38px)", lineHeight: 1.1 }}>
             Reunification Scenarios
           </h1>
-          <a href="model_reference.html" target="_blank" rel="noreferrer" className="inline-block mt-3 underline text-sm" style={{ color: "#177052" }}>Model reference · variables, parameters and sources</a><a className="inline-block ml-4 underline text-sm" href={"benefits.html#"+encodeURIComponent(JSON.stringify({policy:active,structural,horizon}))}>Benefits and whole-island controls</a>
+          <a href="model_reference.html" target="_blank" rel="noreferrer" className="inline-block mt-3 underline text-sm" style={{ color: "#177052" }}>Model reference · variables, parameters and sources</a><a className="inline-block ml-4 underline text-sm" href={"benefits.html#"+encodeURIComponent(JSON.stringify({policy:active,structural,horizon}))}>Fiscal checks and additional assumptions</a>
           <p className="mt-2 max-w-2xl text-sm" style={{ color: "#5C6B63" }}>
             Every published estimate of the cost of Irish unification is a bundle of assumptions about
             constitutional form, negotiated liabilities and convergence speed. Set the bundle yourself. Selecting a bundle changes policy spending and timing only, while negotiated terms and growth stay explicit.

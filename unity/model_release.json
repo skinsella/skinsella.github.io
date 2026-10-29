@@ -1,8 +1,8 @@
 {
   "modelVersion": "2026-10-29-component-fiscal",
   "modelSha256": "4c794c7e9803ed30dae34cc199432bc928383c1f630cae0b72e724d35744d7e0",
-  "extensionSha256": "94685b7a9fdbc7b159ff8d703da28e0f27cb23e800673008ac0cc1845e7b5169",
-  "extensionVersion": "2026-10-29-benefits-extension",
+  "extensionSha256": "ed3a8616c7b2cdbf0b30624efe86a303d60c7f4580209e110f0378afb8374847",
+  "extensionVersion": "2026-10-29-fiscal-checks",
   "benefits": "benefits.html",
   "benefitsReference": "benefits_reference.json",
   "story": "index.html",
