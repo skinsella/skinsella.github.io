@@ -156,7 +156,7 @@ function fiscalComponents(p,s,t) {
  const payBase=s.publicPayBase,benefitBase=s.nonPensionWelfareBase;
  const purchasesBase=BASE_SPENDING-payBase-benefitBase-PENSIONS-DEBT_INT-DEFENCE_NET-OTHER_NONID;
  if(purchasesBase&lt;0)throw new RangeError(&#39;Component allocations exceed frozen gross spending&#39;);
- const relativeRate=(1+p.gNI/100)/(1+s.baselineGrowth/100);
+ const relativeRate=p.counterfactual&amp;&amp;!p.shared?1:(1+p.gNI/100)/(1+s.baselineGrowth/100);
  const relativeOutput=p.stall&amp;&amp;t&gt;7?Math.pow(relativeRate,7)*Math.pow(Math.min(relativeRate,1.004),t-7):Math.pow(relativeRate,t);
  const pay=payBase*Math.pow(1+s.niPayGrowth/100,t)*Math.pow(relativeOutput,s.payGrowthPassThrough)*volumes;
  const benefits=benefitBase*Math.pow(1+s.niBenefitGrowth/100,t)*volumes;
@@ -371,4 +371,4 @@ const round2 = (x) =&gt; { const rounded=Math.round(x*100)/100; return rounded==
 
 
 export { FORMS, ECONOMIC_PARAMETERS, DEFAULT_STRUCTURAL, MODEL_CONSTANTS, simulate, inheritedDeficit, breakEven, payback, policyForForm, validateInputs, MANAGED_CASES, managedCase, UNITY_CASES, unityCase, fiscalComponents, populationAt, POPULATION_PROJECTIONS };
-</pre></details><p>Model fingerprint 93f2868aee8d484adbba6e63f5390f52bc9986f58c97d5e6725a64f45edeb3f8</p></html>
+</pre></details><p>Model fingerprint 166183ffd6162968fc4af5471dd946bb19f1d97e744e025d2bee7a9930559fa7</p></html>

@@ -19,7 +19,7 @@
 <div id="root"><div id="fallback">Loading the simulator. If this message persists, check your internet connection, the page loads React and Recharts from public CDNs.</div></div>
 <script>
 (() => {
-  const BUILD_FINGERPRINT = "93f2868aee8d484adbba6e63f5390f52bc9986f58c97d5e6725a64f45edeb3f8";
+  const BUILD_FINGERPRINT = "166183ffd6162968fc4af5471dd946bb19f1d97e744e025d2bee7a9930559fa7";
   const { useMemo, useState } = React;
   const { ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer, Legend } = Recharts;
   const GNI_STAR = 290.9;
@@ -201,7 +201,7 @@
     const payBase = s.publicPayBase, benefitBase = s.nonPensionWelfareBase;
     const purchasesBase = BASE_SPENDING - payBase - benefitBase - PENSIONS - DEBT_INT - DEFENCE_NET - OTHER_NONID;
     if (purchasesBase < 0) throw new RangeError("Component allocations exceed frozen gross spending");
-    const relativeRate = (1 + p.gNI / 100) / (1 + s.baselineGrowth / 100);
+    const relativeRate = p.counterfactual && !p.shared ? 1 : (1 + p.gNI / 100) / (1 + s.baselineGrowth / 100);
     const relativeOutput = p.stall && t > 7 ? Math.pow(relativeRate, 7) * Math.pow(Math.min(relativeRate, 1.004), t - 7) : Math.pow(relativeRate, t);
     const pay = payBase * Math.pow(1 + s.niPayGrowth / 100, t) * Math.pow(relativeOutput, s.payGrowthPassThrough) * volumes;
     const benefits = benefitBase * Math.pow(1 + s.niBenefitGrowth / 100, t) * volumes;

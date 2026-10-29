@@ -156,7 +156,7 @@ function fiscalComponents(p,s,t) {
  const payBase=s.publicPayBase,benefitBase=s.nonPensionWelfareBase;
  const purchasesBase=BASE_SPENDING-payBase-benefitBase-PENSIONS-DEBT_INT-DEFENCE_NET-OTHER_NONID;
  if(purchasesBase<0)throw new RangeError('Component allocations exceed frozen gross spending');
- const relativeRate=(1+p.gNI/100)/(1+s.baselineGrowth/100);
+ const relativeRate=p.counterfactual&&!p.shared?1:(1+p.gNI/100)/(1+s.baselineGrowth/100);
  const relativeOutput=p.stall&&t>7?Math.pow(relativeRate,7)*Math.pow(Math.min(relativeRate,1.004),t-7):Math.pow(relativeRate,t);
  const pay=payBase*Math.pow(1+s.niPayGrowth/100,t)*Math.pow(relativeOutput,s.payGrowthPassThrough)*volumes;
  const benefits=benefitBase*Math.pow(1+s.niBenefitGrowth/100,t)*volumes;
