@@ -1,4 +1,47 @@
 {
+  "harmonisationCases": {
+    "upper": {
+      "label": "Upper · F&M 2024 gross, likely overstated",
+      "caveat": "Gross historical benchmarks, no tax offset. Not like-for-like grades or benefit-by-benefit costing.",
+      "settings": {
+        "payGapPct": null,
+        "payTaxOffset": 0,
+        "welfareGapPct": null,
+        "welfareTaxOffset": 0
+      }
+    },
+    "middle": {
+      "label": "Middle · Doyle pay, F&M welfare",
+      "caveat": "Doyle pay calibration uses 15 × €152m. Its price basis is not verified. Welfare retains the F&M gross assumption.",
+      "settings": {
+        "payGapPct": 48,
+        "payTaxOffset": 48.778360964451885,
+        "welfareGapPct": null,
+        "welfareTaxOffset": 0
+      }
+    },
+    "rateBased": {
+      "label": "Candidate · rate-based welfare",
+      "caveat": "Doyle pension price basis unverified. Published-rate sensitivity, not a complete benefit costing. Older pensions, Irish extra benefits and eligibility are not fully costed. Not a central estimate.",
+      "settings": {
+        "payGapPct": 48,
+        "payTaxOffset": 48.778360964451885,
+        "welfareGapPct": 4.256429943999353,
+        "welfareTaxOffset": 6.805592635588342
+      }
+    },
+    "lower": {
+      "label": "Lower · Doyle pay, no welfare gap",
+      "caveat": "Lower sensitivity bound, not an estimate. Doyle price basis is unverified and a zero welfare gap is not a Tomlinson replication.",
+      "settings": {
+        "payGapPct": 48,
+        "payTaxOffset": 48.778360964451885,
+        "welfareGapPct": 0,
+        "welfareTaxOffset": 0
+      }
+    }
+  },
+  "centralCase": null,
   "outputs": [
     {
       "key": "channelBaseOutput",
@@ -246,7 +289,7 @@
       "description": "Annual Republic cost including interest per resident, euro."
     }
   ],
-  "version": "2026-10-29-feasibility-repair",
+  "version": "2026-10-29-harmonisation-cases",
   "currentAssessment": {
     "reportedTests": [
       "debt",
@@ -260,7 +303,7 @@
     "overallAssessment": "Not assessed",
     "fourOfFiveRule": "Reserved until all economic tests are measured. Not applied to the fiscal checks."
   },
-  "extensionSha256": "861f73355e27aa695c8cfd3aa43c89c00898ca96af2317ffacf5fd32e198383e",
+  "extensionSha256": "e231f8781c6b4110f4d4b10f4b4a02fbf906973444ad1e609146f5948d762a42",
   "inputs": [
     {
       "key": "ukTransitionShare",

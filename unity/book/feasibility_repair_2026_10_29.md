@@ -14,17 +14,11 @@ The growth section now solves the smallest hypothetical UK payment needed for re
 
 The solved payment is a requirement rather than an expected settlement or an estimate of UK savings. The table reports both its first-year percentage and euro amount.
 
-## A conditional route for Managed Integration
+## Harmonisation update
 
-Under the saved favourable liability settlement, accepted deductions, 15-year alignment and 4.5% NI growth, Managed Integration has €4.5bn transition debt left at year 25 without support. The solver finds that a first-year UK payment of 3.2% of the frozen transfer, about €0.55bn, declining over the existing schedule, brings repayment to year 25.
+Earlier numerical examples on this page used the unsupported Table 7 recovery assumption and are withdrawn as current results. Use the [three-case harmonisation correction](harmonisation_implementation_2026_10_29.md) and the [current check record](../data/feasibility_repair_checks.json).
 
-This leaves growth optimistic and the settlement favourable. It demonstrates a negotiated funding requirement under those assumptions, not that either condition is likely.
-
-In a separate experiment, assigning the whole programme envelope to capital under the existing response settings also brings repayment to year 25. That is an experiment limit, not a recommendation to classify all programme spending as capital or evidence that its return has been estimated.
-
-At 2% growth, the tested UK payment range does not deliver Managed Integration repayment. The model retains that result instead of silently weakening spending indexation.
-
-Exact settings and numerical results are saved in [the check record](../data/feasibility_repair_checks.json). The default fiscal paths remain unchanged and regression checks still match the earlier paths.
+The investment and support mechanisms remain available. Their results now depend explicitly on the upper, middle or lower case, with no central calibration selected.
 
 ## Repairs to confirmed defects
 

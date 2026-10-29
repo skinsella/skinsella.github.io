@@ -4,7 +4,7 @@ This release replaces the fixed-envelope fiscal calculation with separate indexe
 
 Baseline receipts follow reference Northern Ireland output, with a separate residual growth setting. Additional policy output produces marginal receipts only once, while baseline public pay responds to the policy-output premium through an explicit assumed pass-through.
 
-Pensions are removed from other spending before their funding share, rate index and projected older-population volume are applied. Harmonisation follows the positive difference between moving gross Republic targets and moving NI baselines, with the source gross/net bridge applied once.
+Pensions are removed from other spending before their funding share, rate index and projected older-population volume are applied. Harmonisation follows the positive difference between moving gross Republic targets and moving NI baselines, with explicit case-specific tax offsets and no inferred Table 7 recovery.
 
 Component allocations are historical calibrations rather than current official programme accounts. The non-pension benefit allocation subtracts the pension envelope from the historical total welfare normalisation, and residual purchases reconcile the opening total exactly.
 

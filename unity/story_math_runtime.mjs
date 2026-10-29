@@ -1,4 +1,4 @@
-import {simulate} from './scenario_model.mjs?v=9e44efa421d8';
+import {simulate} from './scenario_model.mjs?v=bc5737684012';
 export function niceAxis(values){
  const low=Math.min(0,...values),high=Math.max(0,...values),raw=Math.max(1e-9,high-low)/4;
  if(high===low)return {lo:0,hi:1,step:.25,ticks:[0,.25,.5,.75,1]};

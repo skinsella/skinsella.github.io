@@ -11,6 +11,7 @@ export function reproduce(run){
  const compared=Object.fromEntries(Object.entries(run.comparedPolicies).map(([key,policy])=>[key,simulate(policy,run.horizon,run.structural)]));
  const comparison=Array.from({length:run.horizon},(_,i)=>Object.fromEntries([['year',i+1],...Object.entries(compared).map(([key,values])=>[key,values[i].cost])]));
  assert.deepEqual(comparison,run.comparison,'Comparison lines do not reproduce');
+ for(const [key,x] of Object.entries(run.harmonisationCases??{}))assert.deepEqual(simulate(run.policy,run.horizon,x.structural),x.rows,'Harmonisation case does not reproduce '+key);
  return rows;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){

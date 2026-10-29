@@ -45,6 +45,7 @@ The existing strict direction rule is retained pending the open decision below. 
 | 5 | Decide the public release model | Password protected preview exists, while long term access is unsettled | Reproducibility and public engagement remain limited |
 | 6 | Decide how to treat general equilibrium effects | Current framework is mainly structural accounting with selected feedbacks | Behavioural claims may exceed the implemented model |
 | 7 | Define "falling from year 20" | Code requires year 20 to be below year 19, the earlier brief draft did not | Federal at 3% growth passes or fails the direction test depending on the reading |
+| 8 | Choose the central harmonisation case | Model default is F&M 2024 gross gap, which likely overstates cost. Lower cases in book/harmonisation_gap_review_2026_10_29.md | Every headline cost in the paper and brief depends on it |
 
 ## Rule for closing a decision
 
@@ -56,3 +57,7 @@ A decision is closed only when the chosen option, date, owner, rationale and aff
 - `book/scenario_mapping.md`
 - `chats/codex_project_history.md`
 - `README.md`
+
+The harmonisation implementation now reports the upper, middle and lower cases together. The initial upper view removes the unsupported table-difference offset, while decision 8 on a central case remains open.
+
+The rateBased candidate is a separate sensitivity under the updated implementation note. It does not replace middle or resolve the central-case decision.

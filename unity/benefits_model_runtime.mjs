@@ -1,5 +1,5 @@
-import {simulate,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,FORMS,fiscalComponents,populationAt,payback,validateInputs} from './scenario_model.mjs?v=861f73355e27';
-import SOURCES from './benefits_sources.mjs?v=861f73355e27';
+import {simulate,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,FORMS,fiscalComponents,populationAt,payback,validateInputs} from './scenario_model.mjs?v=e231f8781c6b';
+import SOURCES from './benefits_sources.mjs?v=e231f8781c6b';
 
 // These are specification bounds for experiments, not empirical confidence intervals.
 // A null calibration is deliberately unavailable rather than replaced by an invented estimate.
@@ -30,7 +30,7 @@ export const BENEFIT_INPUTS = [
  ['ukPathSpendingGrowth',null,-2,3,'%','Null follows residual purchases cost growth. Does not blanket-index pay or pensions.','design'],
  ['ukPathTransferRisk',0,0,30,'%','Frozen transfer withdrawal by year 25, assumed to reduce residual services.','source needed'],
 ].map(([key,value,min,max,unit,description,status])=>({key,value,min,max,unit,description,status}));
-export const ASSESSMENT_VERSION='2026-10-29-feasibility-repair';
+export const ASSESSMENT_VERSION='2026-10-29-harmonisation-cases';
 export const BENEFIT_DEFAULTS=Object.fromEntries(BENEFIT_INPUTS.map(x=>[x.key,x.value]));
 export const SUCCESS_RULES=Object.freeze({comparisonYear:15,debtCeiling:80,burdenPctGNI:2,burdenSensitivities:[1,3],fallingFrom:20,assessmentHorizon:25,requiredPasses:4});
 const clamp=(v,l,h)=>Math.max(l,Math.min(h,v));

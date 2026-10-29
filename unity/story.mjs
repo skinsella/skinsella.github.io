@@ -1,10 +1,10 @@
 import {requiredUKSupport} from './feasibility_model.mjs';
 import {simulateBenefits,assessBenefits} from './benefits_model.mjs';
 import {niceAxis,requiredGrowth} from './story_math.mjs';
-import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs';
+import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit,HARMONISATION_CASES,harmonisationSettings} from './scenario_model.mjs';
 const $=id=>document.getElementById(id),keys=['unitary','federal','glide','worst'];
 const names={unitary:'Unitary',federal:'Federal',glide:'Managed Integration',worst:'Higher Cost'};
-const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2,ukTransitionShare:0,capitalShare:0};
+const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2,ukTransitionShare:0,capitalShare:0,harmonisationCase:'upper'};
 const settings={...D,baselineGrowth:2,southGrowth:2,baselineRevenueGrowth:0,baselineSpendingGrowth:1,defenceSavingShare:100,centralSavingShare:100,taxAdjustmentShare:100,growthRevenue:true};
 const thresholdCache=new Map(),supportCache=new Map();
 const money=v=>`€${Math.abs(v).toFixed(1)}bn${v<0?' surplus':''}`;
@@ -45,6 +45,9 @@ function renderWorth(selected){
 }
 
 function render(){
+ Object.assign(settings,harmonisationSettings(state.harmonisationCase));
+ document.querySelectorAll('[data-harmonisation]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.harmonisation===state.harmonisationCase));
+ $('harmonisation-caveat').textContent=HARMONISATION_CASES[state.harmonisationCase].caveat+' No central case has been selected.';
  settings.linkedMechanisms=state.capitalShare>0;settings.investmentCapitalShare=state.capitalShare;
  const adjusted=inheritedDeficit(true,true,settings);$('bridge-number').textContent=money(C.PUBLISHED);
  const bridge=[['Reported UK fiscal balance',C.PUBLISHED],['After other study adjustments',C.PUBLISHED-C.DEFENCE_NET-C.OTHER_NONID-C.TAX_ADD],['If the UK retains pensions',adjusted+C.DEBT_INT],['Residual under a very favourable deal',adjusted]];
@@ -56,6 +59,7 @@ function render(){
  singleBar('terms-chart',current[0].cost,'Managed Integration · first year',Math.ceil(maxFirst/10)*10);
  document.querySelectorAll('[data-years]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.years===state.years));
  document.querySelectorAll('[data-growth]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.growth===state.growth));
+ $('harmonisation-results').innerHTML=Object.entries(HARMONISATION_CASES).map(([key,x])=>{const rows=fiscalRun(policy(state.form),25,{...settings,...harmonisationSettings(key)}),r=rows.at(-1);return '<tr><td>'+x.label+'</td><td>'+money(rows[0].cost)+'</td><td>'+money(r.cost)+'</td><td>'+money(r.debt)+'</td><td>'+r.totalDebtPctGNI.toFixed(1)+'%</td></tr>';}).join('');
  const series=keys.map(key=>({key,name:names[key],colour:FORMS[key].color,rows:run(key)}));
  const rising=series.every(s=>s.rows.at(-1).cost>s.rows[0].cost);
  $('path-heading').textContent=rising?`At ${state.growth}% growth, costs rise over time.`:'Design and growth change the fiscal path.';
@@ -69,10 +73,10 @@ function render(){
  $('growth-legend').innerHTML=series.map(s=>`<span><span class="dot" style="background:${s.colour}"></span>${s.name}</span>`).join('');
  renderWorth(selected);
  const paid=series.filter(s=>payback(s.rows)!==null);
- const cacheKey=JSON.stringify([state.pensionsUK,state.debtUK,state.years,state.ukTransitionShare,state.capitalShare]);
+ const cacheKey=JSON.stringify([state.pensionsUK,state.debtUK,state.years,state.ukTransitionShare,state.capitalShare,state.harmonisationCase]);
  if(!thresholdCache.has(cacheKey))thresholdCache.set(cacheKey,Object.fromEntries(keys.map(k=>[k,requiredGrowth(policy(k),settings,25,fiscalRun)])));
  const thresholds=thresholdCache.get(cacheKey),managed=thresholds.glide;
- const supportKey=JSON.stringify([state.pensionsUK,state.debtUK,state.years,state.growth,state.capitalShare]);
+ const supportKey=JSON.stringify([state.pensionsUK,state.debtUK,state.years,state.growth,state.capitalShare,state.harmonisationCase]);
  if(!supportCache.has(supportKey))supportCache.set(supportKey,Object.fromEntries(keys.map(k=>[k,requiredUKSupport(policy(k),settings)])));
  const supportNeeded=supportCache.get(supportKey);
  $('feasibility-results').innerHTML=keys.map(k=>{const x=supportNeeded[k];return '<tr><td>'+names[k]+'</td><td>'+(x?x.display===0?'None needed':x.display.toFixed(1)+'% (€'+(C.PUBLISHED*x.display/100).toFixed(2)+'bn)':'Not reached within 50% search')+'</td></tr>';}).join('');
@@ -91,6 +95,7 @@ $('timing-buttons').addEventListener('click',e=>{const b=e.target.closest('[data
 $('growth-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-growth]');if(b){state.growth=+b.dataset.growth;render();}});
 $('future-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-form]');if(b){state.form=b.dataset.form;render();}});
 $('uk-payment').addEventListener('input',e=>{const v=Number(e.target.value);if(Number.isFinite(v)&&v>=0&&v<=50){state.ukTransitionShare=v;render();}});
+$('harmonisation-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-harmonisation]');if(b){state.harmonisationCase=b.dataset.harmonisation;render();}});
 $('capital-share').addEventListener('input',e=>{const v=Number(e.target.value);if(Number.isFinite(v)&&v>=0&&v<=100){state.capitalShare=v;render();}});
 $('worth-buttons').addEventListener('click',e=>{const x=e.target.closest('[data-worth]');if(x){state.worthMetric=x.dataset.worth;render();}});
 render();

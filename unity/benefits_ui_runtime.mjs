@@ -1,11 +1,14 @@
-import {simulateBenefits,assessBenefits,BENEFIT_INPUTS,BENEFIT_DEFAULTS,SUCCESS_RULES,publicationIssues,validateSharedSettings} from './benefits_model_runtime.mjs?v=861f73355e27';
-import {DEFAULT_STRUCTURAL as D,FORMS} from './scenario_model.mjs?v=861f73355e27';
+import {simulateBenefits,assessBenefits,BENEFIT_INPUTS,BENEFIT_DEFAULTS,SUCCESS_RULES,publicationIssues,validateSharedSettings} from './benefits_model_runtime.mjs?v=e231f8781c6b';
+import {DEFAULT_STRUCTURAL as D,FORMS,HARMONISATION_CASES,harmonisationSettings} from './scenario_model.mjs?v=e231f8781c6b';
 const $=id=>document.getElementById(id);
 let initialError='',loaded;
 try{loaded=validateSharedSettings(JSON.parse(decodeURIComponent(location.hash.slice(1))||'{}'));}
 catch(e){initialError=e.message;loaded=validateSharedSettings({});}
 const {policy:p,structural:s,benefits:b,horizon}=loaded;
 const labels={debt:'Total debt below 80% of GNI* throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling from year 20'};
+$('harmonisation-select').innerHTML=Object.entries(HARMONISATION_CASES).map(([key,x])=>'<option value="'+key+'">'+x.label+'</option>').join('')+'<option value="custom">Custom sensitivity</option>';
+$('harmonisation-select').value=s.harmonisationCase;
+$('harmonisation-select').addEventListener('change',e=>{Object.assign(s,harmonisationSettings(e.target.value));render();});
 $('context').textContent=`Loaded ${p.gNI}% NI growth from other causes, ${p.reratingYears}-year alignment, UK pension retention ${p.pensionsUK?'on':'off'}, and UK debt-interest retention ${p.debtUK?'on':'off'}. Changes here affect this extension comparison only.`;
 $('inputs').innerHTML=BENEFIT_INPUTS.map(x=>`<tr><td><label for="b-${x.key}">${x.key}</label></td><td><input id="b-${x.key}" type="number" min="${x.min}" max="${x.max}" step="${x.unit==='years'||x.unit==='year'?1:'any'}" placeholder="Not calibrated" ${x.status==='source needed'?'disabled':''}></td><td>${x.unit}</td><td>${x.min} to ${x.max}</td><td>${x.status}<br>${x.description}</td></tr>`).join('');
 for(const x of BENEFIT_INPUTS){const el=$('b-'+x.key);el.value=b[x.key]??'';el.addEventListener('input',e=>{b[x.key]=e.target.value===''?null:Number(e.target.value);render();});}
@@ -14,6 +17,7 @@ function render(){
   if(initialError)throw Error('Invalid shared settings. '+initialError);
   const issues=publicationIssues(b);if(issues.length)throw Error('Unverified channels stay disabled in this public comparison. '+issues.join('. '));
   const rows=simulateBenefits(p,horizon,s,b),twin=simulateBenefits({...p,gNI:Math.min(p.gNI,1.3)},horizon,s,b),a=assessBenefits(rows),ta=assessBenefits(twin),end=rows.at(-1);
+  $('harmonisation-comparison').innerHTML=Object.entries(HARMONISATION_CASES).map(([key,x])=>{const r=simulateBenefits(p,horizon,{...s,...harmonisationSettings(key)},b),a=assessBenefits(r),end=r.at(-1);return '<tr><td>'+x.label+'</td><td>'+r[0].cost.toFixed(1)+'</td><td>'+end.cost.toFixed(1)+'</td><td>'+end.debt.toFixed(1)+'</td><td>'+end.totalDebtPctGNI.toFixed(1)+'%</td><td>'+a.fiscalPasses+' of 3</td></tr>';}).join('');
   $('error').textContent='';$('status').textContent=a.status;
   $('sensitivities').textContent=''+a.burdenSensitivities.map((x,i)=>'At the '+x.limit+'% annual burden limit, there are '+x.fiscalPasses+' of 3 fiscal passes for the selected path and '+ta.burdenSensitivities[i].fiscalPasses+' for the comparison').join('. ')+'.';
   $('tests').innerHTML=Object.entries(labels).map(([k,label])=>`<tr><td>${label}</td><td>${a.tests[k]===null?'Not assessed':a.tests[k]?'Pass':'Fail'}</td><td>${ta.tests[k]===null?'Not assessed':ta.tests[k]?'Pass':'Fail'}</td></tr>`).join('');

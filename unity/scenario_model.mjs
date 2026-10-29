@@ -21,6 +21,7 @@ const DEFENCE_NET = 1.640;
 const OTHER_NONID = 0.692;
 const TAX_ADD = 1.840;
 const RERATE_FULL = (18.104-9.577)*UK_2019_TO_2023_EUR;
+const SOURCE_WELFARE_BASE = 9.615*UK_2019_TO_2023_EUR; // F&M 2024 Table 6, 2019 total welfare including pensions.
 
 
 const FORMS = {
@@ -103,6 +104,23 @@ const ECONOMIC_PARAMETERS = [
   {key:'serviceCostPerResident',label:'Annual service cost per additional resident',value:15000,min:0,max:30000,step:1000,unit:' € per resident',basis:'Illustrative marginal cost, not average public spending'},
 ];
 
+// Shared sensitivity definitions. No central case has been selected.
+const DOYLE_PAY_TAX_OFFSET=100*(1-15*0.152/(0.48*SOURCE_PAY_BASE));
+const RATE_WELFARE_GROSS=.381+.130*UK_2019_TO_2023_EUR;
+const RATE_WELFARE_NET=.343+.130*UK_2019_TO_2023_EUR;
+const HARMONISATION_CASES=Object.freeze({
+ upper:{label:'Upper · F&M 2024 gross, likely overstated',caveat:'Gross historical benchmarks, no tax offset. Not like-for-like grades or benefit-by-benefit costing.',settings:{payGapPct:null,payTaxOffset:0,welfareGapPct:null,welfareTaxOffset:0}},
+ middle:{label:'Middle · Doyle pay, F&M welfare',caveat:'Doyle pay calibration uses 15 × €152m. Its price basis is not verified. Welfare retains the F&M gross assumption.',settings:{payGapPct:48,payTaxOffset:DOYLE_PAY_TAX_OFFSET,welfareGapPct:null,welfareTaxOffset:0}},
+ rateBased:{label:'Candidate · rate-based welfare',caveat:'Doyle pension price basis unverified. Published-rate sensitivity, not a complete benefit costing. Older pensions, Irish extra benefits and eligibility are not fully costed. Not a central estimate.',settings:{payGapPct:48,payTaxOffset:DOYLE_PAY_TAX_OFFSET,welfareGapPct:100*RATE_WELFARE_GROSS/SOURCE_WELFARE_BASE,welfareTaxOffset:100*(1-RATE_WELFARE_NET/RATE_WELFARE_GROSS)}},
+ lower:{label:'Lower · Doyle pay, no welfare gap',caveat:'Lower sensitivity bound, not an estimate. Doyle price basis is unverified and a zero welfare gap is not a Tomlinson replication.',settings:{payGapPct:48,payTaxOffset:DOYLE_PAY_TAX_OFFSET,welfareGapPct:0,welfareTaxOffset:0}}
+});
+function harmonisationSettings(key,custom={}) {
+ if(key==='custom')return {payGapPct:null,welfareGapPct:null,payTaxOffset:0,welfareTaxOffset:0,...Object.fromEntries(Object.entries(custom).filter(([k])=>['payGapPct','welfareGapPct','payTaxOffset','welfareTaxOffset'].includes(k))),harmonisationCase:'custom'};
+ if(!Object.hasOwn(HARMONISATION_CASES,key))throw new RangeError('Unknown harmonisation case');
+ return {...HARMONISATION_CASES[key].settings,harmonisationCase:key};
+}
+function resolvedHarmonisation(s){return s.harmonisationCase==='custom'?harmonisationSettings('custom',Object.fromEntries(['payGapPct','welfareGapPct','payTaxOffset','welfareTaxOffset'].map(k=>[k,s[k]]))):harmonisationSettings(s.harmonisationCase??'upper');}
+
 const DEFAULT_STRUCTURAL = { southGrowth: 2, ageing: 0, shift: 0, realInterest: 2, discountRate: 2,
     payGrowthPassThrough:1, niPayGrowth:1, niBenefitGrowth:1, pensionRateGrowth:1, southPayGrowth:1, southBenefitGrowth:1,
     nonPensionWelfareBase:9.615*UK_2019_TO_2023_EUR-PENSIONS,
@@ -112,6 +130,7 @@ const DEFAULT_STRUCTURAL = { southGrowth: 2, ageing: 0, shift: 0, realInterest: 
     taxShare: 35, baselineRevenueGrowth: 0, baselineSpendingGrowth: 1,
     defenceSavingShare: 0, centralSavingShare: 0, taxAdjustmentShare: 0,
     pensionTransferYears: 40, ageSensitiveSpending: 0, outputCeiling: 0,
+    harmonisationCase: 'upper', payGapPct: null, welfareGapPct: null, payTaxOffset: null, welfareTaxOffset: null,
     ...Object.fromEntries(ECONOMIC_PARAMETERS.map(item => [item.key, item.value])) };
 // Conditional feasibility examples. These are selected assumptions, not estimated forecasts.
 const MANAGED_CASES = {
@@ -174,23 +193,30 @@ function fiscalComponents(p,s,t) {
  const baselineRevenue=BASE_REVENUE*referenceFactor*Math.pow(1+s.baselineRevenueGrowth/100,t);
  const revenueAdjustment=TAX_ADD*s.taxAdjustmentShare/100*referenceFactor;
  const phase=p.counterfactual?0:Math.min(t/p.reratingYears,1)*p.reratingScope/100;
- const payTarget=(payBase+GROSS_PAY_FULL)*Math.pow(1+s.southPayGrowth/100,t)*volumes;
- const grossPayIncrease=phase*Math.max(0,payTarget-pay);
+ // Harmonisation gap. Null keeps the F&M 2024 Table 6 gross increments exactly. A number sets the
+ // gap as a percentage of the F&M 2019 pay bill or total welfare bill, for sensitivity cases.
+ const h=resolvedHarmonisation(s);
+ const payGap=h.payGapPct==null?GROSS_PAY_FULL:h.payGapPct/100*SOURCE_PAY_BASE;
+ const welfareGap=h.welfareGapPct==null?GROSS_WELFARE_FULL:h.welfareGapPct/100*SOURCE_WELFARE_BASE;
+ const payTarget=(payBase+payGap)*Math.pow(1+s.southPayGrowth/100,t)*volumes;
+ const grossPayIncrease=payGap===0?0:phase*Math.max(0,payTarget-pay);
  const welfareBase=benefitBase+PENSIONS;
  const pensionWeight=PENSIONS/welfareBase;
  const welfareVolumes=(1-pensionWeight)*volumes+pensionWeight*pensionVolumes;
- const welfareTarget=(welfareBase+GROSS_WELFARE_FULL)*Math.pow(1+s.southBenefitGrowth/100,t)*welfareVolumes;
+ const welfareTarget=(welfareBase+welfareGap)*Math.pow(1+s.southBenefitGrowth/100,t)*welfareVolumes;
  const welfareBefore=benefits+pensionEnvelope;
- const grossWelfareIncrease=phase*Math.max(0,welfareTarget-welfareBefore);
- // Source net/gross bridge is applied once. This is not an estimated tax schedule.
- const netRecoveryShare=1-RERATE_FULL/(GROSS_PAY_FULL+GROSS_WELFARE_FULL);
- const harmonisation=(grossPayIncrease+grossWelfareIncrease)*(1-netRecoveryShare);
+ const grossWelfareIncrease=welfareGap===0?0:phase*Math.max(0,welfareTarget-welfareBefore);
+ // Table 6 increments are gross. The Table 7 difference does not reconcile
+ // with Table 6 and is not a tax estimate. Only explicit case offsets apply.
+ const harmonisation=grossPayIncrease*(1-(h.payTaxOffset??0)/100)+grossWelfareIncrease*(1-(h.welfareTaxOffset??0)/100);
+
  return {pay,benefits,pensionEnvelope,pensionCost,purchases,defence,central,allocatedInterest,spending,baselineSpending,baselineRevenue,revenueAdjustment,harmonisation,grossPayIncrease,grossWelfareIncrease,volumes,pensionVolumes,niPopulation:pop.ni,roiPopulation:pop.roi,populationHeld:pop.heldBeyondSource?1:0};
 }
 
-const MODEL_CONSTANTS = { GNI_STAR, NORTH_GNI, UK_2019_TO_2023_EUR, UK_FY2022_TO_2023_EUR, BASE_REVENUE, BASE_SPENDING, GROSS_PAY_FULL, GROSS_WELFARE_FULL, SOURCE_PAY_BASE, PUBLISHED, PENSIONS, DEBT_INT, DEFENCE_NET, OTHER_NONID, TAX_ADD, RERATE_FULL };
+const MODEL_CONSTANTS = { GNI_STAR, NORTH_GNI, UK_2019_TO_2023_EUR, UK_FY2022_TO_2023_EUR, BASE_REVENUE, BASE_SPENDING, GROSS_PAY_FULL, GROSS_WELFARE_FULL, SOURCE_PAY_BASE, SOURCE_WELFARE_BASE, PUBLISHED, PENSIONS, DEBT_INT, DEFENCE_NET, OTHER_NONID, TAX_ADD, RERATE_FULL };
 
 function validateInputs(p,horizon,s) {
+  if(!['upper','middle','lower','rateBased','custom'].includes(s.harmonisationCase))throw new RangeError('Unknown harmonisation case');
   if(!Number.isInteger(horizon)||horizon<1||horizon>100)throw new RangeError('Horizon must be an integer from 1 to 100');
   for(const [key,value] of Object.entries({...s,...p}))if(typeof value==='number'&&!Number.isFinite(value))throw new RangeError('Non-finite input '+key);
   for(const key of Object.keys(s))if(!Object.hasOwn(DEFAULT_STRUCTURAL,key))throw new TypeError('Unknown structural input '+key);
@@ -211,6 +237,7 @@ function validateInputs(p,horizon,s) {
   if(!Number.isFinite(s.payGrowthPassThrough)||s.payGrowthPassThrough<0||s.payGrowthPassThrough>1)throw new RangeError('Invalid public pay pass-through');
   if(!['M1','M2','M3'].includes(s.populationVariant))throw new RangeError('Unknown CSO population variant');
   for(const key of ['niPayGrowth','niBenefitGrowth','pensionRateGrowth','southPayGrowth','southBenefitGrowth'])if(!Number.isFinite(s[key])||s[key]<-2||s[key]>6)throw new RangeError('Invalid indexation rate '+key);
+  for(const key of ['payGapPct','welfareGapPct','payTaxOffset','welfareTaxOffset'])if(s[key]!=null&&(!Number.isFinite(s[key])||s[key]<0||s[key]>(key.endsWith('Pct')?150:100)))throw new RangeError('Invalid harmonisation setting '+key);
   if(s.nonPensionWelfareBase<0||s.inheritedInterestYears<0||s.inheritedInterestYears>100)throw new RangeError('Invalid component settings');
   // Engineering domains, not evidence intervals. Imported settings obey the same
   // meaningful domains as interactive experiments instead of accepting overflow inputs.
@@ -389,4 +416,4 @@ const round1 = (x) => { const rounded=Math.round(x*10)/10; return rounded===0 ? 
 const round2 = (x) => { const rounded=Math.round(x*100)/100; return rounded===0 ? 0 : rounded; };
 
 
-export { FORMS, ECONOMIC_PARAMETERS, DEFAULT_STRUCTURAL, MODEL_CONSTANTS, simulate, inheritedDeficit, breakEven, payback, policyForForm, validateInputs, MANAGED_CASES, managedCase, UNITY_CASES, unityCase, fiscalComponents, populationAt, POPULATION_PROJECTIONS };
+export { FORMS, ECONOMIC_PARAMETERS, DEFAULT_STRUCTURAL, MODEL_CONSTANTS, simulate, inheritedDeficit, breakEven, payback, policyForForm, validateInputs, MANAGED_CASES, managedCase, UNITY_CASES, unityCase, fiscalComponents, populationAt, POPULATION_PROJECTIONS, HARMONISATION_CASES, harmonisationSettings };

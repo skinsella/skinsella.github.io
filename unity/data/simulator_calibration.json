@@ -1,5 +1,5 @@
 {
-  "modelSha256": "1ec510b37520c2e2449a59eec22cb0c5670b26f4a78301fbb602bc5f7b81b14c",
+  "modelSha256": "514cb416dd7dae0060da52cbbb12965f6c04a14c37999d9f57f7e0677bf8df8d",
   "constants": {
     "GNI_STAR": 290.9,
     "NORTH_GNI": 72.73594775750469,
@@ -10,6 +10,7 @@
     "GROSS_PAY_FULL": 5.874851507783097,
     "GROSS_WELFARE_FULL": 6.561114932867839,
     "SOURCE_PAY_BASE": 9.273424453878706,
+    "SOURCE_WELFARE_BASE": 13.118136843319665,
     "PUBLISHED": 17.058,
     "PENSIONS": 6.864,
     "DEBT_INT": 4.238,
@@ -55,6 +56,11 @@
     "pensionTransferYears": 40,
     "ageSensitiveSpending": 0,
     "outputCeiling": 0,
+    "harmonisationCase": "upper",
+    "payGapPct": null,
+    "welfareGapPct": null,
+    "payTaxOffset": null,
+    "welfareTaxOffset": null,
     "investmentCapitalShare": 0,
     "spareCapacity": 0,
     "baselineGrowth": 2,
@@ -93,7 +99,7 @@
     {
       "title": "FitzGerald and Morgenroth 2024",
       "url": "https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf",
-      "status": "Tables 6 and 7 provide historical pay, welfare and gross/net harmonisation benchmarks."
+      "status": "Table 6 supplies gross historical gaps. Table 7 does not reconcile with Table 6 and is not a tax estimate."
     },
     {
       "title": "Doyle 2025",

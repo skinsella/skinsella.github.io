@@ -1,5 +1,5 @@
 {
-  "modelSha256": "1ec510b37520c2e2449a59eec22cb0c5670b26f4a78301fbb602bc5f7b81b14c",
+  "modelSha256": "514cb416dd7dae0060da52cbbb12965f6c04a14c37999d9f57f7e0677bf8df8d",
   "inputs": [
     {
       "key": "southGrowth",
@@ -216,6 +216,36 @@
       "value": 0,
       "scope": "structural",
       "description": "Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed."
+    },
+    {
+      "key": "harmonisationCase",
+      "value": "upper",
+      "scope": "structural",
+      "description": "Upper, middle, lower, rate-based candidate or custom. No central case chosen. Named cases override the four custom settings."
+    },
+    {
+      "key": "payGapPct",
+      "value": null,
+      "scope": "structural",
+      "description": "Custom gross pay gap as percentage of historical SOURCE_PAY_BASE. Null uses F&M Table 6."
+    },
+    {
+      "key": "welfareGapPct",
+      "value": null,
+      "scope": "structural",
+      "description": "Custom gross welfare gap as percentage of historical SOURCE_WELFARE_BASE. Null uses F&M Table 6."
+    },
+    {
+      "key": "payTaxOffset",
+      "value": null,
+      "scope": "structural",
+      "description": "Explicit custom share of the gross pay increment recovered. Null means zero, not an inferred Table 7 adjustment."
+    },
+    {
+      "key": "welfareTaxOffset",
+      "value": null,
+      "scope": "structural",
+      "description": "Explicit custom share of gross welfare increment recovered. Null means zero."
     },
     {
       "key": "investmentCapitalShare",
@@ -443,7 +473,7 @@
     {
       "title": "FitzGerald and Morgenroth 2024",
       "url": "https://www.iiea.com/images/uploads/resources/Northern_Ireland_Subvention_Possible_Unification_Effects.pdf",
-      "status": "Tables 6 and 7 provide historical pay, welfare and gross/net harmonisation benchmarks."
+      "status": "Table 6 supplies gross historical gaps. Table 7 does not reconcile with Table 6 and is not a tax estimate."
     },
     {
       "title": "Doyle 2025",
