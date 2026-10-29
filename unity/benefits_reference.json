@@ -246,7 +246,7 @@
       "description": "Annual Republic cost including interest per resident, euro."
     }
   ],
-  "version": "2026-10-29-fiscal-checks",
+  "version": "2026-10-29-feasibility-repair",
   "currentAssessment": {
     "reportedTests": [
       "debt",
@@ -260,7 +260,7 @@
     "overallAssessment": "Not assessed",
     "fourOfFiveRule": "Reserved until all economic tests are measured. Not applied to the fiscal checks."
   },
-  "extensionSha256": "ed3a8616c7b2cdbf0b30624efe86a303d60c7f4580209e110f0378afb8374847",
+  "extensionSha256": "861f73355e27aa695c8cfd3aa43c89c00898ca96af2317ffacf5fd32e198383e",
   "inputs": [
     {
       "key": "ukTransitionShare",
@@ -497,6 +497,7 @@
       3
     ],
     "fallingFrom": 20,
+    "assessmentHorizon": 25,
     "requiredPasses": 4
   },
   "sources": {
@@ -847,6 +848,7 @@
     "Baseline debt ratios are a scenario overlay. Budget years 2027 to 2030 index model years 1 to 4, while demographic normalisation stays 2024. Not a calendar-year forecast.",
     "An 80% ceiling is Stephen’s assessment choice, not an established safe debt limit.",
     "The four-of-five rule is reserved for future use after economic tests can be measured. The annual burden limit is 2% of Republic GNI* with 1% and 3% sensitivities. These are assessment choices, not empirical safety limits.",
+    "Shared settings are schema-checked before rendering. Engine bounds are engineering domains rather than evidence intervals. Fiscal checks require an uninterrupted annual sequence through at least year 25.",
     "The low-growth comparison uses a selected 1.3% illustration, not a verified historical estimate.",
     "No empirical central values have been supplied for new trade, FDI or integration effects. These remain off in public controls.",
     "EU grant allocation finances already-costed programme investment. It cannot create a second capital stock for the same spending.",

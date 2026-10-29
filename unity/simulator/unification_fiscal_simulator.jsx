@@ -104,7 +104,7 @@ const ECONOMIC_PARAMETERS = [
   {key:'labourSlack',label:'Available resident labour above reference employment',value:5,min:0,max:15,step:0.5,unit:'%',basis:'Illustrative labour availability'},
   {key:'publicRecruitmentElasticity',label:'Public-service recruitment response to pay',value:0.2,min:0,max:0.6,step:0.05,unit:' elasticity',basis:'Illustrative recruitment index. Not an output or tax gain'},
   {key:'baselineEmployment',label:'Reference employment for job equivalents',value:900000,min:700000,max:1100000,step:10000,unit:' jobs',basis:'Illustrative employment scale, not an official employment estimate'},
-  {key:'migrationResponse',label:'Unfilled labour demand met through migration',value:0,min:0,max:100,step:5,unit:'%',basis:'Illustrative response. Disabled by default'},
+  {key:'migrationResponse',label:'Unfilled labour demand met through migration, unavailable pending complete accounts',value:0,min:0,max:100,step:5,unit:'%',basis:'Illustrative response. Disabled by default'},
   {key:'migrantHouseholdSize',label:'Additional residents per migrant worker',value:1.5,min:1,max:3,step:0.1,unit:' people',basis:'Illustrative household size'},
   {key:'serviceCostPerResident',label:'Annual service cost per additional resident',value:15000,min:0,max:30000,step:1000,unit:' € per resident',basis:'Illustrative marginal cost, not average public spending'},
 ];
@@ -199,7 +199,7 @@ const MODEL_CONSTANTS = { GNI_STAR, NORTH_GNI, UK_2019_TO_2023_EUR, UK_FY2022_TO
 function validateInputs(p,horizon,s) {
   if(!Number.isInteger(horizon)||horizon<1||horizon>100)throw new RangeError('Horizon must be an integer from 1 to 100');
   for(const [key,value] of Object.entries({...s,...p}))if(typeof value==='number'&&!Number.isFinite(value))throw new RangeError('Non-finite input '+key);
-  for(const key of Object.keys(s))if(!(key in DEFAULT_STRUCTURAL))throw new TypeError('Unknown structural input '+key);
+  for(const key of Object.keys(s))if(!Object.hasOwn(DEFAULT_STRUCTURAL,key))throw new TypeError('Unknown structural input '+key);
   for(const [key,value] of Object.entries(s))if(typeof DEFAULT_STRUCTURAL[key]==='number'&&!Number.isFinite(value))throw new TypeError('Non-numeric input '+key);
   for(const key of Object.keys(p))if(!['gNI','stall','reratingScope','reratingYears','investment','duplication','pensionsUK','debtUK','counterfactual','shared'].includes(key))throw new TypeError('Unknown policy input '+key);
   for(const key of ['linkedMechanisms','growthRevenue','populationVolumes'])if(s[key]!==undefined&&typeof s[key]!=='boolean')throw new TypeError('Invalid switch '+key);
@@ -218,6 +218,13 @@ function validateInputs(p,horizon,s) {
   if(!['M1','M2','M3'].includes(s.populationVariant))throw new RangeError('Unknown CSO population variant');
   for(const key of ['niPayGrowth','niBenefitGrowth','pensionRateGrowth','southPayGrowth','southBenefitGrowth'])if(!Number.isFinite(s[key])||s[key]<-2||s[key]>6)throw new RangeError('Invalid indexation rate '+key);
   if(s.nonPensionWelfareBase<0||s.inheritedInterestYears<0||s.inheritedInterestYears>100)throw new RangeError('Invalid component settings');
+  // Engineering domains, not evidence intervals. Imported settings obey the same
+  // meaningful domains as interactive experiments instead of accepting overflow inputs.
+  const domains={businessUplift:[0,15],labourUplift:[0,10],transitionShock:[0,15],privateMaturity:[1,50],privateRecovery:[1,50],fundOpening:[0,1000],fundContribution:[0,100],fundDrawCap:[0,1000],fundReturn:[-100,20],realInterest:[0,20],discountRate:[0,20],fundContributionYears:[0,100],ageSensitiveSpending:[0,100],pensionTransferYears:[1,100],outputCeiling:[0,10]};
+  for(const [key,[lo,hi]] of Object.entries(domains))if(s[key]<lo||s[key]>hi)throw new RangeError('Input outside supported domain '+key);
+  for(const key of ['privateMaturity','privateRecovery','fundContributionYears','pensionTransferYears','inheritedInterestYears'])if(!Number.isInteger(s[key]))throw new RangeError('Integer years required '+key);
+  if(!Number.isInteger(p.reratingYears)||p.reratingYears>100||p.investment>100||p.duplication>100)throw new RangeError('Policy input outside supported domain');
+  if(s.migrationResponse>0)throw new RangeError('Endogenous migration is unavailable until population, output, receipts and service accounts are integrated');
   if(s.shift)throw new RangeError('Unspecified compositional deficit erosion has been removed');
 }
 function policyForForm(key, common, selected = null) {
@@ -364,6 +371,7 @@ function simulate(p, horizon, s, extension = null) {
       outputCapped:uncappedOutput>ceiling ? 1 : 0,
     });
   }
+  for(const row of rows)for(const [key,value] of Object.entries(row))if(typeof value==='number'&&!Number.isFinite(value))throw new RangeError('Non-finite model result '+key);
   return rows;
 }
 
@@ -372,10 +380,13 @@ function breakEven(rows) {
   return hit ? hit.year : null;
 }
 function payback(rows) {
-  let started = false;
-  for (const r of rows) {
-    if (r.cumulativeNonPositive === 0) started = true;
-    if (started && r.cumulativeNonPositive === 1) return r.year;
+  // Repayment must persist to the end of the reported horizon. A path that
+  // needs no initial bridge but earns a surplus qualifies from its first year.
+  if(!rows.some(r=>r.cumulativeNonPositive===0))return rows.some(r=>r.cost<0)?rows[0]?.year??null:null;
+  let positiveSeen=false;
+  for(let i=0;i<rows.length;i++) {
+    if(rows[i].cumulativeNonPositive===0)positiveSeen=true;
+    if(positiveSeen&&rows[i].cumulativeNonPositive===1&&rows.slice(i).every(r=>r.cumulativeNonPositive===1))return rows[i].year;
   }
   return null;
 }
@@ -753,10 +764,10 @@ export default function UnificationSimulator() {
             <div className="rounded-xl border p-5 mt-4" style={{ borderColor: "#DCE2DC", background: "#FFFFFF" }}>
               <div className="text-xs uppercase tracking-wide mb-3" style={{ color: "#5C6B63" }}>Linked economic mechanisms</div>
               <label className="flex items-center gap-2 mb-3 text-xs"><input type="checkbox" checked={structural.linkedMechanisms} onChange={(event) => setS("linkedMechanisms", event.target.checked)} />Enable experimental economic responses</label>
-              <p className="text-xs mb-3">Investment builds depreciating capital after a delivery lag. Harmonisation affects household consumption, private wages, labour supply and recruitment. Firms adjust capital and employment, with migration and service costs if enabled.</p>
+              <p className="text-xs mb-3">Investment builds depreciating capital after a delivery lag. Harmonisation affects household consumption, private wages, labour supply and recruitment. Private capital and employment remain diagnostics. Endogenous migration is unavailable until its accounts are integrated.</p>
               <p className="text-xs mb-3">The public-capital benchmark is a reduced-form response. Induced private capital and jobs are diagnostics and do not add a second output dividend. Demand is limited by selected spare capacity. All response parameters remain unestimated for Northern Ireland, and growth must exclude any effects entered separately.</p>
               <details><summary className="cursor-pointer text-sm mb-4">Response parameters and evidence</summary>
-                {ECONOMIC_PARAMETERS.map(item => <div key={item.key}>
+                {ECONOMIC_PARAMETERS.filter(item => !['migrationResponse','migrantHouseholdSize','serviceCostPerResident'].includes(item.key)).map(item => <div key={item.key}>
                   <Slider label={item.label} value={structural[item.key]} onChange={value => setS(item.key, value)} min={item.min} max={item.max} step={item.step} unit={item.unit} />
                   <p className="text-[11px] mb-4 -mt-3" style={{ color: "#5C6B63" }}>{item.basis}{item.url && <> <a href={item.url} target="_blank" rel="noreferrer" className="underline">Source</a></>}</p>
                 </div>)}

@@ -1,4 +1,4 @@
-import {simulate,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,FORMS,fiscalComponents,populationAt,payback} from './scenario_model.mjs';
+import {simulate,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,FORMS,fiscalComponents,populationAt,payback,validateInputs} from './scenario_model.mjs';
 import SOURCES from './benefits_sources.mjs';
 
 // These are specification bounds for experiments, not empirical confidence intervals.
@@ -30,18 +30,29 @@ export const BENEFIT_INPUTS = [
  ['ukPathSpendingGrowth',null,-2,3,'%','Null follows residual purchases cost growth. Does not blanket-index pay or pensions.','design'],
  ['ukPathTransferRisk',0,0,30,'%','Frozen transfer withdrawal by year 25, assumed to reduce residual services.','source needed'],
 ].map(([key,value,min,max,unit,description,status])=>({key,value,min,max,unit,description,status}));
-export const ASSESSMENT_VERSION='2026-10-29-fiscal-checks';
+export const ASSESSMENT_VERSION='2026-10-29-feasibility-repair';
 export const BENEFIT_DEFAULTS=Object.fromEntries(BENEFIT_INPUTS.map(x=>[x.key,x.value]));
-export const SUCCESS_RULES=Object.freeze({comparisonYear:15,debtCeiling:80,burdenPctGNI:2,burdenSensitivities:[1,3],fallingFrom:20,requiredPasses:4});
+export const SUCCESS_RULES=Object.freeze({comparisonYear:15,debtCeiling:80,burdenPctGNI:2,burdenSensitivities:[1,3],fallingFrom:20,assessmentHorizon:25,requiredPasses:4});
 const clamp=(v,l,h)=>Math.max(l,Math.min(h,v));
 function inputs(values={}) {
  const b={...BENEFIT_DEFAULTS,...values};
- for(const k of Object.keys(values))if(!(k in BENEFIT_DEFAULTS))throw Error('Unknown benefits input '+k);
+ for(const k of Object.keys(values))if(!Object.hasOwn(BENEFIT_DEFAULTS,k))throw Error('Unknown benefits input '+k);
  for(const x of BENEFIT_INPUTS){const v=b[x.key];if(v===null&&x.value===null)continue;if(typeof v!=='number'||!Number.isFinite(v)||v<x.min||v>x.max)throw Error('Invalid benefits input '+x.key);if(x.unit==='years'||x.unit==='year')if(!Number.isInteger(v))throw Error('Integer years required');}
  if(b.integrationOneOff>0&&b.integrationOneOff<.5)throw Error('Positive integration implementation cost must be at least 0.5bn within the specification bounds');
  if(b.integrationSaving>0&&b.integrationOneOff<=0)throw Error('Integration savings require a matching one-off cost');
  if(b.fdiNorthShare>0)for(const k of ['fdiOutputPerJob','fdiTaxPerJob','fdiRepublicJobsPerResident','fdiNIJobsPerResident'])if(b[k]===null)throw Error('FDI calibration missing '+k);
  return b;
+}
+export function validateSharedSettings(value) {
+ const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+ if(!object(value))throw Error('Shared settings must be an object');
+ for(const k of Object.keys(value))if(!['policy','structural','benefits','horizon'].includes(k))throw Error('Unknown shared setting '+k);
+ for(const k of ['policy','structural','benefits'])if(value[k]!==undefined&&!object(value[k]))throw Error('Shared '+k+' settings must be an object');
+ const policy={...FORMS.glide.defaults,gNI:2,pensionsUK:true,debtUK:true,...value.policy};
+ const structural={...D,defenceSavingShare:100,centralSavingShare:100,taxAdjustmentShare:100,...value.structural};
+ const benefits=inputs(value.benefits),horizon=value.horizon??25;
+ validateInputs(policy,horizon,structural);
+ return {policy,structural,benefits,horizon};
 }
 export function supportAt(t,s,b) {
  const uk=C.PUBLISHED*b.ukTransitionShare/100*Math.max(0,1-(t-1)/b.ukTransitionYears);
@@ -137,18 +148,20 @@ export function simulateBenefits(p,horizon,s=D,values={}) {
 }
 
 export function assessBenefits(rows,rules=SUCCESS_RULES) {
+ const required=rules.assessmentHorizon??25;
+ const complete=rows.length>=required&&rows.every((r,i)=>r.year===i+1)&&rows.every(r=>Number.isFinite(r.totalDebtPctGNI)&&Number.isFinite(r.netCostPctGNI)&&Number.isFinite(r.unroundedCost));
  const late=rows.filter(x=>x.year>=rules.fallingFrom);
  // The two economic tests are unavailable until household income and empirical
  // channel calibrations exist. An assumed output path never supplies a pass.
  const tests={northernIncome:null,islandOutput:null,
-   debt:rows.length?rows.every(x=>x.totalDebtPctGNI<rules.debtCeiling):null,
-   burden:rows.length?rows.every(x=>x.netCostPctGNI<=rules.burdenPctGNI):null,
-   falling:late.length<2?null:late.every(x=>{const prev=rows.find(y=>y.year===x.year-1);return prev&&x.unroundedCost<prev.unroundedCost;})};
+   debt:complete?rows.every(x=>x.totalDebtPctGNI<rules.debtCeiling):null,
+   burden:complete?rows.every(x=>x.netCostPctGNI<=rules.burdenPctGNI):null,
+   falling:!complete||late.length<2?null:late.every(x=>{const prev=rows.find(y=>y.year===x.year-1);return prev&&x.unroundedCost<prev.unroundedCost;})};
  const fiscalTests=Object.fromEntries(['debt','burden','falling'].map(k=>[k,tests[k]]));
  const fiscalPasses=Object.values(fiscalTests).filter(x=>x===true).length;
  const pending=Object.values(fiscalTests).filter(x=>x===null).length;
  const burdenSensitivities=(rules.burdenSensitivities??[]).map(limit=>{
-   const burdenPass=rows.length?rows.every(x=>x.netCostPctGNI<=limit):null;
+   const burdenPass=complete?rows.every(x=>x.netCostPctGNI<=limit):null;
    const n=fiscalPasses-(tests.burden===true?1:0)+(burdenPass===true?1:0);
    return {limit,burdenPass,passes:n,fiscalPasses:n,allFiscalPass:n===3};
  });
@@ -168,8 +181,15 @@ export function exportScenarioPair(pair,provenance) {
  for(const k of ['commit','modelSha256','settingsFixedAt','settingsCommit'])if(!provenance?.[k])throw Error('Missing provenance '+k);
  if(!/^[a-f0-9]{40}$/.test(provenance.commit)||!/^[a-f0-9]{40}$/.test(provenance.settingsCommit)||!/^[a-f0-9]{64}$/.test(provenance.modelSha256)||!Number.isFinite(Date.parse(provenance.settingsFixedAt)))throw Error('Invalid provenance');
  const a=inputs(pair.scenario.benefits),b=inputs(pair.twin.benefits);
+ // All settings that determine the UK output and fiscal path must match. Policy
+ // growth and constitutional spending remain free to differ on the unity side.
+ const sa={...D,...pair.scenario.structural},sb={...D,...pair.twin.structural};
+ const ukKeys=['baselineRevenueGrowth','niPayGrowth','niBenefitGrowth','pensionRateGrowth','publicPayBase','nonPensionWelfareBase','populationVolumes','populationVariant','ageing','ageSensitiveSpending','inheritedInterestYears'];
+ for(const k of ukKeys)if(sa[k]!==sb[k])throw Error('Twins must share the same UK path '+k);
+ if((pair.scenario.horizon??25)!==(pair.twin.horizon??25))throw Error('Twins must share the same horizon');
+
  for(const k of ['ukPathGrowth','ukPathSpendingGrowth','ukPathTransferRisk'])if(a[k]!==b[k])throw Error('Twins must share the same UK path');
- for(const [input,fallback] of [['ukPathGrowth','baselineGrowth'],['ukPathSpendingGrowth','baselineSpendingGrowth']])if((a[input]??pair.scenario.structural?.[fallback])!==(b[input]??pair.twin.structural?.[fallback]))throw Error('Twins must share the same UK path');
+ for(const [input,fallback] of [['ukPathGrowth','baselineGrowth'],['ukPathSpendingGrowth','baselineSpendingGrowth']])if((a[input]??sa[fallback])!==(b[input]??sb[fallback]))throw Error('Twins must share the same UK path');
  for(const k of ['ukTransitionShare','euSupportPeak','borderGainMax','borderGainRepublic','fdiNorthShare','integrationSaving'])if(b[k]>a[k])throw Error('Adverse twin cannot increase benefit '+k);
  if(b.gbFrictionLoss<a.gbFrictionLoss)throw Error('Adverse twin cannot reduce GB friction');
  for(const item of [pair.scenario,pair.twin])if(publicationIssues(item.benefits).length)throw Error('Unverified scenario cannot be published');

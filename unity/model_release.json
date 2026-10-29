@@ -1,8 +1,8 @@
 {
   "modelVersion": "2026-10-29-component-fiscal",
-  "modelSha256": "4c794c7e9803ed30dae34cc199432bc928383c1f630cae0b72e724d35744d7e0",
-  "extensionSha256": "ed3a8616c7b2cdbf0b30624efe86a303d60c7f4580209e110f0378afb8374847",
-  "extensionVersion": "2026-10-29-fiscal-checks",
+  "modelSha256": "1ec510b37520c2e2449a59eec22cb0c5670b26f4a78301fbb602bc5f7b81b14c",
+  "extensionSha256": "861f73355e27aa695c8cfd3aa43c89c00898ca96af2317ffacf5fd32e198383e",
+  "extensionVersion": "2026-10-29-feasibility-repair",
   "benefits": "benefits.html",
   "benefitsReference": "benefits_reference.json",
   "story": "index.html",

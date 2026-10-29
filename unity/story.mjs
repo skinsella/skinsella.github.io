@@ -1,11 +1,12 @@
+import {requiredUKSupport} from './feasibility_model.mjs';
 import {simulateBenefits,assessBenefits} from './benefits_model.mjs';
 import {niceAxis,requiredGrowth} from './story_math.mjs';
 import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs';
 const $=id=>document.getElementById(id),keys=['unitary','federal','glide','worst'];
 const names={unitary:'Unitary',federal:'Federal',glide:'Managed Integration',worst:'Higher Cost'};
-const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2,ukTransitionShare:0};
+const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2,ukTransitionShare:0,capitalShare:0};
 const settings={...D,baselineGrowth:2,southGrowth:2,baselineRevenueGrowth:0,baselineSpendingGrowth:1,defenceSavingShare:100,centralSavingShare:100,taxAdjustmentShare:100,growthRevenue:true};
-const thresholdCache=new Map();
+const thresholdCache=new Map(),supportCache=new Map();
 const money=v=>`€${Math.abs(v).toFixed(1)}bn${v<0?' surplus':''}`;
 function policy(key,years=state.years){return {...FORMS[key].defaults,reratingYears:key==='glide'?years:FORMS[key].defaults.reratingYears,gNI:state.growth,stall:false,pensionsUK:state.pensionsUK,debtUK:state.debtUK,counterfactual:false,shared:false};}
 const benefits=()=>({ukTransitionShare:state.ukTransitionShare});
@@ -44,6 +45,7 @@ function renderWorth(selected){
 }
 
 function render(){
+ settings.linkedMechanisms=state.capitalShare>0;settings.investmentCapitalShare=state.capitalShare;
  const adjusted=inheritedDeficit(true,true,settings);$('bridge-number').textContent=money(C.PUBLISHED);
  const bridge=[['Reported UK fiscal balance',C.PUBLISHED],['After other study adjustments',C.PUBLISHED-C.DEFENCE_NET-C.OTHER_NONID-C.TAX_ADD],['If the UK retains pensions',adjusted+C.DEBT_INT],['Residual under a very favourable deal',adjusted]];
  const bridgeWidth=Math.max(300,Math.min(700,$('bridge-chart').clientWidth-20)),bridgeBar=bridgeWidth-100;
@@ -67,9 +69,15 @@ function render(){
  $('growth-legend').innerHTML=series.map(s=>`<span><span class="dot" style="background:${s.colour}"></span>${s.name}</span>`).join('');
  renderWorth(selected);
  const paid=series.filter(s=>payback(s.rows)!==null);
- const cacheKey=JSON.stringify([state.pensionsUK,state.debtUK,state.years,state.ukTransitionShare]);
+ const cacheKey=JSON.stringify([state.pensionsUK,state.debtUK,state.years,state.ukTransitionShare,state.capitalShare]);
  if(!thresholdCache.has(cacheKey))thresholdCache.set(cacheKey,Object.fromEntries(keys.map(k=>[k,requiredGrowth(policy(k),settings,25,fiscalRun)])));
  const thresholds=thresholdCache.get(cacheKey),managed=thresholds.glide;
+ const supportKey=JSON.stringify([state.pensionsUK,state.debtUK,state.years,state.growth,state.capitalShare]);
+ if(!supportCache.has(supportKey))supportCache.set(supportKey,Object.fromEntries(keys.map(k=>[k,requiredUKSupport(policy(k),settings)])));
+ const supportNeeded=supportCache.get(supportKey);
+ $('feasibility-results').innerHTML=keys.map(k=>{const x=supportNeeded[k];return '<tr><td>'+names[k]+'</td><td>'+(x?x.display===0?'None needed':x.display.toFixed(1)+'% (€'+(C.PUBLISHED*x.display/100).toFixed(2)+'bn)':'Not reached within 50% search')+'</td></tr>';}).join('');
+ $('investment-caption').textContent=state.capitalShare===0?'Programme expenditure is costed, with no productive return assumed. This fiscal comparison does not assess the benefits of investment.':'Mechanical capital experiment. '+state.capitalShare+'% of programme spending enters capital, with '+settings.investmentEfficiency+'% delivery efficiency, a '+settings.investmentLag+'-year lag and elasticity '+settings.publicCapitalElasticity+'. These are conditional benchmark assumptions, not an NI project appraisal. Added capital output does not yet feed back into pay.';
+
  $('growth-number').textContent=managed?`About ${managed.display.toFixed(1)}% a year`:'Above the tested growth range';
  $('threshold-unit').textContent='NI growth needed for Managed Integration to repay cumulative costs within 25 years';
  $('payback-count').textContent=`At your chosen ${state.growth}% growth, ${paid.length} of 4 futures repay within 25 years. Required growth rates below are rounded upwards under the displayed assumptions.`;
@@ -83,6 +91,7 @@ $('timing-buttons').addEventListener('click',e=>{const b=e.target.closest('[data
 $('growth-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-growth]');if(b){state.growth=+b.dataset.growth;render();}});
 $('future-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-form]');if(b){state.form=b.dataset.form;render();}});
 $('uk-payment').addEventListener('input',e=>{const v=Number(e.target.value);if(Number.isFinite(v)&&v>=0&&v<=50){state.ukTransitionShare=v;render();}});
+$('capital-share').addEventListener('input',e=>{const v=Number(e.target.value);if(Number.isFinite(v)&&v>=0&&v<=100){state.capitalShare=v;render();}});
 $('worth-buttons').addEventListener('click',e=>{const x=e.target.closest('[data-worth]');if(x){state.worthMetric=x.dataset.worth;render();}});
 render();
 fetch('model_reference.json').then(r=>r.json()).then(r=>$('fingerprint').textContent='Model version '+r.modelVersion).catch(()=>{});
