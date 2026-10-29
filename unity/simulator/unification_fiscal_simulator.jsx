@@ -532,11 +532,7 @@ export default function UnificationSimulator() {
   const active = policyForForm(form,{gNI:params.gNI,stall:params.stall,pensionsUK,debtUK},params);
   const rows = useMemo(() => simulate(active, horizon, structural), [params, pensionsUK, debtUK, horizon, structural, form]);
   const be = breakEven(rows);
-  const rows50 = useMemo(
-    () => (horizon === 50 ? rows : simulate(active, 50, structural)),
-    [params, pensionsUK, debtUK, horizon, structural, rows, form]
-  );
-  const pb50 = payback(rows50);
+  const pb50 = payback(rows);
   const cumEnd = rows[rows.length - 1].cumulative;
   const yearOne = rows[0];
   const lastYear = rows[rows.length - 1];
@@ -782,7 +778,7 @@ export default function UnificationSimulator() {
 
           {/* Output */}
           <div className="lg:col-span-3">
-            {!hasSelected ? <div className="rounded-xl border p-5 bg-white"><h2 className="text-lg mb-3">Choose assumptions before viewing results</h2><p>No opening result is presented as a central forecast. Select a policy bundle, a complete example or edit a control to run the calculation.</p><p className="mt-3">The examples depend on assumed growth, negotiated terms and spending paths. Compare the combined stresses beside the cases before interpreting a payback result.</p><button type="button" className="border rounded p-2 mt-3" onClick={()=>setHasSelected(true)}>Show restrictive accounting reference</button></div> : <>
+            {!hasSelected ? <div className="rounded-xl border p-5 bg-white"><h2 className="text-lg mb-3">Choose assumptions before viewing results</h2><p>No opening result is presented as a central forecast. Select a policy bundle, a complete example or edit a control to run the calculation.</p><p className="mt-3">The examples depend on assumed growth, negotiated terms and spending paths. Compare the combined stresses beside the cases before interpreting a payback result.</p><button type="button" className="border rounded p-2 mt-3" onClick={()=>setHasSelected(true)}>Show current accounting settings</button></div> : <>
 
             {FORMS[form].counterfactual ? <div className="rounded-xl border p-5 mb-5 bg-white text-sm">Republic fiscal perspective. Northern Ireland remains UK-funded. The investment dial affects Shared Island only. The UK status quo has zero incremental Republic cost by definition.</div> : <Waterfall pensionsUK={pensionsUK} debtUK={debtUK} structural={structural} />}
 
@@ -808,8 +804,8 @@ export default function UnificationSimulator() {
               <Stat label="Transition debt at horizon" value={`€${rows[rows.length - 1].debt}bn`} sub="Incremental borrowing only" />
               <Stat label="Year-one cost" value={`€${yearOne.cost}bn`} sub={`2023 prices · ${yearOne.pctGNI}% of GNI*`} />
               <Stat label="Annual break-even" value={be ? `Year ${be}` : `None by yr ${horizon}`} sub={be ? "First non-positive annual cost" : "No balance within selected horizon"} />
-              <Stat label="Financing-inclusive payback" value={pb50 ? `Year ${pb50}` : "None by yr 50"}
-                sub={pb50 ? "Early deficits repaid by surpluses" : "No cumulative payback within 50 years"} />
+              <Stat label="Financing-inclusive payback" value={pb50 ? `Year ${pb50}` : `None by yr ${horizon}`}
+                sub={pb50 ? "Early deficits repaid by surpluses" : "No cumulative payback within selected horizon"} />
               <Stat label={`${horizon}-yr cumulative`} value={cumEnd < 0 ? `€${Math.abs(Math.round(cumEnd))}bn surplus` : `€${Math.round(cumEnd)}bn`}
                 sub={`2023 prices · ${round1((Math.abs(cumEnd) / GNI_STAR) * 100)}% of one year's GNI*`} />
             </div>
