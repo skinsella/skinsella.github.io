@@ -1,12 +1,12 @@
 {
   "qualification": "Conditional experiments, not forecasts. No central harmonisation case selected. Doyle price basis is unverified in middle, lower and rateBased. Lower is a bound and rateBased is incomplete.",
-  "growth": 4.5,
+  "growth": 4.3,
   "policy": {
     "reratingScope": 100,
     "reratingYears": 15,
     "investment": 1.5,
     "duplication": 0.25,
-    "gNI": 4.5,
+    "gNI": 4.3,
     "stall": false,
     "pensionsUK": true,
     "debtUK": true
@@ -46,6 +46,7 @@
     "centralSavingShare": 100,
     "taxAdjustmentShare": 100,
     "pensionTransferYears": 40,
+    "pensionTopUpFall": 1.5594485445409103,
     "ageSensitiveSpending": 0,
     "outputCeiling": 0,
     "harmonisationCase": "upper",
@@ -83,24 +84,24 @@
     "serviceCostPerResident": 15000
   },
   "requiredUKSupport": {
-    "exact": 13.981845788657665,
-    "display": 14
+    "exact": 18.64120364189148,
+    "display": 18.7
   },
   "baseline": {
-    "cost25": -13.8,
-    "debt25": 19.9,
+    "cost25": -13.2,
+    "debt25": 26.5,
     "payback": null
   },
   "supported": {
-    "share": 14,
-    "cost25": -14.2,
+    "share": 18.7,
+    "cost25": -13.7,
     "debt25": 0,
     "payback": 25
   },
   "capitalExperiment": {
     "share": 100,
-    "cost25": -14.4,
-    "debt25": 10,
+    "cost25": -13.8,
+    "debt25": 16.9,
     "payback": null
   },
   "harmonisationCases": {
@@ -140,6 +141,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "upper",
@@ -176,12 +178,12 @@
         "migrantHouseholdSize": 1.5,
         "serviceCostPerResident": 15000
       },
-      "cost25": -13.8,
-      "debt25": 19.9,
+      "cost25": -13.2,
+      "debt25": 26.5,
       "payback": null,
       "requiredUKSupport": {
-        "exact": 13.981845788657665,
-        "display": 14
+        "exact": 18.64120364189148,
+        "display": 18.7
       }
     },
     "middle": {
@@ -220,6 +222,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "middle",
@@ -256,7 +259,7 @@
         "migrantHouseholdSize": 1.5,
         "serviceCostPerResident": 15000
       },
-      "cost25": -14.5,
+      "cost25": -13.9,
       "debt25": 0,
       "payback": 25,
       "requiredUKSupport": {
@@ -300,6 +303,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "rateBased",
@@ -336,7 +340,7 @@
         "migrantHouseholdSize": 1.5,
         "serviceCostPerResident": 15000
       },
-      "cost25": -24,
+      "cost25": -23.3,
       "debt25": 0,
       "payback": 14,
       "requiredUKSupport": {
@@ -380,6 +384,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "lower",
@@ -416,7 +421,7 @@
         "migrantHouseholdSize": 1.5,
         "serviceCostPerResident": 15000
       },
-      "cost25": -24.8,
+      "cost25": -24.1,
       "debt25": 0,
       "payback": 13,
       "requiredUKSupport": {

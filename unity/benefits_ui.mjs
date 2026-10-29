@@ -5,7 +5,7 @@ let initialError='',loaded;
 try{loaded=validateSharedSettings(JSON.parse(decodeURIComponent(location.hash.slice(1))||'{}'));}
 catch(e){initialError=e.message;loaded=validateSharedSettings({});}
 const {policy:p,structural:s,benefits:b,horizon}=loaded;
-const labels={debt:'Total debt below 80% of GNI* throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling from year 20'};
+const labels={debt:'Total State debt below 80% of GNI* plus NI output throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling from year 20'};
 $('harmonisation-select').innerHTML=Object.entries(HARMONISATION_CASES).map(([key,x])=>'<option value="'+key+'">'+x.label+'</option>').join('')+'<option value="custom">Custom sensitivity</option>';
 $('harmonisation-select').value=s.harmonisationCase;
 $('harmonisation-select').addEventListener('change',e=>{Object.assign(s,harmonisationSettings(e.target.value));render();});

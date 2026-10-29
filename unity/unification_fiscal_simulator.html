@@ -19,7 +19,7 @@
 <div id="root"><div id="fallback">Loading the simulator. If this message persists, check your internet connection, the page loads React and Recharts from public CDNs.</div></div>
 <script>
 (() => {
-  const BUILD_FINGERPRINT = "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12";
+  const BUILD_FINGERPRINT = "f00f9c0b45f00f61e31982c5f4364391bead1446845ea5f4e33061d998304057";
   const { useMemo, useState } = React;
   const { ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer, Legend } = Recharts;
   const GNI_STAR = 290.9;
@@ -34,6 +34,7 @@
   const MODEL_VERSION = "2026-10-29-component-fiscal";
   const PUBLISHED = 17.058;
   const PENSIONS = 6.864;
+  const PENSION_TOPUP_FALL = 1.3 * UK_FY2022_TO_2023_EUR;
   const DEBT_INT = 4.238;
   const DEFENCE_NET = 1.64;
   const OTHER_NONID = 0.692;
@@ -93,7 +94,7 @@
     }
   };
   function inheritedDeficit(pensionsUK, debtUK, s = {}) {
-    return PUBLISHED - DEFENCE_NET * (s.defenceSavingShare ?? 0) / 100 - OTHER_NONID * (s.centralSavingShare ?? 0) / 100 - TAX_ADD * (s.taxAdjustmentShare ?? 0) / 100 - (pensionsUK ? PENSIONS : 0) - (debtUK ? DEBT_INT : 0);
+    return PUBLISHED - (s.pensionTopUpFall ?? 0) - DEFENCE_NET * (s.defenceSavingShare ?? 0) / 100 - OTHER_NONID * (s.centralSavingShare ?? 0) / 100 - TAX_ADD * (s.taxAdjustmentShare ?? 0) / 100 - (pensionsUK ? PENSIONS - (s.pensionTopUpFall ?? 0) : 0) - (debtUK ? DEBT_INT : 0);
   }
   const ECONOMIC_PARAMETERS = [
     { key: "investmentCapitalShare", label: "Capital share of additional expenditure", value: 0, min: 0, max: 100, step: 5, unit: "%", basis: "Unallocated by default. Health, welfare and education expenditure is not automatically capital" },
@@ -177,6 +178,7 @@
     centralSavingShare: 0,
     taxAdjustmentShare: 0,
     pensionTransferYears: 40,
+    pensionTopUpFall: PENSION_TOPUP_FALL,
     ageSensitiveSpending: 0,
     outputCeiling: 0,
     harmonisationCase: "upper",
@@ -228,7 +230,8 @@
     const relativeOutput = p.stall && t > 7 ? Math.pow(relativeRate, 7) * Math.pow(Math.min(relativeRate, 1.004), t - 7) : Math.pow(relativeRate, t);
     const pay = payBase * Math.pow(1 + s.niPayGrowth / 100, t) * Math.pow(relativeOutput, s.payGrowthPassThrough) * volumes;
     const benefits = benefitBase * Math.pow(1 + s.niBenefitGrowth / 100, t) * volumes;
-    const pensionEnvelope = PENSIONS * Math.pow(1 + s.pensionRateGrowth / 100, t) * pensionVolumes * Math.pow(1 + s.ageing / 100, t);
+    const pensionBase = PENSIONS - (s.pensionTopUpFall ?? 0);
+    const pensionEnvelope = pensionBase * Math.pow(1 + s.pensionRateGrowth / 100, t) * pensionVolumes * Math.pow(1 + s.ageing / 100, t);
     const purchasesFactor = Math.pow(1 + s.baselineSpendingGrowth / 100, t) * volumes;
     const purchases = purchasesBase * purchasesFactor;
     const defence = DEFENCE_NET * purchasesFactor * (1 - s.defenceSavingShare / 100);
@@ -247,8 +250,8 @@
     const welfareGap = h.welfareGapPct == null ? GROSS_WELFARE_FULL : h.welfareGapPct / 100 * SOURCE_WELFARE_BASE;
     const payTarget = (payBase + payGap) * Math.pow(1 + s.southPayGrowth / 100, t) * volumes;
     const grossPayIncrease = payGap === 0 ? 0 : phase * Math.max(0, payTarget - pay);
-    const welfareBase = benefitBase + PENSIONS;
-    const pensionWeight = PENSIONS / welfareBase;
+    const welfareBase = benefitBase + pensionBase;
+    const pensionWeight = pensionBase / welfareBase;
     const welfareVolumes = (1 - pensionWeight) * volumes + pensionWeight * pensionVolumes;
     const welfareTarget = (welfareBase + welfareGap) * Math.pow(1 + s.southBenefitGrowth / 100, t) * welfareVolumes;
     const welfareBefore = benefits + pensionEnvelope;
@@ -258,6 +261,10 @@
   }
   function validateInputs(p, horizon, s) {
     if (!["upper", "middle", "lower", "rateBased", "custom"].includes(s.harmonisationCase)) throw new RangeError("Unknown harmonisation case");
+    if (s.harmonisationCase !== "custom") {
+      const expected = harmonisationSettings(s.harmonisationCase);
+      for (const key of ["payGapPct", "welfareGapPct", "payTaxOffset", "welfareTaxOffset"]) if (s[key] != null && s[key] !== expected[key]) throw new RangeError("Conflicting harmonisation setting " + key + "; select custom or use the named preset");
+    }
     if (!Number.isInteger(horizon) || horizon < 1 || horizon > 100) throw new RangeError("Horizon must be an integer from 1 to 100");
     for (const [key, value] of Object.entries({ ...s, ...p })) if (typeof value === "number" && !Number.isFinite(value)) throw new RangeError("Non-finite input " + key);
     for (const key of Object.keys(s)) if (!Object.hasOwn(DEFAULT_STRUCTURAL, key)) throw new TypeError("Unknown structural input " + key);
@@ -273,6 +280,7 @@
       if (!Number.isFinite(v) || v < item.min || v > item.max) throw new RangeError("Economic input outside supported domain " + item.key);
     }
     for (const key of ["southGrowth", "ageing"]) if (!Number.isFinite(s[key]) || s[key] < 0 || s[key] > 10) throw new RangeError("Invalid structural input " + key);
+    if (!Number.isFinite(s.pensionTopUpFall ?? 0) || (s.pensionTopUpFall ?? 0) < 0 || (s.pensionTopUpFall ?? 0) > PENSIONS) throw new RangeError("Invalid pension top-up fall");
     for (const key of ["fundOpening", "fundContribution", "fundDrawCap", "realInterest", "discountRate", "ageSensitiveSpending"]) if ((s[key] ?? 0) < 0) throw new RangeError("Negative input " + key);
     if ((s.fundReturn ?? 0) < -100) throw new RangeError("Fund return cannot be below minus 100 percent");
     if ((s.pensionTransferYears ?? 40) < 1 || (s.outputCeiling ?? 0) < 0 || (s.outputCeiling ?? 0) > 0 && s.outputCeiling < 1) throw new RangeError("Invalid transfer period or ceiling");
@@ -299,7 +307,7 @@
     validateInputs(p, horizon, s);
     const linked = s.linkedMechanisms === true;
     const core = inheritedDeficit(true, true, s);
-    const pensionsBorne = p.pensionsUK ? 0 : PENSIONS;
+    const pensionsBorne = p.pensionsUK ? 0 : PENSIONS - (s.pensionTopUpFall ?? 0);
     const debtBorne = p.debtUK ? 0 : DEBT_INT;
     const r = (1 + p.gNI / 100) / (1 + e.baselineGrowth / 100);
     const gs = s.southGrowth / 100, ag = s.ageing / 100;
@@ -773,7 +781,7 @@
       setHasSelected(true);
       setCaseLabel(null);
       setStructural((prev) => ({ ...prev, ...harmonisationSettings(e.target.value) }));
-    } }, Object.entries(HARMONISATION_CASES).map(([key, x]) => /* @__PURE__ */ React.createElement("option", { key, value: key }, x.label)), /* @__PURE__ */ React.createElement("option", { value: "custom" }, "Custom sensitivity"))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2" }, "No central case selected. ", HARMONISATION_CASES[structural.harmonisationCase]?.caveat), structural.harmonisationCase === "custom" && ["payGapPct", "welfareGapPct", "payTaxOffset", "welfareTaxOffset"].map((key) => /* @__PURE__ */ React.createElement("label", { key, className: "block text-xs my-2" }, key, /* @__PURE__ */ React.createElement("input", { type: "number", min: "0", max: key.includes("Gap") ? 150 : 100, value: structural[key] ?? "", placeholder: key.includes("Gap") ? "F&M gross gap" : "No offset", onChange: (e) => setS(key, e.target.value === "" ? null : Math.max(0, Math.min(key.includes("Gap") ? 150 : 100, Number(e.target.value)))) })))), /* @__PURE__ */ React.createElement("details", { className: "mb-4" }, /* @__PURE__ */ React.createElement("summary", { className: "text-sm cursor-pointer" }, "Component spending and population assumptions"), /* @__PURE__ */ React.createElement("p", { className: "text-xs my-3" }, "Historical component allocations reconcile to the frozen total. Their current composition and the real growth rates remain scenario assumptions."), /* @__PURE__ */ React.createElement(Slider, { label: "Policy output premium passed to public pay", value: structural.payGrowthPassThrough, onChange: (v) => setS("payGrowthPassThrough", v), min: 0, max: 1, step: 0.1, unit: " elasticity" }), /* @__PURE__ */ React.createElement(Slider, { label: "NI public pay real growth per worker", value: structural.niPayGrowth, onChange: (v) => setS("niPayGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "NI non-pension benefit real rate growth", value: structural.niBenefitGrowth, onChange: (v) => setS("niBenefitGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Pension real rate growth", value: structural.pensionRateGrowth, onChange: (v) => setS("pensionRateGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Republic public pay target real growth", value: structural.southPayGrowth, onChange: (v) => setS("southPayGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Republic benefit target real growth", value: structural.southBenefitGrowth, onChange: (v) => setS("southBenefitGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Opening non-pension benefit allocation", value: structural.nonPensionWelfareBase, onChange: (v) => setS("nonPensionWelfareBase", v), min: 0, max: 9, step: 0.25, unit: " \u20ACbn" }), /* @__PURE__ */ React.createElement(Slider, { label: "Inherited interest flow duration", value: structural.inheritedInterestYears, onChange: (v) => setS("inheritedInterestYears", v), min: 0, max: 100, step: 1, unit: " years" }), /* @__PURE__ */ React.createElement("label", { className: "block text-xs my-3" }, /* @__PURE__ */ React.createElement("input", { type: "checkbox", checked: structural.populationVolumes, onChange: (e) => setS("populationVolumes", e.target.checked) }), " Use NI population for service volumes and over-65 population for pension volumes"), /* @__PURE__ */ React.createElement("label", { className: "text-xs" }, "Republic population variant ", /* @__PURE__ */ React.createElement("select", { value: structural.populationVariant, onChange: (e) => setS("populationVariant", e.target.value) }, ["M1", "M2", "M3"].map((v) => /* @__PURE__ */ React.createElement("option", { key: v }, v))))), /* @__PURE__ */ React.createElement(
+    } }, Object.entries(HARMONISATION_CASES).map(([key, x]) => /* @__PURE__ */ React.createElement("option", { key, value: key }, x.label)), /* @__PURE__ */ React.createElement("option", { value: "custom" }, "Custom sensitivity"))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2" }, "No central case selected. ", HARMONISATION_CASES[structural.harmonisationCase]?.caveat), structural.harmonisationCase === "custom" && ["payGapPct", "welfareGapPct", "payTaxOffset", "welfareTaxOffset"].map((key) => /* @__PURE__ */ React.createElement("label", { key, className: "block text-xs my-2" }, key, /* @__PURE__ */ React.createElement("input", { type: "number", min: "0", max: key.includes("Gap") ? 150 : 100, value: structural[key] ?? "", placeholder: key.includes("Gap") ? "F&M gross gap" : "No offset", onChange: (e) => setS(key, e.target.value === "" ? null : Math.max(0, Math.min(key.includes("Gap") ? 150 : 100, Number(e.target.value)))) })))), /* @__PURE__ */ React.createElement("details", { className: "mb-4" }, /* @__PURE__ */ React.createElement("summary", { className: "text-sm cursor-pointer" }, "Component spending and population assumptions"), /* @__PURE__ */ React.createElement("p", { className: "text-xs my-3" }, "Historical component allocations reconcile to the frozen total. Their current composition and the real growth rates remain scenario assumptions."), /* @__PURE__ */ React.createElement(Slider, { label: "Policy output premium passed to public pay", value: structural.payGrowthPassThrough, onChange: (v) => setS("payGrowthPassThrough", v), min: 0, max: 1, step: 0.1, unit: " elasticity" }), /* @__PURE__ */ React.createElement(Slider, { label: "NI public pay real growth per worker", value: structural.niPayGrowth, onChange: (v) => setS("niPayGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "NI non-pension benefit real rate growth", value: structural.niBenefitGrowth, onChange: (v) => setS("niBenefitGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Pension real rate growth", value: structural.pensionRateGrowth, onChange: (v) => setS("pensionRateGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Republic public pay target real growth", value: structural.southPayGrowth, onChange: (v) => setS("southPayGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Republic benefit target real growth", value: structural.southBenefitGrowth, onChange: (v) => setS("southBenefitGrowth", v), min: -2, max: 6, step: 0.25, unit: "%" }), /* @__PURE__ */ React.createElement(Slider, { label: "Opening non-pension benefit allocation", value: structural.nonPensionWelfareBase, onChange: (v) => setS("nonPensionWelfareBase", v), min: 0, max: 9, step: 0.25, unit: " \u20ACbn" }), /* @__PURE__ */ React.createElement(Slider, { label: "Pension top-up fall, Doyle and HM Treasury sensitivity", value: structural.pensionTopUpFall, onChange: (v) => setS("pensionTopUpFall", v), min: 0, max: PENSIONS, step: 0.01, unit: " \u20ACbn" }), /* @__PURE__ */ React.createElement("p", { className: "text-xs" }, "Doyle 2025 Table 3 reports an expected public-service pension top-up reduction attributed to HM Treasury. The same reduction is removed from the opening deficit and pension envelope. ", /* @__PURE__ */ React.createElement("a", { href: "https://all-islandeconomy.com/wp-content/uploads/2025/06/21614_Public_Finances_UPDATED.pdf" }, "Source")), /* @__PURE__ */ React.createElement(Slider, { label: "Inherited interest flow duration", value: structural.inheritedInterestYears, onChange: (v) => setS("inheritedInterestYears", v), min: 0, max: 100, step: 1, unit: " years" }), /* @__PURE__ */ React.createElement("label", { className: "block text-xs my-3" }, /* @__PURE__ */ React.createElement("input", { type: "checkbox", checked: structural.populationVolumes, onChange: (e) => setS("populationVolumes", e.target.checked) }), " Use NI population for service volumes and over-65 population for pension volumes"), /* @__PURE__ */ React.createElement("label", { className: "text-xs" }, "Republic population variant ", /* @__PURE__ */ React.createElement("select", { value: structural.populationVariant, onChange: (e) => setS("populationVariant", e.target.value) }, ["M1", "M2", "M3"].map((v) => /* @__PURE__ */ React.createElement("option", { key: v }, v))))), /* @__PURE__ */ React.createElement(
       Slider,
       {
         label: "Ageing drift",

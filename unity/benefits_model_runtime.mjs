@@ -1,5 +1,5 @@
-import {simulate,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,FORMS,fiscalComponents,populationAt,payback,validateInputs} from './scenario_model.mjs?v=353e057bf922';
-import SOURCES from './benefits_sources.mjs?v=353e057bf922';
+import {simulate,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,FORMS,fiscalComponents,populationAt,payback,validateInputs} from './scenario_model.mjs?v=ca6f8ebbce26';
+import SOURCES from './benefits_sources.mjs?v=ca6f8ebbce26';
 
 // These are specification bounds for experiments, not empirical confidence intervals.
 // A null calibration is deliberately unavailable rather than replaced by an invented estimate.
@@ -30,7 +30,7 @@ export const BENEFIT_INPUTS = [
  ['ukPathSpendingGrowth',null,-2,3,'%','Null follows residual purchases cost growth. Does not blanket-index pay or pensions.','design'],
  ['ukPathTransferRisk',0,0,30,'%','Frozen transfer withdrawal by year 25, assumed to reduce residual services.','source needed'],
 ].map(([key,value,min,max,unit,description,status])=>({key,value,min,max,unit,description,status}));
-export const ASSESSMENT_VERSION='2026-10-29-harmonisation-cases';
+export const ASSESSMENT_VERSION='2026-10-29-state-income-debt';
 export const BENEFIT_DEFAULTS=Object.fromEntries(BENEFIT_INPUTS.map(x=>[x.key,x.value]));
 export const SUCCESS_RULES=Object.freeze({comparisonYear:15,debtCeiling:80,burdenPctGNI:2,burdenSensitivities:[1,3],fallingFrom:20,assessmentHorizon:25,requiredPasses:4});
 const clamp=(v,l,h)=>Math.max(l,Math.min(h,v));
@@ -138,12 +138,15 @@ export function simulateBenefits(p,horizon,s=D,values={}) {
    const gni=neutral?roiBase:republicOutput;
    if(gni<=0)throw Error('Republic GNI* must remain positive');
    const baseDebt=baselineDebtRatio(t)/100*roiBase;
+   // After unity the State's income includes Northern Ireland, so the debt ratio adds NI output to
+   // Republic GNI*. NI output is GDP, an approximation. The burden check stays on Republic GNI*.
+   const stateIncome=neutral?gni:gni+niOutput;
    return {...r,...ageAt(2024+t,s.populationVariant),northernEarnedIncomePerPerson:null,ukEarnedIncomePerPerson:null,northernEarnedIncomeGainPerPerson:null,
      northernOutputPerPerson,ukOutputPerPerson,assumedPolicyOutput,assumedGrowthOutputGap,
      capitalOutputGain,tradeOutputGain,fdiOutputGain,modelledIslandOutputGain,totalIslandOutputDifference,otherOutputDifference,
      economicAssessmentReady:false,northernTransferPerPerson:transfer*1e9/r.niPopulation,ukTransferPerPerson:ukTransfer*1e9/uk.niPopulation,
      ukOutput:uk.unroundedActualOutput,ukDomesticTransfer:ukTransfer,northernDomesticTransfer:transfer,ukTransferWithdrawal:withdrawal,
-     republicGNI:gni,baselineRepublicDebt:baseDebt,debtHeadroomPctGNI:SUCCESS_RULES.debtCeiling-100*(baseDebt+r.unroundedDebt)/gni,totalRepublicDebt:baseDebt+r.unroundedDebt,totalDebtPctGNI:100*(baseDebt+r.unroundedDebt)/gni,netCostPctGNI:100*r.unroundedCost/gni,burdenLimitPerRepublicResident:SUCCESS_RULES.burdenPctGNI/100*gni*1e9/r.roiPopulation,netCostPerRepublicResident:r.unroundedCost*1e9/r.roiPopulation};
+     republicGNI:gni,baselineRepublicDebt:baseDebt,stateIncome,debtHeadroomPctGNI:SUCCESS_RULES.debtCeiling-100*(baseDebt+r.unroundedDebt)/stateIncome,totalRepublicDebt:baseDebt+r.unroundedDebt,totalDebtPctGNI:100*(baseDebt+r.unroundedDebt)/stateIncome,totalDebtPctRepublicGNI:100*(baseDebt+r.unroundedDebt)/gni,netCostPctGNI:100*r.unroundedCost/gni,burdenLimitPerRepublicResident:SUCCESS_RULES.burdenPctGNI/100*gni*1e9/r.roiPopulation,netCostPerRepublicResident:r.unroundedCost*1e9/r.roiPopulation};
  });
 }
 

@@ -1,5 +1,5 @@
 {
-  "modelSha256": "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12",
+  "modelSha256": "f00f9c0b45f00f61e31982c5f4364391bead1446845ea5f4e33061d998304057",
   "inputs": [
     {
       "key": "southGrowth",
@@ -204,6 +204,12 @@
       "value": 40,
       "scope": "structural",
       "description": "Explicit illustrative scenario setting. See the full executable equations. No causal calibration is claimed."
+    },
+    {
+      "key": "pensionTopUpFall",
+      "value": 1.5594485445409103,
+      "scope": "structural",
+      "description": "Doyle 2025 Table 3 expected public-service pension top-up reduction, attributed to HM Treasury. Removed from both the opening deficit and pension envelope, preserving the retained-liability residual."
     },
     {
       "key": "ageSensitiveSpending",

@@ -259,6 +259,11 @@
       "description": "Annual extension account or intermediate variable, defined in benefits_model.mjs. Monetary aggregates are constant 2023 euro bn unless the name identifies jobs, people or a ratio."
     },
     {
+      "key": "stateIncome",
+      "nullable": false,
+      "description": "Republic GNI* plus NI output after unity, euro bn. Republic GNI* only in the UK status quo."
+    },
+    {
       "key": "debtHeadroomPctGNI",
       "nullable": false,
       "description": "Chosen 80% ceiling less total debt ratio, percentage points."
@@ -271,7 +276,12 @@
     {
       "key": "totalDebtPctGNI",
       "nullable": false,
-      "description": "Baseline plus transition debt as percent of scenario Republic GNI*."
+      "description": "Baseline plus transition debt as percent of State income, scenario Republic GNI* plus NI output after unity. NI output is GDP, an approximation."
+    },
+    {
+      "key": "totalDebtPctRepublicGNI",
+      "nullable": false,
+      "description": "Baseline plus transition debt as percent of scenario Republic GNI* only, for comparison."
     },
     {
       "key": "netCostPctGNI",
@@ -289,7 +299,7 @@
       "description": "Annual Republic cost including interest per resident, euro."
     }
   ],
-  "version": "2026-10-29-harmonisation-cases",
+  "version": "2026-10-29-state-income-debt",
   "currentAssessment": {
     "reportedTests": [
       "debt",
@@ -303,7 +313,7 @@
     "overallAssessment": "Not assessed",
     "fourOfFiveRule": "Reserved until all economic tests are measured. Not applied to the fiscal checks."
   },
-  "extensionSha256": "353e057bf922d0ce75c2b541933708a2b2575f119dace85adafd486c97fc7b77",
+  "extensionSha256": "ca6f8ebbce2611572c0e9c74d0e9b61783a4690ca521b66fcdcd95b4658ad3fd",
   "inputs": [
     {
       "key": "ukTransitionShare",
@@ -883,7 +893,7 @@
     "capital": "Output difference holding chosen growth and all other settings fixed, removing programme and EU-funded capital only.",
     "reconciliation": "Total output difference = assumed growth gap + capital + trade + net FDI + other output differences.",
     "direction": "Current strict rule includes the change from year 19 to 20, followed by a fall in every later year. Interpretation remains an open decision.",
-    "debt": "Budget 2027 debt ratio schedule applied to unchanged model real GNI* baseline, plus transition borrowing. Divide by scenario Republic GNI*.",
+    "debt": "Budget 2027 debt ratio schedule applied to unchanged model real GNI* baseline, plus transition borrowing. Divide by State income, scenario Republic GNI* plus NI output after unity. The annual burden check stays on Republic GNI*.",
     "demography": "People 65+ / people aged 15 to 64. NI annual source and linearly interpolated CSO knots."
   },
   "limitations": [

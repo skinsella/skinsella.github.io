@@ -1,5 +1,5 @@
 {
-  "modelSha256": "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12",
+  "modelSha256": "f00f9c0b45f00f61e31982c5f4364391bead1446845ea5f4e33061d998304057",
   "constants": {
     "GNI_STAR": 290.9,
     "NORTH_GNI": 72.73594775750469,
@@ -13,6 +13,7 @@
     "SOURCE_WELFARE_BASE": 13.118136843319665,
     "PUBLISHED": 17.058,
     "PENSIONS": 6.864,
+    "PENSION_TOPUP_FALL": 1.5594485445409103,
     "DEBT_INT": 4.238,
     "DEFENCE_NET": 1.64,
     "OTHER_NONID": 0.692,
@@ -54,6 +55,7 @@
     "centralSavingShare": 0,
     "taxAdjustmentShare": 0,
     "pensionTransferYears": 40,
+    "pensionTopUpFall": 1.5594485445409103,
     "ageSensitiveSpending": 0,
     "outputCeiling": 0,
     "harmonisationCase": "upper",

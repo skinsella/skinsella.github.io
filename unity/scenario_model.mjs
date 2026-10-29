@@ -15,7 +15,8 @@ const GROSS_WELFARE_FULL = 4.809*UK_2019_TO_2023_EUR;
 const SOURCE_PAY_BASE = 6.797*UK_2019_TO_2023_EUR;
 const MODEL_VERSION = '2026-10-29-component-fiscal';
 const PUBLISHED = 17.058;
-const PENSIONS = 6.864;
+const PENSIONS = 6.864; // Doyle 2025 Table 2, £5.722bn: state pensions just over £4bn and net public service pension top-up £1.7bn.
+const PENSION_TOPUP_FALL = 1.3*UK_FY2022_TO_2023_EUR; // Doyle 2025, HM Treasury expects the top-up to fall by about £1.3bn by 2028, to about £4.4bn in total.
 const DEBT_INT = 4.238;
 const DEFENCE_NET = 1.640;
 const OTHER_NONID = 0.692;
@@ -67,8 +68,8 @@ const FORMS = {
 // Simulation
 // ---------------------------------------------------------------
 function inheritedDeficit(pensionsUK, debtUK, s = {}) {
-  return PUBLISHED - DEFENCE_NET*(s.defenceSavingShare??0)/100 - OTHER_NONID*(s.centralSavingShare??0)/100 - TAX_ADD*(s.taxAdjustmentShare??0)/100
-    - (pensionsUK ? PENSIONS : 0) - (debtUK ? DEBT_INT : 0);
+  return PUBLISHED - (s.pensionTopUpFall??0) - DEFENCE_NET*(s.defenceSavingShare??0)/100 - OTHER_NONID*(s.centralSavingShare??0)/100 - TAX_ADD*(s.taxAdjustmentShare??0)/100
+    - (pensionsUK ? PENSIONS-(s.pensionTopUpFall??0) : 0) - (debtUK ? DEBT_INT : 0);
 }
 
 // Published benchmarks are transferred evidence, not Northern Ireland estimates.
@@ -129,7 +130,7 @@ const DEFAULT_STRUCTURAL = { southGrowth: 2, ageing: 0, shift: 0, realInterest: 
     fundOpening: 0, fundReturn: 2, fundContribution: 0, fundContributionYears: 10, fundDrawCap: 5, linkedMechanisms: false, growthRevenue: true,
     taxShare: 35, baselineRevenueGrowth: 0, baselineSpendingGrowth: 1,
     defenceSavingShare: 0, centralSavingShare: 0, taxAdjustmentShare: 0,
-    pensionTransferYears: 40, ageSensitiveSpending: 0, outputCeiling: 0,
+    pensionTransferYears: 40, pensionTopUpFall: PENSION_TOPUP_FALL, ageSensitiveSpending: 0, outputCeiling: 0,
     harmonisationCase: 'upper', payGapPct: null, welfareGapPct: null, payTaxOffset: null, welfareTaxOffset: null,
     ...Object.fromEntries(ECONOMIC_PARAMETERS.map(item => [item.key, item.value])) };
 // Conditional feasibility examples. These are selected assumptions, not estimated forecasts.
@@ -179,7 +180,8 @@ function fiscalComponents(p,s,t) {
  const relativeOutput=p.stall&&t>7?Math.pow(relativeRate,7)*Math.pow(Math.min(relativeRate,1.004),t-7):Math.pow(relativeRate,t);
  const pay=payBase*Math.pow(1+s.niPayGrowth/100,t)*Math.pow(relativeOutput,s.payGrowthPassThrough)*volumes;
  const benefits=benefitBase*Math.pow(1+s.niBenefitGrowth/100,t)*volumes;
- const pensionEnvelope=PENSIONS*Math.pow(1+s.pensionRateGrowth/100,t)*pensionVolumes*Math.pow(1+s.ageing/100,t);
+ const pensionBase=PENSIONS-(s.pensionTopUpFall??0);
+ const pensionEnvelope=pensionBase*Math.pow(1+s.pensionRateGrowth/100,t)*pensionVolumes*Math.pow(1+s.ageing/100,t);
  const purchasesFactor=Math.pow(1+s.baselineSpendingGrowth/100,t)*volumes;
  const purchases=purchasesBase*purchasesFactor;
  const defence=DEFENCE_NET*purchasesFactor*(1-s.defenceSavingShare/100);
@@ -200,8 +202,10 @@ function fiscalComponents(p,s,t) {
  const welfareGap=h.welfareGapPct==null?GROSS_WELFARE_FULL:h.welfareGapPct/100*SOURCE_WELFARE_BASE;
  const payTarget=(payBase+payGap)*Math.pow(1+s.southPayGrowth/100,t)*volumes;
  const grossPayIncrease=payGap===0?0:phase*Math.max(0,payTarget-pay);
- const welfareBase=benefitBase+PENSIONS;
- const pensionWeight=PENSIONS/welfareBase;
+ // The top-up fall reflects higher member contributions, not lower pension rates, so the harmonisation
+ // target is built on the reduced envelope and the welfare gap is unchanged.
+ const welfareBase=benefitBase+pensionBase;
+ const pensionWeight=pensionBase/welfareBase;
  const welfareVolumes=(1-pensionWeight)*volumes+pensionWeight*pensionVolumes;
  const welfareTarget=(welfareBase+welfareGap)*Math.pow(1+s.southBenefitGrowth/100,t)*welfareVolumes;
  const welfareBefore=benefits+pensionEnvelope;
@@ -213,10 +217,11 @@ function fiscalComponents(p,s,t) {
  return {pay,benefits,pensionEnvelope,pensionCost,purchases,defence,central,allocatedInterest,spending,baselineSpending,baselineRevenue,revenueAdjustment,harmonisation,grossPayIncrease,grossWelfareIncrease,volumes,pensionVolumes,niPopulation:pop.ni,roiPopulation:pop.roi,populationHeld:pop.heldBeyondSource?1:0};
 }
 
-const MODEL_CONSTANTS = { GNI_STAR, NORTH_GNI, UK_2019_TO_2023_EUR, UK_FY2022_TO_2023_EUR, BASE_REVENUE, BASE_SPENDING, GROSS_PAY_FULL, GROSS_WELFARE_FULL, SOURCE_PAY_BASE, SOURCE_WELFARE_BASE, PUBLISHED, PENSIONS, DEBT_INT, DEFENCE_NET, OTHER_NONID, TAX_ADD, RERATE_FULL };
+const MODEL_CONSTANTS = { GNI_STAR, NORTH_GNI, UK_2019_TO_2023_EUR, UK_FY2022_TO_2023_EUR, BASE_REVENUE, BASE_SPENDING, GROSS_PAY_FULL, GROSS_WELFARE_FULL, SOURCE_PAY_BASE, SOURCE_WELFARE_BASE, PUBLISHED, PENSIONS, PENSION_TOPUP_FALL, DEBT_INT, DEFENCE_NET, OTHER_NONID, TAX_ADD, RERATE_FULL };
 
 function validateInputs(p,horizon,s) {
   if(!['upper','middle','lower','rateBased','custom'].includes(s.harmonisationCase))throw new RangeError('Unknown harmonisation case');
+  if(s.harmonisationCase!=='custom'){const expected=harmonisationSettings(s.harmonisationCase);for(const key of ['payGapPct','welfareGapPct','payTaxOffset','welfareTaxOffset'])if(s[key]!=null&&s[key]!==expected[key])throw new RangeError('Conflicting harmonisation setting '+key+'; select custom or use the named preset');}
   if(!Number.isInteger(horizon)||horizon<1||horizon>100)throw new RangeError('Horizon must be an integer from 1 to 100');
   for(const [key,value] of Object.entries({...s,...p}))if(typeof value==='number'&&!Number.isFinite(value))throw new RangeError('Non-finite input '+key);
   for(const key of Object.keys(s))if(!Object.hasOwn(DEFAULT_STRUCTURAL,key))throw new TypeError('Unknown structural input '+key);
@@ -229,6 +234,7 @@ function validateInputs(p,horizon,s) {
   if(p.gNI<0||p.gNI>7||p.reratingScope<0||p.reratingScope>100||p.reratingYears<1||p.investment<0||p.duplication<0)throw new RangeError('Policy input outside supported domain');
   for(const item of ECONOMIC_PARAMETERS){const v=s[item.key]??item.value;if(!Number.isFinite(v)||v<item.min||v>item.max)throw new RangeError('Economic input outside supported domain '+item.key);}
   for(const key of ['southGrowth','ageing'])if(!Number.isFinite(s[key])||s[key]<0||s[key]>10)throw new RangeError('Invalid structural input '+key);
+  if(!Number.isFinite(s.pensionTopUpFall??0)||(s.pensionTopUpFall??0)<0||(s.pensionTopUpFall??0)>PENSIONS)throw new RangeError('Invalid pension top-up fall');
   for(const key of ['fundOpening','fundContribution','fundDrawCap','realInterest','discountRate','ageSensitiveSpending'])if((s[key]??0)<0)throw new RangeError('Negative input '+key);
   if((s.fundReturn??0)<-100)throw new RangeError('Fund return cannot be below minus 100 percent');
   if((s.pensionTransferYears??40)<1||(s.outputCeiling??0)<0||((s.outputCeiling??0)>0&&s.outputCeiling<1))throw new RangeError('Invalid transfer period or ceiling');
@@ -258,7 +264,7 @@ function simulate(p, horizon, s, extension = null) {
   validateInputs(p,horizon,s);
   const linked = s.linkedMechanisms === true;
   const core = inheritedDeficit(true,true,s);
-  const pensionsBorne = p.pensionsUK ? 0 : PENSIONS;
+  const pensionsBorne = p.pensionsUK ? 0 : PENSIONS-(s.pensionTopUpFall??0);
   const debtBorne = p.debtUK ? 0 : DEBT_INT;
   const r = (1 + p.gNI / 100) / (1 + e.baselineGrowth / 100);
   const gs = s.southGrowth / 100, ag = s.ageing / 100;

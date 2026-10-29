@@ -1,8 +1,8 @@
 {
   "modelVersion": "2026-10-29-component-fiscal",
-  "modelSha256": "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12",
-  "extensionSha256": "353e057bf922d0ce75c2b541933708a2b2575f119dace85adafd486c97fc7b77",
-  "extensionVersion": "2026-10-29-harmonisation-cases",
+  "modelSha256": "f00f9c0b45f00f61e31982c5f4364391bead1446845ea5f4e33061d998304057",
+  "extensionSha256": "ca6f8ebbce2611572c0e9c74d0e9b61783a4690ca521b66fcdcd95b4658ad3fd",
+  "extensionVersion": "2026-10-29-state-income-debt",
   "benefits": "benefits.html",
   "benefitsReference": "benefits_reference.json",
   "story": "index.html",

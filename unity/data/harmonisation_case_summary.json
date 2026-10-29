@@ -1,6 +1,6 @@
 {
   "qualification": "No central case selected. Favourable settlement, 2% NI growth. Middle and lower have an unverified Doyle price basis. Lower is a bound, not an estimate.",
-  "modelSha256": "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12",
+  "modelSha256": "f00f9c0b45f00f61e31982c5f4364391bead1446845ea5f4e33061d998304057",
   "cases": {
     "upper": {
       "definition": {
@@ -48,6 +48,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "upper",
@@ -96,18 +97,18 @@
         "counterfactual": false,
         "shared": false
       },
-      "year1": 4.347553301594574,
-      "year10": 14.460315478538746,
-      "year25": 25.53746943708512,
-      "transitionDebt25": 407.2870508613058,
-      "totalDebtPctGNI25": 140.23998991625547,
+      "year1": 4.306577641852845,
+      "year10": 13.79309101489009,
+      "year25": 22.991849067751406,
+      "transitionDebt25": 380.23307823086185,
+      "totalDebtPctGNI25": 107.65379539394706,
       "growthToRepay": {
-        "exact": 4.618766339321155,
-        "display": 4.7
+        "exact": 4.457510584383272,
+        "display": 4.5
       },
       "growthForAllFiscalChecks": {
-        "exact": 4.285428312374279,
-        "display": 4.3
+        "exact": 4.09574433369562,
+        "display": 4.1
       }
     },
     "middle": {
@@ -156,6 +157,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "middle",
@@ -204,18 +206,18 @@
         "counterfactual": false,
         "shared": false
       },
-      "year1": 4.1050673015253665,
-      "year10": 11.553961533999122,
-      "year25": 19.28128341743774,
-      "transitionDebt25": 316.4295633815866,
-      "totalDebtPctGNI25": 121.20236755890741,
+      "year1": 4.064091641783637,
+      "year10": 10.886737070350467,
+      "year25": 16.735663048104023,
+      "transitionDebt25": 289.3755907511427,
+      "totalDebtPctGNI25": 92.42415603099371,
       "growthToRepay": {
-        "exact": 4.410069947247393,
-        "display": 4.5
+        "exact": 4.221771873591933,
+        "display": 4.3
       },
       "growthForAllFiscalChecks": {
-        "exact": 3.6417854237370193,
-        "display": 3.7
+        "exact": 3.3891322806011885,
+        "display": 3.4
       }
     },
     "rateBased": {
@@ -264,6 +266,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "rateBased",
@@ -312,18 +315,18 @@
         "counterfactual": false,
         "shared": false
       },
-      "year1": 3.6927956146850534,
-      "year10": 6.059753529226944,
-      "year25": 6.444079889135693,
-      "transitionDebt25": 137.76977322440376,
-      "totalDebtPctGNI25": 83.76728422342882,
+      "year1": 3.6524101058276512,
+      "year10": 5.467564801568891,
+      "year25": 4.184191391543473,
+      "transitionDebt25": 113.9099533337478,
+      "totalDebtPctGNI25": 63.012398644964826,
       "growthToRepay": {
-        "exact": 3.1375175366410986,
-        "display": 3.2
+        "exact": 2.9548402282525785,
+        "display": 3
       },
       "growthForAllFiscalChecks": {
-        "exact": 2.160777432494797,
-        "display": 2.2
+        "exact": 1.9005335339461453,
+        "display": 2
       }
     },
     "lower": {
@@ -372,6 +375,7 @@
         "centralSavingShare": 100,
         "taxAdjustmentShare": 100,
         "pensionTransferYears": 40,
+        "pensionTopUpFall": 1.5594485445409103,
         "ageSensitiveSpending": 0,
         "outputCeiling": 0,
         "harmonisationCase": "lower",
@@ -420,18 +424,18 @@
         "counterfactual": false,
         "shared": false
       },
-      "year1": 3.657281572991782,
-      "year10": 5.586469676900301,
-      "year25": 5.338253328929241,
-      "transitionDebt25": 122.37960349147473,
-      "totalDebtPctGNI25": 80.54253910315029,
+      "year1": 3.6169469011037383,
+      "year10": 5.000744702008972,
+      "year25": 3.1029784391350663,
+      "transitionDebt25": 98.79493534467218,
+      "totalDebtPctGNI25": 60.47880147731744,
       "growthToRepay": {
-        "exact": 3.0203049488482065,
-        "display": 3.1
+        "exact": 2.8362649635528214,
+        "display": 2.9
       },
       "growthForAllFiscalChecks": {
-        "exact": 2.0581384414690547,
-        "display": 2.1
+        "exact": 1.8497518197982572,
+        "display": 1.9
       }
     }
   }

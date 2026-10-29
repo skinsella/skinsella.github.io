@@ -1,7 +1,7 @@
-import {requiredUKSupport} from './feasibility_runtime.mjs?v=80d1fe105a80';
-import {simulateBenefits,assessBenefits} from './benefits_model_runtime.mjs?v=353e057bf922';
-import {niceAxis,requiredGrowth} from './story_math_runtime.mjs?v=80d1fe105a80';
-import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit,HARMONISATION_CASES,harmonisationSettings} from './scenario_model.mjs?v=80d1fe105a80';
+import {requiredUKSupport} from './feasibility_runtime.mjs?v=0e68830e3ff5';
+import {simulateBenefits,assessBenefits} from './benefits_model_runtime.mjs?v=ca6f8ebbce26';
+import {niceAxis,requiredGrowth} from './story_math_runtime.mjs?v=0e68830e3ff5';
+import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit,HARMONISATION_CASES,harmonisationSettings} from './scenario_model.mjs?v=0e68830e3ff5';
 const $=id=>document.getElementById(id),keys=['unitary','federal','glide','worst'];
 const names={unitary:'Unitary',federal:'Federal',glide:'Managed Integration',worst:'Higher Cost'};
 const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2,ukTransitionShare:0,capitalShare:0,harmonisationCase:'upper'};
@@ -33,14 +33,14 @@ function renderWorth(selected){
  const a=assessBenefits(selected.rows),b=assessBenefits(twin),end=selected.rows.at(-1);
  $('worth-number').textContent=a.fiscalPasses+' of 3 fiscal checks';
  $('worth-unit').textContent=selected.name+' · '+a.status;
- const labels={debt:'Total Republic debt below 80% of GNI* throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling each year from year 20'};
+ const labels={debt:'Total State debt below 80% of GNI* plus NI output throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling each year from year 20'};
  $('worth-tests').innerHTML=Object.entries(labels).map(([k,label])=>'<tr><td>'+label+'</td><td>'+(a.tests[k]===null?'Not assessed':a.tests[k]?'Pass':'Fail')+'</td><td>'+(b.tests[k]===null?'Not assessed':b.tests[k]?'Pass':'Fail')+'</td></tr>').join('');
  const annual=state.worthMetric==='annual',field=annual?'netCostPctGNI':'totalDebtPctGNI',ceiling=annual?2:80;
- const unit=annual?'Annual Republic cost / GNI* · %':'Total Republic debt / GNI* · %';
+ const unit=annual?'Annual Republic cost / GNI* · %':'Total State debt / (GNI* plus NI output) · %';
  const limit={key:'limit',name:'Selected limit',colour:'#a37525',rows:selected.rows.map(r=>({year:r.year,[field]:ceiling}))};
  lines('worth-chart',[{...selected,rows:selected.rows},{key:'twin',name:'Lower-growth comparison',colour:'#8b9690',rows:twin},limit],field,unit,unit);
  $('worth-sensitivities').textContent=a.burdenSensitivities.map((x,i)=>'At the '+x.limit+'% annual burden limit, '+x.fiscalPasses+' of 3 fiscal checks pass for the selected future and '+b.burdenSensitivities[i].fiscalPasses+' for its lower-growth comparison').join('. ')+'.';
- $('worth-debt').textContent='Year 25 total Republic debt is '+end.totalDebtPctGNI.toFixed(1)+'% of GNI*, '+(end.debtHeadroomPctGNI>=0?'headroom below the chosen 80% ceiling is '+end.debtHeadroomPctGNI.toFixed(1):'the chosen 80% ceiling is exceeded by '+(-end.debtHeadroomPctGNI).toFixed(1))+' percentage points.';
+ $('worth-debt').textContent='Year 25 total State debt is '+end.totalDebtPctGNI.toFixed(1)+'% of GNI* plus NI output, '+(end.debtHeadroomPctGNI>=0?'headroom below the chosen 80% ceiling is '+end.debtHeadroomPctGNI.toFixed(1):'the chosen 80% ceiling is exceeded by '+(-end.debtHeadroomPctGNI).toFixed(1))+' percentage points.';
  document.querySelectorAll('[data-worth]').forEach(x=>x.setAttribute('aria-pressed',(state.worthMetric??'debt')===x.dataset.worth));
 }
 
