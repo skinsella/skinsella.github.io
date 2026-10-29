@@ -1,7 +1,7 @@
 {
   "modelVersion": "2026-10-29-component-fiscal",
-  "modelSha256": "514cb416dd7dae0060da52cbbb12965f6c04a14c37999d9f57f7e0677bf8df8d",
-  "extensionSha256": "e231f8781c6b4110f4d4b10f4b4a02fbf906973444ad1e609146f5948d762a42",
+  "modelSha256": "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12",
+  "extensionSha256": "353e057bf922d0ce75c2b541933708a2b2575f119dace85adafd486c97fc7b77",
   "extensionVersion": "2026-10-29-harmonisation-cases",
   "benefits": "benefits.html",
   "benefitsReference": "benefits_reference.json",

@@ -33,10 +33,10 @@ Rate-based case, 2% Northern Ireland growth, with Doyle's pay gap net of tax as 
 | Total debt in year 25, % of GNI* | 140.2% | 121.2% | 83.8% | 80.5% |
 | Debt check first fails | Year 10 | Year 12 | Year 21 | Year 25 |
 | Growth needed to repay | 4.7% | 4.5% | 3.2% | 3.1% |
-| Growth needed to pass all three checks | 4.3% | 3.6% | 2.2% | 2.1% |
+| Growth needed to pass all three checks | 4.3% | 3.7% | 2.2% | 2.1% |
 | Adverse deal, year 25, €bn | 41.2 | 34.9 | 22.1 | 21.0 |
 
-Across the four designs on the favourable deal, the rate-based case needs growth of 3.1% to 3.4% to repay, and 2.2% to 2.4% to pass all three checks. Immediate parity under Unitary gives a gross gain of about €2,600 per Northern Ireland resident in year one, close to the 2023 household income gap of about 2,500 PPS per person.
+Across the four designs on the favourable deal, the rate-based case needs growth of 3.1% to 3.4% to repay, and 2.2% to 2.5% to pass all three checks. Immediate parity under Unitary gives a gross gain of about €2,600 per Northern Ireland resident in year one, close to the 2023 household income gap of about 2,500 PPS per person.
 
 ## Why it may be too low
 
@@ -55,7 +55,9 @@ Doyle and Tomlinson both argue that unity is more affordable than critics claim,
 
 ## Decision for Stephen
 
-Whether to replace the middle case's welfare gap with this rate-based gap. If so, the middle case's Managed Integration cost in year 25 falls from €19.3 billion to €6.4 billion, and the three cases would run from €25.5 billion to €5.3 billion with the middle case close to the lower one.
+Stephen added this as a fourth case on 29 October 2026, between the middle and lower cases. It appears in paper version 3.6 and in `research/paper_runs/four_cases.mjs`.
+
+Still open is whether any case should be presented as central. Until then all four are reported side by side.
 
 ## Sources
 

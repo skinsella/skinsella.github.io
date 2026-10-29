@@ -21,7 +21,7 @@
       }
     },
     "rateBased": {
-      "label": "Candidate · rate-based welfare",
+      "label": "Rate-based case",
       "caveat": "Doyle pension price basis unverified. Published-rate sensitivity, not a complete benefit costing. Older pensions, Irish extra benefits and eligibility are not fully costed. Not a central estimate.",
       "settings": {
         "payGapPct": 48,
@@ -303,7 +303,7 @@
     "overallAssessment": "Not assessed",
     "fourOfFiveRule": "Reserved until all economic tests are measured. Not applied to the fiscal checks."
   },
-  "extensionSha256": "e231f8781c6b4110f4d4b10f4b4a02fbf906973444ad1e609146f5948d762a42",
+  "extensionSha256": "353e057bf922d0ce75c2b541933708a2b2575f119dace85adafd486c97fc7b77",
   "inputs": [
     {
       "key": "ukTransitionShare",

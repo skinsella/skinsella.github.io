@@ -1,6 +1,6 @@
 {
   "qualification": "No central case selected. Favourable settlement, 2% NI growth. Middle and lower have an unverified Doyle price basis. Lower is a bound, not an estimate.",
-  "modelSha256": "514cb416dd7dae0060da52cbbb12965f6c04a14c37999d9f57f7e0677bf8df8d",
+  "modelSha256": "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12",
   "cases": {
     "upper": {
       "definition": {
@@ -220,7 +220,7 @@
     },
     "rateBased": {
       "definition": {
-        "label": "Candidate · rate-based welfare",
+        "label": "Rate-based case",
         "caveat": "Doyle pension price basis unverified. Published-rate sensitivity, not a complete benefit costing. Older pensions, Irish extra benefits and eligibility are not fully costed. Not a central estimate.",
         "settings": {
           "payGapPct": 48,

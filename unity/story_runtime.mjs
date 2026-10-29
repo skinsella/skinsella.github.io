@@ -1,7 +1,7 @@
-import {requiredUKSupport} from './feasibility_runtime.mjs?v=bc5737684012';
-import {simulateBenefits,assessBenefits} from './benefits_model_runtime.mjs?v=e231f8781c6b';
-import {niceAxis,requiredGrowth} from './story_math_runtime.mjs?v=bc5737684012';
-import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit,HARMONISATION_CASES,harmonisationSettings} from './scenario_model.mjs?v=bc5737684012';
+import {requiredUKSupport} from './feasibility_runtime.mjs?v=80d1fe105a80';
+import {simulateBenefits,assessBenefits} from './benefits_model_runtime.mjs?v=353e057bf922';
+import {niceAxis,requiredGrowth} from './story_math_runtime.mjs?v=80d1fe105a80';
+import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit,HARMONISATION_CASES,harmonisationSettings} from './scenario_model.mjs?v=80d1fe105a80';
 const $=id=>document.getElementById(id),keys=['unitary','federal','glide','worst'];
 const names={unitary:'Unitary',federal:'Federal',glide:'Managed Integration',worst:'Higher Cost'};
 const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2,ukTransitionShare:0,capitalShare:0,harmonisationCase:'upper'};

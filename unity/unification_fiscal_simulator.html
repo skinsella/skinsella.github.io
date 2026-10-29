@@ -19,7 +19,7 @@
 <div id="root"><div id="fallback">Loading the simulator. If this message persists, check your internet connection, the page loads React and Recharts from public CDNs.</div></div>
 <script>
 (() => {
-  const BUILD_FINGERPRINT = "514cb416dd7dae0060da52cbbb12965f6c04a14c37999d9f57f7e0677bf8df8d";
+  const BUILD_FINGERPRINT = "a33e6157ee833b39f6d535132567c1929a90559fb55d3830acd362235589dc12";
   const { useMemo, useState } = React;
   const { ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer, Legend } = Recharts;
   const GNI_STAR = 290.9;
@@ -131,7 +131,7 @@
   const HARMONISATION_CASES = Object.freeze({
     upper: { label: "Upper \xB7 F&M 2024 gross, likely overstated", caveat: "Gross historical benchmarks, no tax offset. Not like-for-like grades or benefit-by-benefit costing.", settings: { payGapPct: null, payTaxOffset: 0, welfareGapPct: null, welfareTaxOffset: 0 } },
     middle: { label: "Middle \xB7 Doyle pay, F&M welfare", caveat: "Doyle pay calibration uses 15 \xD7 \u20AC152m. Its price basis is not verified. Welfare retains the F&M gross assumption.", settings: { payGapPct: 48, payTaxOffset: DOYLE_PAY_TAX_OFFSET, welfareGapPct: null, welfareTaxOffset: 0 } },
-    rateBased: { label: "Candidate \xB7 rate-based welfare", caveat: "Doyle pension price basis unverified. Published-rate sensitivity, not a complete benefit costing. Older pensions, Irish extra benefits and eligibility are not fully costed. Not a central estimate.", settings: { payGapPct: 48, payTaxOffset: DOYLE_PAY_TAX_OFFSET, welfareGapPct: 100 * RATE_WELFARE_GROSS / SOURCE_WELFARE_BASE, welfareTaxOffset: 100 * (1 - RATE_WELFARE_NET / RATE_WELFARE_GROSS) } },
+    rateBased: { label: "Rate-based case", caveat: "Doyle pension price basis unverified. Published-rate sensitivity, not a complete benefit costing. Older pensions, Irish extra benefits and eligibility are not fully costed. Not a central estimate.", settings: { payGapPct: 48, payTaxOffset: DOYLE_PAY_TAX_OFFSET, welfareGapPct: 100 * RATE_WELFARE_GROSS / SOURCE_WELFARE_BASE, welfareTaxOffset: 100 * (1 - RATE_WELFARE_NET / RATE_WELFARE_GROSS) } },
     lower: { label: "Lower \xB7 Doyle pay, no welfare gap", caveat: "Lower sensitivity bound, not an estimate. Doyle price basis is unverified and a zero welfare gap is not a Tomlinson replication.", settings: { payGapPct: 48, payTaxOffset: DOYLE_PAY_TAX_OFFSET, welfareGapPct: 0, welfareTaxOffset: 0 } }
   });
   function harmonisationSettings(key, custom = {}) {
