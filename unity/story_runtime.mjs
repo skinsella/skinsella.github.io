@@ -1,4 +1,4 @@
-import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs?v=767509cbfb0c';
+import {FORMS,DEFAULT_STRUCTURAL as D,MODEL_CONSTANTS as C,simulate,breakEven,payback,inheritedDeficit} from './scenario_model.mjs?v=65ae01587eb0';
 const $=id=>document.getElementById(id),keys=['unitary','federal','glide','worst'];
 const names={unitary:'Unitary',federal:'Federal',glide:'Managed Integration',worst:'Higher Cost'};
 const state={pensionsUK:true,debtUK:true,years:15,form:'glide',growth:2};
