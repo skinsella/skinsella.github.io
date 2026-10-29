@@ -4,9 +4,9 @@ The extension adds a whole-island comparison alongside fiscal repayment. It does
 
 ## Decisions recorded first
 
-Stephen confirmed the comparison dates, debt ceiling and Budget 2027 baseline rule on 29 October 2026. The existing four-of-five pass rule is retained and the annual burden threshold stays unset.
+Stephen confirmed the comparison dates, debt ceiling and Budget 2027 baseline rule on 29 October 2026. The existing four-of-five pass rule is retained and the annual burden threshold is 2% of GNI* with 1% and 3% sensitivities.
 
-These decisions were committed in `30bb478` before extension scenario results. An unset threshold is never a pass, so all four other tests must pass while the burden test remains pending.
+These decisions were recorded and committed before extension scenario results, with the annual burden rule recorded in `e59d454`. The four-of-five rule applies to all five tests, with repayment reported separately.
 
 ## Accounting boundary
 

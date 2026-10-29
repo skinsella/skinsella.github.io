@@ -31,7 +31,7 @@ export const BENEFIT_INPUTS = [
  ['ukPathTransferRisk',0,0,30,'%','Frozen transfer withdrawal by year 25, assumed to reduce residual services.','source needed'],
 ].map(([key,value,min,max,unit,description,status])=>({key,value,min,max,unit,description,status}));
 export const BENEFIT_DEFAULTS=Object.fromEntries(BENEFIT_INPUTS.map(x=>[x.key,x.value]));
-export const SUCCESS_RULES=Object.freeze({comparisonYear:15,debtCeiling:80,burdenLimit:null,fallingFrom:20,requiredPasses:4});
+export const SUCCESS_RULES=Object.freeze({comparisonYear:15,debtCeiling:80,burdenPctGNI:2,burdenSensitivities:[1,3],fallingFrom:20,requiredPasses:4});
 const clamp=(v,l,h)=>Math.max(l,Math.min(h,v));
 function inputs(values={}) {
  const b={...BENEFIT_DEFAULTS,...values};
@@ -112,7 +112,7 @@ export function simulateBenefits(p,horizon,s=D,values={}) {
    return {...r,...ageAt(2024+t,s.populationVariant),northernResourceProxyPerPerson:income,ukResourceProxyPerPerson:ukIncome,northernProxyGainPerPerson:income-ukIncome,
      islandOutputProxy:niOutput+gni,ukIslandOutputProxy:uk.unroundedActualOutput+roiBase,islandOutputProxyGain:niOutput+gni-uk.unroundedActualOutput-roiBase,
      ukOutput:uk.unroundedActualOutput,ukDomesticTransfer:ukTransfer,northernDomesticTransfer:transfer,ukTransferWithdrawal:withdrawal,
-     republicGNI:gni,baselineRepublicDebt:baseDebt,debtHeadroomPctGNI:SUCCESS_RULES.debtCeiling-100*(baseDebt+r.unroundedDebt)/gni,totalRepublicDebt:baseDebt+r.unroundedDebt,totalDebtPctGNI:100*(baseDebt+r.unroundedDebt)/gni,netCostPerRepublicResident:r.unroundedCost*1e9/r.roiPopulation};
+     republicGNI:gni,baselineRepublicDebt:baseDebt,debtHeadroomPctGNI:SUCCESS_RULES.debtCeiling-100*(baseDebt+r.unroundedDebt)/gni,totalRepublicDebt:baseDebt+r.unroundedDebt,totalDebtPctGNI:100*(baseDebt+r.unroundedDebt)/gni,netCostPctGNI:100*r.unroundedCost/gni,burdenLimitPerRepublicResident:SUCCESS_RULES.burdenPctGNI/100*gni*1e9/r.roiPopulation,netCostPerRepublicResident:r.unroundedCost*1e9/r.roiPopulation};
  });
 }
 
@@ -120,10 +120,11 @@ export function assessBenefits(rows,rules=SUCCESS_RULES) {
  const r=rows.find(x=>x.year===rules.comparisonYear),late=rows.filter(x=>x.year>=rules.fallingFrom);
  const tests={northernProxy:r?r.northernProxyGainPerPerson>1e-6:null,islandOutput:r?r.islandOutputProxyGain>1e-9:null,
    debt:rows.length?rows.every(x=>x.totalDebtPctGNI<rules.debtCeiling):null,
-   burden:rules.burdenLimit===null?null:rows.every(x=>x.netCostPerRepublicResident<rules.burdenLimit),
+   burden:rows.length?rows.every(x=>x.netCostPctGNI<=rules.burdenPctGNI):null,
    falling:late.length<2?null:late.every(x=>{const prev=rows.find(y=>y.year===x.year-1);return prev&&x.unroundedCost<prev.unroundedCost;})};
  const passes=Object.values(tests).filter(x=>x===true).length,pending=Object.values(tests).filter(x=>x===null).length;
- return {tests,passes,pending,status:passes>=rules.requiredPasses?'Meets selected proxy tests':passes+pending<rules.requiredPasses?'Does not meet selected tests':'Assessment incomplete',payback:payback(rows)};
+ const burdenSensitivities=(rules.burdenSensitivities??[]).map(limit=>{const burdenPass=rows.every(x=>x.netCostPctGNI<=limit),n=passes-(tests.burden===true?1:0)+(burdenPass?1:0);return {limit,burdenPass,passes:n,meetsRule:n>=rules.requiredPasses};});
+ return {tests,passes,pending,burdenSensitivities,status:passes>=rules.requiredPasses?'Meets selected proxy tests':passes+pending<rules.requiredPasses?'Does not meet selected tests':'Assessment incomplete',payback:payback(rows)};
 }
 
 export function publicationIssues(values={}) {

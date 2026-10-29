@@ -31,12 +31,13 @@ function renderWorth(selected){
  const twin=simulateBenefits({...policy(state.form),gNI:Math.min(state.growth,1.3)},25,settings,benefits());
  const a=assessBenefits(selected.rows),b=assessBenefits(twin),end=selected.rows.at(-1);
  $('worth-number').textContent=a.passes+' of 5 tests';
- $('worth-unit').textContent=selected.name+' · '+a.status+' · annual burden limit still unset';
- const labels={northernProxy:'Northern resource proxy higher by year 15',islandOutput:'Island output proxy higher by year 15',debt:'Total Republic debt below 80% of GNI* throughout',burden:'Annual cost per resident below agreed limit',falling:'Annual cost falling from year 20'};
+ $('worth-unit').textContent=selected.name+' · '+a.status+' · annual burden limit 2% of Republic GNI*';
+ const labels={northernProxy:'Northern resource proxy higher by year 15',islandOutput:'Island output proxy higher by year 15',debt:'Total Republic debt below 80% of GNI* throughout',burden:'Annual Republic cost no more than 2% of GNI*',falling:'Annual cost falling from year 20'};
  $('worth-tests').innerHTML=Object.entries(labels).map(([k,label])=>'<tr><td>'+label+'</td><td>'+(a.tests[k]===null?'Not assessed':a.tests[k]?'Pass':'Fail')+'</td><td>'+(b.tests[k]===null?'Not assessed':b.tests[k]?'Pass':'Fail')+'</td></tr>').join('');
  const field=state.worthMetric==='island'?'islandOutputProxyGain':'northernProxyGainPerPerson';
  const unit=state.worthMetric==='island'?'Island output proxy gain · €bn':'Northern resource proxy gain · €/person';
  lines('worth-chart',[{...selected,rows:selected.rows},{key:'twin',name:'Lower-growth comparison',colour:'#8b9690',rows:twin}],field,unit,unit);
+ $('worth-sensitivities').textContent=''+a.burdenSensitivities.map((x,i)=>'At the '+x.limit+'% annual burden limit, there are '+x.passes+' of 5 passes for the selected future and '+b.burdenSensitivities[i].passes+' for its lower-growth comparison').join('. ')+'.';
  $('worth-debt').textContent='Year 25 total Republic debt is '+end.totalDebtPctGNI.toFixed(1)+'% of GNI*, '+(end.debtHeadroomPctGNI>=0?'headroom below the chosen 80% ceiling is '+end.debtHeadroomPctGNI.toFixed(1):'the chosen 80% ceiling is exceeded by '+(-end.debtHeadroomPctGNI).toFixed(1))+' percentage points. The island old-age dependency ratio is '+end.islandOldAgeDependency.toFixed(1)+' per 100 working-age people, compared with '+end.republicOldAgeDependency.toFixed(1)+' in the Republic alone.';
  document.querySelectorAll('[data-worth]').forEach(x=>x.setAttribute('aria-pressed',(state.worthMetric??'income')===x.dataset.worth));
 }
