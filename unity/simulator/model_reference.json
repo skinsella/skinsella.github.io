@@ -737,6 +737,10 @@
   ],
   "equations": [
     [
+      "Story growth threshold",
+      "Lowest constant NI real growth found between 0% and 7% with financing-inclusive cumulative cost at year 25 at or below zero. Coarse brackets are refined by bisection and displayed rounded upwards to 0.1 percentage point. Not statistical precision or an estimated convergence rate."
+    ],
+    [
       "Opening components",
       "BASE_SPENDING = payBase + nonPensionBenefits + PENSIONS + DEBT_INT + defence + central + residualPurchases"
     ],

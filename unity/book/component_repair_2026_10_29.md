@@ -16,7 +16,7 @@ GDP per person is not household wellbeing and remains affected by multinational 
 
 Allocated UK debt interest has an explicit selected duration. There is still no invented inherited principal or maturity portfolio, so this remains a limited liability-flow sensitivity.
 
-The public story has five linked questions with a chart directly beneath each headline figure. The specialist panel and full assumption register remain separate, with no change in policy settings hidden behind outcome-promising labels.
+The public story has four linked questions with a chart directly beneath each headline figure. The specialist panel and full assumption register remain separate, with no change in policy settings hidden behind outcome-promising labels.
 
 The four futures retain fixed colours. Higher Cost uses an explicit illustrative recurring administration allowance of €1bn, with no extra programme expenditure, rather than silently changing pension or debt switches.
 
