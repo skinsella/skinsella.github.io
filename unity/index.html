@@ -1,9 +1,835 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="What would Irish reunification mean for the public finances? Explore negotiations, public services and growth in five steps."><title>Reunification, five questions</title><style>
-:root{--ink:#172a24;--muted:#52655b;--green:#177052;--paper:#f7f7f1;--line:#d7dfd7}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:0 24px}header{padding:55px 0 26px}h1{font:500 clamp(36px,7vw,64px)/1.08 Georgia,serif;max-width:800px;margin:15px 0}h2{font:500 clamp(27px,5vw,39px)/1.15 Georgia,serif;margin:10px 0 18px}p{max-width:700px}.eyebrow{text-transform:uppercase;font-size:12px;letter-spacing:.14em;color:var(--muted)}nav{position:sticky;top:0;background:#f7f7f1f2;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:2;display:flex;gap:10px;overflow-x:auto;padding:10px 0}nav a{white-space:nowrap;font-size:13px;text-decoration:none}a{color:var(--green)}section{padding:46px 0 38px;border-bottom:1px solid var(--line);scroll-margin-top:58px}.lede{font-size:19px;color:var(--muted)}.number{font:500 clamp(36px,7vw,56px)/1.1 Georgia,serif;margin:22px 0 6px}.unit{font-size:13px;color:var(--muted)}.chart{margin:16px 0;background:white;border:1px solid var(--line);border-radius:12px;padding:12px;overflow:hidden}.chart svg{display:block;width:100%;height:auto}button{font:inherit;font-size:14px;background:white;border:1px solid #aebfb3;border-radius:7px;padding:11px 15px;cursor:pointer;color:var(--ink)}button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:white}button:focus-visible,a:focus-visible{outline:3px solid #bd871e;outline-offset:3px}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin:17px 0}.toggles{display:grid;grid-template-columns:1fr 1fr;gap:10px}.toggles button{text-align:left}.toggles span{display:block;font-size:12px;margin-top:5px}.caveat{font-size:13px;color:var(--muted)}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:9px 5px;text-align:left;border-bottom:1px solid var(--line)}.scroll{overflow-x:auto}.conclusion{padding:40px 0 65px}.conclusion a{display:inline-block;margin:8px 16px 0 0}.notice{font-size:13px;color:var(--muted);border-left:3px solid #819b85;padding-left:12px}footer{font-size:12px;color:var(--muted);padding-bottom:35px}summary{cursor:pointer}details{margin-top:16px}@media(max-width:520px){main{padding:0 16px}header{padding-top:30px}section{padding-top:30px}.lede{font-size:17px}.chart{padding:5px}.toggles{gap:7px}button{font-size:13px;padding:10px}nav{gap:13px}th,td{padding:8px 3px}}
-</style><script>document.documentElement.classList.add(sessionStorage.getItem("priceOfUnityAccess") === "granted" ? "access-granted" : "access-locked");</script><script src="access.js" defer></script><style>html.access-locked body > :not(#access-gate){visibility:hidden}#access-gate{visibility:visible;position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#f7f7f1;padding:20px;font:16px system-ui}#access-form{width:min(100%,390px);padding:30px;background:white;border:1px solid #d7dfd7;border-radius:12px}#access-form input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #aebfb3;border-radius:6px}#access-form button{width:100%;margin-top:12px;background:#177052;color:white;padding:12px;border:0;border-radius:6px}#access-error{min-height:20px;color:#a63d2f}</style></head><body><main><header><div class="eyebrow">The economics of a united Ireland</div><h1>What would reunification mean for the public finances?</h1><p class="lede">The answer depends on what transfers, how public services change and how the economy grows. Follow the choices through five questions.</p><p class="notice">This is an illustration of fiscal choices, not a forecast or a measure of household wellbeing.</p></header><nav aria-label="Page steps"><a href="#headline">1 The starting figure</a><a href="#negotiation">2 The opening bill</a><a href="#futures">3 Four futures</a><a href="#growth">4 The growth test</a><a href="#worth">5 Fiscal checks</a></nav>
-<section id="headline"><div class="eyebrow">1 · The number everyone quotes</div><h2>The reported deficit is a starting point.</h2><p>Some allocated UK costs might stay with the UK. This bridge shows what the study-based adjustments would remove under an illustrative favourable agreement.</p><div class="number" id="bridge-number"></div><div class="unit">Reported UK fiscal balance, before any negotiated adjustments</div><div class="chart" id="bridge-chart"></div><p class="caveat">The deductions are disputed assumptions, not agreed savings. The fiscal source is frozen pending the official update. <a href="model_reference.html">Sources</a></p></section>
-<section id="negotiation"><div class="eyebrow">2 · The opening bill</div><h2>Who pays, and how fast do services align?</h2><p>Change who takes the pension and debt-interest allocations, then choose how quickly Managed Integration closes the pay and welfare gap.</p><div class="toggles"><button id="pension-toggle" aria-pressed="true">Who pays accrued pensions?<span id="pension-label"></span></button><button id="debt-toggle" aria-pressed="true">Who pays allocated debt interest?<span id="debt-label"></span></button></div><details><summary>Outside support</summary><p><label for="uk-payment">Hypothetical UK transition payment in year one, as % of the frozen transfer</label> <input id="uk-payment" type="number" min="0" max="50" step="0.1" value="0" style="width:70px;padding:8px"></p><p class="caveat">It declines over ten years. This is a negotiation assumption, not an expected agreement.</p><button disabled>EU support stays off pending evidence</button><p class="caveat">Net funding, eligibility and co-financing need to be established. <a href="benefits.html">See all new inputs</a></p></details><div class="buttons" id="timing-buttons"><button data-years="1">On day one</button><button data-years="15" aria-pressed="true">Over 15 years</button><button data-years="25">Over a generation</button></div><p>Harmonisation is uncertain. Compare the harmonisation cases before interpreting any cost or repayment date.</p><div class="buttons" id="harmonisation-buttons"><button data-harmonisation="upper" aria-pressed="true">Upper · F&amp;M 2024 gross, likely overstated</button><button data-harmonisation="middle">Middle · Doyle pay, F&amp;M welfare</button><button data-harmonisation="rateBased">Rate-based case</button><button data-harmonisation="lower">Lower · Doyle pay, no welfare gap</button></div><p class="caveat" id="harmonisation-caveat"></p><div class="number" id="terms-number" aria-live="polite"></div><div class="unit" id="terms-unit"></div><div class="chart" id="terms-chart"></div><p class="caveat">Other study adjustments stay accepted here. Pension funding phases in if the UK retains accrued liabilities, and the pay and benefit target keeps rising.</p></section>
-<section id="futures"><div class="eyebrow">3 · Four futures</div><h2 id="path-heading">Your choices shape the path.</h2><p class="eyebrow" id="path-growth-label"></p><p>The futures differ in harmonisation timing, early additional spending and ongoing administration. Your pension and interest choices carry through to every future.</p><div class="buttons" id="future-buttons"></div><div class="number" id="future-number" aria-live="polite"></div><div class="unit" id="future-unit"></div><div class="chart" id="future-chart"></div><div class="legend" id="future-legend"></div><p class="caveat">The grey UK status quo line is zero additional Republic cost. The Northern Ireland deficit remains UK-funded.</p><p class="caveat" id="design-caption"></p><details><summary>Test a productive return on programme spending</summary><p>Default comparisons cost the programmes without assuming an investment dividend. This optional experiment shows how productive capital could change the path while keeping growth from other causes fixed.</p><p><label for="capital-share">Programme spending treated as productive capital, %</label> <input id="capital-share" type="number" min="0" max="100" step="10" value="0" style="width:80px;padding:8px"></p><p class="caveat" id="investment-caption"></p><p class="caveat">The external elasticity is a private-output benchmark applied here as an aggregate-output experiment. It is not an estimate for Northern Ireland. <a href="model_reference.html">Sources and all response assumptions</a></p></details></section>
-<section id="growth"><div class="eyebrow">4 · The growth test</div><h2>Does the transition pay for itself?</h2><p>Apply the same NI growth rate from other causes to every future. See whether later surpluses repay earlier costs, including borrowing interest.</p><div class="buttons" id="growth-buttons"><button data-growth="1.3">Lower growth · 1.3%</button><button data-growth="2" aria-pressed="true">Reference growth · 2%</button><button data-growth="3">Higher growth · 3%</button><button data-growth="4.5">Optimistic · 4.5%</button></div><div class="number" id="growth-number" aria-live="polite"></div><div class="unit" id="threshold-unit"></div><p class="caveat" id="payback-count"></p><div class="chart" id="growth-chart"></div><div class="legend" id="growth-legend"></div><div class="scroll"><table><thead><tr><th>Future</th><th>NI growth needed</th><th>Payback at chosen growth</th><th>Debt / Republic GNI*</th></tr></thead><tbody id="growth-results"></tbody></table></div><p class="caveat">These are assumed aggregate growth rates, not estimated catch-up effects. The NI reference economy and Republic each grow at 2%, and transition debt ratios use Republic GNI* while excluding existing sovereign debt.</p><p class="caveat" id="federal-assumption"></p><h3>The same future under the harmonisation cases</h3><p class="caveat">Your chosen design, growth, negotiated terms and investment treatment are held fixed. Middle, lower and the rate-based candidate use an unverified Doyle price basis. Lower is a bound, and the candidate leaves some benefits and eligibility costs unmeasured.</p><div class="scroll"><table><thead><tr><th>Harmonisation</th><th>Year 1 cost</th><th>Year 25 cost</th><th>Transition debt year 25</th><th>Total State debt / (GNI* plus NI output) year 25</th></tr></thead><tbody id="harmonisation-results"></tbody></table></div><details><summary>What negotiated support would make repayment possible?</summary><p>At your chosen growth, solve the smallest hypothetical UK payment that repays cumulative costs by year 25. Each trial keeps your pension, interest, harmonisation and investment settings fixed.</p><div class="scroll"><table><thead><tr><th>Future</th><th>Required UK payment in year one</th></tr></thead><tbody id="feasibility-results"></tbody></table></div><p class="caveat">The payment declines linearly over ten years and then ends. The search runs from zero to 50% of the frozen opening transfer, rounded upwards to 0.1 percentage point. It estimates a requirement, not the likelihood of agreement or the UK's actual saving.</p></details></section>
-<section id="worth"><div class="eyebrow">5 · Fiscal checks</div><h2>Does it meet the fiscal limits?</h2><p>Compare the selected future with a lower-growth version under the same negotiated terms. Repayment and the three fiscal checks answer different questions.</p><div class="number" id="worth-number"></div><div class="unit" id="worth-unit"></div><div class="buttons" id="worth-buttons"><button data-worth="debt" aria-pressed="true">Total State debt / (GNI* plus NI output)</button><button data-worth="annual">Annual cost / GNI*</button></div><div class="chart" id="worth-chart"></div><p class="caveat">The coloured line shows the selected future, grey shows the same design with NI growth capped at a selected 1.3%, and gold marks the chosen limit. The lower rate is an illustration, not a verified historical estimate.</p><div class="scroll"><table><thead><tr><th>Fiscal check</th><th>Selected future</th><th>Lower-growth comparison</th></tr></thead><tbody id="worth-tests"></tbody></table></div><p id="worth-debt"></p><p id="worth-sensitivities" class="caveat"></p><p class="caveat">The current direction rule requires year 20 to be lower than year 19 and costs to keep falling thereafter. These checks describe fiscal paths under your assumptions, not a finding that a design is economically favourable.</p><p class="caveat">Total State debt adds the baseline Republic debt to transition borrowing and is divided by Republic GNI* plus NI output. This mixed income measure is approximate. Annual burden remains relative to Republic GNI*. The model does not currently assess household income gains.</p><a id="benefits-link" href="benefits.html">Explore the fiscal checks and assumptions</a></section>
-<div class="conclusion"><h2>There is no single price of unity.</h2><p id="conclusion-text"></p><p>Annual balance, repayment of transition costs and wider economic wellbeing are different questions. The final step checks the selected fiscal limits.</p><a href="unification_fiscal_simulator.html">Explore every assumption →</a><a href="model_reference.html">Read the sources and equations</a><a href="model_diagram.html">See the model connections</a></div><footer>All money is in constant 2023 euros. Component rates, negotiated terms and growth effects are selected assumptions. <a href="model_reference.json">Download the model register</a><p id="fingerprint"></p></footer></main><script type="module" src="story_runtime.mjs?v=0e68830e3ff5"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive report on the fiscal cost of a united Ireland to the Republic, with a live calculator. Illustrative scenarios in constant 2023 euros, not forecasts.">
+<title>United Ireland Fiscal Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a working ledger. Settings on the left like a budget annex, results on the right, read top to bottom. */
+:root {
+  --bg: #f4f6f7; --surface: #ffffff; --ink: #14212c; --muted: #56636e; --rule: #d6dde2;
+  --accent: #1d5b8e; --accent-soft: #e3edf6; --debt: #b9561a; --limit: #14212c;
+  --pass: #23744a; --pass-soft: #e2f2e8; --fail: #ad2a22; --fail-soft: #f8e3e1;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f161c; --surface: #172129; --ink: #e6ecf0; --muted: #9aa8b3; --rule: #2a3742;
+  --accent: #7db4e3; --accent-soft: #1d3346; --debt: #ec9a62; --limit: #e6ecf0;
+  --pass: #6fcf98; --pass-soft: #163325; --fail: #f08a82; --fail-soft: #3a1c1a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f161c; --surface: #172129; --ink: #e6ecf0; --muted: #9aa8b3; --rule: #2a3742;
+  --accent: #7db4e3; --accent-soft: #1d3346; --debt: #ec9a62; --limit: #e6ecf0;
+  --pass: #6fcf98; --pass-soft: #163325; --fail: #f08a82; --fail-soft: #3a1c1a; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: grid; gap: 6px; padding-bottom: 20px; border-bottom: 1px solid var(--rule); margin-bottom: 24px }
+.eyebrow { font: 500 12px/1.3 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+h1 { font: 600 clamp(28px, 4vw, 40px)/1.1 var(--display); margin: 0; text-wrap: balance }
+.lede { margin: 0; max-width: 68ch; color: var(--muted) }
+.grid { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr) } }
+
+aside { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px; display: grid; gap: 16px }
+aside h2, main h2 { font: 600 19px/1.25 var(--display); margin: 0 }
+.field { display: grid; gap: 6px }
+.field label, .field .lab { font-weight: 500; font-size: 13.5px }
+.row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px }
+output { font: 500 13px var(--mono); color: var(--accent); font-variant-numeric: tabular-nums }
+select { width: 100%; font: inherit; padding: 7px 8px; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); color: var(--ink) }
+input[type=range] { width: 100%; accent-color: var(--accent) }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden }
+.seg input { position: absolute; opacity: 0; pointer-events: none }
+.seg label { padding: 7px 6px; text-align: center; font-size: 13px; cursor: pointer; line-height: 1.25 }
+.seg input:checked + label { background: var(--accent-soft); color: var(--accent); font-weight: 600 }
+.seg input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px }
+details { border-top: 1px solid var(--rule); padding-top: 12px }
+details > div { display: grid; gap: 14px; margin-top: 12px }
+summary { cursor: pointer; font-weight: 600; font-size: 14px }
+.note { font-size: 12.5px; color: var(--muted); margin: 0 }
+button { font: 500 13.5px var(--body); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer }
+button:hover { border-color: var(--accent); color: var(--accent) }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+
+main { display: grid; gap: 22px; min-width: 0 }
+.scenario { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px }
+.scenario p { margin: 0; font: 500 17px/1.35 var(--display) }
+.tag { font: 500 11.5px var(--body); letter-spacing: .05em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; background: var(--accent-soft); color: var(--accent) }
+.tag.changed { background: var(--fail-soft); color: var(--fail) }
+.figures { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--rule); border-radius: 6px; background: var(--surface) }
+@media (max-width: 1000px) { .figures { grid-template-columns: repeat(3, minmax(0, 1fr)) } }
+@media (max-width: 520px) { .figures { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+.fig { padding: 14px 16px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: grid; gap: 2px; align-content: start }
+.fig .k { font-size: 12.5px; color: var(--muted) }
+.fig .v { font: 500 24px/1.2 var(--mono); font-variant-numeric: tabular-nums }
+.fig .s { font: 12px var(--mono); color: var(--muted) }
+.checks { display: flex; flex-wrap: wrap; gap: 8px }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; font-size: 13px; font-weight: 500 }
+.pill.ok { background: var(--pass-soft); color: var(--pass) }
+.pill.no { background: var(--fail-soft); color: var(--fail) }
+.pill b { font-weight: 600 }
+.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px }
+@media (max-width: 700px) { .charts { grid-template-columns: minmax(0, 1fr) } }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 14px 8px; min-width: 0 }
+figcaption { font-weight: 600; font-size: 14px; margin-bottom: 4px }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); margin-bottom: 4px }
+.legend i { display: inline-block; width: 16px; height: 0; border-top: 2.5px solid; vertical-align: middle; margin-right: 5px }
+.legend i.dot { border-top: 1.5px dashed }
+svg { display: block; width: 100%; height: auto }
+svg text { font: 12px var(--mono); fill: var(--muted) }
+.tablebar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px }
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface) }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; min-width: 640px }
+th, td { padding: 7px 12px; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap }
+th { font: 500 12px var(--body); color: var(--muted); background: var(--bg) }
+td { font: 13px var(--mono) }
+th:first-child, td:first-child { text-align: left }
+tr:last-child td { border-bottom: 0 }
+.method { display: grid; gap: 10px; font-size: 14px; max-width: 72ch; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 18px }
+.method p { margin: 0 }
+.method strong { color: var(--ink) }
+.verify { display: inline-flex; align-items: center; gap: 6px; margin: 4px 0 0; font-size: 13px; color: var(--muted) }
+.verify.ok { color: var(--pass) } .verify.no { color: var(--fail) }
+.verify::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor }
+.presets { display: grid; gap: 10px }
+.presets .grp { display: grid; gap: 5px }
+.presets .gl { font-size: 12px; color: var(--muted) }
+.presets .btns { display: flex; flex-wrap: wrap; gap: 5px }
+.presets button { padding: 5px 9px; font-size: 12.5px }
+.presets button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); font-weight: 600 }
+.scale { position: relative; height: 38px; margin: -2px 8px 0; font: 11px/1.2 var(--mono); color: var(--muted) }
+.scale span { position: absolute; transform: translateX(-50%); white-space: nowrap; padding-top: 7px }
+.scale span::before { content: ""; position: absolute; left: 50%; top: 0; height: 6px; border-left: 1.5px solid currentColor }
+.scale span.need { top: 17px; color: var(--accent); font-weight: 500 }
+.scale span.need::before { top: -17px; height: 23px; border-left-style: dashed }
+.pinbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 13.5px; color: var(--muted) }
+.pinbar b { color: var(--ink); font-weight: 500 }
+.fig .d { font: 12px var(--mono) }
+.fig .d.up { color: var(--fail) } .fig .d.down { color: var(--pass) } .fig .d.same { color: var(--muted) }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+
+.toc { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 12px 0 18px; border-bottom: 1px solid var(--rule); margin-bottom: 26px; font-size: 14px }
+.toc a { color: var(--accent); text-decoration: none } .toc a:hover { text-decoration: underline }
+.byline { margin: 0; font-size: 13px; color: var(--muted) }
+.rep { display: grid; gap: 14px; max-width: 980px; margin: 0 0 40px; scroll-margin-top: 16px }
+.rep > p { margin: 0; max-width: 72ch }
+.rep h2 { font: 600 clamp(22px, 3vw, 28px)/1.2 var(--display); margin: 0; text-wrap: balance }
+.rep h3 { font: 600 18px/1.3 var(--display); margin: 14px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px }
+.rep b[data-v] { font-weight: 600; font-variant-numeric: tabular-nums }
+.rep table { min-width: 560px }
+.rep td:not(:first-child) { white-space: nowrap }
+.flag { background: var(--fail-soft); color: var(--ink); border-radius: 6px; padding: 10px 14px }
+.scrollx { overflow-x: auto }
+svg text.lab { font-family: var(--body); fill: var(--ink) }
+td.c3 { background: var(--pass-soft); color: var(--pass); font-weight: 600 } td.c0 { background: var(--fail-soft); color: var(--fail) }
+td .bar { display: inline-block; height: 10px; background: var(--accent); border-radius: 2px; min-width: 2px }
+td:last-child:has(.bar) { width: 30%; min-width: 120px }
+#try + .grid { margin-bottom: 40px }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="eyebrow">Paper version 3.13 · constant 2023 euros · interactive report</span>
+  <h1>What would a united Ireland cost the Republic?</h1>
+  <p class="lede">This report walks through the fiscal model behind the appendix to <em>A Blueprint for a Unified Island</em>, step by step. Every figure on this page is worked out live by the model as the page opens, and every figure is an illustrative scenario in constant 2023 euros, not a forecast.</p>
+  <p class="verify" id="verify" role="status">Checking this page against the published paper</p>
+  <p class="byline">Stephen Kinsella, University of Limerick. Royal Irish Academy project on the economics of a united Ireland.</p>
+</header>
+
+<nav class="toc" aria-label="Contents">
+  <a href="#start">1. Where the cost starts</a>
+  <a href="#cases">2. Bringing pay and welfare level</a>
+  <a href="#designs">3. Four ways to unify</a>
+  <a href="#results">4. The results</a>
+  <a href="#fiscal-checks">5. The three fiscal checks</a>
+  <a href="#try">6. Try it yourself</a>
+  <a href="#tests">7. How robust are the results</a>
+  <a href="#published">8. Against published estimates</a>
+  <a href="#limits">9. Limits</a>
+</nav>
+
+<section class="rep" id="start">
+  <h2>1. Where the cost starts</h2>
+  <p>The UK publishes a figure for the gap between what is spent in Northern Ireland and what is raised there. For 2022-23 it comes to <b data-v="published"></b> in 2023 euros, but that is not the bill a united Ireland would inherit.</p>
+  <p>Some of that spending is UK defence and central costs that would not move to Dublin, and some receipts raised in Northern Ireland are booked elsewhere. Doyle (2025) adjusts for these, which brings the gap to <b data-v="beforeLiab"></b>.</p>
+  <p>The rest depends on a deal with the UK about pensions and debt interest built up before unity. If the UK keeps paying both, which this report calls the favourable deal, <b data-v="inherited"></b> is left.</p>
+  <figure><figcaption>From the published deficit to the inherited deficit, € billion</figcaption>
+    <div class="scrollx"><svg id="r-bridge" viewBox="0 0 760 300" role="img" aria-label="Bridge from the published deficit to the inherited deficit" style="min-width:620px"></svg></div></figure>
+</section>
+
+<section class="rep" id="cases">
+  <h2>2. Bringing pay and welfare level</h2>
+  <p>Public pay and welfare are lower in Northern Ireland than in the Republic. Bringing them up to Republic levels is the largest single cost of unity, and the published estimates of it differ widely.</p>
+  <p>So the model reports four cases and treats none of them as central. The upper case uses the gross gaps from FitzGerald and Morgenroth (2024), and the lower case drops the welfare gap altogether and is a bound rather than an estimate.</p>
+  <div class="tablewrap"><table id="r-cases"></table></div>
+  <p class="note">Gaps are measured on 2019 pay and welfare bills and converted to 2023 euros. Part of any pay rise comes back as income tax, shown as the share returned.</p>
+</section>
+
+<section class="rep" id="designs">
+  <h2>3. Four ways to unify</h2>
+  <p>The four designs differ in how fast pay and welfare rise, how much extra is spent in the first ten years and how much duplicate administration is kept. The deal with the UK is set separately, so any design can be run on either deal.</p>
+  <div class="tablewrap"><table id="r-designs"></table></div>
+</section>
+
+<section class="rep" id="results">
+  <h2>4. The results</h2>
+  <p>Each year the model grows Northern Ireland spending and receipts forward and adds the costs of the chosen design. Anything not covered is borrowed at a real interest rate of 2%, and the interest is added to the next year's cost.</p>
+  <p>The table shows Managed Integration on the favourable deal at 2% growth in each case. In the upper case the yearly cost rises from <b data-v="up1"></b> to <b data-v="up25"></b>, while in the lower case it stays near <b data-v="lo25"></b>.</p>
+  <div class="tablewrap"><table id="r-results"></table></div>
+  <div class="charts">
+    <figure><figcaption>Yearly cost, € billion</figcaption>
+      <div class="legend" id="r-leg1"></div>
+      <svg id="r-cost" viewBox="0 0 520 280" role="img" aria-label="Yearly cost by case and deal"></svg></figure>
+    <figure><figcaption>Total State debt, % of GNI* plus NI output</figcaption>
+      <div class="legend" id="r-leg2"></div>
+      <svg id="r-debt" viewBox="0 0 520 280" role="img" aria-label="Total debt by case"></svg></figure>
+  </div>
+  <p class="note">Solid lines are the favourable deal and dashed lines the adverse deal, in which Dublin also takes on the pensions and debt interest. The dotted line is the limit or ceiling.</p>
+</section>
+
+<section class="rep" id="fiscal-checks">
+  <h2>5. The three fiscal checks</h2>
+  <p>Three checks were set before any result was run. Total State debt must stay below 80% of GNI* plus Northern Ireland output, the yearly cost must stay at or below 2% of GNI*, and the cost must fall every year from year 20.</p>
+  <p>The grid shows how many checks each design passes on the favourable deal at four growth rates. The second table shows the steady growth each design needs to repay its borrowing within 25 years, against 1.3% for Northern Ireland since 2000.</p>
+  <div class="tablewrap"><table id="r-grid"></table></div>
+  <div class="tablewrap"><table id="r-growth"></table></div>
+</section>
+
+<section class="rep" id="try">
+  <h2>6. Try it yourself</h2>
+  <p>Change the case, the design, the deal or the growth rate, and every figure below updates. Pin a scenario to compare it with another, or use the starting points to load the paper's own scenarios.</p>
+</section>
+
+<div class="grid">
+<aside aria-label="Settings">
+  <h2>Starting points</h2>
+  <div class="presets" id="presets"></div>
+  <p class="note">Each starting point sets the paper's own assumptions and gets its own page link, so you can send it to someone.</p>
+  <h2>Scenario</h2>
+  <div class="field"><label for="case">Harmonisation case</label>
+    <select id="case"><option value="upper">Upper</option><option value="middle">Middle</option><option value="rateBased">Rate-based</option><option value="lower">Lower</option></select></div>
+  <p class="note" id="case-note"></p>
+  <div class="field"><label for="design">Design</label>
+    <select id="design"><option value="unitary">Unitary</option><option value="federal">Federal</option><option value="glide" selected>Managed Integration</option><option value="worst">Higher Cost</option></select></div>
+  <div class="field"><span class="lab" id="deal-lab">UK deal</span>
+    <div class="seg" role="radiogroup" aria-labelledby="deal-lab">
+      <input type="radio" name="deal" id="deal-fav" value="fav" checked><label for="deal-fav">Favourable<br><small>UK keeps pensions and debt</small></label>
+      <input type="radio" name="deal" id="deal-adv" value="adv"><label for="deal-adv">Adverse<br><small>Dublin takes both</small></label>
+    </div></div>
+  <div class="field"><div class="row"><label for="g">Northern Ireland real growth</label><output for="g" id="g-o"></output></div>
+    <input type="range" id="g" min="0" max="7" step="0.1" value="2">
+    <div class="scale" id="g-scale" aria-hidden="true"></div>
+    <p class="note">The marks show recent growth (1.3%), the paper's assumed catch-up rate (3%), and the growth this scenario needs to repay its borrowing within 25 years.</p></div>
+
+  <details>
+    <summary>Paper assumptions</summary>
+    <div id="paper-fields"></div>
+  </details>
+  <details>
+    <summary>Tests beyond the paper</summary>
+    <div><p class="note">These are switched off in the paper. Any values set here are test settings, not estimates.</p><div id="test-fields" style="display:grid;gap:14px"></div></div>
+  </details>
+  <button id="reset" type="button">Reset to paper settings</button>
+</aside>
+
+<main>
+  <div class="scenario"><p id="scen"></p><span class="tag" id="status"></span></div>
+  <div class="pinbar"><button id="pin" type="button">Pin this scenario to compare</button><span id="pin-text">Pin a scenario, then change the settings to see the two side by side.</span></div>
+  <div class="figures" id="figures"></div>
+  <div class="checks" id="checks" aria-label="Fiscal checks"></div>
+  <div class="charts">
+    <figure><figcaption>Yearly cost, € billion</figcaption>
+      <div class="legend"><span><i style="border-color:var(--accent)"></i>Cost to the Republic</span><span><i class="dot" style="border-color:var(--limit)"></i>Burden limit, 2% of GNI*</span><span class="pinleg" hidden><i style="border-color:var(--muted);opacity:.7"></i>Pinned scenario</span></div>
+      <svg id="c-cost" viewBox="0 0 520 260" role="img" aria-label="Yearly cost against the burden limit"></svg></figure>
+    <figure><figcaption>Total State debt, % of GNI* plus NI output</figcaption>
+      <div class="legend"><span><i style="border-color:var(--debt)"></i>Existing debt plus transition borrowing</span><span><i class="dot" style="border-color:var(--limit)"></i>80% ceiling</span><span class="pinleg" hidden><i style="border-color:var(--muted);opacity:.7"></i>Pinned scenario</span></div>
+      <svg id="c-debt" viewBox="0 0 520 260" role="img" aria-label="Total debt against the 80% ceiling"></svg></figure>
+  </div>
+  <figure><figcaption>How the year 1 cost builds up, € billion</figcaption>
+    <p class="note" style="margin-bottom:6px">Each bar adds to or takes away from the cost. The last bar is the total for year 1.</p>
+    <div style="overflow-x:auto"><svg id="c-y1" viewBox="0 0 760 300" role="img" aria-label="Year 1 cost broken into its parts" style="min-width:620px"></svg></div></figure>
+  <div class="tablebar"><h2>Year by year</h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button id="all" type="button">Show all 25 years</button><button id="copy" type="button">Copy as CSV</button></div></div>
+  <div class="tablewrap"><table id="tbl"></table></div>
+  
+</main>
+</div>
+
+<section class="rep" id="tests">
+  <h2>7. How robust are the results</h2>
+  <p>This part tests how far the results depend on the assumptions. It uses the paper's starting scenario, Managed Integration in the upper case on the favourable deal at 2% growth, unless a table says otherwise.</p>
+  <p class="flag"><b>Test values.</b> The ranges in 7a and 7b, the slopes in 7e, the shares in 7g and the values in 7h are values the author has chosen for these tests. They are assumptions rather than estimates drawn from data, so quote them as test settings only.</p>
+
+  <h3>7a. Which assumptions matter most <span class="tag changed">Test values</span></h3>
+  <p>Each assumption is moved between a low and a high value with everything else held still. Northern Ireland growth matters far more than anything else.</p>
+  <div class="tablewrap"><table id="r-tornado"></table></div>
+
+  <h3>7b. Many assumptions at once <span class="tag changed">Test values</span></h3>
+  <p>Here every assumption from 7a is drawn at random within its range, 1,000 times for each case. The spread shows how sensitive the result is to the ranges, and it is not a probability forecast.</p>
+  <div class="tablewrap"><table id="r-fan"></table></div>
+  <p class="note">The draws use a fixed seed in this page, so the figures repeat, but they differ slightly from the notebook, which uses its own random numbers.</p>
+
+  <h3>7c. Which choice explains the spread</h3>
+  <p>Running every mix of case, design, deal and four growth rates gives 128 scenarios. The table splits the variation in year 25 results into the part each choice explains.</p>
+  <div class="tablewrap"><table id="r-variance"></table></div>
+
+  <h3>7d. Why the debt ratio moves</h3>
+  <p>Each year's change in transition borrowing, as a share of income, splits into the new primary cost, interest on past borrowing and the fall that comes from income growing. With a 2% interest rate and 2% growth, interest and growth cancel out, so the ratio rises only because of new primary cost.</p>
+  <div class="tablewrap"><table id="r-dynamics"></table></div>
+
+  <h3>7e. When interest rises with debt <span class="tag changed">Test values</span></h3>
+  <p>The paper holds the real interest rate at 2% whatever happens to debt. This test adds a premium for each point that total debt sits above 80%.</p>
+  <div class="tablewrap"><table id="r-premium"></table></div>
+
+  <h3>7f. One number per scenario</h3>
+  <p>Adding up 25 years of primary cost, and discounting later years at 2%, gives one figure per scenario. Shown as a share of discounted GNI*, it is the average yearly cost and can be set against the 2% burden limit.</p>
+  <div class="tablewrap"><table id="r-pv"></table></div>
+  <p class="note">Interest is left out because it pays for borrowing in earlier years, which are already counted.</p>
+
+  <h3>7g. The Republic's own starting point <span class="tag changed">Test values in the second table</span></h3>
+  <p>Budget 2027 shows headline surpluses, but they depend on corporation tax that the Department of Finance says may be transitory. Without it the State would run a deficit of <b data-v="u2027"></b> of GNI* in 2027.</p>
+  <div class="tablewrap"><table id="r-budget"></table></div>
+  <p>The second table shows total debt if a share of that tax were lost for good, from year 1 of unity.</p>
+  <div class="tablewrap"><table id="r-ct"></table></div>
+
+  <h3>7h. Bounds on behaviour <span class="tag changed">Test values</span></h3>
+  <p>The paper assumes people do not change what they do when welfare rises to Republic levels. This test takes away receipts as some people work less, and adds benefit claimants over 25 years.</p>
+  <div class="tablewrap"><table id="r-behaviour"></table></div>
+</section>
+
+<section class="rep" id="published">
+  <h2>8. Against published estimates</h2>
+  <p>The table sets the model beside FitzGerald and Morgenroth (2024) and Doyle and UUEPC (2025), using the same items where it can. Published figures are rebased to 2023 euros in the project's meta-analysis.</p>
+  <p>The model matches Doyle exactly and comes within €1 billion of FitzGerald and Morgenroth's full parity case. The base rows differ mainly because of the data year and because the model's pension and debt interest figures are larger.</p>
+  <div class="tablewrap"><table id="r-reconcile"></table></div>
+</section>
+
+<section class="rep" id="limits">
+  <h2>9. Limits</h2>
+  <p>The pay and welfare gaps come from 2019 data, which is why the model reports four cases. A benefit-by-benefit costing through a tax and benefit model is needed to settle where the true figure lies.</p>
+  <p>Pensions follow a simple linear schedule rather than an actuarial valuation, and UK debt is treated as 25 years of interest with no principal. Growth is an assumption rather than a result, and the gains from unity that reach households and firms are left out.</p>
+  <p>The Northern Ireland figures may change when the UK statistics office publishes corrected accounts. The test values in part 7 are chosen settings rather than sourced estimates.</p>
+  <p class="note">Sources. ONS country and regional public sector finances via Doyle (2025). FitzGerald and Morgenroth (2024), Table 6. CSO Annual National Accounts 2023. Department of Finance, Budget 2027 Economic and Fiscal Outlook, Tables 15, 17 and 18. NISRA and CSO population projections. The model's code is in the Zerve notebook "Version 4 Fiscal Model", available on request.</p>
+</section>
+
+</div>
+
+<script>
+// United Ireland fiscal model, version 3.13. JavaScript port of zerve/guided/02 to 06.
+// Checked against the Python notebook by tests/test_guided_model.py. Constant 2023 euros, billions.
+const FX_2023 = 0.86979;
+const UK_2019_TO_2023_EUR = ((90.7406+92.0952+92.7667+92.7151)/(76.6540+77.4590+77.9213+78.3396))/FX_2023;
+const UK_FY2022_TO_2023_EUR = ((90.7406+92.0952+92.7667+92.7151)/(85.7671+87.1467+89.3502+90.7406))/FX_2023;
+const GNI_STAR = 290.9, NORTH_GNI = 63.265/FX_2023, PUBLISHED = 17.058;
+const BASE_REVENUE = 21.773*UK_FY2022_TO_2023_EUR, BASE_SPENDING = BASE_REVENUE + PUBLISHED;
+const DEFENCE_NET = 1.640, OTHER_NONID = 0.692, TAX_ADD = 1.840, PENSIONS = 6.864, DEBT_INT = 4.238;
+const PENSION_TOPUP_FALL = 1.3*UK_FY2022_TO_2023_EUR;
+const GROSS_PAY_FULL = 4.306*UK_2019_TO_2023_EUR, GROSS_WELFARE_FULL = 4.809*UK_2019_TO_2023_EUR;
+const SOURCE_PAY_BASE = 6.797*UK_2019_TO_2023_EUR, SOURCE_WELFARE_BASE = 9.615*UK_2019_TO_2023_EUR;
+const EU_CONTRIBUTION_RATE = 100*3.683/390.996, EU_RECEIPTS = 0.293527*UK_FY2022_TO_2023_EUR;
+const DEBT_RATIOS = {2027: 56.4, 2028: 56.3, 2029: 56.2, 2030: 54.9};
+const TRANSITORY_CT_PCT = {2027: 6.0, 2028: 5.7, 2029: 5.2, 2030: 5.9};
+const POP = {"baseYear":2024,"ni":{"2024":{"total":1927855,"over65":349194},"2025":{"total":1931301,"over65":357695},"2026":{"total":1934180,"over65":366755},"2027":{"total":1936545,"over65":375613},"2028":{"total":1938324,"over65":384768},"2029":{"total":1939582,"over65":394243},"2030":{"total":1940347,"over65":403900},"2031":{"total":1940634,"over65":413012},"2032":{"total":1940471,"over65":421637},"2033":{"total":1939927,"over65":430027},"2034":{"total":1939054,"over65":437794},"2035":{"total":1937878,"over65":444859},"2036":{"total":1936429,"over65":451740},"2037":{"total":1934818,"over65":457615},"2038":{"total":1933097,"over65":463004},"2039":{"total":1931313,"over65":467365},"2040":{"total":1929481,"over65":470627},"2041":{"total":1927624,"over65":473832},"2042":{"total":1925677,"over65":476453},"2043":{"total":1923707,"over65":479525},"2044":{"total":1921673,"over65":483750},"2045":{"total":1919518,"over65":488871},"2046":{"total":1917172,"over65":493111},"2047":{"total":1914584,"over65":497114},"2048":{"total":1911750,"over65":501159},"2049":{"total":1908622,"over65":505183},"2050":{"total":1905145,"over65":509615}},"roi":{"M1":{"2022":5184000,"2027":5581800,"2032":5872400,"2037":6142300,"2042":6396300,"2047":6633600,"2052":6839200,"2057":7005400},"M2":{"2022":5184000,"2027":5530500,"2032":5761000,"2037":5946900,"2042":6113200,"2047":6259900,"2052":6373200,"2057":6446300},"M3":{"2022":5184000,"2027":5489700,"2032":5645500,"2037":5721200,"2042":5771500,"2047":5797300,"2052":5786300,"2057":5733700}}};
+const DOYLE_PAY_TAX_OFFSET = 100*(1 - 15*0.152/(0.48*SOURCE_PAY_BASE));
+const RATE_WELFARE_GROSS = .381 + .130*UK_2019_TO_2023_EUR, RATE_WELFARE_NET = .343 + .130*UK_2019_TO_2023_EUR;
+const HARMONISATION_CASES = {
+  upper: {payGapPct: null, payTaxOffset: 0, welfareGapPct: null, welfareTaxOffset: 0},
+  middle: {payGapPct: 48, payTaxOffset: DOYLE_PAY_TAX_OFFSET, welfareGapPct: null, welfareTaxOffset: 0},
+  rateBased: {payGapPct: 48, payTaxOffset: DOYLE_PAY_TAX_OFFSET, welfareGapPct: 100*RATE_WELFARE_GROSS/SOURCE_WELFARE_BASE,
+              welfareTaxOffset: 100*(1 - RATE_WELFARE_NET/RATE_WELFARE_GROSS)},
+  lower: {payGapPct: 48, payTaxOffset: DOYLE_PAY_TAX_OFFSET, welfareGapPct: 0, welfareTaxOffset: 0},
+};
+const CASE_LABELS = {upper: 'Upper', middle: 'Middle', rateBased: 'Rate-based', lower: 'Lower'};
+const FORMS = {
+  unitary: {name: 'Unitary', reratingScope: 100, reratingYears: 1, investment: 0.5, duplication: 0},
+  federal: {name: 'Federal', reratingScope: 100, reratingYears: 20, investment: 0.5, duplication: 0.5},
+  glide: {name: 'Managed Integration', reratingScope: 100, reratingYears: 15, investment: 1.5, duplication: 0.25},
+  worst: {name: 'Higher Cost', reratingScope: 100, reratingYears: 1, investment: 0, duplication: 1},
+};
+const DEFAULTS = {southGrowth: 2, baselineGrowth: 2, realInterest: 2, niPayGrowth: 1, niBenefitGrowth: 1, pensionRateGrowth: 1,
+  southPayGrowth: 1, southBenefitGrowth: 1, nonPensionWelfareBase: SOURCE_WELFARE_BASE - PENSIONS, populationVariant: 'M2',
+  inheritedInterestYears: 25, taxShare: 35, baselineSpendingGrowth: 1, defenceSavingShare: 100, centralSavingShare: 100,
+  taxAdjustmentShare: 100, pensionTransferYears: 40, pensionTopUpFall: PENSION_TOPUP_FALL, euContributionRate: EU_CONTRIBUTION_RATE,
+  euReceipts: EU_RECEIPTS, publicPayBase: Math.round(SOURCE_PAY_BASE*1000)/1000, harmonisationCase: 'upper',
+  riskPremiumThreshold: 80, riskPremiumSlope: 0, behaviourReceiptLoss: 0, migrationPct: 0, ctLossShare: 0};
+
+const paperSettings = c => ({...DEFAULTS, harmonisationCase: c});
+function policy(form, gNI = 2, ukKeeps = true) {
+  const f = FORMS[form];
+  return {reratingScope: f.reratingScope, reratingYears: f.reratingYears, investment: f.investment, duplication: f.duplication,
+          gNI, pensionsUK: ukKeeps, debtUK: ukKeeps, counterfactual: false, shared: false};
+}
+const calendar = (s, t) => ({c: t, popYear: 2024 + t, debtYear: Math.min(2030, 2026 + t),
+  gni: GNI_STAR*Math.pow(1 + s.southGrowth/100, t), niRef: Math.pow(1 + s.baselineGrowth/100, t)});
+function populationAt(year, variant = 'M2') {
+  const knots = POP.roi[variant], ys = Object.keys(knots).map(Number).sort((a, b) => a - b);
+  const y = Math.max(ys[0], Math.min(ys[ys.length - 1], year));
+  const l = Math.max(...ys.filter(k => k <= y)), r = Math.min(...ys.filter(k => k >= y));
+  const roi = l === r ? knots[l] : knots[l] + (knots[r] - knots[l])*(y - l)/(r - l);
+  const ni = POP.ni[String(Math.max(2024, Math.min(2050, year)))];
+  return {ni: ni.total, niOver65: ni.over65, roi};
+}
+function components(p, s, t) {
+  const cal = calendar(s, t), k = cal.c, idx = g => Math.pow(1 + g/100, k);
+  const start = populationAt(2024, s.populationVariant), pop = populationAt(cal.popYear, s.populationVariant);
+  const vol = pop.ni/start.ni, pvol = pop.niOver65/start.niOver65;
+  const mig = p.counterfactual ? 1 : 1 + s.migrationPct/100*Math.min(t/25, 1);
+  const payBase = s.publicPayBase, benefitBase = s.nonPensionWelfareBase;
+  const purchasesBase = BASE_SPENDING - payBase - benefitBase - PENSIONS - DEBT_INT - DEFENCE_NET - OTHER_NONID;
+  const rel = (p.counterfactual && !p.shared) ? 1 : (1 + p.gNI/100)/(1 + s.baselineGrowth/100);
+  const pay = payBase*idx(s.niPayGrowth)*Math.pow(rel, t)*vol;
+  const benefits = benefitBase*idx(s.niBenefitGrowth)*vol*mig;
+  const pensionBase = PENSIONS - s.pensionTopUpFall;
+  const pensionEnv = pensionBase*idx(s.pensionRateGrowth)*pvol;
+  const pf = idx(s.baselineSpendingGrowth)*vol;
+  const purchases = purchasesBase*pf;
+  const defence = DEFENCE_NET*pf*(1 - s.defenceSavingShare/100);
+  const central = OTHER_NONID*pf*(1 - s.centralSavingShare/100);
+  const allocInt = t <= s.inheritedInterestYears ? DEBT_INT : 0;
+  const pensionCost = pensionEnv*(p.pensionsUK ? Math.min(t/s.pensionTransferYears, 1) : 1);
+  const spending = pay + benefits + pensionCost + purchases + defence + central + (p.debtUK ? 0 : allocInt);
+  const revenue = BASE_REVENUE*cal.niRef;
+  const extraReceipts = TAX_ADD*s.taxAdjustmentShare/100*cal.niRef;
+  const phase = p.counterfactual ? 0 : Math.min(t/p.reratingYears, 1)*p.reratingScope/100;
+  const h = HARMONISATION_CASES[s.harmonisationCase];
+  const payGap = h.payGapPct === null ? GROSS_PAY_FULL : h.payGapPct/100*SOURCE_PAY_BASE;
+  const welfGap = h.welfareGapPct === null ? GROSS_WELFARE_FULL : h.welfareGapPct/100*SOURCE_WELFARE_BASE;
+  const grossPay = payGap === 0 ? 0 : phase*Math.max(0, (payBase + payGap)*idx(s.southPayGrowth)*vol - pay);
+  const welfareBase = benefitBase + pensionBase, w = pensionBase/welfareBase;
+  const welfTarget = (welfareBase + welfGap)*idx(s.southBenefitGrowth)*((1 - w)*vol*mig + w*pvol);
+  const grossWelfare = welfGap === 0 ? 0 : phase*Math.max(0, welfTarget - (benefits + pensionEnv));
+  const harmonisation = grossPay*(1 - h.payTaxOffset/100) + grossWelfare*(1 - h.welfareTaxOffset/100);
+  return {spending, revenue, extraReceipts, harmonisation, grossWelfare, roiPopulation: pop.roi};
+}
+function simulate(p, s, horizon = 25) {
+  const neutral = p.counterfactual && !p.shared;
+  let debt = 0, cum = 0, ctDebt = 0, prevPct = null; const rows = [];
+  for (let t = 1; t <= horizon; t++) {
+    const cal = calendar(s, t), baseOut = NORTH_GNI*cal.niRef;
+    const out = neutral ? baseOut : baseOut*Math.pow((1 + p.gNI/100)/(1 + s.baselineGrowth/100), t);
+    const c = components(p, s, t);
+    const gap = c.spending - c.revenue - c.extraReceipts;
+    const invest = (neutral || t > 10) ? 0 : p.investment;
+    const growthTax = s.taxShare/100*(out - baseOut);
+    const euC = p.counterfactual ? 0 : s.euContributionRate/100*out;
+    const euR = p.counterfactual ? 0 : s.euReceipts;
+    const behaviour = p.counterfactual ? 0 : s.behaviourReceiptLoss/100*c.grossWelfare;
+    const primary = p.counterfactual ? (p.shared ? invest : 0)
+      : gap + c.harmonisation + invest + p.duplication - growthTax + euC - euR + behaviour;
+    const rate = s.realInterest + (prevPct === null ? 0 : s.riskPremiumSlope/100*Math.max(0, prevPct - s.riskPremiumThreshold));
+    const interest = debt*rate/100, cost = primary + interest;
+    debt = Math.max(0, debt + cost); cum += cost;
+    ctDebt = ctDebt*(1 + s.realInterest/100) + s.ctLossShare/100*TRANSITORY_CT_PCT[cal.debtYear]/100*cal.gni;
+    const income = neutral ? cal.gni : cal.gni + out;
+    prevPct = 100*(DEBT_RATIOS[cal.debtYear]/100*cal.gni + ctDebt + debt)/income;
+    rows.push({year: t, cost, primary, interest, rate, gap, harmonisation: c.harmonisation, investment: invest,
+               administration: p.counterfactual ? 0 : p.duplication, growthTax, euContribution: euC, euReceipts: euR, behaviour, income, republicGni: cal.gni, niOutput: out, ctDebt, borrowing: debt, cumulative: cum, totalDebtPct: prevPct,
+               costPctGni: 100*cost/cal.gni, burdenLimit: 0.02*cal.gni, costPerResident: cost*1e9/c.roiPopulation});
+  }
+  return rows;
+}
+const checks = (rows, ceiling = 80, burden = 2, fallingFrom = 20) => ({
+  debt: rows.every(x => x.totalDebtPct < ceiling),
+  burden: rows.every(x => x.costPctGni <= burden),
+  falling: rows.filter(x => x.year >= fallingFrom).every(x => x.cost < rows[x.year - 2].cost)});
+const repaid = rows => rows[rows.length - 1].cumulative <= 0;
+function growthNeeded(p, s, test, horizon = 25) {
+  const ok = g => test(simulate({...p, gNI: g}, s, horizon));
+  if (ok(0)) return 0;
+  let lo = 0, hi = null, g = .25;
+  while (g <= 7) { if (ok(g)) { hi = g; break; } lo = g; g += .25; }
+  if (hi === null) return null;
+  for (let i = 0; i < 32; i++) { const m = (lo + hi)/2; if (ok(m)) hi = m; else lo = m; }
+  return Math.ceil(hi*10 - 1e-8)/10;
+}
+
+</script>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const CASE_NOTES = {upper: 'Full pay and welfare gaps, FitzGerald and Morgenroth (2024).', middle: 'Doyle (2025) pay gap with the full welfare gap.', rateBased: 'Doyle pay gap with welfare costed benefit by benefit.', lower: 'Doyle pay gap and no welfare gap.'};
+const PAPER_VALUES = {"upper|unitary_fav": [15.2, 26.1, 5.3], "upper|unitary_adv": [24.8, 39.8, 6.9], "upper|federal_fav": [3.7, 23.2, 4.4], "upper|federal_adv": [13.3, 36.9, 6.2], "upper|glide_fav": [4.7, 24.1, 4.7], "upper|glide_adv": [14.2, 37.7, 6.4], "upper|worst_fav": [15.7, 27.6, 5.4], "upper|worst_adv": [25.3, 41.2, 7.0], "middle|unitary_fav": [11.6, 19.1, 5.0], "middle|unitary_adv": [21.2, 32.7, 6.7], "middle|federal_fav": [3.5, 17.2, 4.2], "middle|federal_adv": [13.1, 30.9, 6.2], "middle|glide_fav": [4.4, 17.8, 4.5], "middle|glide_adv": [14.0, 31.5, 6.4], "middle|worst_fav": [12.1, 20.6, 5.1], "middle|worst_adv": [21.7, 34.2, 6.8], "rateBased|unitary_fav": [5.4, 5.2, 3.2], "rateBased|unitary_adv": [15.0, 18.8, 5.3], "rateBased|federal_fav": [3.2, 5.2, 3.0], "rateBased|federal_adv": [12.8, 18.8, 5.2], "rateBased|glide_fav": [4.0, 5.3, 3.2], "rateBased|glide_adv": [13.6, 18.9, 5.3], "rateBased|worst_fav": [5.9, 6.7, 3.4], "rateBased|worst_adv": [15.5, 20.3, 5.5], "lower|unitary_fav": [4.9, 4.0, 3.0], "lower|unitary_adv": [14.5, 17.6, 5.2], "lower|federal_fav": [3.2, 4.1, 2.9], "lower|federal_adv": [12.8, 17.8, 5.2], "lower|glide_fav": [4.0, 4.2, 3.0], "lower|glide_adv": [13.6, 17.8, 5.2], "lower|worst_fav": [5.4, 5.5, 3.2], "lower|worst_adv": [15.0, 19.1, 5.3]};
+const PRESETS = [
+  ['Managed Integration, favourable deal', [['paper-upper', 'Upper', 'upper', 'glide', true], ['paper-middle', 'Middle', 'middle', 'glide', true],
+    ['paper-rate-based', 'Rate-based', 'rateBased', 'glide', true], ['paper-lower', 'Lower', 'lower', 'glide', true]]],
+  ['Other designs, upper case, favourable deal', [['unitary-upper', 'Unitary', 'upper', 'unitary', true], ['federal-upper', 'Federal', 'upper', 'federal', true],
+    ['higher-cost-upper', 'Higher Cost', 'upper', 'worst', true]]],
+  ['Adverse deal, Managed Integration', [['adverse-upper', 'Upper', 'upper', 'glide', false], ['adverse-lower', 'Lower', 'lower', 'glide', false]]],
+];
+const PRESET_MAP = Object.fromEntries(PRESETS.flatMap(([, list]) => list.map(x => [x[0], x])));
+const PAPER = [
+  ['realInterest', 'Real interest rate', 0, 5, 0.1, 2, '%'],
+  ['taxShare', 'Tax share of extra NI output', 20, 50, 1, 35, '%'],
+  ['southPayGrowth', 'Real pay growth, Republic', 0, 3, 0.1, 1, '%'],
+  ['niPayGrowth', 'Real pay growth, NI', 0, 3, 0.1, 1, '%'],
+  ['southBenefitGrowth', 'Real benefit growth, Republic', 0, 3, 0.1, 1, '%'],
+  ['pensionTransferYears', 'Years for UK pension transfer', 10, 80, 1, 40, ' yrs'],
+  ['investment', 'Extra spending in years 1 to 10', 0, 5, 0.25, null, ' €bn'],
+  ['duplication', 'Duplicate administration', 0, 2, 0.05, null, ' €bn'],
+];
+const TESTS = [
+  ['riskPremiumSlope', 'Interest premium per point of debt above 80%', 0, 10, 0.5, 0, ' bp'],
+  ['behaviourReceiptLoss', 'Receipts lost, share of welfare uplift', 0, 30, 1, 0, '%'],
+  ['migrationPct', 'Extra benefit claimants by year 25', 0, 10, 1, 0, '%'],
+  ['ctLossShare', 'Transitory corporation tax lost', 0, 100, 5, 0, '%'],
+];
+const fmt = (v, u) => (u.trim() === '€bn' ? v.toFixed(2) : Number.isInteger(+v) && u !== '%' ? v : (+v).toFixed(1)) + u;
+function addSlider(box, [id, label, min, max, step, def, unit]) {
+  const d = document.createElement('div'); d.className = 'field';
+  d.innerHTML = `<div class="row"><label for="${id}">${label}</label><output id="${id}-o" for="${id}"></output></div>
+    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${def ?? 0}">`;
+  box.appendChild(d); $(id).dataset.unit = unit;
+}
+PAPER.forEach(s => addSlider($('paper-fields'), s));
+TESTS.forEach(s => addSlider($('test-fields'), s));
+$('g').dataset.unit = '%';
+
+function designDefaults() { const f = FORMS[$('design').value]; $('investment').value = f.investment; $('duplication').value = f.duplication; }
+function reset(c = 'upper', d = 'glide', fav = true) {
+  $('case').value = c; $('design').value = d; $(fav ? 'deal-fav' : 'deal-adv').checked = true; $('g').value = 2;
+  PAPER.concat(TESTS).forEach(([id, , , , , def]) => { if (def !== null) $(id).value = def; });
+  designDefaults();
+}
+let showAll = false, lastRows = [], lastState = null, pinned = null, activePreset = null;
+
+$('presets').innerHTML = PRESETS.map(([group, list]) => `<div class="grp"><span class="gl">${group}</span><div class="btns">` +
+  list.map(([name, label]) => `<button type="button" data-preset="${name}" aria-pressed="false">${label}</button>`).join('') + '</div></div>').join('');
+function applyPreset(name) {
+  const p = PRESET_MAP[name]; if (!p) return false;
+  reset(p[2], p[3], p[4]); activePreset = name; update(); return true;
+}
+function clearHash() { try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+$('presets').addEventListener('click', e => {
+  const b = e.target.closest('button[data-preset]'); if (!b) return;
+  const name = b.dataset.preset;
+  if (location.hash === '#' + name) applyPreset(name); else location.hash = name;
+});
+window.addEventListener('hashchange', () => applyPreset(location.hash.slice(1)));
+
+function drawScale(need) {
+  const pos = v => `calc(${(v/7*100).toFixed(2)}% + ${(8 - 16*v/7).toFixed(1)}px)`;
+  let h = `<span style="left:${pos(1.3)}" title="Recent growth">1.3%</span><span style="left:${pos(3)}" title="Assumed catch-up">3%</span>`;
+  h += need === null ? `<span class="need" style="left:${pos(7)}">Repays above 7%</span>`
+                     : `<span class="need" style="left:${pos(need)}">Repays at ${need.toFixed(1)}%</span>`;
+  $('g-scale').innerHTML = h;
+}
+
+function waterfall(svg, r) {
+  const items = [['Inherited gap, NI spending less receipts', r.gap], ['Pay and welfare harmonisation, net of tax', r.harmonisation],
+    ['Extra spending', r.investment], ['Duplicate administration', r.administration], ['EU budget contribution', r.euContribution],
+    ['Less EU farm payments', -r.euReceipts], ['Less tax from faster growth', -r.growthTax]];
+  if (Math.abs(r.behaviour) > 1e-9) items.push(['Lower work effort (test)', r.behaviour]);
+  if (Math.abs(r.interest) > 1e-9) items.push(['Interest on borrowing', r.interest]);
+  const W = 760, rowH = 30, T = 8, labW = 290, R = 70, n = items.length + 1, H = T + n*rowH + 22;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  let run = 0; const segs = items.map(([l, v]) => { const a = run; run += v; return [l, v, a, run]; });
+  const vals = segs.flatMap(s => [s[2], s[3]]).concat([0, r.cost]);
+  const lo = Math.min(...vals), hi = Math.max(...vals), x = v => labW + (v - lo)/((hi - lo) || 1)*(W - labW - R);
+  let g = `<line x1="${x(0)}" x2="${x(0)}" y1="${T - 4}" y2="${T + n*rowH}" stroke="var(--rule)" stroke-width="1.2"/>`;
+  segs.forEach(([l, v, a, b], i) => {
+    const y = T + i*rowH, x0 = Math.min(x(a), x(b)), w = Math.max(Math.abs(x(b) - x(a)), 1.5);
+    g += `<text x="${labW - 10}" y="${y + rowH/2 + 4}" text-anchor="end" style="font-family:var(--body);fill:var(--ink)">${l}</text>`;
+    g += `<rect x="${x0}" y="${y + 6}" width="${w}" height="${rowH - 12}" rx="2" fill="${v < 0 ? 'var(--pass)' : 'var(--accent)'}" opacity="${v < 0 ? .8 : .85}"/>`;
+    g += `<text x="${Math.max(x(a), x(b)) + 6}" y="${y + rowH/2 + 4}">${v >= 0 ? '+' : '−'}${Math.abs(v).toFixed(2)}</text>`;
+    if (i < segs.length - 1) g += `<line x1="${x(b)}" x2="${x(b)}" y1="${y + rowH - 6}" y2="${y + rowH + 6}" stroke="var(--muted)" stroke-dasharray="2 2"/>`;
+  });
+  const y = T + segs.length*rowH;
+  g += `<text x="${labW - 10}" y="${y + rowH/2 + 4}" text-anchor="end" style="font-family:var(--body);font-weight:600;fill:var(--ink)">Year 1 cost</text>`;
+  g += `<rect x="${Math.min(x(0), x(r.cost))}" y="${y + 5}" width="${Math.abs(x(r.cost) - x(0))}" height="${rowH - 10}" rx="2" fill="var(--ink)"/>`;
+  g += `<text x="${Math.max(x(0), x(r.cost)) + 6}" y="${y + rowH/2 + 4}" style="fill:var(--ink);font-weight:500">${r.cost.toFixed(2)}</text>`;
+  svg.innerHTML = g;
+}
+
+function verify() {
+  let n = 0, bad = [];
+  for (const [key, pub] of Object.entries(PAPER_VALUES)) {
+    const [c, rest] = key.split('|'), i = rest.lastIndexOf('_'), f = rest.slice(0, i), fav = rest.slice(i + 1) === 'fav';
+    const p = policy(f, 2, fav), s = paperSettings(c), r = simulate(p, s);
+    const got = [Math.round(r[0].cost*10)/10, Math.round(r[24].cost*10)/10, growthNeeded(p, s, repaid)];
+    got.forEach((v, j) => { n++; if (Math.abs(v - pub[j]) > 1e-9) bad.push(key); });
+  }
+  const el = $('verify');
+  if (!bad.length) { el.className = 'verify ok'; el.textContent = `Matches paper version 3.13. All ${n} published numbers checked when this page opened.`; }
+  else { el.className = 'verify no'; el.textContent = `${bad.length} of ${n} published numbers differ from the paper. Do not cite this page until it is fixed.`; }
+}
+
+$('pin').addEventListener('click', () => {
+  if (pinned) { pinned = null; } else { pinned = lastState; }
+  update();
+});
+
+function lineChart(svg, rows, key, limitFn, colour, unit, pinRows) {
+  const W = 520, H = 260, L = 46, R = 12, T = 12, B = 30;
+  const xs = rows.map(r => r.year), ys = rows.map(r => r[key]), lim = rows.map(limitFn), py = pinRows ? pinRows.map(r => r[key]) : [];
+  let lo = Math.min(0, ...ys, ...lim, ...py), hi = Math.max(...ys, ...lim, ...py);
+  const span = hi - lo || 1, stepRaw = span/5, mag = Math.pow(10, Math.floor(Math.log10(stepRaw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m*mag).find(s => s >= stepRaw);
+  lo = Math.floor(lo/step)*step; hi = Math.ceil(hi/step)*step;
+  const x = v => L + (v - 1)/(xs.length - 1)*(W - L - R), y = v => T + (hi - v)/(hi - lo)*(H - T - B);
+  let g = '';
+  for (let v = lo; v <= hi + 1e-9; v += step) {
+    g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)" stroke-width="${Math.abs(v) < 1e-9 ? 1.2 : .7}"/>`;
+    g += `<text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end">${+v.toFixed(2)}${unit}</text>`;
+  }
+  [1, 5, 10, 15, 20, 25].forEach(t => g += `<text x="${x(t)}" y="${H - 10}" text-anchor="middle">${t}</text>`);
+  const path = vals => vals.map((v, i) => `${i ? 'L' : 'M'}${x(xs[i]).toFixed(1)},${y(v).toFixed(1)}`).join('');
+  g += `<path d="${path(lim)}" fill="none" stroke="var(--limit)" stroke-width="1.3" stroke-dasharray="4 4"/>`;
+  if (pinRows) g += `<path d="${path(py)}" fill="none" stroke="var(--muted)" stroke-width="2" opacity=".7" stroke-linejoin="round"/>`;
+  g += `<path d="${path(ys)}" fill="none" stroke="${colour}" stroke-width="2.6" stroke-linejoin="round"/>`;
+  const e = rows.length - 1;
+  g += `<circle cx="${x(xs[e])}" cy="${y(ys[e])}" r="3.5" fill="${colour}"/>`;
+  svg.innerHTML = g;
+}
+
+function update() {
+  const c = $('case').value, d = $('design').value, fav = $('deal-fav').checked, g = +$('g').value;
+  const s = {...paperSettings(c)}; const p = policy(d, g, fav);
+  PAPER.concat(TESTS).forEach(([id]) => { const v = +$(id).value; if (id in p) p[id] = v; else s[id] = v; });
+  document.querySelectorAll('input[type=range]').forEach(el => { $(el.id + '-o').textContent = fmt(+el.value, el.dataset.unit); });
+  $('case-note').textContent = CASE_NOTES[c];
+  const rows = simulate(p, s); lastRows = rows;
+  if (activePreset) { const pr = PRESET_MAP[activePreset];
+    const same = c === pr[2] && d === pr[3] && fav === pr[4] && g === 2 && PAPER.every(([id, , , , , def]) => +$(id).value === (def ?? FORMS[d][id])) && TESTS.every(([id]) => +$(id).value === 0);
+    if (!same) { activePreset = null; clearHash(); } }
+  document.querySelectorAll('[data-preset]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.preset === activePreset)));
+  const res = checks(rows), need = growthNeeded(p, s, repaid);
+  const f = FORMS[d];
+  const isPaper = g === 2 && PAPER.every(([id, , , , , def]) => +$(id).value === (def ?? f[id])) && TESTS.every(([id]) => +$(id).value === 0);
+  $('scen').textContent = `${f.name}, ${CASE_LABELS[c].toLowerCase()} case, ${fav ? 'favourable' : 'adverse'} deal, ${g.toFixed(1)}% growth`;
+  $('status').textContent = isPaper ? 'Paper settings' : 'Changed from the paper';
+  $('status').className = 'tag' + (isPaper ? '' : ' changed');
+  const label = $('scen').textContent + (isPaper ? '' : ', changed settings');
+  lastState = {label, rows, need};
+  drawScale(need);
+  $('pin').textContent = pinned ? 'Clear the pin' : 'Pin this scenario to compare';
+  $('pin-text').innerHTML = pinned ? `Comparing with <b>${pinned.label}</b>, shown in grey on the charts.` : 'Pin a scenario, then change the settings to see the two side by side.';
+  document.querySelectorAll('.pinleg').forEach(el => el.hidden = !pinned);
+  const last = rows[rows.length - 1], first = rows[0];
+  const figs = [
+    ['Year 1 cost', `€${first.cost.toFixed(1)}bn`, `${first.costPctGni.toFixed(2)}% of GNI*`],
+    ['Year 25 cost', `€${last.cost.toFixed(1)}bn`, `${last.costPctGni.toFixed(2)}% of GNI*`],
+    ['Borrowing by year 25', `€${Math.round(last.borrowing)}bn`, 'constant 2023 euros'],
+    ['Total debt, year 25', `${last.totalDebtPct.toFixed(1)}%`, 'of GNI* plus NI output'],
+    ['Growth to repay', need === null ? 'above 7%' : `${need.toFixed(1)}%`, 'NI real growth, 25 years'],
+  ];
+  const pl = pinned ? pinned.rows[pinned.rows.length - 1] : null, pf = pinned ? pinned.rows[0] : null;
+  const delta = (cur, old, dp, unit, pre = '') => { if (old === null || old === undefined) return '<span class="d same">pinned repays above 7%</span>';
+    const dv = cur - old, cls = Math.abs(dv) < Math.pow(10, -dp)/2 ? 'same' : dv > 0 ? 'up' : 'down';
+    return `<span class="d ${cls}">${dv >= 0 ? '+' : '−'}${pre}${Math.abs(dv).toFixed(dp)}${unit} vs pinned</span>`; };
+  const deltas = pinned ? [delta(first.cost, pf.cost, 1, 'bn', '€'), delta(last.cost, pl.cost, 1, 'bn', '€'), delta(last.borrowing, pl.borrowing, 0, 'bn', '€'),
+    delta(last.totalDebtPct, pl.totalDebtPct, 1, ' pts'), need === null ? '<span class="d same">above 7%</span>' : delta(need, pinned.need, 1, ' pts')] : [];
+  $('figures').innerHTML = figs.map(([k, v, sub], i) => `<div class="fig"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${sub}</span>${deltas[i] || ''}</div>`).join('');
+  const firstFail = rows.find(x => x.totalDebtPct >= 80);
+  $('checks').innerHTML = [
+    ['Debt check', res.debt, res.debt ? 'stays below 80%' : `crosses 80% in year ${firstFail.year}`],
+    ['Burden check', res.burden, res.burden ? 'cost within 2% of GNI*' : 'cost above 2% of GNI*'],
+    ['Falling check', res.falling, res.falling ? 'cost falls from year 20' : 'cost does not fall from year 20'],
+  ].map(([n, ok, why]) => `<span class="pill ${ok ? 'ok' : 'no'}"><b>${n} ${ok ? 'passes' : 'fails'}</b> ${why}</span>`).join('');
+  lineChart($('c-cost'), rows, 'cost', r => r.burdenLimit, 'var(--accent)', '', pinned && pinned.rows);
+  lineChart($('c-debt'), rows, 'totalDebtPct', () => 80, 'var(--debt)', '%', pinned && pinned.rows);
+  waterfall($('c-y1'), rows[0]);
+  const shown = showAll ? rows : rows.filter(r => [1, 5, 10, 15, 20, 25].includes(r.year));
+  $('tbl').innerHTML = '<thead><tr><th>Year</th><th>Cost €bn</th><th>Primary cost €bn</th><th>Interest €bn</th><th>Cost % of GNI*</th><th>Borrowing €bn</th><th>Total debt %</th><th>Cost per Republic resident €</th></tr></thead><tbody>' +
+    shown.map(r => `<tr><td>${r.year}</td><td>${r.cost.toFixed(2)}</td><td>${r.primary.toFixed(2)}</td><td>${r.interest.toFixed(2)}</td><td>${r.costPctGni.toFixed(2)}</td><td>${r.borrowing.toFixed(1)}</td><td>${r.totalDebtPct.toFixed(1)}</td><td>${Math.round(r.costPerResident).toLocaleString('en-IE')}</td></tr>`).join('') + '</tbody>';
+}
+
+$('design').addEventListener('change', () => { designDefaults(); update(); });
+document.querySelectorAll('select, input').forEach(el => el.addEventListener('input', update));
+$('reset').addEventListener('click', () => { activePreset = null; clearHash(); reset(); update(); });
+$('all').addEventListener('click', () => { showAll = !showAll; $('all').textContent = showAll ? 'Show key years' : 'Show all 25 years'; update(); });
+$('copy').addEventListener('click', async () => {
+  const head = 'year,cost_eur_bn,primary_eur_bn,interest_eur_bn,cost_pct_gni,borrowing_eur_bn,total_debt_pct,cost_per_resident_eur';
+  const csv = [head].concat(lastRows.map(r => [r.year, r.cost, r.primary, r.interest, r.costPctGni, r.borrowing, r.totalDebtPct, r.costPerResident].map(v => +(+v).toFixed(4)).join(','))).join('\n');
+  try { await navigator.clipboard.writeText(csv); $('copy').textContent = 'Copied'; }
+  catch (e) { $('copy').textContent = 'Copy failed. Select the table instead'; }
+  setTimeout(() => $('copy').textContent = 'Copy as CSV', 2000);
+});
+designDefaults();
+if (!applyPreset(location.hash.slice(1))) update();
+setTimeout(verify, 50);
+})();
+</script>
+
+<p class="note" style="max-width:1100px;margin:0 auto 48px;padding:0 16px">More on the model.
+<a href="model_reference.html">Model reference</a> ·
+<a href="five_questions.html">Five questions explainer</a> ·
+<a href="simulator.html">Full simulator</a></p>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const COL = {upper: 'var(--accent)', middle: 'var(--debt)', rateBased: '#b08a00', lower: 'var(--pass)'};
+const CASES = ['upper', 'middle', 'rateBased', 'lower'];
+const DESIGNS = ['unitary', 'federal', 'glide', 'worst'];
+const eur = (v, d = 1) => `${v < 0 ? "−" : ""}€${Math.abs(v).toFixed(d)}bn`;
+const pct = (v, d = 1) => `${v.toFixed(d)}%`;
+const setV = (k, t) => document.querySelectorAll(`[data-v="${k}"]`).forEach(e => e.textContent = t);
+function table(id, head, rows, opts = {}) {
+  $(id).innerHTML = '<thead><tr>' + head.map(h => `<th>${h}</th>`).join('') + '</tr></thead><tbody>' +
+    rows.map(r => '<tr>' + r.map((c, i) => `<td${opts.cls ? ` class="${opts.cls(r, i) || ''}"` : ''}>${c}</td>`).join('') + '</tr>').join('') + '</tbody>';
+}
+
+// 1. Bridge
+const bridge = [['Published deficit, ONS 2022-23', PUBLISHED], ['Net UK defence spending', -DEFENCE_NET], ['Spending abroad and central', -OTHER_NONID],
+  ['Extra receipts identified by Doyle', -TAX_ADD], ['Expected fall in pension top-up', -PENSION_TOPUP_FALL],
+  ['Pensions kept by the UK', -(PENSIONS - PENSION_TOPUP_FALL)], ['Debt interest kept by the UK', -DEBT_INT]];
+const before = bridge.slice(0, 5).reduce((a, b) => a + b[1], 0), inherited = bridge.reduce((a, b) => a + b[1], 0);
+setV('published', eur(PUBLISHED, 2)); setV('beforeLiab', eur(before, 2)); setV('inherited', eur(inherited, 2));
+(function wf(svg, items, totalLabel) {
+  const W = 760, rowH = 32, T = 8, labW = 290, R = 80, n = items.length + 1, H = T + n*rowH + 10;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  let run = 0; const segs = items.map(([l, v], i) => { const a = i === 0 ? 0 : run; run = i === 0 ? v : run + v; return [l, v, a, run]; });
+  const hi = Math.max(...segs.map(s => Math.max(s[2], s[3]))), x = v => labW + v/hi*(W - labW - R);
+  let g = '';
+  segs.forEach(([l, v, a, b], i) => {
+    const y = T + i*rowH, x0 = Math.min(x(a), x(b)), w = Math.max(Math.abs(x(b) - x(a)), 1.5);
+    g += `<text x="${labW - 10}" y="${y + rowH/2 + 4}" text-anchor="end" class="lab">${l}</text>`;
+    g += `<rect x="${x0}" y="${y + 6}" width="${w}" height="${rowH - 12}" rx="2" fill="${i === 0 ? 'var(--muted)' : 'var(--pass)'}"/>`;
+    g += `<text x="${Math.max(x(a), x(b)) + 6}" y="${y + rowH/2 + 4}">${i === 0 ? '' : '−'}${Math.abs(v).toFixed(2)}</text>`;
+  });
+  const y = T + segs.length*rowH;
+  g += `<text x="${labW - 10}" y="${y + rowH/2 + 4}" text-anchor="end" class="lab" style="font-weight:600">${totalLabel}</text>`;
+  g += `<rect x="${x(0)}" y="${y + 5}" width="${x(run) - x(0)}" height="${rowH - 10}" rx="2" fill="var(--ink)"/>`;
+  g += `<text x="${x(run) + 6}" y="${y + rowH/2 + 4}" style="fill:var(--ink);font-weight:500">${run.toFixed(2)}</text>`;
+  svg.innerHTML = g;
+})($('r-bridge'), bridge, 'Left on the favourable deal');
+
+// 2. Cases
+const caseRows = CASES.map(k => {
+  const h = HARMONISATION_CASES[k];
+  const pay = h.payGapPct === null ? GROSS_PAY_FULL : h.payGapPct/100*SOURCE_PAY_BASE;
+  const wel = h.welfareGapPct === null ? GROSS_WELFARE_FULL : h.welfareGapPct/100*SOURCE_WELFARE_BASE;
+  const net = pay*(1 - h.payTaxOffset/100) + wel*(1 - h.welfareTaxOffset/100);
+  return [CASE_LABELS[k], pay.toFixed(1), h.payTaxOffset.toFixed(0) + '%', wel.toFixed(1), h.welfareTaxOffset.toFixed(0) + '%', (pay + wel).toFixed(1), net.toFixed(1)];
+});
+table('r-cases', ['Case', 'Pay gap €bn', 'Pay returned in tax', 'Welfare gap €bn', 'Welfare returned in tax', 'Gross gap €bn', 'Net cost at full parity €bn'], caseRows);
+
+// 3. Designs
+table('r-designs', ['Design', 'Pay and welfare reach Republic levels', 'Extra spending, years 1 to 10', 'Duplicate administration'],
+  DESIGNS.map(d => { const f = FORMS[d]; return [f.name, f.reratingYears === 1 ? 'On day one' : `Over ${f.reratingYears} years`, eur(f.investment, 2) + ' a year', eur(f.duplication, 2) + ' a year']; }));
+
+// 4. Results
+const all = {};
+for (const c of CASES) for (const d of DESIGNS) for (const uk of [true, false]) {
+  const p = policy(d, 2, uk), s = paperSettings(c), r = simulate(p, s);
+  all[`${c}|${d}|${uk}`] = {p, s, r};
+}
+const allChecks = rr => { const c = checks(rr); return c.debt && c.burden && c.falling; };
+const resRows = CASES.map(c => {
+  const {p, s, r} = all[`${c}|glide|true`]; const fail = r.find(x => x.totalDebtPct >= 80);
+  const gr = growthNeeded(p, s, repaid), ga = growthNeeded(p, s, allChecks);
+  return [CASE_LABELS[c], eur(r[0].cost), eur(r[24].cost), `€${Math.round(r[24].borrowing)}bn`, pct(r[24].totalDebtPct), fail ? `Year ${fail.year}` : 'Never',
+          gr === null ? 'above 7%' : pct(gr), ga === null ? 'above 7%' : pct(ga)];
+});
+table('r-results', ['Case', 'Year 1 cost', 'Year 25 cost', 'Borrowing by year 25', 'Total debt, year 25', 'Debt passes 80%', 'Growth to repay', 'Growth to pass all checks'], resRows);
+setV('up1', eur(all['upper|glide|true'].r[0].cost)); setV('up25', eur(all['upper|glide|true'].r[24].cost)); setV('lo25', eur(all['lower|glide|true'].r[24].cost));
+
+function lines(svg, series, refFn, unit) {
+  const W = 520, H = 280, L = 46, R = 12, T = 12, B = 30;
+  const vals = series.flatMap(s => s.v).concat(refFn ? Array.from({length: 25}, (_, i) => refFn(i)) : []);
+  let lo = Math.min(0, ...vals), hi = Math.max(...vals);
+  const raw = (hi - lo)/5, mag = Math.pow(10, Math.floor(Math.log10(raw))), step = [1, 2, 2.5, 5, 10].map(m => m*mag).find(s => s >= raw);
+  lo = Math.floor(lo/step)*step; hi = Math.ceil(hi/step)*step;
+  const x = i => L + i/24*(W - L - R), y = v => T + (hi - v)/(hi - lo)*(H - T - B);
+  let g = '';
+  for (let v = lo; v <= hi + 1e-9; v += step) g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)" stroke-width=".7"/><text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end">${+v.toFixed(1)}${unit}</text>`;
+  [1, 5, 10, 15, 20, 25].forEach(t => g += `<text x="${x(t - 1)}" y="${H - 10}" text-anchor="middle">${t}</text>`);
+  const path = v => v.map((z, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(z).toFixed(1)}`).join('');
+  if (refFn) g += `<path d="${path(Array.from({length: 25}, (_, i) => refFn(i)))}" fill="none" stroke="var(--limit)" stroke-width="1.2" stroke-dasharray="2 3"/>`;
+  series.forEach(s => g += `<path d="${path(s.v)}" fill="none" stroke="${s.c}" stroke-width="${s.w || 2.2}" ${s.dash ? 'stroke-dasharray="6 4"' : ''} stroke-linejoin="round"/>`);
+  svg.innerHTML = g;
+}
+const leg = CASES.map(c => `<span><i style="border-color:${COL[c]}"></i>${CASE_LABELS[c]}</span>`).join('');
+$('r-leg1').innerHTML = leg; $('r-leg2').innerHTML = leg;
+const costSeries = [];
+CASES.forEach(c => { costSeries.push({v: all[`${c}|glide|true`].r.map(x => x.cost), c: COL[c]}); costSeries.push({v: all[`${c}|glide|false`].r.map(x => x.cost), c: COL[c], dash: true, w: 1.6}); });
+lines($('r-cost'), costSeries, i => all['upper|glide|true'].r[i].burdenLimit, '');
+lines($('r-debt'), CASES.map(c => ({v: all[`${c}|glide|true`].r.map(x => x.totalDebtPct), c: COL[c]})), () => 80, '%');
+
+// 5. Checks grid and growth needed
+const growths = [1.3, 2, 3, 4.5], gridRows = [];
+for (const c of CASES) for (const d of DESIGNS) {
+  gridRows.push([CASE_LABELS[c], FORMS[d].name, ...growths.map(g => { const cc = checks(simulate(policy(d, g, true), paperSettings(c))); return (cc.debt + cc.burden + cc.falling) + ' of 3'; })]);
+}
+table('r-grid', ['Case', 'Design', ...growths.map(g => `At ${g}% growth`)], gridRows, {cls: (r, i) => i < 2 ? '' : ('c' + r[i][0])});
+table('r-growth', ['Design', ...CASES.map(c => `${CASE_LABELS[c]} case`)], DESIGNS.map(d => [FORMS[d].name, ...CASES.map(c => {
+  const {p, s} = all[`${c}|${d}|true`]; const g = growthNeeded(p, s, repaid); return g === null ? 'above 7%' : pct(g); })]));
+
+// 7. Tests, using the paper's starting scenario
+const P0 = policy('glide', 2, true), S0 = paperSettings('upper'), base = simulate(P0, S0);
+const RANGES = [['NI growth, %', 'p', 'gNI', 1.3, 3.0], ['Real interest rate, %', 's', 'realInterest', 1, 3], ['Tax share of extra NI output, %', 's', 'taxShare', 30, 40],
+  ['Real pay growth, Republic, %', 's', 'southPayGrowth', 0.5, 1.5], ['Real pay growth, NI, %', 's', 'niPayGrowth', 0.5, 1.5], ['Real benefit growth, Republic, %', 's', 'southBenefitGrowth', 0.5, 1.5],
+  ['Years for UK pension transfer', 's', 'pensionTransferYears', 25, 55], ['Extra spending, €bn a year', 'p', 'investment', 0.5, 2.5], ['Duplicate administration, €bn a year', 'p', 'duplication', 0, 0.5]];
+const run = (cp, cs, s0 = S0) => simulate({...P0, ...cp}, {...s0, ...cs});
+const tor = RANGES.map(([l, w, k, lo, hi]) => { const a = run(w === 'p' ? {[k]: lo} : {}, w === 's' ? {[k]: lo} : {}), b = run(w === 'p' ? {[k]: hi} : {}, w === 's' ? {[k]: hi} : {});
+  return {l, lo, hi, bl: a[24].borrowing, bh: b[24].borrowing, dl: a[24].totalDebtPct, dh: b[24].totalDebtPct}; }).sort((m, n) => Math.abs(n.bh - n.bl) - Math.abs(m.bh - m.bl));
+const maxSwing = Math.max(...tor.map(t => Math.abs(t.bh - t.bl)));
+table('r-tornado', ['Assumption', 'Low', 'High', 'Borrowing yr 25 at low', 'Borrowing yr 25 at high', 'Swing', ''], tor.map(t => [t.l, t.lo, t.hi, `€${Math.round(t.bl)}bn`, `€${Math.round(t.bh)}bn`, `€${Math.round(Math.abs(t.bh - t.bl))}bn`,
+  `<span class="bar" style="width:${(Math.abs(t.bh - t.bl)/maxSwing*100).toFixed(0)}%"></span>`]));
+
+let seed = 2027; const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0)/4294967296; };
+const q = (arr, p) => { const a = [...arr].sort((m, n) => m - n), i = (a.length - 1)*p/100, l = Math.floor(i); return a[l] + (a[Math.min(l + 1, a.length - 1)] - a[l])*(i - l); };
+table('r-fan', ['Case', 'Debt yr 25, middle 90% of draws', 'Debt yr 25, median', 'Draws that pass 80% debt', 'Cost yr 25, middle 90% of draws'], CASES.map(c => {
+  const s0 = paperSettings(c), debt = [], cost = []; let above = 0;
+  for (let i = 0; i < 1000; i++) { const cp = {}, cs = {}; RANGES.forEach(([, w, k, lo, hi]) => (w === 'p' ? cp : cs)[k] = lo + (hi - lo)*rnd());
+    const r = run(cp, cs, s0); debt.push(r[24].totalDebtPct); cost.push(r[24].cost); if (r.some(x => x.totalDebtPct >= 80)) above++; }
+  return [CASE_LABELS[c], `${pct(q(debt, 5), 0)} to ${pct(q(debt, 95), 0)}`, pct(q(debt, 50)), pct(above/10, 0), `${eur(q(cost, 5))} to ${eur(q(cost, 95))}`];
+}));
+
+const grid = []; for (const c of CASES) for (const d of DESIGNS) for (const uk of [true, false]) for (const g of growths) { const r = simulate(policy(d, g, uk), paperSettings(c)); grid.push({c, d, uk, g, b: r[24].borrowing, k: r[24].cost}); }
+const split = key => { const m = grid.reduce((a, r) => a + r[key], 0)/grid.length, tot = grid.reduce((a, r) => a + (r[key] - m)**2, 0), out = {};
+  for (const f of ['c', 'd', 'uk', 'g']) { const groups = {}; grid.forEach(r => (groups[r[f]] = groups[r[f]] || []).push(r[key]));
+    out[f] = 100*Object.values(groups).reduce((a, v) => a + v.length*(v.reduce((x, y) => x + y, 0)/v.length - m)**2, 0)/tot; }
+  out.i = 100 - out.c - out.d - out.uk - out.g; return out; };
+const sb = split('b'), sk = split('k');
+table('r-variance', ['Choice', 'Share of spread in borrowing, yr 25', 'Share of spread in cost, yr 25'],
+  [['Harmonisation case', 'c'], ['Design', 'd'], ['UK deal', 'uk'], ['NI growth', 'g'], ['Choices working together', 'i']].map(([l, k]) => [l, pct(sb[k]), pct(sk[k])]));
+
+let pb = 0, py = null; const dyn = [];
+base.forEach(x => { const y = x.income, ge = py === null ? 0 : pb*(1/y - 1/py)*100, ratio = 100*x.borrowing/y, pr = py === null ? 0 : 100*pb/py;
+  dyn.push({t: x.year, prim: 100*x.primary/y, int: 100*x.interest/y, ge, ch: ratio - pr, ratio}); pb = x.borrowing; py = y; });
+const z = v => (Math.abs(v) < 0.005 ? 0 : v).toFixed(2);
+table('r-dynamics', ['Year', 'New primary cost', 'Interest', 'Growth of income', 'Change in ratio', 'Borrowing, % of income'],
+  dyn.filter(d => [1, 5, 10, 15, 20, 25].includes(d.t)).map(d => [d.t, z(d.prim), z(d.int), z(d.ge), z(d.ch), z(d.ratio)]));
+
+const prem = []; for (const c of CASES) for (const sl of [0, 2.5, 5]) { const r = simulate(P0, {...paperSettings(c), riskPremiumSlope: sl}); prem.push([CASE_LABELS[c], sl + ' bp', `€${Math.round(r[24].borrowing)}bn`, pct(r[24].totalDebtPct), pct(r[24].rate), eur(r[24].interest)]); }
+table('r-premium', ['Case', 'Premium per point above 80%', 'Borrowing yr 25', 'Total debt yr 25', 'Real rate yr 25', 'Interest yr 25'], prem);
+
+const pv = (xs, r) => xs.reduce((a, x, i) => a + x/Math.pow(1 + r/100, i + 1), 0);
+const pvRows = []; for (const uk of [true, false]) for (const d of DESIGNS) pvRows.push([uk ? 'Favourable' : 'Adverse', FORMS[d].name, ...CASES.map(c => { const r = all[`${c}|${d}|${uk}`].r; return pct(100*pv(r.map(x => x.primary), 2)/pv(r.map(x => x.republicGni), 2), 2); })]);
+table('r-pv', ['Deal', 'Design', ...CASES.map(c => CASE_LABELS[c])], pvRows);
+
+const BUDGET = [[2025, 3.2, 5.0, -6135], [2026, 1.9, 5.3, -12075], [2027, 2.5, 6.0, -13430], [2028, 1.2, 5.7, -18105], [2029, 0.2, 5.2, -20765], [2030, 1.3, 5.9, -20270]];
+setV('u2027', pct(-(2.5 - 6.0)));
+table('r-budget', ['Year', 'Headline balance, % GNI*', 'Potentially transitory corporation tax, % GNI*', 'Balance without it, % GNI*', 'Balance without it, € million'],
+  BUDGET.map(([yr, h, ct, m]) => [yr, h.toFixed(1), ct.toFixed(1), (h - ct).toFixed(1), m.toLocaleString('en-IE')]));
+const ctRows = []; for (const sh of [0, 25, 50]) for (const c of CASES) { const r = simulate(P0, {...paperSettings(c), ctLossShare: sh}); const f = r.find(x => x.totalDebtPct >= 80);
+  ctRows.push([sh + '%', CASE_LABELS[c], pct(r[9].totalDebtPct), pct(r[24].totalDebtPct), f ? `Year ${f.year}` : 'Never']); }
+table('r-ct', ['Share of transitory tax lost', 'Case', 'Total debt yr 10', 'Total debt yr 25', 'Debt passes 80%'], ctRows);
+
+const beh = []; for (const c of CASES) { const b0 = simulate(P0, paperSettings(c))[24]; for (const [l, m] of [[0, 0], [10, 2], [20, 5]]) {
+  const r = simulate(P0, {...paperSettings(c), behaviourReceiptLoss: l, migrationPct: m})[24]; beh.push([CASE_LABELS[c], l + '%', m + '%', eur(r.cost), eur(r.cost - b0.cost), pct(r.totalDebtPct)]); } }
+table('r-behaviour', ['Case', 'Receipts lost, share of welfare rise', 'Extra claimants by year 25', 'Cost yr 25', 'Change in cost', 'Total debt yr 25'], beh);
+
+// 8. Reconciliation
+const pensionsKept = PENSIONS - PENSION_TOPUP_FALL, upperGap = GROSS_PAY_FULL + GROSS_WELFARE_FULL;
+const rec = [['Doyle and UUEPC (2025)', 'Inherited deficit, UK keeps pensions and debt', 1.78, inherited],
+  ['FitzGerald and Morgenroth (2024)', 'Base, UK keeps pensions, Dublin takes debt', 9.82, before - pensionsKept],
+  ['FitzGerald and Morgenroth (2024)', 'Base, Dublin takes pensions, UK keeps debt', 11.06, before - DEBT_INT],
+  ['FitzGerald and Morgenroth (2024)', 'Base, Dublin takes pensions and debt', 13.07, before],
+  ['FitzGerald and Morgenroth (2024)', 'Base plus immediate pay and welfare parity', 24.70, before + upperGap]];
+table('r-reconcile', ['Study', 'Measure', 'Published, 2023 € bn', 'Model, same items € bn', 'Difference'], rec.map(([s, m, p, v]) => [s, m, p.toFixed(2), v.toFixed(2), (v - p >= 0 ? '+' : '−') + Math.abs(v - p).toFixed(2)]));
+})();
+</script>
+
+</body>
+</html>

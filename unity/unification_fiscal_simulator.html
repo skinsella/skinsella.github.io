@@ -14,7 +14,7 @@
   html, body { margin: 0; padding: 0; background: #F6F7F4; }
   #fallback { font-family: system-ui, sans-serif; color: #5C6B63; padding: 40px; max-width: 640px; margin: 0 auto; }
 </style>
-<script>document.documentElement.classList.add(sessionStorage.getItem("priceOfUnityAccess") === "granted" ? "access-granted" : "access-locked");</script><script src="access.js" defer></script><style>html.access-locked body > :not(#access-gate){visibility:hidden}#access-gate{visibility:visible;position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#f7f7f1;padding:20px;font:16px system-ui}#access-form{width:min(100%,390px);padding:30px;background:white;border:1px solid #d7dfd7;border-radius:12px}#access-form input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #aebfb3;border-radius:6px}#access-form button{width:100%;margin-top:12px;background:#177052;color:white;padding:12px;border:0;border-radius:6px}#access-error{min-height:20px;color:#a63d2f}</style></head>
+</head>
 <body>
 <div id="root"><div id="fallback">Loading the simulator. If this message persists, check your internet connection, the page loads React and Recharts from public CDNs.</div></div>
 <script>
