@@ -139,7 +139,7 @@ td:last-child:has(.bar) { width: 30%; min-width: 120px }
 <body>
 <div class="wrap">
 <header>
-  <span class="eyebrow">Paper version 3.13 · constant 2023 euros · interactive report</span>
+  <span class="eyebrow">Paper version 3.14 · constant 2023 euros · interactive report</span>
   <h1>What would a united Ireland cost the Republic?</h1>
   <p class="lede">This report walks through the fiscal model behind the appendix to <em>A Blueprint for a Unified Island</em>, step by step. Every figure on this page is worked out live by the model as the page opens, and every figure is an illustrative scenario in constant 2023 euros, not a forecast.</p>
   <p class="verify" id="verify" role="status">Checking this page against the published paper</p>
@@ -325,7 +325,7 @@ td:last-child:has(.bar) { width: 30%; min-width: 120px }
 </div>
 
 <script>
-// United Ireland fiscal model, version 3.13. JavaScript port of zerve/guided/02 to 06.
+// United Ireland fiscal model, version 3.14. JavaScript port of zerve/guided/02 to 06.
 // Checked against the Python notebook by tests/test_guided_model.py. Constant 2023 euros, billions.
 const FX_2023 = 0.86979;
 const UK_2019_TO_2023_EUR = ((90.7406+92.0952+92.7667+92.7151)/(76.6540+77.4590+77.9213+78.3396))/FX_2023;
@@ -559,7 +559,7 @@ function verify() {
     got.forEach((v, j) => { n++; if (Math.abs(v - pub[j]) > 1e-9) bad.push(key); });
   }
   const el = $('verify');
-  if (!bad.length) { el.className = 'verify ok'; el.textContent = `Matches paper version 3.13. All ${n} published numbers checked when this page opened.`; }
+  if (!bad.length) { el.className = 'verify ok'; el.textContent = `Matches paper version 3.14. All ${n} published numbers checked when this page opened.`; }
   else { el.className = 'verify no'; el.textContent = `${bad.length} of ${n} published numbers differ from the paper. Do not cite this page until it is fixed.`; }
 }
 
